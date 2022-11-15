@@ -1,13 +1,14 @@
 import * as React from "react"
 import { graphql } from 'gatsby'
 import Layout from '../../components/layout'
+import Seo from '../../components/seo'
 import { textCenter, navbarMargin, container } from '../../components/global.module.css'
 import BlogLink  from '../../components/blog-link'
 
 const Blog = ({ data }) => {
-  const nodes = data.allMdx.nodes;
+  const nodes = data.allFile.nodes;
   return (
-    <Layout pageTitle="Dongjoon Lee | Blog" darkNavbar={true}>
+    <Layout darkNavbar={true}>
       <div className={navbarMargin}>
         <div className={textCenter}>
           <h1>Blog</h1>
@@ -16,7 +17,7 @@ const Blog = ({ data }) => {
         <div className={container}>
           {nodes.map((node) => {
             return (
-              <BlogLink key={node.id} node={node} />
+              <BlogLink key={node.childMdx.id} node={node.childMdx} />
             )
           })}
         </div>
@@ -27,21 +28,24 @@ const Blog = ({ data }) => {
 
 export const query = graphql`
   query {
-  allMdx(filter: {fileAbsolutePath: {regex: "/(blogs)/"}}, sort:{fields: frontmatter___date, order: DESC}) {
-    nodes {
-      id
-      frontmatter {
-        title
-        date(formatString:"MMMM D, YYYY")
+    allFile(
+      sort: {childMdx: {frontmatter: {date: DESC}}}
+      filter: {sourceInstanceName: {eq: "blogs"}}
+    ) {
+      nodes {
+        childMdx {
+          frontmatter {
+            title
+            date(formatString:"MMMM D, YYYY")
+            slug
+          }
+          id
+          body
+        }
       }
-      id
-      body
-      slug
     }
   }
-}
-
-
 `
+export const Head = () => <Seo title="Blog" />
 
 export default Blog

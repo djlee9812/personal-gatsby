@@ -5,10 +5,9 @@ import { layoutContainer, contentDiv } from './layout.module.css'
 import '@fontsource/inconsolata'
 import '@fontsource/josefin-sans'
 
-const Layout = ({ pageTitle, darkNavbar, children }) => {
+const Layout = ({ darkNavbar, children }) => {
   return (
     <div className={layoutContainer}>
-      <title>{pageTitle}</title>
       <Navbar darkNavbar={darkNavbar}/>
       <div className={contentDiv}>
         {children}

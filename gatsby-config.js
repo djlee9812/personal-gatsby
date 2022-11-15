@@ -15,31 +15,31 @@ module.exports = {
     "gatsby-plugin-sitemap", 
     "gatsby-plugin-sharp", 
     "gatsby-transformer-sharp", 
+    "gatsby-plugin-mdx",
     {
       resolve: 'gatsby-source-filesystem',
       options: {
-        "name": "images",
-        "path": "./src/images/"
+        name: `images`,
+        path: `${__dirname}/src/images/`
       },
       __key: "images"
     }, 
     {
       resolve: 'gatsby-source-filesystem',
       options: {
-        "name": "gallery",
-        "path": "./gallery/"
+        name: `gallery`,
+        path: `${__dirname}/gallery/`
       },
       __key: "gallery"
     }, 
     {
       resolve: 'gatsby-source-filesystem',
       options: {
-        "name": "blogs",
-        "path": "./blogs/"
+        name: `blogs`,
+        path: `${__dirname}/blogs/`
       },
       __key: "blogs"
     }, 
-    "gatsby-plugin-mdx",
     "@react-icons/all-files",
     "gatsby-plugin-smoothscroll"
     

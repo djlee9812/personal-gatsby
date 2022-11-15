@@ -1,11 +1,12 @@
 import * as React from "react"
 import Layout from '../components/layout'
+import Seo from '../components/seo'
 import { container, textCenter, navbarMargin, marginSm } from '../components/global.module.css'
 
 const Projects = () => {
 
   return (
-    <Layout pageTitle="Dongjoon Lee | Projects" darkNavbar={true}>
+    <Layout darkNavbar={true}>
       <main className={navbarMargin}>
         <div className={`${container} ${textCenter}`}>
           <h1 className={marginSm}>Projects</h1>
@@ -15,5 +16,7 @@ const Projects = () => {
     </Layout>
   )
 }
+
+export const Head = () => <Seo title="Projects" />
 
 export default Projects

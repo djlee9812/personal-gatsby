@@ -2,6 +2,7 @@ import * as React from "react"
 import { Link } from 'gatsby'
 import { FaArrowDown } from '@react-icons/all-files/fa/FaArrowDown'
 import Layout from '../components/layout'
+import Seo from '../components/seo'
 import * as styles from '../components/index.module.css'
 import { navbarMargin, textCenter, hiddenButton } from '../components/global.module.css'
 import { StaticImage } from 'gatsby-plugin-image'
@@ -32,7 +33,7 @@ const IndexPage = () => {
   }
   
   return (
-    <Layout pageTitle="Dongjoon Lee" darkNavbar={scrolled}>
+    <Layout darkNavbar={scrolled}>
       <div style={{display: "grid"}}>
         <StaticImage
           className={styles.backgroundImage}
@@ -116,5 +117,7 @@ const IndexPage = () => {
     </Layout>
   )
 }
+
+export const Head = () => <Seo title="Home" />
 
 export default IndexPage

@@ -4,7 +4,7 @@ import { Link } from 'gatsby'
 const BlogLink = ({ node }) => {
   const title = node.frontmatter.title;
   const date = node.frontmatter.date;
-  const slug = node.slug;
+  const slug = node.frontmatter.slug;
   return (
     <Link to={`/blog/${slug}`}>
       <h3>{title}</h3>
