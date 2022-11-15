@@ -1,0 +1,36 @@
+.cell {
+  margin: 0;
+  cursor: pointer;
+}
+
+@media only screen and (max-width: 768px) {
+  .cell {
+    padding-bottom: 10px;
+  }
+}
+
+.masonry-img {
+  display: block;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+@media only screen and (min-width: 768px) {
+  .masonry-img {
+    height: 100%;
+  }
+}
+
+.image-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-weight: 400;
+}
+
+.opaque-image {
+  filter: brightness(70%);
+}

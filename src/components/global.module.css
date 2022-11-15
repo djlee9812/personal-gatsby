@@ -1,0 +1,22 @@
+.container {
+  padding: 15px 20px;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.navbar-margin {
+  padding-top: 50px;
+  min-height: 80vh;
+}
+
+.margin-sm {
+  margin: 10px;
+}
+
+.hidden-button {
+  background: transparent;
+  border: none !important;
+  cursor: pointer;
+}

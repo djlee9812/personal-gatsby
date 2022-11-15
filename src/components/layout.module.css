@@ -1,0 +1,21 @@
+body {
+  margin: 0px;
+  padding: 0px;
+}
+
+.layout-container {
+  margin: 0px;
+  padding: 0px;
+}
+
+.content-div {
+  min-height: calc(100vh - 10em - 50px);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Josefin Sans', sans-serif;
+}
+
+p, span, a {
+  font-family: 'Inconsolata', monospace;
+}
