@@ -43,7 +43,7 @@ const IndexPage = () => {
           <header className={styles.header}>
             <h1 className={`${styles.headerText} ${styles.headerTitle}`} id="header-title">Dongjoon Lee</h1>
             <p className={styles.headerText}>Welcome to my website!</p>
-            <button className={`${styles.down} ${hiddenButton}`} onClick={() => {scrollTo('#main')}} onKeyDown={(e) => {handleSpaceScroll(e)}}>
+            <button className={`${styles.down} ${hiddenButton}`} aria-label="Scroll Down" onClick={() => {scrollTo('#main')}} onKeyDown={(e) => {handleSpaceScroll(e)}}>
               <span id="down" className={`${styles.headerText} `}><FaArrowDown size={30}/></span>
             </button>
           </header>
@@ -115,6 +115,6 @@ const IndexPage = () => {
   )
 }
 
-export const Head = () => <Seo title="Home" />
+export const Head = () => <Seo />
 
 export default IndexPage

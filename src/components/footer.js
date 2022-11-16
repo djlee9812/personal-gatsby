@@ -12,25 +12,25 @@ const Footer = () => {
       <div id="links-div">
         <ul className={links}>
           <li>
-            <a href="https://www.github.com/djlee9812/">
+            <a href="https://www.github.com/djlee9812/" aria-label="Github link">
               {/* <i class="fa-brands fa-github"></i> */}
               <FaGithub />
             </a>
           </li>
           <li>
-            <a href="https://www.instagram.com/djlee9812/">
+            <a href="https://www.instagram.com/djlee9812/" aria-label="Instagram link">
               {/* <i class="fa-brands fa-instagram"></i> */}
               <FaInstagram />
             </a>
           </li>
           <li>
-            <a href="https://www.linkedin.com/in/dongjoon-lee/">
+            <a href="https://www.linkedin.com/in/dongjoon-lee/" aria-label="LinkedIn link">
               {/* <i class="fa-brands fa-linkedin"></i> */}
               <FaLinkedin />
             </a>
           </li>
           <li>
-            <a href="https://www.goodreads.com/dongjoonlee/">
+            <a href="https://www.goodreads.com/dongjoonlee/" aria-label="GoodReads link">
               {/* <i class="fa-brands fa-goodreads"></i> */}
               <FaGoodreads />
             </a>
