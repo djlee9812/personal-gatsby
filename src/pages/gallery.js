@@ -30,8 +30,9 @@ const Gallery = ({ data }) => {
   const nodes = data.allFile.nodes;
   const numPages = nodes.length;
   const [galIndex, setGalIndex] = React.useState(0);
-  const [modalImage, setModalImage] = React.useState(getImage(nodes[0].childMdx.frontmatter.imageList[0].hero_image));
-  const [modalAlt, setModalAlt] = React.useState("");
+  const [imgIndex, setImgIndex] = React.useState(0);
+  // const [modalImage, setModalImage] = React.useState(getImage(nodes[imgIndex].childMdx.frontmatter.imageList[imgIndex].hero_image));
+  // const [modalAlt, setModalAlt] = React.useState("");
   const [modalShow, setModalShow] = React.useState(false);
 
   const decrementIndex = () => {
@@ -50,10 +51,12 @@ const Gallery = ({ data }) => {
   }
 
   const node = nodes[galIndex].childMdx;
+  const imgList = node.frontmatter.imageList;
 
-  const openModal = (img, alt) => {
-    setModalImage(img);
-    setModalAlt(alt);
+  const openModal = (index, img, alt) => {
+    setImgIndex(index)
+    // setModalImage(img);
+    // setModalAlt(alt);
     setModalShow(true);
   }
 
@@ -62,11 +65,20 @@ const Gallery = ({ data }) => {
   }
 
   const nextImg = () => {
-
+    if (imgIndex === imgList.length-1) {
+      setImgIndex(0)
+    } else {
+      setImgIndex(imgIndex+1)
+      console.log(imgIndex)
+    }
   }
 
   const prevImg = () => {
-
+    if (imgIndex === 0) {
+      setImgIndex(imgList.length-1)
+    } else {
+      setImgIndex(imgIndex-1)
+    }
   }
 
   return (
@@ -86,7 +98,7 @@ const Gallery = ({ data }) => {
         </div>
         <section className={masonry}>
           {
-            node.frontmatter.imageList.map(({hero_image, hero_image_alt, grid_row, grid_col}, index) => {
+            imgList.map(({hero_image, hero_image_alt, grid_row, grid_col}, index) => {
               const image = getImage(hero_image);
               const id = "cell" + index.toString();
               return (
@@ -98,14 +110,14 @@ const Gallery = ({ data }) => {
                   masonryBool={masonryBool} 
                   gridRow={grid_row} 
                   gridCol={grid_col}
-                  onClick={() => {openModal(image, hero_image_alt)}}
+                  onClick={() => {openModal(index, image, hero_image_alt)}}
                 />
               )
             })
           }
         </section>
       </main>
-      {modalShow ? (<ImageModal image={modalImage} alt={modalAlt} close={closeModal} nextImg={nextImg} prevImg={prevImg}/>) : null}
+      {modalShow ? (<ImageModal image={getImage(imgList[imgIndex].hero_image)} alt={imgList[imgIndex].hero_image_alt} close={closeModal} nextImg={nextImg} prevImg={prevImg}/>) : null}
     </Layout>
   )
 }

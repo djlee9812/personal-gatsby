@@ -4,7 +4,7 @@ import FocusTrap from 'focus-trap-react'
 import { hiddenButton } from './global.module.css'
 import { modal, modalContent, closeBtn, modalImage, modalTitle } from './image-modal.module.css'
 
-const ImageModal = ({ image, alt, show, close }) => {
+const ImageModal = ({ image, alt, close, nextImg, prevImg }) => {
   const [imgData, setImgData] = React.useState(image);
   const [altText, setAltText] = React.useState(alt);
 
@@ -23,10 +23,10 @@ const ImageModal = ({ image, alt, show, close }) => {
       close()
     }
     if (event.key === 'ArrowRight') {
-
+      nextImg()
     }
     if (event.key === 'ArrowLeft') {
-      
+      prevImg()
     }
   }
 
