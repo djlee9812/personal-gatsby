@@ -1,20 +1,18 @@
 import * as React from 'react'
 import { graphql } from 'gatsby'
-import { MDXRenderer } from 'gatsby-plugin-mdx'
 import Layout from '../../components/layout'
 import Seo from '../../components/seo'
 import { navbarMargin, container } from '../../components/global.module.css'
 
 
-const BlogPost = ({ data }) => {
+const BlogPost = ({ data, children }) => {
   return (
     <Layout darkNavbar={true}>
       <div className={navbarMargin}>
         <div className={container}>
+          <h3>{data.mdx.frontmatter.title}</h3>
           <p>{data.mdx.frontmatter.date}</p>
-          <MDXRenderer>
-            {data.mdx.body}
-          </MDXRenderer>
+          {children}
         </div>
       </div>
     </Layout>
