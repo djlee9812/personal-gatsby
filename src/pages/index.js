@@ -11,14 +11,11 @@ import scrollTo from 'gatsby-plugin-smoothscroll'
 const IndexPage = () => {
   const [scrolled, setScrolled] = React.useState(false);
 
-  const onScroll = () => {
-    setScrolled(window.pageYOffset > 50)
-  };
-
   React.useEffect(() => {
-    if (typeof window !== "undefined") {
-      window.addEventListener("scroll", onScroll);
-    }
+    const onScroll = () => {
+      setScrolled(window.pageYOffset > 50)
+    };
+    window.addEventListener("scroll", onScroll);
     return () => {
       window.removeEventListener("scroll", onScroll);
     }
