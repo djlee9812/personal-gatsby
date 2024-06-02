@@ -1,11 +1,11 @@
 import * as React from "react"
 import { Link } from 'gatsby'
-import { FaArrowDown } from '@react-icons/all-files/fa/FaArrowDown'
+import { navbarMargin, textCenter, hiddenButton } from '../components/global.module.css'
+import { StaticImage } from 'gatsby-plugin-image'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Layout from '../components/layout'
 import Seo from '../components/seo'
 import * as styles from '../components/index.module.css'
-import { navbarMargin, textCenter, hiddenButton } from '../components/global.module.css'
-import { StaticImage } from 'gatsby-plugin-image'
 import scrollTo from 'gatsby-plugin-smoothscroll'
 
 const IndexPage = () => {
@@ -44,7 +44,7 @@ const IndexPage = () => {
             <h1 className={`${styles.headerText} ${styles.headerTitle}`} id="header-title">Dongjoon Lee</h1>
             <p className={styles.headerText}>Welcome to my website!</p>
             <button className={`${styles.down} ${hiddenButton}`} aria-label="Scroll Down" onClick={() => {scrollTo('#main')}} onKeyDown={(e) => {handleSpaceScroll(e)}}>
-              <span id="down" className={`${styles.headerText} `}><FaArrowDown size={30}/></span>
+              <span id="down" className={`${styles.headerText} `}><FontAwesomeIcon icon="arrow-down" size={30}/></span>
             </button>
           </header>
         </div>

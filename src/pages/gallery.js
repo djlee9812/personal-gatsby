@@ -1,12 +1,11 @@
 import * as React from "react"
 import { graphql } from 'gatsby'
 import { getImage } from 'gatsby-plugin-image'
-import { FaArrowLeft } from '@react-icons/all-files/fa/FaArrowLeft'
-import { FaArrowRight } from '@react-icons/all-files/fa/FaArrowRight'
-import Layout from '../components/layout'
-import Seo from '../components/seo'
 import { masonry, titleDiv, arrowDiv } from '../components/gallery.module.css'
 import { container, textCenter, navbarMargin, marginSm, hiddenButton } from '../components/global.module.css'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import Layout from '../components/layout'
+import Seo from '../components/seo'
 import ImageCell from '../components/image-cell'
 import ImageModal from '../components/image-modal'
 
@@ -86,14 +85,14 @@ const Gallery = ({ data }) => {
       <main className={navbarMargin} id="main">
         <div className={`${container} ${titleDiv}`}>
           <div className={arrowDiv}>
-            <button className={hiddenButton} onClick={decrementIndex} aria-label="move left"><FaArrowLeft size={25}/></button>
+            <button className={hiddenButton} onClick={decrementIndex} aria-label="move left"><FontAwesomeIcon icon="arrow-left" size={25}/></button>
           </div>
           <div className={textCenter}>
             <h1 className={marginSm}>{node.frontmatter.title}</h1>
             <p className={marginSm}>{node.frontmatter.description}</p>
           </div>
           <div className={arrowDiv}>
-            <button className={hiddenButton} onClick={incrementIndex} aria-label="move right"><FaArrowRight size={25}/></button>
+            <button className={hiddenButton} onClick={incrementIndex} aria-label="move right"><FontAwesomeIcon icon="arrow-right" size={25}/></button>
           </div>
         </div>
         <section className={masonry}>

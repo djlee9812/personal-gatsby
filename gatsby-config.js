@@ -9,6 +9,23 @@ module.exports = {
     description: `Dongjoon Lee's Personal Website`
   },
   plugins: [
+    // {
+    //   resolve: "gatsby-plugin-google-tagmanager",
+    //   options: {
+    //     id: "YOUR_GOOGLE_TAGMANAGER_ID",
+  
+    //     // Include GTM in development.
+    //     //
+    //     // Defaults to false meaning GTM will only be loaded in production.
+    //     includeInDevelopment: false,
+  
+    //     // datalayer to be set before GTM is loaded
+    //     // should be an object or a function that is executed in the browser
+    //     //
+    //     // Defaults to null
+    //     defaultDataLayer: { platform: "gatsby" },
+    //   },
+    // },
     {
       resolve: `gatsby-plugin-google-gtag`,
       options: {
@@ -64,9 +81,8 @@ module.exports = {
         path: `${__dirname}/blogs/`
       },
       __key: "blogs"
-    }, 
-    "@react-icons/all-files",
-    "gatsby-plugin-smoothscroll"
-    
+    },
+    "gatsby-plugin-smoothscroll",
+    "gatsby-plugin-netlify",
   ]
 };

@@ -1,9 +1,6 @@
 import * as React from 'react'
-import { FaGithub } from '@react-icons/all-files/fa/FaGithub'
-import { FaInstagram } from '@react-icons/all-files/fa/FaInstagram'
-import { FaLinkedin } from '@react-icons/all-files/fa/FaLinkedin'
-import { FaGoodreads } from '@react-icons/all-files/fa/FaGoodreads'
 import { links, footerDiv } from './footer.module.css'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const Footer = () => {
   return (
@@ -13,26 +10,22 @@ const Footer = () => {
         <ul className={links}>
           <li>
             <a href="https://www.github.com/djlee9812/" aria-label="Github link">
-              {/* <i class="fa-brands fa-github"></i> */}
-              <FaGithub />
+            <FontAwesomeIcon icon={['fab', 'github']} />
             </a>
           </li>
           <li>
             <a href="https://www.instagram.com/djlee9812/" aria-label="Instagram link">
-              {/* <i class="fa-brands fa-instagram"></i> */}
-              <FaInstagram />
+            <FontAwesomeIcon icon={['fab', 'instagram']} />
             </a>
           </li>
           <li>
             <a href="https://www.linkedin.com/in/dongjoon-lee/" aria-label="LinkedIn link">
-              {/* <i class="fa-brands fa-linkedin"></i> */}
-              <FaLinkedin />
+            <FontAwesomeIcon icon={['fab', 'linkedin']} />
             </a>
           </li>
           <li>
             <a href="https://www.goodreads.com/dongjoonlee/" aria-label="GoodReads link">
-              {/* <i class="fa-brands fa-goodreads"></i> */}
-              <FaGoodreads />
+            <FontAwesomeIcon icon={['fab', 'goodreads']} />
             </a>
           </li>
         </ul>
