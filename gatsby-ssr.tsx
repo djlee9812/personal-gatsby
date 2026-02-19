@@ -1,5 +1,6 @@
 import React from 'react';
-import type { GatsbySSR } from "gatsby"
+import type { GatsbySSR } from "gatsby";
+import { Partytown } from "@qwik.dev/partytown/react";
 
 export const onRenderBody: GatsbySSR["onRenderBody"] = ({ setHtmlAttributes, setHeadComponents }) => {
   setHtmlAttributes({ lang: 'en' });
@@ -7,6 +8,7 @@ export const onRenderBody: GatsbySSR["onRenderBody"] = ({ setHtmlAttributes, set
   const gaId = process.env.GA_ID;
   if (gaId && gaId !== "undefined" && gaId !== "") {
     setHeadComponents([
+      <Partytown key="partytown" forward={['gtag', 'dataLayer.push']} />,
       <script
         key="gtag-partytown"
         type="text/partytown"

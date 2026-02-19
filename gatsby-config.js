@@ -10,12 +10,6 @@ module.exports = {
     description: `Dongjoon Lee's Personal Website`
   },
   plugins: [
-    {
-      resolve: 'gatsby-plugin-partytown',
-      options: {
-        forward: ['gtag', 'dataLayer.push'],
-      },
-    },
     "gatsby-plugin-image", 
     "gatsby-plugin-sitemap", 
     "gatsby-plugin-sharp", 
