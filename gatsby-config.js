@@ -9,48 +9,10 @@ module.exports = {
     description: `Dongjoon Lee's Personal Website`
   },
   plugins: [
-    // {
-    //   resolve: "gatsby-plugin-google-tagmanager",
-    //   options: {
-    //     id: "YOUR_GOOGLE_TAGMANAGER_ID",
-  
-    //     // Include GTM in development.
-    //     //
-    //     // Defaults to false meaning GTM will only be loaded in production.
-    //     includeInDevelopment: false,
-  
-    //     // datalayer to be set before GTM is loaded
-    //     // should be an object or a function that is executed in the browser
-    //     //
-    //     // Defaults to null
-    //     defaultDataLayer: { platform: "gatsby" },
-    //   },
-    // },
     {
-      resolve: `gatsby-plugin-google-gtag`,
+      resolve: 'gatsby-plugin-partytown',
       options: {
-        // You can add multiple tracking ids and a pageview event will be fired for all of them.
-        trackingIds: [
-          process.env.GA_ID, // Google Analytics / GA
-        ],
-        // This object gets passed directly to the gtag config command
-        // This config will be shared across all trackingIds
-        gtagConfig: {
-          optimize_id: process.env.GTAG_ID,
-          anonymize_ip: true,
-          cookie_expires: 0,
-        },
-        // This object is used for configuration specific to this plugin
-        pluginConfig: {
-          // Puts tracking script in the head instead of the body
-          head: false,
-          // Setting this parameter is also optional
-          respectDNT: true,
-          // Avoids sending pageview hits from custom paths
-          // exclude: ["/preview/**", "/do-not-track/me/too/"],
-          // Defaults to https://www.googletagmanager.com
-          origin: "https://www.dongjoonlee.com",
-        },
+        forward: ['gtag', 'dataLayer.push'],
       },
     },
     "gatsby-plugin-image", 
@@ -81,6 +43,27 @@ module.exports = {
         path: `${__dirname}/blogs/`
       },
       __key: "blogs"
+    },
+    {
+      resolve: 'gatsby-plugin-robots-txt',
+      options: {
+        resolveEnv: () => process.env.CONTEXT || process.env.NODE_ENV,
+        env: {
+          production: {
+            policy: [{ userAgent: '*', allow: '/' }]
+          },
+          'branch-deploy': {
+            policy: [{ userAgent: '*', disallow: ['/'] }],
+            sitemap: null,
+            host: null
+          },
+          'deploy-preview': {
+            policy: [{ userAgent: '*', disallow: ['/'] }],
+            sitemap: null,
+            host: null
+          }
+        }
+      }
     },
     "gatsby-plugin-smoothscroll",
     "gatsby-plugin-netlify",

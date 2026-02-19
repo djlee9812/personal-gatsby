@@ -38,24 +38,28 @@ const ImageModal = ({ image, alt, close, nextImg, prevImg }) => {
 
   return (
     <FocusTrap>
-      <aside 
-        tag="aside"
+      <div 
         className={modal} 
         ref={modalRef} 
-        role="dialog" 
-        aria-modal="true"
+        role="button"
         tabIndex="-1"
+        aria-label="Close modal"
         onClick={clickModal} 
         onKeyDown={handleKey} 
       >
-        <div className={modalContent}>
+        <div 
+          className={modalContent}
+          role="dialog"
+          aria-modal="true"
+          tabIndex="-1"
+        >
           <h3 className={modalTitle}>{alt}</h3>
           <button className={`${hiddenButton} ${closeBtn}`} onClick={close} onKeyDown={handleKey} ref={closeRef}>
             <span>&times;</span>
           </button>
           <GatsbyImage className={modalImage} image={imgData} alt={altText} objectFit="contain" />
         </div>
-      </aside>
+      </div>
     </FocusTrap>
   )
 }

@@ -1,7 +1,7 @@
 import * as React from "react"
+import { container, textCenter, navbarMargin, marginSm } from '../components/global.module.css'
 import Layout from '../components/layout'
 import Seo from '../components/seo'
-import { container, textCenter, navbarMargin, marginSm } from '../components/global.module.css'
 
 const Projects = () => {
 

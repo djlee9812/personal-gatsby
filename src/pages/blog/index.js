@@ -1,8 +1,8 @@
 import * as React from "react"
 import { graphql } from 'gatsby'
+import { textCenter, navbarMargin, container } from '../../components/global.module.css'
 import Layout from '../../components/layout'
 import Seo from '../../components/seo'
-import { textCenter, navbarMargin, container } from '../../components/global.module.css'
 import BlogLink  from '../../components/blog-link'
 
 const Blog = ({ data }) => {

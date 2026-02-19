@@ -26,8 +26,14 @@ const ImageCell = ({ image, alt, masonryBool, gridRow, gridCol, onClick }) => {
   }, [masonryBool, gridRow, gridCol])
   
   
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      onClick();
+    }
+  };
+
   return (
-    <figure 
+    <div 
       className={cell} 
       onMouseOver={imageEnter} 
       onMouseLeave={imageLeave} 
@@ -35,10 +41,13 @@ const ImageCell = ({ image, alt, masonryBool, gridRow, gridCol, onClick }) => {
       onBlur={imageLeave}
       style={masonryStyle}
       onClick={onClick}
+      onKeyDown={handleKeyDown}
+      role="button"
+      tabIndex={0}
     >
       <GatsbyImage className={`${masonryImg} ${hoverStyle}`} image={image} alt={alt}/>
       <span className={imageText}>{hoverText}</span>
-    </figure>
+    </div>
   )
 }
 

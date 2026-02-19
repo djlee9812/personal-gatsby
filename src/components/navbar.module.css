@@ -8,7 +8,7 @@
 }
 
 .navbar-background {
-  background-color: #282828;
+  background-color: var(--color-bg-primary);
 }
 
 @media only screen and (min-width: 768px) {
@@ -37,9 +37,9 @@
 .nav-item a {
   display: inline-block;
   text-decoration: none;
-  color: white;
+  color: var(--color-text-primary);
 }
 
 .active {
-  color: #d4fcff;
+  color: var(--color-highlight);
 }

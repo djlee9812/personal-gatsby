@@ -19,7 +19,7 @@
 }
 
 .header-text {
-  color: white;
+  color: var(--color-text-primary);
 }
 
 .header-title {
@@ -100,7 +100,7 @@
 
 .embedded-anchor {
   text-decoration: none;
-  color: #0f6649;
+  color: var(--color-accent);
 }
 
 figure {
@@ -109,8 +109,8 @@ figure {
 }
 
 figcaption {
-  background-color: #2B2B37;
-  color: #c6c6c6;
+  background-color: var(--color-bg-secondary);
+  color: var(--color-text-secondary);
   max-width: 400px;
   font-size: 10px;
   display: block;

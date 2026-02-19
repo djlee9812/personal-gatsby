@@ -1,3 +1,17 @@
+:root {
+  /* Colors */
+  --color-bg-primary: #282828;
+  --color-bg-secondary: #2B2B37;
+  --color-text-primary: #ffffff;
+  --color-text-secondary: #c6c6c6;
+  --color-accent: #0f6649;
+  --color-highlight: #d4fcff;
+
+  /* Fonts */
+  --font-heading: 'Josefin Sans', sans-serif;
+  --font-body: 'Inconsolata', monospace;
+}
+
 .container {
   padding: 15px 20px;
 }

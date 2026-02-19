@@ -1,8 +1,8 @@
 import * as React from "react"
 import { Link } from "gatsby"
+import { navbarMargin } from '../components/global.module.css'
 import Layout from '../components/layout'
 import Seo from '../components/seo'
-import { navbarMargin } from '../components/global.module.css'
 import { notFoundDiv } from '../components/404.module.css'
 
 // markup

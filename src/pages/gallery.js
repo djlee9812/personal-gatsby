@@ -1,29 +1,30 @@
 import * as React from "react"
 import { graphql } from 'gatsby'
 import { getImage } from 'gatsby-plugin-image'
-import { masonry, titleDiv, arrowDiv } from '../components/gallery.module.css'
 import { container, textCenter, navbarMargin, marginSm, hiddenButton } from '../components/global.module.css'
+import { masonry, titleDiv, arrowDiv } from '../components/gallery.module.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Layout from '../components/layout'
 import Seo from '../components/seo'
 import ImageCell from '../components/image-cell'
 import ImageModal from '../components/image-modal'
 
+const minWidth = 768;
+
 const Gallery = ({ data }) => {
-  const minWidth = 768;
   
   const [masonryBool, setMasonryBool] = React.useState(false)
   React.useEffect(() => {
-    const getWindowWidth = () => {
-      const { innerWidth: width } = window;
-      return width;
-    }
-    setMasonryBool(getWindowWidth() > minWidth);
-    const handleResize = () => {
-      setMasonryBool(getWindowWidth() > minWidth)
-    }
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+    const mql = window.matchMedia(`(min-width: ${minWidth}px)`);
+    
+    // Set initial state
+    setMasonryBool(mql.matches);
+
+    // Modern browsers support addEventListener on MediaQueryList
+    const handler = (e) => setMasonryBool(e.matches);
+    mql.addEventListener('change', handler);
+    
+    return () => mql.removeEventListener('change', handler);
   }, []);
 
   const nodes = data.allFile.nodes;
@@ -68,7 +69,6 @@ const Gallery = ({ data }) => {
       setImgIndex(0)
     } else {
       setImgIndex(imgIndex+1)
-      console.log(imgIndex)
     }
   }
 
@@ -85,14 +85,14 @@ const Gallery = ({ data }) => {
       <main className={navbarMargin} id="main">
         <div className={`${container} ${titleDiv}`}>
           <div className={arrowDiv}>
-            <button className={hiddenButton} onClick={decrementIndex} aria-label="move left"><FontAwesomeIcon icon="arrow-left" size={25}/></button>
+            <button className={hiddenButton} onClick={decrementIndex} aria-label="move left"><FontAwesomeIcon icon="arrow-left" size="xl"/></button>
           </div>
           <div className={textCenter}>
             <h1 className={marginSm}>{node.frontmatter.title}</h1>
             <p className={marginSm}>{node.frontmatter.description}</p>
           </div>
           <div className={arrowDiv}>
-            <button className={hiddenButton} onClick={incrementIndex} aria-label="move right"><FontAwesomeIcon icon="arrow-right" size={25}/></button>
+            <button className={hiddenButton} onClick={incrementIndex} aria-label="move right"><FontAwesomeIcon icon="arrow-right" size="xl"/></button>
           </div>
         </div>
         <section className={masonry}>
@@ -135,7 +135,7 @@ export const query = graphql`
               hero_image {
                 childImageSharp {
                   gatsbyImageData(
-                    placeholder: DOMINANT_COLOR,
+                    placeholder: BLURRED,
                     formats: [AUTO, WEBP, AVIF]
                   )
                 }
