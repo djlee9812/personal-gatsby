@@ -1,11 +1,12 @@
 import * as React from "react"
-import { Link } from "gatsby"
+import { Link, HeadFC } from "gatsby"
+// @ts-ignore
 import { navbarMargin } from '../components/global.module.css'
 import Layout from '../components/layout'
 import Seo from '../components/seo'
+// @ts-ignore
 import { notFoundDiv } from '../components/404.module.css'
 
-// markup
 const NotFoundPage = () => {
   return (
     <Layout darkNavbar={true}>
@@ -21,6 +22,6 @@ const NotFoundPage = () => {
   )
 }
 
-export const Head = () => <Seo title="404" />
+export const Head: HeadFC = () => <Seo title="404" />
 
 export default NotFoundPage

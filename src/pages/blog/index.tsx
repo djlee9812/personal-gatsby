@@ -1,11 +1,30 @@
 import * as React from "react"
-import { graphql } from 'gatsby'
+import { graphql, PageProps, HeadFC } from 'gatsby'
+// @ts-ignore
 import { textCenter, navbarMargin, container } from '../../components/global.module.css'
 import Layout from '../../components/layout'
 import Seo from '../../components/seo'
 import BlogLink  from '../../components/blog-link'
 
-const Blog = ({ data }) => {
+interface BlogNode {
+  childMdx: {
+    frontmatter: {
+      title: string
+      date: string
+      slug: string
+    }
+    id: string
+    body: string
+  }
+}
+
+interface BlogData {
+  allFile: {
+    nodes: BlogNode[]
+  }
+}
+
+const Blog = ({ data }: PageProps<BlogData>) => {
   const nodes = data.allFile.nodes;
   return (
     <Layout darkNavbar={true}>
@@ -46,6 +65,6 @@ export const query = graphql`
     }
   }
 `
-export const Head = () => <Seo title="Blog" />
+export const Head: HeadFC = () => <Seo title="Blog" />
 
 export default Blog

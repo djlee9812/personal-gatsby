@@ -1,11 +1,22 @@
 import * as React from 'react'
-import { GatsbyImage } from 'gatsby-plugin-image'
+import { GatsbyImage, IGatsbyImageData } from 'gatsby-plugin-image'
+// @ts-ignore
 import { cell, masonryImg, imageText, opaqueImage } from './image-cell.module.css'
 
-const ImageCell = ({ image, alt, masonryBool, gridRow, gridCol, onClick }) => {
-  const [hoverStyle, setHoverStyle] = React.useState(null)
+interface ImageCellProps {
+  image: IGatsbyImageData
+  alt: string
+  masonryBool?: boolean
+  gridRow?: string
+  gridCol?: string
+  onClick: () => void
+}
+
+const ImageCell = ({ image, alt, masonryBool, gridRow, gridCol, onClick }: ImageCellProps) => {
+  const [hoverStyle, setHoverStyle] = React.useState<string | null>(null)
   const [hoverText, setHoverText] = React.useState("")
-  const [masonryStyle, setMasonryStyle] = React.useState({})
+  const [masonryStyle, setMasonryStyle] = React.useState<React.CSSProperties>({})
+  
   const imageEnter = () => {
     setHoverStyle(opaqueImage);
     setHoverText(alt);
@@ -14,6 +25,7 @@ const ImageCell = ({ image, alt, masonryBool, gridRow, gridCol, onClick }) => {
     setHoverStyle(null);
     setHoverText("");
   }
+  
   React.useEffect(() => {
     if (masonryBool) {
       setMasonryStyle({
@@ -25,8 +37,7 @@ const ImageCell = ({ image, alt, masonryBool, gridRow, gridCol, onClick }) => {
     }
   }, [masonryBool, gridRow, gridCol])
   
-  
-  const handleKeyDown = (e) => {
+  const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter' || e.key === ' ') {
       onClick();
     }

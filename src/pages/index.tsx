@@ -1,15 +1,22 @@
 import * as React from "react"
-import { Link } from 'gatsby'
+import { Link, HeadFC } from 'gatsby'
+// @ts-ignore
 import { navbarMargin, textCenter, hiddenButton } from '../components/global.module.css'
 import { StaticImage } from 'gatsby-plugin-image'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Layout from '../components/layout'
 import Seo from '../components/seo'
+// @ts-ignore
 import * as styles from '../components/index.module.css'
 import scrollTo from 'gatsby-plugin-smoothscroll'
 import { motion } from 'framer-motion'
 
-const Section = ({ children, delay = 0 }) => (
+interface SectionProps {
+  children: React.ReactNode
+  delay?: number
+}
+
+const Section = ({ children, delay = 0 }: SectionProps) => (
   <motion.div
     initial={{ opacity: 0, y: 20 }}
     whileInView={{ opacity: 1, y: 0 }}
@@ -22,13 +29,15 @@ const Section = ({ children, delay = 0 }) => (
 
 const IndexPage = () => {
   const [scrolled, setScrolled] = React.useState(false);
-  const sentinelRef = React.useRef(null);
+  const sentinelRef = React.useRef<HTMLDivElement>(null);
 
   React.useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
         // When the sentinel is NOT intersecting, it means we've scrolled down
-        setScrolled(!entry.isIntersecting);
+        if (entry) {
+          setScrolled(!entry.isIntersecting);
+        }
       },
       { threshold: [0], rootMargin: "-50px 0px 0px 0px" }
     );
@@ -46,9 +55,8 @@ const IndexPage = () => {
     };
   }, []);
 
-  const handleSpaceScroll = (e) => {
+  const handleSpaceScroll = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter') {
-
       scrollTo('#main');
     }
   }
@@ -69,7 +77,7 @@ const IndexPage = () => {
             <h1 className={`${styles.headerText} ${styles.headerTitle}`} id="header-title">Dongjoon Lee</h1>
             <p className={styles.headerText}>Welcome to my website!</p>
             <button className={`${styles.down} ${hiddenButton}`} aria-label="Scroll Down" onClick={() => {scrollTo('#main')}} onKeyDown={(e) => {handleSpaceScroll(e)}}>
-              <span id="down" className={`${styles.headerText} `}><FontAwesomeIcon icon="arrow-down" size="2x"/></span>
+              <span id="down" className={`${styles.headerText} `}><FontAwesomeIcon icon="arrow-down" size="lg"/></span>
             </button>
           </header>
         </div>
@@ -99,7 +107,7 @@ const IndexPage = () => {
             </div>
           </Section>
           <div className={textCenter} role="separator">
-            <StaticImage className={styles.hrSvg} src="../images/hr.svg" aria-hidden="true" focusable="false" alt="divider"/>
+            <StaticImage className={styles.hrSvg} src="../images/hr.svg" aria-hidden="true" alt="divider"/>
           </div>
           <Section>
             <div className={styles.flexRow}>
@@ -120,7 +128,7 @@ const IndexPage = () => {
             </div>
           </Section>
           <div className={textCenter} role="separator">
-            <StaticImage className={styles.hrSvg} src="../images/hr.svg" aria-hidden="true" focusable="false" alt="divider"/>
+            <StaticImage className={styles.hrSvg} src="../images/hr.svg" aria-hidden="true" alt="divider"/>
           </div>
           <Section>
             <div className={styles.flexRow}>
@@ -145,6 +153,6 @@ const IndexPage = () => {
   )
 }
 
-export const Head = () => <Seo />
+export const Head: HeadFC = () => <Seo />
 
 export default IndexPage

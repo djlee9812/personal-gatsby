@@ -1,4 +1,5 @@
 import * as React from 'react'
+// @ts-ignore
 import { links, footerDiv } from './footer.module.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 

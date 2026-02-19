@@ -3,6 +3,7 @@ require("dotenv").config({
 })
 
 module.exports = {
+  graphqlTypegen: true,
   siteMetadata: {
     title: `Dongjoon Lee's Personal Website`,
     siteUrl: `https://www.dongjoonlee.com`,

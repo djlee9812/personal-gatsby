@@ -1,2 +1,2 @@
-// gatsby-browser.js
+// gatsby-browser.ts
 import './src/utils/fontawesome';

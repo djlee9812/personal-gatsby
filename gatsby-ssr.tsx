@@ -1,6 +1,7 @@
 import React from 'react';
+import type { GatsbySSR } from "gatsby"
 
-export const onRenderBody = ({ setHtmlAttributes, setHeadComponents }) => {
+export const onRenderBody: GatsbySSR["onRenderBody"] = ({ setHtmlAttributes, setHeadComponents }) => {
   setHtmlAttributes({ lang: 'en' });
   
   const gaId = process.env.GA_ID;
@@ -20,7 +21,7 @@ export const onRenderBody = ({ setHtmlAttributes, setHeadComponents }) => {
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
             gtag('config', '${gaId}', {
-              page_path: location ? location.pathname + location.search + location.hash : undefined,
+              page_path: typeof location !== 'undefined' ? location.pathname + location.search + location.hash : undefined,
               anonymize_ip: true,
               cookie_expires: 0,
             });

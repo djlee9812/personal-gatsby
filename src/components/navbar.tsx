@@ -1,8 +1,13 @@
 import * as React from 'react'
 import { Link } from 'gatsby'
+// @ts-ignore
 import { navbarStyle, navbarBackground, navLink, navItem } from './navbar.module.css'
 
-const Navbar = ({ darkNavbar }) => {
+interface NavbarProps {
+  darkNavbar?: boolean
+}
+
+const Navbar = ({ darkNavbar }: NavbarProps) => {
   let navStyle = navbarStyle
   if (darkNavbar) {
     navStyle = `${navbarStyle} ${navbarBackground}`;

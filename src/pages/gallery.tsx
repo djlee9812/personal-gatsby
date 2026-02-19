@@ -1,7 +1,9 @@
 import * as React from "react"
-import { graphql } from 'gatsby'
-import { getImage } from 'gatsby-plugin-image'
+import { graphql, PageProps, HeadFC } from 'gatsby'
+import { getImage, IGatsbyImageData } from 'gatsby-plugin-image'
+// @ts-ignore
 import { container, textCenter, navbarMargin, marginSm, hiddenButton } from '../components/global.module.css'
+// @ts-ignore
 import { masonry, titleDiv, arrowDiv } from '../components/gallery.module.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Layout from '../components/layout'
@@ -11,7 +13,35 @@ import ImageModal from '../components/image-modal'
 
 const minWidth = 768;
 
-const Gallery = ({ data }) => {
+interface ImageListItem {
+  hero_image: {
+    childImageSharp: {
+      gatsbyImageData: IGatsbyImageData
+    }
+  }
+  hero_image_alt: string
+  grid_row: string
+  grid_col: string
+}
+
+interface GalleryNode {
+  childMdx: {
+    frontmatter: {
+      title: string
+      description: string
+      imageList: ImageListItem[]
+    }
+    id: string
+  }
+}
+
+interface GalleryData {
+  allFile: {
+    nodes: GalleryNode[]
+  }
+}
+
+const Gallery = ({ data }: PageProps<GalleryData>) => {
   
   const [masonryBool, setMasonryBool] = React.useState(false)
   React.useEffect(() => {
@@ -21,7 +51,7 @@ const Gallery = ({ data }) => {
     setMasonryBool(mql.matches);
 
     // Modern browsers support addEventListener on MediaQueryList
-    const handler = (e) => setMasonryBool(e.matches);
+    const handler = (e: MediaQueryListEvent) => setMasonryBool(e.matches);
     mql.addEventListener('change', handler);
     
     return () => mql.removeEventListener('change', handler);
@@ -31,8 +61,6 @@ const Gallery = ({ data }) => {
   const numPages = nodes.length;
   const [galIndex, setGalIndex] = React.useState(0);
   const [imgIndex, setImgIndex] = React.useState(0);
-  // const [modalImage, setModalImage] = React.useState(getImage(nodes[imgIndex].childMdx.frontmatter.imageList[imgIndex].hero_image));
-  // const [modalAlt, setModalAlt] = React.useState("");
   const [modalShow, setModalShow] = React.useState(false);
 
   const decrementIndex = () => {
@@ -50,13 +78,13 @@ const Gallery = ({ data }) => {
     }
   }
 
-  const node = nodes[galIndex].childMdx;
+  const node = nodes[galIndex]?.childMdx;
+  if (!node) return null;
+
   const imgList = node.frontmatter.imageList;
 
-  const openModal = (index, img, alt) => {
+  const openModal = (index: number) => {
     setImgIndex(index)
-    // setModalImage(img);
-    // setModalAlt(alt);
     setModalShow(true);
   }
 
@@ -100,23 +128,31 @@ const Gallery = ({ data }) => {
             imgList.map(({hero_image, hero_image_alt, grid_row, grid_col}, index) => {
               const image = getImage(hero_image);
               const id = "cell" + index.toString();
+              if (!image) return null;
               return (
                 <ImageCell 
-                  id={id} 
                   key={id} 
                   image={image} 
                   alt={hero_image_alt} 
                   masonryBool={masonryBool} 
                   gridRow={grid_row} 
                   gridCol={grid_col}
-                  onClick={() => {openModal(index, image, hero_image_alt)}}
+                  onClick={() => {openModal(index)}}
                 />
               )
             })
           }
         </section>
       </main>
-      {modalShow ? (<ImageModal image={getImage(imgList[imgIndex].hero_image)} alt={imgList[imgIndex].hero_image_alt} close={closeModal} nextImg={nextImg} prevImg={prevImg}/>) : null}
+      {modalShow && imgList[imgIndex] ? (
+        <ImageModal 
+          image={getImage(imgList[imgIndex]!.hero_image)!} 
+          alt={imgList[imgIndex]!.hero_image_alt} 
+          close={closeModal} 
+          nextImg={nextImg} 
+          prevImg={prevImg}
+        />
+      ) : null}
     </Layout>
   )
 }
@@ -151,6 +187,6 @@ export const query = graphql`
     }
   }
 `
-export const Head = () => <Seo title="Gallery" />
+export const Head: HeadFC = () => <Seo title="Gallery" />
 
 export default Gallery

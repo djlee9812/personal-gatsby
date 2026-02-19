@@ -1,54 +1,40 @@
-<p align="center">
-  <a href="https://www.gatsbyjs.com/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter">
-    <img alt="Gatsby" src="https://www.gatsbyjs.com/Gatsby-Monogram.svg" width="60" />
-  </a>
-</p>
-<h1 align="center">
-  Gatsby minimal starter
-</h1>
+# Dongjoon Lee's Personal Website
 
-## 🚀 Quick start
+Welcome to the source code for my personal website! This site serves as an ongoing catalog of my life, featuring a gallery of my travels, a blog for my thoughts, and information about my background and hobbies like snowboarding and music.
 
-1.  **Create a Gatsby site.**
+## 🛠 Tech Stack
 
-    Use the Gatsby CLI to create a new site, specifying the minimal starter.
+- **Framework:** [Gatsby v5](https://www.gatsbyjs.com/)
+- **Language:** [TypeScript](https://www.typescriptlang.org/)
+- **Styling:** CSS Modules
+- **Animations:** [Framer Motion](https://www.framer.com/motion/)
+- **Content:** [MDX](https://mdxjs.com/) (for blog posts and gallery data)
+- **Icons:** [FontAwesome](https://fontawesome.com/)
+- **Deployment:** [Netlify](https://www.netlify.com/)
 
+## 📂 Project Structure
+
+- `src/pages/`: Main entry points for the site (Home, Gallery, Blog).
+- `src/components/`: Reusable React components.
+- `src/hooks/`: Custom React hooks (e.g., site metadata).
+- `blogs/`: MDX files for blog content.
+- `gallery/`: MDX files and image data for the gallery.
+- `src/images/`: Static images used across the site.
+
+## 🚀 Getting Started
+
+1.  **Install dependencies:**
     ```shell
-    # create a new Gatsby site using the minimal starter
-    npm init gatsby
+    npm install
     ```
 
-2.  **Start developing.**
-
-    Navigate into your new site’s directory and start it up.
-
+2.  **Start developing:**
     ```shell
-    cd my-gatsby-site/
     npm run develop
     ```
+    The site will be running at `http://localhost:8000`.
 
-3.  **Open the code and start customizing!**
-
-    Your site is now running at http://localhost:8000!
-
-    Edit `src/pages/index.js` to see your site update in real-time!
-
-4.  **Learn more**
-
-    - [Documentation](https://www.gatsbyjs.com/docs/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter)
-
-    - [Tutorials](https://www.gatsbyjs.com/tutorial/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter)
-
-    - [Guides](https://www.gatsbyjs.com/tutorial/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter)
-
-    - [API Reference](https://www.gatsbyjs.com/docs/api-reference/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter)
-
-    - [Plugin Library](https://www.gatsbyjs.com/plugins?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter)
-
-    - [Cheat Sheet](https://www.gatsbyjs.com/docs/cheat-sheet/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter)
-
-## 🚀 Quick start (Gatsby Cloud)
-
-Deploy this starter with one click on [Gatsby Cloud](https://www.gatsbyjs.com/cloud/):
-
-[<img src="https://www.gatsbyjs.com/deploynow.svg" alt="Deploy to Gatsby Cloud">](https://www.gatsbyjs.com/dashboard/deploynow?url=https://github.com/gatsbyjs/gatsby-starter-minimal)
+3.  **Build for production:**
+    ```shell
+    npm run build
+    ```
