@@ -6,3 +6,9 @@ public
 
 # Local Netlify folder
 .netlify
+
+# TypeScript incremental build cache
+*.tsbuildinfo
+
+# Generated Partytown library files
+static/~partytown/
