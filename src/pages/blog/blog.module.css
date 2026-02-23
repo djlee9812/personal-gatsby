@@ -1,0 +1,110 @@
+.blogGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 2rem;
+  padding: 2rem 0;
+}
+
+.blogCard {
+  background: rgba(43, 43, 55, 0.5);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  text-decoration: none;
+  color: var(--color-text-primary);
+}
+
+.blogCard:hover {
+  transform: translateY(-5px);
+  border-color: var(--color-highlight);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  background: rgba(43, 43, 55, 0.8);
+}
+
+.blogCard h3 {
+  margin: 0 0 0.5rem 0;
+  font-family: var(--font-heading);
+  color: var(--color-highlight);
+  font-size: 1.5rem;
+}
+
+.blogDate {
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  color: var(--color-text-secondary);
+  margin-bottom: 1rem;
+  display: block;
+}
+
+.blogExcerpt {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--color-text-primary);
+  margin-bottom: 1.5rem;
+  flex-grow: 1;
+}
+
+.readMore {
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  color: var(--color-highlight);
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Post Template Styles */
+.postHeader {
+  margin-bottom: 3rem;
+  text-align: center;
+}
+
+.postTitle {
+  font-size: 3rem;
+  margin-bottom: 0.5rem;
+  color: var(--color-highlight);
+}
+
+.postMeta {
+  font-family: var(--font-body);
+  color: var(--color-text-secondary);
+}
+
+.hr {
+  height: 2px;
+  width: 100px;
+  background: linear-gradient(90deg, transparent, var(--color-highlight), transparent);
+  margin: 2rem auto;
+}
+
+.postContent {
+  font-family: var(--font-body);
+  line-height: 1.8;
+  font-size: 1.1rem;
+}
+
+.postContent p {
+  margin-bottom: 1.5rem;
+}
+
+.postContent h2, .postContent h3 {
+  margin-top: 2.5rem;
+  margin-bottom: 1rem;
+  color: var(--color-highlight);
+}
+
+@media (max-width: 768px) {
+  .blogGrid {
+    grid-template-columns: 1fr;
+  }
+  .postTitle {
+    font-size: 2.2rem;
+  }
+}

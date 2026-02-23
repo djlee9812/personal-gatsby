@@ -1,8 +1,12 @@
 import * as React from "react"
 import { Link } from 'gatsby'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+// @ts-ignore
+import * as styles from '../pages/blog/blog.module.css'
 
 interface BlogLinkProps {
   node: {
+    excerpt: string
     frontmatter: {
       title: string
       date: string
@@ -12,13 +16,16 @@ interface BlogLinkProps {
 }
 
 const BlogLink = ({ node }: BlogLinkProps) => {
-  const title = node.frontmatter.title;
-  const date = node.frontmatter.date;
-  const slug = node.frontmatter.slug;
+  const { title, date, slug } = node.frontmatter;
+  
   return (
-    <Link to={`/blog/${slug}`}>
+    <Link to={`/blog/${slug}`} className={styles.blogCard}>
+      <span className={styles.blogDate}>{date}</span>
       <h3>{title}</h3>
-      <p>{date}</p>
+      <p className={styles.blogExcerpt}>{node.excerpt}</p>
+      <div className={styles.readMore}>
+        Read Post <FontAwesomeIcon icon="arrow-right" size="xs" />
+      </div>
     </Link>
   )
 }
