@@ -94,9 +94,13 @@ const IndexPage = () => {
                 <p className={styles.bioText}>
                   Hi I'm Dongjoon! I was born in Seoul, Korea and moved to
                   Southern California in the fourth grade. 
-                  I graduated from the MIT 
-                  Aeronautics and Astronautics department, where I worked on 
-                  aircraft design and optimization.
+                  I graduated with a Master's degree from the MIT 
+                  Aeronautics and Astronautics department in the summer of 2023, where I worked on 
+                  aircraft design and optimization. You can find my Master's thesis <a className={styles.embeddedAnchor} href="https://dspace.mit.edu/handle/1721.1/151601">here</a>.
+                </p>
+                <p className={styles.bioText}>
+                  Since graduation, I've been working as a Software Developer at MathWorks, 
+                  specifically on the Aerospace Toolbox and Aerospace Blockset product.
                 </p>
                 <p className={styles.bioText}>
                   Personally, I enjoy snowboarding, playing music,
