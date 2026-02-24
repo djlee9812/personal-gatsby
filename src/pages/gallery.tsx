@@ -14,7 +14,8 @@ const minWidth = 768;
 interface ImageListItem {
   hero_image: {
     childImageSharp: {
-      gatsbyImageData: IGatsbyImageData
+      thumb: IGatsbyImageData
+      full: IGatsbyImageData
     }
   }
   hero_image_alt: string
@@ -124,7 +125,7 @@ const Gallery = ({ data }: PageProps<GalleryData>) => {
         <section className={galleryStyles.masonry}>
           {
             imgList.map(({hero_image, hero_image_alt, grid_row, grid_col}, index) => {
-              const image = getImage(hero_image);
+              const image = hero_image.childImageSharp.thumb;
               const id = "cell" + index.toString();
               if (!image) return null;
               return (
@@ -144,7 +145,7 @@ const Gallery = ({ data }: PageProps<GalleryData>) => {
       </main>
       {modalShow && imgList[imgIndex] ? (
         <ImageModal 
-          image={getImage(imgList[imgIndex]!.hero_image)!} 
+          image={imgList[imgIndex]!.hero_image.childImageSharp.full} 
           alt={imgList[imgIndex]!.hero_image_alt} 
           close={closeModal} 
           nextImg={nextImg} 
@@ -168,7 +169,13 @@ export const query = graphql`
             imageList {
               hero_image {
                 childImageSharp {
-                  gatsbyImageData(
+                  thumb: gatsbyImageData(
+                    width: 600,
+                    placeholder: BLURRED,
+                    formats: [AUTO, WEBP]
+                  )
+                  full: gatsbyImageData(
+                    width: 1600,
                     placeholder: BLURRED,
                     formats: [AUTO, WEBP]
                   )
