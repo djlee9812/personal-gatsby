@@ -1,15 +1,38 @@
+/* Global Variables & Theming */
 :root {
-  /* Colors */
-  --color-bg-primary: #282828;
-  --color-bg-secondary: #2B2B37;
-  --color-text-primary: #ffffff;
-  --color-text-secondary: #c6c6c6;
-  --color-accent: #0f6649;
-  --color-highlight: #d4fcff;
-
+  /* Light Mode (Default) */
+  --color-bg-primary: #f8f9fa; /* Off-white */
+  --color-bg-secondary: #ffffff;
+  --color-text-primary: #2d3436;
+  --color-text-secondary: #636e72;
+  --color-accent: #00b894; /* Teal */
+  --color-highlight: #008f72; /* Darker Teal for better visibility on light bg */
+  --color-border: #dfe6e9;
+  
   /* Fonts */
   --font-heading: 'Josefin Sans', sans-serif;
   --font-body: 'Inconsolata', monospace;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* Dark Mode */
+    --color-bg-primary: #1e1e1e;
+    --color-bg-secondary: #2d3436;
+    --color-text-primary: #dfe6e9;
+    --color-text-secondary: #b2bec3;
+    --color-accent: #55efc4; /* Lighter Teal */
+    --color-highlight: #81ecec;
+    --color-border: #636e72;
+  }
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--color-bg-primary);
+  color: var(--color-text-primary);
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .container {
@@ -21,7 +44,7 @@
 }
 
 .navbar-margin {
-  padding-top: 50px;
+  padding-top: 80px;
   min-height: 80vh;
 }
 
@@ -33,4 +56,5 @@
   background: transparent;
   border: none !important;
   cursor: pointer;
+  color: var(--color-text-primary);
 }

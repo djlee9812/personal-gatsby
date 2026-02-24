@@ -3,10 +3,7 @@ import { ComposableMap, Geographies, Geography, ZoomableGroup } from "react-simp
 import visitedCountries from "../data/visited-countries.json";
 import visitedStates from "../data/visited-states.json";
 
-// High-performance, lightweight TopoJSON from Natural Earth (Admin 0 - Map Units)
-// This separates territories like French Guiana and uses "Czech Republic" correctly.
 const worldUrl = "https://raw.githubusercontent.com/mtraynham/natural-earth-topo/master/topojson/ne_50m_admin_0_map_units.json";
-// Lat/Long TopoJSON for US States (fixes winding order issues)
 const statesUrl = "https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json";
 
 interface MapPosition {
@@ -38,7 +35,6 @@ const TravelMap = () => {
           <Geographies geography={worldUrl}>
             {({ geographies }: { geographies: any[] }) =>
               geographies.map((geo: any) => {
-                // Use geounit for precise matching (e.g. "French Guiana", "England")
                 const geounit = geo.properties.geounit;
                 const sovereignt = geo.properties.sovereignt;
                 

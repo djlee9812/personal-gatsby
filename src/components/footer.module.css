@@ -18,7 +18,7 @@
 
 @media only screen and (max-width: 768px) {
   .footer-div {
-    padding: 15px;
+    padding: 15px 15px 100px 15px;
   }
 }
 

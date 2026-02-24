@@ -1,121 +1,231 @@
-.header {
+/* Minimalist Layout */
+
+/* 1. Hero Section */
+.hero-container {
   height: 100vh;
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
-  text-align: center;
-}
-
-.background-image {
-  grid-area: 1 / 1;
-  filter: brightness(50%);
-}
-
-.cover-content {
-  grid-area: 1 / 1;
+  align-items: flex-start; /* Changed to start for left alignment of the block, will adjust title */
+  text-align: left;
   position: relative;
-  display: grid;
+  overflow: hidden;
+  padding: 0 10%; /* Increased side padding */
 }
 
-.header-text {
+.hero-title {
+  font-family: var(--font-heading);
+  font-size: clamp(4rem, 12vw, 9rem); /* Larger font size */
+  font-weight: 800; /* Extra bold */
+  margin: 0;
+  letter-spacing: -0.04em;
+  line-height: 0.9;
   color: var(--color-text-primary);
+  display: block; /* Ensures stacking */
+  text-transform: uppercase;
+  margin-bottom: 2rem;
 }
 
-.header-title {
-  font-size: 3em;
-}
-
-.down {
-  position: absolute;
-  top:85vh;
-  padding: 20px;
-  font-size: 2.5em;
-}
-
-.down:hover {
-  cursor: pointer;
-  opacity: 0.8;
-}
-
-.flex-row {
+.hero-subtitle {
+  font-family: var(--font-body);
+  font-size: clamp(1rem, 1.5vw, 1.25rem);
+  color: var(--color-text-secondary);
+  border-left: 3px solid var(--color-accent);
+  padding-left: 1.5rem;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  gap: 0.5rem;
 }
 
-.main-about {
-  max-width: 1200px;
-  margin: auto;
+.hero-subtitle p {
+  margin: 0;
+  line-height: 1.4;
 }
 
-@media only screen and (min-width: 768px) {
-  .main-about {
-    width: 80%;
-  }
-  .two-column {
-    width: 50%;
-    padding: 20px;
-  }
-  .three-column {
-    width: 33%;
-    padding: 20px;
-  }
+.scroll-indicator {
+  position: absolute;
+  bottom: 40px;
+  left: 50%; /* Center horizontally */
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  color: var(--color-text-secondary);
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  opacity: 0.8;
+  animation: bounce 2s infinite;
 }
 
-@media only screen and (max-width: 1250px) {
-  .main-about {
-    width: 90%;
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateX(-50%) translateY(0);
   }
-}
-
-
-@media only screen and (max-width: 768px) {
-  .flex-row {
-    flex-direction: column;
+  40% {
+    transform: translateX(-50%) translateY(-10px);
   }
-  .two-column {
-    padding: 10px 20px;
-  }
-  .three-column {
-    padding: 10px 50px;
+  60% {
+    transform: translateX(-50%) translateY(-5px);
   }
 }
 
-.full-width {
-  width: 100%;
-}
-
-.map-img {
-  padding-top: 0px;
-  padding-bottom: 0px;
-}
-
-.hr-svg {
-  width: 30%;
-}
-
-.bio-text {
-  line-height: 1.5em;
-}
-
-.embedded-anchor {
-  text-decoration: none;
-  color: var(--color-accent);
-}
-
-figure {
-  margin: 0px;
+/* 2. Content Sections */
+.section {
+  padding: 120px 0;
+  max-width: 1000px; /* Clean, contained width */
+  margin: 0 auto;
   position: relative;
 }
 
-figcaption {
-  background-color: var(--color-bg-secondary);
+.section-title {
+  font-family: var(--font-heading);
+  font-size: 2.5rem;
+  margin-bottom: 3rem;
+  color: var(--color-text-primary);
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.section-title::after {
+  content: "";
+  flex-grow: 1;
+  height: 1px;
+  background: var(--color-border);
+  opacity: 0.5;
+}
+
+/* 3. About Layout */
+.about-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 60px;
+  align-items: center;
+}
+
+.about-text {
+  font-family: var(--font-body);
+  font-size: 1.15rem;
+  line-height: 1.8;
   color: var(--color-text-secondary);
-  max-width: 400px;
-  font-size: 10px;
+}
+
+.about-text p {
+  margin-bottom: 1.5rem;
+}
+
+.highlight {
+  color: var(--color-accent);
+  font-weight: bold;
+}
+
+.portrait-container {
+  position: relative;
+}
+
+.portrait-img {
+  border-radius: 12px;
+  box-shadow: 20px 20px 0px var(--color-bg-secondary); /* Offset border effect */
+  border: 1px solid var(--color-border);
+}
+
+/* 4. Hobby/Featured Cards */
+.hobby-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 40px;
+}
+
+.hobby-card {
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  height: 400px;
+  background: var(--color-bg-secondary);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+  transition: transform 0.3s ease;
+  text-decoration: none;
   display: block;
-  float: left;
+}
+
+.hobby-card:hover {
+  transform: translateY(-5px);
+}
+
+.card-overlay {
   position: absolute;
-  left: 5px;
-  bottom: 5px;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 30px;
+  background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+  color: white; /* Always white text on image */
+  z-index: 2;
+}
+
+.card-title {
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  margin: 0 0 5px 0;
+}
+
+.card-text {
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  opacity: 0.9;
+  margin: 0;
+}
+
+/* 5. Map Section */
+.map-container {
+  background: var(--color-bg-secondary);
+  padding: 20px;
+  border-radius: 20px;
+  border: 1px solid var(--color-border);
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .section {
+    padding: 80px 20px;
+  }
+  
+  .about-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  
+  .hero-container {
+    padding: 0 5%;
+    align-items: center;
+    text-align: center;
+  }
+
+  .hero-title {
+    font-size: 15vw;
+    line-height: 1.2;
+  }
+
+  .hero-subtitle {
+     align-items: center;
+     border-left: none;
+     border-top: 2px solid var(--color-accent);
+     padding-left: 0;
+     padding-top: 1.5rem;
+  }
+
+  .portrait-img {
+    box-shadow: 10px 10px 0px var(--color-bg-secondary);
+    margin-right: 20px;
+    max-width: calc(100% - 20px); /* Ensure it doesn't overflow with margin */
+  }
+
+  .scroll-indicator {
+    bottom: 100px;
+  }
+
+  .hobby-grid {
+    grid-template-columns: 1fr;
+  }
 }
