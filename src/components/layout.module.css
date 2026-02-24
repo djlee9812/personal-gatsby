@@ -1,13 +1,3 @@
-body {
-  margin: 0px;
-  padding: 0px;
-}
-
-.layout-container {
-  margin: 0px;
-  padding: 0px;
-}
-
 .content-div {
   min-height: calc(100vh - 10em - 50px);
 }

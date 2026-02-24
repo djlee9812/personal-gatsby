@@ -1,14 +1,13 @@
 import * as React from 'react'
-// @ts-ignore
-import { links, footerDiv } from './footer.module.css'
+import * as styles from './footer.module.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const Footer = () => {
   return (
-    <footer className={footerDiv}>
+    <footer className={styles.footerDiv}>
       <p>Made by Dongjoon Lee</p>
       <div id="links-div">
-        <ul className={links}>
+        <ul className={styles.links}>
           <li>
             <a href="https://www.github.com/djlee9812/" aria-label="Github link">
             <FontAwesomeIcon icon={['fab', 'github']} />

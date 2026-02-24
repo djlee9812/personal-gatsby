@@ -1,10 +1,8 @@
 import * as React from "react"
 import { graphql, PageProps, HeadFC } from 'gatsby'
 import { getImage, IGatsbyImageData } from 'gatsby-plugin-image'
-// @ts-ignore
-import { container, textCenter, navbarMargin, marginSm, hiddenButton } from '../components/global.module.css'
-// @ts-ignore
-import { masonry, titleDiv, arrowDiv } from '../components/gallery.module.css'
+import * as globalStyles from '../components/global.module.css'
+import * as galleryStyles from '../components/gallery.module.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Layout from '../components/layout'
 import Seo from '../components/seo'
@@ -109,21 +107,21 @@ const Gallery = ({ data }: PageProps<GalleryData>) => {
   }
 
   return (
-    <Layout darkNavbar={true}>
-      <main className={navbarMargin} id="main">
-        <div className={`${container} ${titleDiv}`}>
-          <div className={arrowDiv}>
-            <button className={hiddenButton} onClick={decrementIndex} aria-label="move left"><FontAwesomeIcon icon="arrow-left" size="xl"/></button>
+    <Layout>
+      <main className={globalStyles.navbarMargin} id="main">
+        <div className={`${globalStyles.container} ${galleryStyles.titleDiv}`}>
+          <div className={galleryStyles.arrowDiv}>
+            <button className={globalStyles.hiddenButton} onClick={decrementIndex} aria-label="move left"><FontAwesomeIcon icon="arrow-left" size="xl"/></button>
           </div>
-          <div className={textCenter}>
-            <h1 className={marginSm}>{node.frontmatter.title}</h1>
-            <p className={marginSm}>{node.frontmatter.description}</p>
+          <div className={globalStyles.textCenter}>
+            <h1 className={globalStyles.marginSm}>{node.frontmatter.title}</h1>
+            <p className={globalStyles.marginSm}>{node.frontmatter.description}</p>
           </div>
-          <div className={arrowDiv}>
-            <button className={hiddenButton} onClick={incrementIndex} aria-label="move right"><FontAwesomeIcon icon="arrow-right" size="xl"/></button>
+          <div className={galleryStyles.arrowDiv}>
+            <button className={globalStyles.hiddenButton} onClick={incrementIndex} aria-label="move right"><FontAwesomeIcon icon="arrow-right" size="xl"/></button>
           </div>
         </div>
-        <section className={masonry}>
+        <section className={galleryStyles.masonry}>
           {
             imgList.map(({hero_image, hero_image_alt, grid_row, grid_col}, index) => {
               const image = getImage(hero_image);

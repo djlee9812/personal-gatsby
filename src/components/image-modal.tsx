@@ -1,10 +1,8 @@
 import * as React from 'react'
 import { GatsbyImage, IGatsbyImageData } from 'gatsby-plugin-image'
 import FocusTrap from 'focus-trap-react'
-// @ts-ignore
-import { hiddenButton } from './global.module.css'
-// @ts-ignore
-import { modal, modalContent, closeBtn, modalImage, modalTitle } from './image-modal.module.css'
+import * as globalStyles from './global.module.css'
+import * as styles from './image-modal.module.css'
 
 interface ImageModalProps {
   image: IGatsbyImageData
@@ -53,7 +51,7 @@ const ImageModal = ({ image, alt, close, nextImg, prevImg }: ImageModalProps) =>
   return (
     <FocusTrap>
       <div 
-        className={modal} 
+        className={styles.modal} 
         ref={modalRef} 
         role="button"
         tabIndex={-1}
@@ -62,16 +60,16 @@ const ImageModal = ({ image, alt, close, nextImg, prevImg }: ImageModalProps) =>
         onKeyDown={handleKey} 
       >
         <div 
-          className={modalContent}
+          className={styles.modalContent}
           role="dialog"
           aria-modal="true"
           tabIndex={-1}
         >
-          <h3 className={modalTitle}>{altText}</h3>
-          <button className={`${hiddenButton} ${closeBtn}`} onClick={close} onKeyDown={handleKey} ref={closeRef}>
+          <h3 className={styles.modalTitle}>{altText}</h3>
+          <button className={`${globalStyles.hiddenButton} ${styles.closeBtn}`} onClick={close} onKeyDown={handleKey} ref={closeRef}>
             <span>&times;</span>
           </button>
-          <GatsbyImage className={modalImage} image={imgData} alt={altText} objectFit="contain" />
+          <GatsbyImage className={styles.modalImage} image={imgData} alt={altText} objectFit="contain" />
         </div>
       </div>
     </FocusTrap>

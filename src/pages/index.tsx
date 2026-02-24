@@ -5,7 +5,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Layout from '../components/layout'
 import Seo from '../components/seo'
 import TravelMap from '../components/travel-map'
-// @ts-ignore
 import * as styles from '../components/index.module.css'
 import { motion, useScroll, useTransform, Variants } from 'framer-motion'
 import scrollTo from 'gatsby-plugin-smoothscroll'

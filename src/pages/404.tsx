@@ -1,17 +1,15 @@
 import * as React from "react"
 import { Link, HeadFC } from "gatsby"
-// @ts-ignore
-import { navbarMargin } from '../components/global.module.css'
+import * as globalStyles from '../components/global.module.css'
 import Layout from '../components/layout'
 import Seo from '../components/seo'
-// @ts-ignore
-import { notFoundDiv } from '../components/404.module.css'
+import * as styles from '../components/404.module.css'
 
 const NotFoundPage = () => {
   return (
-    <Layout darkNavbar={true}>
-      <main className={navbarMargin}>
-          <div className={notFoundDiv}>
+    <Layout>
+      <main className={globalStyles.navbarMargin}>
+          <div className={styles.notFoundDiv}>
             <h1>404: Page not found</h1>
             <p>The page you're looking for doesn't exist. Return&nbsp;
               <Link to="/">Home</Link>

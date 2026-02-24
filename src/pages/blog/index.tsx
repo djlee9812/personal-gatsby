@@ -1,8 +1,6 @@
 import * as React from "react"
 import { graphql, PageProps, HeadFC } from 'gatsby'
-// @ts-ignore
-import { textCenter, navbarMargin, container } from '../../components/global.module.css'
-// @ts-ignore
+import * as globalStyles from '../../components/global.module.css'
 import * as styles from './blog.module.css'
 import Layout from '../../components/layout'
 import Seo from '../../components/seo'
@@ -46,9 +44,9 @@ const Blog = ({ data }: PageProps<BlogData>) => {
   const nodes = data.allFile.nodes;
   
   return (
-    <Layout darkNavbar={true}>
-      <div className={navbarMargin}>
-        <div className={textCenter}>
+    <Layout>
+      <div className={globalStyles.navbarMargin}>
+        <div className={globalStyles.textCenter}>
           <motion.h1 
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -65,7 +63,7 @@ const Blog = ({ data }: PageProps<BlogData>) => {
           </motion.p>
         </div>
         
-        <div className={container}>
+        <div className={globalStyles.container}>
           <motion.div 
             className={styles.blogGrid}
             variants={containerVariants}

@@ -1,7 +1,6 @@
 import * as React from "react"
 import { Link } from 'gatsby'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-// @ts-ignore
 import * as styles from '../pages/blog/blog.module.css'
 
 interface BlogLinkProps {

@@ -1,8 +1,6 @@
 import * as React from 'react'
 import { graphql, PageProps, HeadFC } from 'gatsby'
-// @ts-ignore
-import { navbarMargin, container } from '../../components/global.module.css'
-// @ts-ignore
+import * as globalStyles from '../../components/global.module.css'
 import * as styles from './blog.module.css'
 import Layout from '../../components/layout'
 import Seo from '../../components/seo'
@@ -20,10 +18,10 @@ interface BlogPostData {
 
 const BlogPost = ({ data, children }: PageProps<BlogPostData>) => {
   return (
-    <Layout darkNavbar={true}>
-      <div className={navbarMargin}>
+    <Layout>
+      <div className={globalStyles.navbarMargin}>
         <motion.div 
-          className={container}
+          className={globalStyles.container}
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}

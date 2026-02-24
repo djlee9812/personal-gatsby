@@ -1,16 +1,16 @@
 import * as React from "react"
-import { container, textCenter, navbarMargin, marginSm } from '../components/global.module.css'
+import * as globalStyles from '../components/global.module.css'
 import Layout from '../components/layout'
 import Seo from '../components/seo'
 
 const Projects = () => {
 
   return (
-    <Layout darkNavbar={true}>
-      <main className={navbarMargin}>
-        <div className={`${container} ${textCenter}`}>
-          <h1 className={marginSm}>Projects</h1>
-          <p className={marginSm}>Here is a compilation of recent projects</p>
+    <Layout>
+      <main className={globalStyles.navbarMargin}>
+        <div className={`${globalStyles.container} ${globalStyles.textCenter}`}>
+          <h1 className={globalStyles.marginSm}>Projects</h1>
+          <p className={globalStyles.marginSm}>Here is a compilation of recent projects</p>
         </div>
       </main>
     </Layout>

@@ -1,24 +1,19 @@
 import * as React from 'react'
 import { Link } from 'gatsby'
-// @ts-ignore
-import { navbarStyle, navLink, navItem, active } from './navbar.module.css'
+import * as styles from './navbar.module.css'
 
-interface NavbarProps {
-  darkNavbar?: boolean
-}
-
-const Navbar = ({ darkNavbar }: NavbarProps) => {
+const Navbar = () => {
   return (
-    <nav className={navbarStyle}>
-      <ul className={navLink}>
-        <li className={navItem}>
-          <Link to="/" activeClassName={active}>Home</Link>
+    <nav className={styles.navbarStyle}>
+      <ul className={styles.navLink}>
+        <li className={styles.navItem}>
+          <Link to="/" activeClassName={styles.active}>Home</Link>
         </li>
-        <li className={navItem}>
-          <Link to="/gallery" activeClassName={active}>Gallery</Link>
+        <li className={styles.navItem}>
+          <Link to="/gallery" activeClassName={styles.active}>Gallery</Link>
         </li>
-        <li className={navItem}>
-          <Link to="/blog" activeClassName={active}>Blog</Link>
+        <li className={styles.navItem}>
+          <Link to="/blog" activeClassName={styles.active}>Blog</Link>
         </li>
       </ul>
     </nav>
