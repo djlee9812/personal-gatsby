@@ -6,6 +6,7 @@ import { StaticImage } from 'gatsby-plugin-image'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Layout from '../components/layout'
 import Seo from '../components/seo'
+import TravelMap from '../components/travel-map'
 // @ts-ignore
 import * as styles from '../components/index.module.css'
 import scrollTo from 'gatsby-plugin-smoothscroll'
@@ -138,8 +139,7 @@ const IndexPage = () => {
             <div className={styles.flexRow}>
               <div className={styles.twoColumn}>
                 <figure>
-                  <StaticImage className={`${styles.fullWidth} ${styles.mapImg}`} src="../images/map.png" alt="travel map"/>
-                  <figcaption><span>Source: Amcharts</span></figcaption>
+                  <TravelMap />
                 </figure>
               </div>
               <div className={styles.twoColumn}>
