@@ -39,19 +39,19 @@ body {
   padding: 15px 20px;
 }
 
-.text-center {
+.textCenter {
   text-align: center;
 }
 
-.navbar-margin {
+.navbarMargin {
   padding-top: 80px;
 }
 
-.margin-sm {
+.marginSm {
   margin: 10px;
 }
 
-.hidden-button {
+.hiddenButton {
   background: transparent;
   border: none !important;
   cursor: pointer;

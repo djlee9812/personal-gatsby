@@ -1,4 +1,4 @@
-.footer-div {
+.footerDiv {
   background-color: var(--color-bg-primary);
   overflow: auto;
   color: var(--color-text-primary);
@@ -11,13 +11,13 @@
 }
 
 @media only screen and (min-width: 768px) {
-  .footer-div {
+  .footerDiv {
     padding: 30px
   }
 }
 
 @media only screen and (max-width: 768px) {
-  .footer-div {
+  .footerDiv {
     padding: 15px 15px 100px 15px;
   }
 }
