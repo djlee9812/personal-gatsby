@@ -1,10 +1,11 @@
 import * as React from 'react'
-import { graphql, PageProps, HeadFC } from 'gatsby'
+import { graphql, PageProps, HeadFC, Link } from 'gatsby'
 import * as globalStyles from '../../components/global.module.css'
 import * as styles from './blog.module.css'
 import Layout from '../../components/layout'
 import Seo from '../../components/seo'
 import { motion } from 'framer-motion'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 interface BlogPostData {
   mdx: {
@@ -21,11 +22,18 @@ const BlogPost = ({ data, children }: PageProps<BlogPostData>) => {
     <Layout>
       <div className={globalStyles.navbarMargin}>
         <motion.div 
-          className={globalStyles.container}
+          className={`${globalStyles.container} ${styles.blogContainer}`}
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
+          style={{ marginTop: '2rem' }}
         >
+          <div className={styles.backLinkContainer}>
+            <Link to="/blog" className={styles.backLink}>
+              <FontAwesomeIcon icon={['fas', 'arrow-left']} /> Back to Blog
+            </Link>
+          </div>
+          
           <header className={styles.postHeader}>
             <span className={styles.postMeta}>{data.mdx.frontmatter.date}</span>
             <h1 className={styles.postTitle}>{data.mdx.frontmatter.title}</h1>
