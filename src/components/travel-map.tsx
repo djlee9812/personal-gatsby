@@ -1,9 +1,13 @@
 import React, { useState } from "react";
 import { ComposableMap, Geographies, Geography, ZoomableGroup } from "react-simple-maps";
 import visitedCountries from "../data/visited-countries.json";
+import visitedStates from "../data/visited-states.json";
 
-// High-performance, lightweight TopoJSON from world-atlas
-const worldUrl = "https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json";
+// High-performance, lightweight TopoJSON from Natural Earth (Admin 0 - Map Units)
+// This separates territories like French Guiana and uses "Czech Republic" correctly.
+const worldUrl = "https://raw.githubusercontent.com/mtraynham/natural-earth-topo/master/topojson/ne_50m_admin_0_map_units.json";
+// Lat/Long TopoJSON for US States (fixes winding order issues)
+const statesUrl = "https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json";
 
 interface MapPosition {
   coordinates: [number, number];
@@ -34,10 +38,39 @@ const TravelMap = () => {
           <Geographies geography={worldUrl}>
             {({ geographies }: { geographies: any[] }) =>
               geographies.map((geo: any) => {
-                const name = geo.properties.name;
+                // Use geounit for precise matching (e.g. "French Guiana", "England")
+                const geounit = geo.properties.geounit;
+                const sovereignt = geo.properties.sovereignt;
                 
-                // Precise matching against your list
-                const isVisited = visitedCountries.includes(name);
+                // If it's USA, we let the states layer handle the highlighting
+                const isUSA = sovereignt === "United States of America";
+                
+                // Strict exact matching against the list
+                const isVisited = !isUSA && visitedCountries.includes(geounit);
+                
+                return (
+                  <Geography
+                    key={geo.rsmKey}
+                    geography={geo}
+                    fill={isVisited ? "#d4fcff" : "#2B2B37"}
+                    stroke="#444"
+                    strokeWidth={0.5}
+                    style={{
+                      default: { outline: "none" },
+                      hover: { outline: "none" },
+                      pressed: { outline: "none" },
+                    }}
+                  />
+                );
+              })
+            }
+          </Geographies>
+
+          <Geographies geography={statesUrl}>
+            {({ geographies }: { geographies: any[] }) =>
+              geographies.map((geo: any) => {
+                const stateName = geo.properties.name;
+                const isVisited = visitedStates.includes(stateName);
                 
                 return (
                   <Geography
