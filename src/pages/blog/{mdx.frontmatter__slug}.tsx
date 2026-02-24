@@ -18,6 +18,22 @@ interface BlogPostData {
 }
 
 const BlogPost = ({ data, children }: PageProps<BlogPostData>) => {
+  console.log(data);
+  if (!data || !data.mdx) {
+    return (
+      <Layout>
+        <div className={globalStyles.navbarMargin}>
+          <div className={globalStyles.container}>
+            <p>Loading or post not found...</p>
+            <Link to="/blog">Back to blog</Link>
+          </div>
+        </div>
+      </Layout>
+    );
+  }
+
+  const { frontmatter } = data.mdx;
+
   return (
     <Layout>
       <div className={globalStyles.navbarMargin}>
@@ -35,8 +51,8 @@ const BlogPost = ({ data, children }: PageProps<BlogPostData>) => {
           </div>
           
           <header className={styles.postHeader}>
-            <span className={styles.postMeta}>{data.mdx.frontmatter.date}</span>
-            <h1 className={styles.postTitle}>{data.mdx.frontmatter.title}</h1>
+            <span className={styles.postMeta}>{frontmatter.date}</span>
+            <h1 className={styles.postTitle}>{frontmatter.title}</h1>
             <div className={styles.hr} />
           </header>
           
@@ -61,6 +77,9 @@ export const query = graphql`
   }
 `
 
-export const Head: HeadFC<BlogPostData> = ({ data }) => <Seo title={data.mdx.frontmatter.title} />
+export const Head: HeadFC<BlogPostData> = ({ data }) => {
+  const title = data?.mdx?.frontmatter?.title || "Blog Post";
+  return <Seo title={title} />;
+}
 
 export default BlogPost
