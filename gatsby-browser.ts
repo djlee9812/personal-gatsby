@@ -5,13 +5,13 @@ import type { GatsbyBrowser } from 'gatsby';
 declare global {
   interface Window {
     gtag?: (...args: any[]) => void;
-    GA_ID?: string;
   }
 }
 
 export const onRouteUpdate: GatsbyBrowser['onRouteUpdate'] = ({ location }) => {
-  if (typeof window.gtag === 'function' && window.GA_ID) {
-    window.gtag('config', window.GA_ID, {
+  const gaId = process.env.GATSBY_GA_ID;
+  if (typeof window.gtag === 'function' && gaId) {
+    window.gtag('config', gaId, {
       page_path: location.pathname + location.search + location.hash,
     });
   }

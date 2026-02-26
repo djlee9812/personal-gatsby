@@ -5,8 +5,8 @@ import { Partytown } from "@qwik.dev/partytown/react";
 export const onRenderBody: GatsbySSR["onRenderBody"] = ({ setHtmlAttributes, setHeadComponents, setPreBodyComponents }) => {
   setHtmlAttributes({ lang: 'en' });
   
-  const gaId = process.env.GA_ID;
-  const gtmId = process.env.GTAG_ID;
+  const gaId = process.env.GATSBY_GA_ID;
+  const gtmId = process.env.GATSBY_GTAG_ID;
 
   if (gaId && gaId !== "undefined" && gaId !== "") {
     setHeadComponents([
@@ -33,13 +33,6 @@ export const onRenderBody: GatsbySSR["onRenderBody"] = ({ setHtmlAttributes, set
               cookie_expires: 0,
             });
           `,
-        }}
-      />,
-      // We set the ID on the main thread so gatsby-browser.ts can access it
-      <script
-        key="gtag-id-main"
-        dangerouslySetInnerHTML={{
-          __html: `window.GA_ID = '${gaId}';`,
         }}
       />,
     ]);
