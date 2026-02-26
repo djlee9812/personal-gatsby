@@ -31,7 +31,6 @@ interface GalleryData {
 
 interface GalleryCollection {
   title: string
-  description: string
   images: CloudinaryNode[]
 }
 
@@ -48,9 +47,6 @@ const Gallery = ({ data }: PageProps<GalleryData>) => {
       // Use the first tag as the category, default to "misc" if no tags
       const category = (node.tags && node.tags.length > 0) ? node.tags[0] : "misc";
       
-      // Ignore images tagged with something else (like "avatar" or "blog")
-      // You can refine this logic if you use many tags.
-      
       if (!groups[category]) groups[category] = [];
       groups[category].push(node);
     });
@@ -59,7 +55,6 @@ const Gallery = ({ data }: PageProps<GalleryData>) => {
       .filter(key => key !== 'misc') // Hide untagged images from gallery
       .map(key => ({
         title: key.charAt(0).toUpperCase() + key.slice(1), // Capitalize "travel" -> "Travel"
-        description: `Collection of ${key} photos`,
         images: groups[key]
       })).sort((a, b) => a.title.localeCompare(b.title));
   }, [data]);
@@ -67,9 +62,31 @@ const Gallery = ({ data }: PageProps<GalleryData>) => {
   const [galIndex, setGalIndex] = React.useState(0);
   const [imgIndex, setImgIndex] = React.useState(0);
   const [modalShow, setModalShow] = React.useState(false);
+  const [renderLimit, setRenderLimit] = React.useState(15);
+  const loaderRef = React.useRef<HTMLDivElement>(null);
+
+  const numPages = collections.length;
+  const currentCollection = numPages > 0 ? collections[galIndex] : null;
+
+  React.useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          setRenderLimit((prev) => prev + 15);
+        }
+      },
+      { rootMargin: "200px" } // Load slightly before reaching the bottom
+    );
+
+    if (loaderRef.current) {
+      observer.observe(loaderRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, [currentCollection]); // Re-bind if collection changes
 
   // Handle case with no collections
-  if (collections.length === 0) {
+  if (numPages === 0 || !currentCollection) {
     return (
       <Layout>
         <main className={globalStyles.navbarMargin} id="main">
@@ -82,17 +99,18 @@ const Gallery = ({ data }: PageProps<GalleryData>) => {
     );
   }
 
-  const numPages = collections.length;
-  const currentCollection = collections[galIndex];
   const imgList = currentCollection.images;
+  const visibleImages = imgList.slice(0, renderLimit);
 
   const decrementIndex = () => {
     setGalIndex(prev => (prev === 0 ? numPages - 1 : prev - 1));
     setImgIndex(0); 
+    setRenderLimit(15); // Reset limit on tab change
   }
   const incrementIndex = () => {
     setGalIndex(prev => (prev === numPages - 1 ? 0 : prev + 1));
     setImgIndex(0);
+    setRenderLimit(15); // Reset limit on tab change
   }
 
   const openModal = (index: number) => {
@@ -123,7 +141,6 @@ const Gallery = ({ data }: PageProps<GalleryData>) => {
           </div>
           <div className={globalStyles.textCenter}>
             <h1 className={globalStyles.marginSm}>{currentCollection.title}</h1>
-            <p className={globalStyles.marginSm}>{currentCollection.description}</p>
           </div>
           <div className={galleryStyles.arrowDiv}>
             <button className={globalStyles.hiddenButton} onClick={incrementIndex} aria-label="Next Collection">
@@ -133,7 +150,7 @@ const Gallery = ({ data }: PageProps<GalleryData>) => {
         </div>
         
         <section className={galleryStyles.masonry}>
-          {imgList.map((node, index) => {
+          {visibleImages.map((node, index) => {
             const id = node.id;
             const alt = node.context?.custom?.alt || `Gallery Image ${index}`; 
             
@@ -147,6 +164,11 @@ const Gallery = ({ data }: PageProps<GalleryData>) => {
             )
           })}
         </section>
+        
+        {/* Invisible target for the IntersectionObserver */}
+        {renderLimit < imgList.length && (
+          <div ref={loaderRef} style={{ height: "1px", width: "100%" }} aria-hidden="true" />
+        )}
       </main>
       
       {modalShow && imgList[imgIndex] ? (
