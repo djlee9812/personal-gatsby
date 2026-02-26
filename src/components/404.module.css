@@ -1,4 +1,65 @@
-.notFoundDiv {
-  vertical-align: middle;
+.notFoundContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   text-align: center;
+  min-height: 60vh;
+  padding: 0 20px;
+}
+
+.errorCode {
+  font-family: var(--font-heading);
+  font-size: clamp(6rem, 20vw, 12rem);
+  font-weight: 800;
+  color: var(--color-text-primary);
+  margin: 0;
+  line-height: 1;
+  letter-spacing: -0.05em;
+  opacity: 0.1; /* Large subtle watermark effect */
+  position: absolute;
+  z-index: 0;
+}
+
+.content {
+  z-index: 1;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.title {
+  font-family: var(--font-heading);
+  font-size: 2.5rem;
+  color: var(--color-text-primary);
+  margin: 0;
+}
+
+.message {
+  font-family: var(--font-body);
+  font-size: 1.2rem;
+  color: var(--color-text-secondary);
+  margin: 0;
+  max-width: 400px;
+  line-height: 1.6;
+}
+
+.homeLink {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: var(--color-bg-primary);
+  background-color: var(--color-accent);
+  text-decoration: none;
+  padding: 12px 24px;
+  border-radius: 30px;
+  font-weight: bold;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  margin-top: 1rem;
+}
+
+.homeLink:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
 }

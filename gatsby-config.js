@@ -52,7 +52,6 @@ module.exports = {
         apiKey: process.env.CLOUDINARY_API_KEY,
         apiSecret: process.env.CLOUDINARY_API_SECRET,
         resourceType: `image`,
-        // prefix: `Gallery/`, 
         maxResults: 500,
         context: true, // Fetch context (tags, alt text, custom fields)
         tags: true,    // Fetch tags
