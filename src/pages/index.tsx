@@ -37,8 +37,8 @@ const IndexPage = () => {
   const heroScale = useTransform(scrollY, [0, 300], [1, 0.95]);
   const heroY = useTransform(scrollY, [0, 300], [0, 50]);
 
-  const data = useStaticQuery(graphql`
-    query {
+  const data = useStaticQuery<Queries.IndexPageCloudinaryQuery>(graphql`
+    query IndexPageCloudinary {
       columnsImg: cloudinaryMedia(secure_url: {regex: "/Columns/"}) {
         gatsbyImageData(width: 400, placeholder: BLURRED, layout: CONSTRAINED)
       }
