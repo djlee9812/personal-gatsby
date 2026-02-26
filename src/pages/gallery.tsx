@@ -1,6 +1,6 @@
 import * as React from "react"
 import { graphql, PageProps, HeadFC } from 'gatsby'
-import { getImage, IGatsbyImageData } from 'gatsby-plugin-image'
+import { IGatsbyImageData } from 'gatsby-plugin-image'
 import * as globalStyles from '../components/global.module.css'
 import * as galleryStyles from '../components/gallery.module.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -9,81 +9,94 @@ import Seo from '../components/seo'
 import ImageCell from '../components/image-cell'
 import ImageModal from '../components/image-modal'
 
-const minWidth = 768;
-
-interface ImageListItem {
-  hero_image: {
-    childImageSharp: {
-      thumb: IGatsbyImageData
-      full: IGatsbyImageData
+interface CloudinaryNode {
+  id: string
+  tags: string[]
+  secure_url: string
+  context?: {
+    custom?: {
+      alt?: string
+      caption?: string
     }
   }
-  hero_image_alt: string
-  grid_row: string
-  grid_col: string
-}
-
-interface GalleryNode {
-  childMdx: {
-    frontmatter: {
-      title: string
-      description: string
-      imageList: ImageListItem[]
-    }
-    id: string
-  }
+  thumb: IGatsbyImageData
+  full: IGatsbyImageData
 }
 
 interface GalleryData {
-  allFile: {
-    nodes: GalleryNode[]
+  allCloudinaryMedia: {
+    nodes: CloudinaryNode[]
   }
+}
+
+interface GalleryCollection {
+  title: string
+  description: string
+  images: CloudinaryNode[]
 }
 
 const Gallery = ({ data }: PageProps<GalleryData>) => {
   
-  const [masonryBool, setMasonryBool] = React.useState(false)
-  React.useEffect(() => {
-    const mql = window.matchMedia(`(min-width: ${minWidth}px)`);
+  // Group images by primary tag
+  const collections: GalleryCollection[] = React.useMemo(() => {
+    const groups: { [key: string]: CloudinaryNode[] } = {};
     
-    // Set initial state
-    setMasonryBool(mql.matches);
+    // Safety check if data is missing
+    if (!data?.allCloudinaryMedia?.nodes) return [];
 
-    // Modern browsers support addEventListener on MediaQueryList
-    const handler = (e: MediaQueryListEvent) => setMasonryBool(e.matches);
-    mql.addEventListener('change', handler);
-    
-    return () => mql.removeEventListener('change', handler);
-  }, []);
+    data.allCloudinaryMedia.nodes.forEach(node => {
+      // Use the first tag as the category, default to "misc" if no tags
+      const category = (node.tags && node.tags.length > 0) ? node.tags[0] : "misc";
+      
+      // Ignore images tagged with something else (like "avatar" or "blog")
+      // You can refine this logic if you use many tags.
+      
+      if (!groups[category]) groups[category] = [];
+      groups[category].push(node);
+    });
 
-  const nodes = data.allFile.nodes;
-  const numPages = nodes.length;
+    return Object.keys(groups)
+      .filter(key => key !== 'misc') // Hide untagged images from gallery
+      .map(key => ({
+        title: key.charAt(0).toUpperCase() + key.slice(1), // Capitalize "travel" -> "Travel"
+        description: `Collection of ${key} photos`,
+        images: groups[key]
+      })).sort((a, b) => a.title.localeCompare(b.title));
+  }, [data]);
+
   const [galIndex, setGalIndex] = React.useState(0);
   const [imgIndex, setImgIndex] = React.useState(0);
   const [modalShow, setModalShow] = React.useState(false);
 
+  // Handle case with no collections
+  if (collections.length === 0) {
+    return (
+      <Layout>
+        <main className={globalStyles.navbarMargin} id="main">
+          <div className={globalStyles.container}>
+            <h1>Gallery</h1>
+            <p>No tagged images found. Please add tags (e.g., 'travel', 'hobby') to your images in Cloudinary.</p>
+          </div>
+        </main>
+      </Layout>
+    );
+  }
+
+  const numPages = collections.length;
+  const currentCollection = collections[galIndex];
+  const imgList = currentCollection.images;
+
   const decrementIndex = () => {
-    if (galIndex === 0) {
-      setGalIndex(numPages-1)
-    } else {
-      setGalIndex(galIndex-1)
-    }
+    setGalIndex(prev => (prev === 0 ? numPages - 1 : prev - 1));
+    setImgIndex(0); 
   }
   const incrementIndex = () => {
-    if (galIndex === numPages-1) {
-      setGalIndex(0)
-    } else {
-      setGalIndex(galIndex+1)
-    }
+    setGalIndex(prev => (prev === numPages - 1 ? 0 : prev + 1));
+    setImgIndex(0);
   }
 
-  const node = nodes[galIndex]?.childMdx;
-  if (!node) return null;
-
-  const imgList = node.frontmatter.imageList;
-
   const openModal = (index: number) => {
-    setImgIndex(index)
+    setImgIndex(index);
     setModalShow(true);
   }
 
@@ -92,19 +105,11 @@ const Gallery = ({ data }: PageProps<GalleryData>) => {
   }
 
   const nextImg = () => {
-    if (imgIndex === imgList.length-1) {
-      setImgIndex(0)
-    } else {
-      setImgIndex(imgIndex+1)
-    }
+    setImgIndex(prev => (prev === imgList.length - 1 ? 0 : prev + 1));
   }
 
   const prevImg = () => {
-    if (imgIndex === 0) {
-      setImgIndex(imgList.length-1)
-    } else {
-      setImgIndex(imgIndex-1)
-    }
+    setImgIndex(prev => (prev === 0 ? imgList.length - 1 : prev - 1));
   }
 
   return (
@@ -112,41 +117,42 @@ const Gallery = ({ data }: PageProps<GalleryData>) => {
       <main className={globalStyles.navbarMargin} id="main">
         <div className={`${globalStyles.container} ${galleryStyles.titleDiv}`}>
           <div className={galleryStyles.arrowDiv}>
-            <button className={globalStyles.hiddenButton} onClick={decrementIndex} aria-label="move left"><FontAwesomeIcon icon="arrow-left" size="xl"/></button>
+            <button className={globalStyles.hiddenButton} onClick={decrementIndex} aria-label="Previous Collection">
+              <FontAwesomeIcon icon={['fas', 'arrow-left']} size="xl"/>
+            </button>
           </div>
           <div className={globalStyles.textCenter}>
-            <h1 className={globalStyles.marginSm}>{node.frontmatter.title}</h1>
-            <p className={globalStyles.marginSm}>{node.frontmatter.description}</p>
+            <h1 className={globalStyles.marginSm}>{currentCollection.title}</h1>
+            <p className={globalStyles.marginSm}>{currentCollection.description}</p>
           </div>
           <div className={galleryStyles.arrowDiv}>
-            <button className={globalStyles.hiddenButton} onClick={incrementIndex} aria-label="move right"><FontAwesomeIcon icon="arrow-right" size="xl"/></button>
+            <button className={globalStyles.hiddenButton} onClick={incrementIndex} aria-label="Next Collection">
+              <FontAwesomeIcon icon={['fas', 'arrow-right']} size="xl"/>
+            </button>
           </div>
         </div>
+        
         <section className={galleryStyles.masonry}>
-          {
-            imgList.map(({hero_image, hero_image_alt, grid_row, grid_col}, index) => {
-              const image = hero_image.childImageSharp.thumb;
-              const id = "cell" + index.toString();
-              if (!image) return null;
-              return (
-                <ImageCell 
-                  key={id} 
-                  image={image} 
-                  alt={hero_image_alt} 
-                  masonryBool={masonryBool} 
-                  gridRow={grid_row} 
-                  gridCol={grid_col}
-                  onClick={() => {openModal(index)}}
-                />
-              )
-            })
-          }
+          {imgList.map((node, index) => {
+            const id = node.id;
+            const alt = node.context?.custom?.alt || `Gallery Image ${index}`; 
+            
+            return (
+              <ImageCell 
+                key={id} 
+                image={node.thumb} 
+                alt={alt} 
+                onClick={() => openModal(index)}
+              />
+            )
+          })}
         </section>
       </main>
+      
       {modalShow && imgList[imgIndex] ? (
         <ImageModal 
-          image={imgList[imgIndex]!.hero_image.childImageSharp.full} 
-          alt={imgList[imgIndex]!.hero_image_alt} 
+          image={imgList[imgIndex].full} 
+          alt={imgList[imgIndex].context?.custom?.alt || ""} 
           close={closeModal} 
           nextImg={nextImg} 
           prevImg={prevImg}
@@ -158,36 +164,27 @@ const Gallery = ({ data }: PageProps<GalleryData>) => {
 
 export const query = graphql`
   query {
-    allFile(
-      filter: {sourceInstanceName: {eq: "gallery"}}
-    ) {
+    allCloudinaryMedia(sort: {created_at: DESC}) {
       nodes {
-        childMdx {
-          frontmatter {
-            title
-            description
-            imageList {
-              hero_image {
-                childImageSharp {
-                  thumb: gatsbyImageData(
-                    width: 600,
-                    placeholder: BLURRED,
-                    formats: [AUTO, WEBP]
-                  )
-                  full: gatsbyImageData(
-                    width: 1600,
-                    placeholder: BLURRED,
-                    formats: [AUTO, WEBP]
-                  )
-                }
-              } 
-              hero_image_alt
-              grid_row
-              grid_col
-            }
+        id
+        tags
+        secure_url
+        context {
+          custom {
+            alt
+            caption
           }
-          id
         }
+        thumb: gatsbyImageData(
+          width: 600
+          placeholder: BLURRED
+          layout: CONSTRAINED
+        )
+        full: gatsbyImageData(
+          width: 1600
+          placeholder: BLURRED
+          layout: CONSTRAINED
+        )
       }
     }
   }

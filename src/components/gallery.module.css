@@ -20,13 +20,9 @@
 
 @media only screen and (min-width: 768px) {
   .masonry {
-    height: 85vh;
-    max-height: 100vw;
-    max-width: 130vh;
-    display: grid;
-    grid-template-columns: repeat(16, 1fr);
-    grid-template-rows: repeat(14, 1fr);
-    row-gap: 1rem;
+    width: 100%;
+    max-width: 1200px;
+    column-count: 3;
     column-gap: 1rem;
   }
 }

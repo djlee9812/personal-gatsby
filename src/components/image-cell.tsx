@@ -5,16 +5,12 @@ import * as styles from './image-cell.module.css'
 interface ImageCellProps {
   image: IGatsbyImageData
   alt: string
-  masonryBool?: boolean
-  gridRow?: string
-  gridCol?: string
   onClick: () => void
 }
 
-const ImageCell = ({ image, alt, masonryBool, gridRow, gridCol, onClick }: ImageCellProps) => {
+const ImageCell = ({ image, alt, onClick }: ImageCellProps) => {
   const [hoverStyle, setHoverStyle] = React.useState<string | null>(null)
   const [hoverText, setHoverText] = React.useState("")
-  const [masonryStyle, setMasonryStyle] = React.useState<React.CSSProperties>({})
   
   const imageEnter = () => {
     setHoverStyle(styles.opaqueImage);
@@ -24,17 +20,6 @@ const ImageCell = ({ image, alt, masonryBool, gridRow, gridCol, onClick }: Image
     setHoverStyle(null);
     setHoverText("");
   }
-  
-  React.useEffect(() => {
-    if (masonryBool) {
-      setMasonryStyle({
-        "gridColumn": gridRow,
-        "gridRow": gridCol
-      })
-    } else {
-      setMasonryStyle({});
-    }
-  }, [masonryBool, gridRow, gridCol])
   
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter' || e.key === ' ') {
@@ -49,7 +34,6 @@ const ImageCell = ({ image, alt, masonryBool, gridRow, gridCol, onClick }: Image
       onMouseLeave={imageLeave} 
       onFocus={imageEnter} 
       onBlur={imageLeave}
-      style={masonryStyle}
       onClick={onClick}
       onKeyDown={handleKeyDown}
       role="button"

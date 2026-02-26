@@ -1,6 +1,6 @@
 import * as React from "react"
-import { Link, HeadFC } from 'gatsby'
-import { StaticImage } from 'gatsby-plugin-image'
+import { Link, HeadFC, useStaticQuery, graphql } from 'gatsby'
+import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Layout from '../components/layout'
 import Seo from '../components/seo'
@@ -36,6 +36,24 @@ const IndexPage = () => {
   const heroOpacity = useTransform(scrollY, [0, 300], [1, 0]);
   const heroScale = useTransform(scrollY, [0, 300], [1, 0.95]);
   const heroY = useTransform(scrollY, [0, 300], [0, 50]);
+
+  const data = useStaticQuery(graphql`
+    query {
+      columnsImg: cloudinaryMedia(secure_url: {regex: "/Columns/"}) {
+        gatsbyImageData(width: 400, placeholder: BLURRED, layout: CONSTRAINED)
+      }
+      snowboardingImg: cloudinaryMedia(secure_url: {regex: "/snowboarding/"}) {
+        gatsbyImageData(width: 600, placeholder: BLURRED, layout: CONSTRAINED)
+      }
+      climbingImg: cloudinaryMedia(secure_url: {regex: "/climb1/"}) {
+        gatsbyImageData(width: 600, placeholder: BLURRED, layout: CONSTRAINED)
+      }
+    }
+  `);
+
+  const columnsImage = getImage(data?.columnsImg?.gatsbyImageData);
+  const snowboardingImage = getImage(data?.snowboardingImg?.gatsbyImageData);
+  const climbingImage = getImage(data?.climbingImg?.gatsbyImageData);
 
   return (
     <Layout>
@@ -107,13 +125,15 @@ const IndexPage = () => {
           </motion.div>
 
           <motion.div className={styles.portraitContainer} variants={fadeInUp}>
-            <StaticImage 
-              src="../images/Columns.jpeg" 
-              alt="Dongjoon Portrait" 
-              className={styles.portraitImg}
-              width={400}
-              quality={95}
-            />
+            {columnsImage ? (
+              <GatsbyImage 
+                image={columnsImage} 
+                alt="Dongjoon Portrait" 
+                className={styles.portraitImg}
+              />
+            ) : (
+              <div style={{width: 400, height: 400, background: '#333', borderRadius: '12px'}} />
+            )}
           </motion.div>
         </div>
       </motion.section>
@@ -131,11 +151,15 @@ const IndexPage = () => {
         <div className={styles.hobbyGrid}>
           {/* Card 1: Snowboarding */}
           <Link to="/gallery" className={styles.hobbyCard}>
-            <StaticImage 
-              src="../images/snowboarding.jpg" 
-              alt="Snowboarding" 
-              style={{ height: '100%' }}
-            />
+            {snowboardingImage ? (
+              <GatsbyImage 
+                image={snowboardingImage} 
+                alt="Snowboarding" 
+                style={{ height: '100%' }}
+              />
+            ) : (
+              <div style={{width: '100%', height: '100%', background: '#333'}} />
+            )}
             <div className={styles.cardOverlay}>
               <h3 className={styles.cardTitle}>Snowboarding</h3>
               <p className={styles.cardText}>Chasing powder & progression.</p>
@@ -144,11 +168,15 @@ const IndexPage = () => {
 
           {/* Card 2: Climbing */}
           <Link to="/gallery" className={styles.hobbyCard}>
-            <StaticImage 
-              src="../images/hobby/climb1.jpg" 
-              alt="Climbing" 
-              style={{ height: '100%' }}
-            />
+            {climbingImage ? (
+              <GatsbyImage 
+                image={climbingImage} 
+                alt="Climbing" 
+                style={{ height: '100%' }}
+              />
+            ) : (
+              <div style={{width: '100%', height: '100%', background: '#333'}} />
+            )}
              <div className={styles.cardOverlay}>
               <h3 className={styles.cardTitle}>Climbing</h3>
               <p className={styles.cardText}>Bouldering & Lead.</p>

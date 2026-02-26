@@ -1,9 +1,9 @@
 import * as React from 'react'
 import { graphql, PageProps, HeadFC, Link } from 'gatsby'
-import * as globalStyles from '../../components/global.module.css'
-import * as styles from './blog.module.css'
-import Layout from '../../components/layout'
-import Seo from '../../components/seo'
+import * as globalStyles from '../components/global.module.css'
+import * as styles from '../pages/blog/blog.module.css'
+import Layout from '../components/layout'
+import Seo from '../components/seo'
 import { motion } from 'framer-motion'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
