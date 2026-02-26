@@ -16,7 +16,6 @@ interface CloudinaryNode {
   context?: {
     custom?: {
       alt?: string
-      caption?: string
     }
   }
   thumb: IGatsbyImageData
@@ -194,7 +193,6 @@ export const query = graphql`
         context {
           custom {
             alt
-            caption
           }
         }
         thumb: gatsbyImageData(
