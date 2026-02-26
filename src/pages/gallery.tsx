@@ -9,51 +9,41 @@ import Seo from '../components/seo'
 import ImageCell from '../components/image-cell'
 import ImageModal from '../components/image-modal'
 
-interface CloudinaryNode {
-  id: string
-  tags: string[]
-  secure_url: string
-  context?: {
-    custom?: {
-      alt?: string
-    }
-  }
-  thumb: IGatsbyImageData
-  full: IGatsbyImageData
-}
+/**
+ * Type alias for a single Cloudinary media node from the generated GraphQL types.
+ */
+type CloudinaryNode = NonNullable<Queries.GalleryQuery["allCloudinaryMedia"]["nodes"]>[0]
 
-interface GalleryData {
-  allCloudinaryMedia: {
-    nodes: CloudinaryNode[]
-  }
-}
-
+/**
+ * Represents a logical group of images (e.g., "Travel", "Hobby") based on Cloudinary tags.
+ */
 interface GalleryCollection {
   title: string
   images: CloudinaryNode[]
 }
 
-const Gallery = ({ data }: PageProps<GalleryData>) => {
+const Gallery = ({ data }: PageProps<Queries.GalleryQuery>) => {
   
-  // Group images by primary tag
+  // Group images by their primary tag (tags[0]). 
+  // This allows the gallery to be "zero-maintenance": simply adding a new tag 
+  // in Cloudinary will automatically create a new collection slide here.
   const collections: GalleryCollection[] = React.useMemo(() => {
     const groups: { [key: string]: CloudinaryNode[] } = {};
     
-    // Safety check if data is missing
     if (!data?.allCloudinaryMedia?.nodes) return [];
 
     data.allCloudinaryMedia.nodes.forEach(node => {
-      // Use the first tag as the category, default to "misc" if no tags
-      const category = (node.tags && node.tags.length > 0) ? node.tags[0] : "misc";
+      // images without tags are grouped under 'misc' and later filtered out.
+      const category = (node.tags && node.tags.length > 0) ? node.tags[0]! : "misc";
       
       if (!groups[category]) groups[category] = [];
-      groups[category].push(node);
+      groups[category].push(node as CloudinaryNode);
     });
 
     return Object.keys(groups)
-      .filter(key => key !== 'misc') // Hide untagged images from gallery
+      .filter(key => key !== 'misc') 
       .map(key => ({
-        title: key.charAt(0).toUpperCase() + key.slice(1), // Capitalize "travel" -> "Travel"
+        title: key.charAt(0).toUpperCase() + key.slice(1), 
         images: groups[key]
       })).sort((a, b) => a.title.localeCompare(b.title));
   }, [data]);
@@ -61,6 +51,13 @@ const Gallery = ({ data }: PageProps<GalleryData>) => {
   const [galIndex, setGalIndex] = React.useState(0);
   const [imgIndex, setImgIndex] = React.useState(0);
   const [modalShow, setModalShow] = React.useState(false);
+  
+  /**
+   * renderLimit implements "Soft Infinite Scroll". 
+   * To prevent the DOM from becoming heavy with hundreds of images on initial load,
+   * we only render a small batch. The IntersectionObserver at the bottom 
+   * increments this limit as the user scrolls.
+   */
   const [renderLimit, setRenderLimit] = React.useState(15);
   const loaderRef = React.useRef<HTMLDivElement>(null);
 
@@ -74,7 +71,7 @@ const Gallery = ({ data }: PageProps<GalleryData>) => {
           setRenderLimit((prev) => prev + 15);
         }
       },
-      { rootMargin: "200px" } // Load slightly before reaching the bottom
+      { rootMargin: "200px" } 
     );
 
     if (loaderRef.current) {
@@ -82,9 +79,9 @@ const Gallery = ({ data }: PageProps<GalleryData>) => {
     }
 
     return () => observer.disconnect();
-  }, [currentCollection]); // Re-bind if collection changes
+  }, [currentCollection]); 
 
-  // Handle case with no collections
+  // Handle cases where no valid Cloudinary images/tags are found.
   if (numPages === 0 || !currentCollection) {
     return (
       <Layout>
@@ -104,12 +101,12 @@ const Gallery = ({ data }: PageProps<GalleryData>) => {
   const decrementIndex = () => {
     setGalIndex(prev => (prev === 0 ? numPages - 1 : prev - 1));
     setImgIndex(0); 
-    setRenderLimit(15); // Reset limit on tab change
+    setRenderLimit(15); 
   }
   const incrementIndex = () => {
     setGalIndex(prev => (prev === numPages - 1 ? 0 : prev + 1));
     setImgIndex(0);
-    setRenderLimit(15); // Reset limit on tab change
+    setRenderLimit(15); 
   }
 
   const openModal = (index: number) => {
@@ -117,9 +114,7 @@ const Gallery = ({ data }: PageProps<GalleryData>) => {
     setModalShow(true);
   }
 
-  const closeModal = () => {
-    setModalShow(false);
-  }
+  const closeModal = () => setModalShow(false);
 
   const nextImg = () => {
     setImgIndex(prev => (prev === imgList.length - 1 ? 0 : prev + 1));
@@ -132,7 +127,8 @@ const Gallery = ({ data }: PageProps<GalleryData>) => {
   return (
     <Layout>
       <main className={globalStyles.navbarMargin} id="main">
-        <div className={`${globalStyles.container} ${galleryStyles.titleDiv}`}>
+        {/* Navigation Header for Collections */}
+        <div className={galleryStyles.titleDiv}>
           <div className={galleryStyles.arrowDiv}>
             <button className={globalStyles.hiddenButton} onClick={decrementIndex} aria-label="Previous Collection">
               <FontAwesomeIcon icon={['fas', 'arrow-left']} size="xl"/>
@@ -148,6 +144,7 @@ const Gallery = ({ data }: PageProps<GalleryData>) => {
           </div>
         </div>
         
+        {/* Masonry Grid */}
         <section className={galleryStyles.masonry}>
           {visibleImages.map((node, index) => {
             const id = node.id;
@@ -156,7 +153,7 @@ const Gallery = ({ data }: PageProps<GalleryData>) => {
             return (
               <ImageCell 
                 key={id} 
-                image={node.thumb} 
+                image={node.thumb as IGatsbyImageData} 
                 alt={alt} 
                 onClick={() => openModal(index)}
               />
@@ -164,15 +161,16 @@ const Gallery = ({ data }: PageProps<GalleryData>) => {
           })}
         </section>
         
-        {/* Invisible target for the IntersectionObserver */}
+        {/* IntersectionObserver trigger for loading more images */}
         {renderLimit < imgList.length && (
           <div ref={loaderRef} style={{ height: "1px", width: "100%" }} aria-hidden="true" />
         )}
       </main>
       
+      {/* Lightbox Modal */}
       {modalShow && imgList[imgIndex] ? (
         <ImageModal 
-          image={imgList[imgIndex].full} 
+          image={imgList[imgIndex].full as IGatsbyImageData} 
           alt={imgList[imgIndex].context?.custom?.alt || ""} 
           close={closeModal} 
           nextImg={nextImg} 
@@ -184,7 +182,7 @@ const Gallery = ({ data }: PageProps<GalleryData>) => {
 }
 
 export const query = graphql`
-  query {
+  query Gallery {
     allCloudinaryMedia(sort: {created_at: DESC}) {
       nodes {
         id

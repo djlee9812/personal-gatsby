@@ -7,18 +7,7 @@ import Seo from '../components/seo'
 import { motion } from 'framer-motion'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
-interface BlogPostData {
-  mdx: {
-    frontmatter: {
-      title: string
-      date: string
-    }
-    body: string
-  }
-}
-
-const BlogPost = ({ data, children }: PageProps<BlogPostData>) => {
-  console.log(data);
+const BlogPost = ({ data, children }: PageProps<Queries.BlogPostQuery>) => {
   if (!data || !data.mdx) {
     return (
       <Layout>
@@ -51,8 +40,8 @@ const BlogPost = ({ data, children }: PageProps<BlogPostData>) => {
           </div>
           
           <header className={styles.postHeader}>
-            <span className={styles.postMeta}>{frontmatter.date}</span>
-            <h1 className={styles.postTitle}>{frontmatter.title}</h1>
+            <span className={styles.postMeta}>{frontmatter?.date}</span>
+            <h1 className={styles.postTitle}>{frontmatter?.title}</h1>
             <div className={styles.hr} />
           </header>
           
@@ -66,7 +55,7 @@ const BlogPost = ({ data, children }: PageProps<BlogPostData>) => {
 }
 
 export const query = graphql`
-  query ($id: String) {
+  query BlogPost($id: String) {
     mdx(id: {eq: $id}) {
       frontmatter {
         title
@@ -77,7 +66,7 @@ export const query = graphql`
   }
 `
 
-export const Head: HeadFC<BlogPostData> = ({ data }) => {
+export const Head: HeadFC<Queries.BlogPostQuery> = ({ data }) => {
   const title = data?.mdx?.frontmatter?.title || "Blog Post";
   return <Seo title={title} />;
 }

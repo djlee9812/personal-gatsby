@@ -1,7 +1,7 @@
 /* Minimalist Layout */
 
 /* 1. Hero Section */
-.hero-container {
+.heroContainer {
   height: 100vh;
   display: flex;
   flex-direction: column;
@@ -13,7 +13,7 @@
   padding: 0 10%; /* Increased side padding */
 }
 
-.hero-title {
+.heroTitle {
   font-family: var(--font-heading);
   font-size: clamp(4rem, 12vw, 9rem); /* Larger font size */
   font-weight: 800; /* Extra bold */
@@ -26,7 +26,7 @@
   margin-bottom: 2rem;
 }
 
-.hero-subtitle {
+.heroSubtitle {
   font-family: var(--font-body);
   font-size: clamp(1rem, 1.5vw, 1.25rem);
   color: var(--color-text-secondary);
@@ -37,12 +37,12 @@
   gap: 0.5rem;
 }
 
-.hero-subtitle p {
+.heroSubtitle p {
   margin: 0;
   line-height: 1.4;
 }
 
-.scroll-indicator {
+.scrollIndicator {
   position: absolute;
   bottom: 40px;
   left: 50%; /* Center horizontally */
@@ -78,7 +78,7 @@
   position: relative;
 }
 
-.section-title {
+.sectionTitle {
   font-family: var(--font-heading);
   font-size: 2.5rem;
   margin-bottom: 3rem;
@@ -88,7 +88,7 @@
   gap: 20px;
 }
 
-.section-title::after {
+.sectionTitle::after {
   content: "";
   flex-grow: 1;
   height: 1px;
@@ -97,21 +97,21 @@
 }
 
 /* 3. About Layout */
-.about-grid {
+.aboutGrid {
   display: grid;
   grid-template-columns: 1.2fr 0.8fr;
   gap: 60px;
   align-items: center;
 }
 
-.about-text {
+.aboutText {
   font-family: var(--font-body);
   font-size: 1.15rem;
   line-height: 1.8;
   color: var(--color-text-secondary);
 }
 
-.about-text p {
+.aboutText p {
   margin-bottom: 1.5rem;
 }
 
@@ -120,24 +120,24 @@
   font-weight: bold;
 }
 
-.portrait-container {
+.portraitContainer {
   position: relative;
 }
 
-.portrait-img {
+.portraitImg {
   border-radius: 12px;
   box-shadow: 20px 20px 0px var(--color-bg-secondary); /* Offset border effect */
   border: 1px solid var(--color-border);
 }
 
 /* 4. Hobby/Featured Cards */
-.hobby-grid {
+.hobbyGrid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
   gap: 40px;
 }
 
-.hobby-card {
+.hobbyCard {
   position: relative;
   border-radius: 16px;
   overflow: hidden;
@@ -149,11 +149,11 @@
   display: block;
 }
 
-.hobby-card:hover {
+.hobbyCard:hover {
   transform: translateY(-5px);
 }
 
-.card-overlay {
+.cardOverlay {
   position: absolute;
   bottom: 0;
   left: 0;
@@ -164,13 +164,13 @@
   z-index: 2;
 }
 
-.card-title {
+.cardTitle {
   font-family: var(--font-heading);
   font-size: 1.5rem;
   margin: 0 0 5px 0;
 }
 
-.card-text {
+.cardText {
   font-family: var(--font-body);
   font-size: 0.9rem;
   opacity: 0.9;
@@ -178,7 +178,7 @@
 }
 
 /* 5. Map Section */
-.map-container {
+.mapContainer {
   background: var(--color-bg-secondary);
   padding: 20px;
   border-radius: 20px;
@@ -191,23 +191,23 @@
     padding: 80px 20px;
   }
   
-  .about-grid {
+  .aboutGrid {
     grid-template-columns: 1fr;
     gap: 40px;
   }
   
-  .hero-container {
+  .heroContainer {
     padding: 0 5%;
     align-items: center;
     text-align: center;
   }
 
-  .hero-title {
+  .heroTitle {
     font-size: 15vw;
     line-height: 1.2;
   }
 
-  .hero-subtitle {
+  .heroSubtitle {
      align-items: center;
      border-left: none;
      border-top: 2px solid var(--color-accent);
@@ -215,17 +215,17 @@
      padding-top: 1.5rem;
   }
 
-  .portrait-img {
+  .portraitImg {
     box-shadow: 10px 10px 0px var(--color-bg-secondary);
     margin-right: 20px;
     max-width: calc(100% - 20px); /* Ensure it doesn't overflow with margin */
   }
 
-  .scroll-indicator {
+  .scrollIndicator {
     bottom: 100px;
   }
 
-  .hobby-grid {
+  .hobbyGrid {
     grid-template-columns: 1fr;
   }
 }

@@ -4,18 +4,14 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import * as styles from '../pages/blog/blog.module.css'
 
 interface BlogLinkProps {
-  node: {
-    excerpt: string
-    frontmatter: {
-      title: string
-      date: string
-      slug: string
-    }
-  }
+  node: Queries.Mdx
 }
 
 const BlogLink = ({ node }: BlogLinkProps) => {
-  const { title, date, slug } = node.frontmatter;
+  const frontmatter = node?.frontmatter;
+  const title = frontmatter?.title;
+  const date = frontmatter?.date;
+  const slug = frontmatter?.slug;
   
   return (
     <Link to={`/blog/${slug}`} className={styles.blogCard}>

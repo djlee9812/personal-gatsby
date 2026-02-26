@@ -7,24 +7,6 @@ import Seo from '../../components/seo'
 import BlogLink  from '../../components/blog-link'
 import { motion } from 'framer-motion'
 
-interface BlogNode {
-  childMdx: {
-    excerpt: string
-    frontmatter: {
-      title: string
-      date: string
-      slug: string
-    }
-    id: string
-  }
-}
-
-interface BlogData {
-  allFile: {
-    nodes: BlogNode[]
-  }
-}
-
 const containerVariants = {
   hidden: { opacity: 0 },
   show: {
@@ -40,7 +22,7 @@ const itemVariants = {
   show: { opacity: 1, y: 0 }
 }
 
-const Blog = ({ data }: PageProps<BlogData>) => {
+const Blog = ({ data }: PageProps<Queries.BlogIndexQuery>) => {
   const nodes = data.allFile.nodes;
   
   return (
@@ -70,11 +52,14 @@ const Blog = ({ data }: PageProps<BlogData>) => {
             initial="hidden"
             animate="show"
           >
-            {nodes.map((node) => (
-              <motion.div key={node.childMdx.id} variants={itemVariants}>
-                <BlogLink node={node.childMdx} />
-              </motion.div>
-            ))}
+            {nodes.map((node) => {
+              if (!node.childMdx) return null;
+              return (
+                <motion.div key={node.childMdx.id} variants={itemVariants}>
+                  <BlogLink node={node.childMdx} />
+                </motion.div>
+              )
+            })}
           </motion.div>
         </div>
       </div>
@@ -83,7 +68,7 @@ const Blog = ({ data }: PageProps<BlogData>) => {
 }
 
 export const query = graphql`
-  query {
+  query BlogIndex {
     allFile(
       sort: {childMdx: {frontmatter: {date: DESC}}}
       filter: {sourceInstanceName: {eq: "blogs"}}

@@ -11,6 +11,15 @@ interface MapPosition {
   zoom: number;
 }
 
+interface GeographyNode {
+  rsmKey: string
+  properties: {
+    name: string
+    geounit: string
+    sovereignt: string
+  }
+}
+
 const TravelMap = () => {
   const [position, setPosition] = useState<MapPosition>({ coordinates: [0, 20], zoom: 1 });
 
@@ -33,8 +42,8 @@ const TravelMap = () => {
           onMoveEnd={(pos: { coordinates: [number, number]; zoom: number }) => setPosition(pos)}
         >
           <Geographies geography={worldUrl}>
-            {({ geographies }: { geographies: any[] }) =>
-              geographies.map((geo: any) => {
+            {({ geographies }: { geographies: GeographyNode[] }) =>
+              geographies.map((geo) => {
                 const geounit = geo.properties.geounit;
                 const sovereignt = geo.properties.sovereignt;
                 
@@ -63,8 +72,8 @@ const TravelMap = () => {
           </Geographies>
 
           <Geographies geography={statesUrl}>
-            {({ geographies }: { geographies: any[] }) =>
-              geographies.map((geo: any) => {
+            {({ geographies }: { geographies: GeographyNode[] }) =>
+              geographies.map((geo) => {
                 const stateName = geo.properties.name;
                 const isVisited = visitedStates.includes(stateName);
                 

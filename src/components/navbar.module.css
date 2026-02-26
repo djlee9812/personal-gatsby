@@ -1,4 +1,5 @@
-.navbar-style {
+/* Modern Pill Navbar */
+.navbarStyle {
   position: fixed;
   top: 20px;
   left: 50%;
@@ -22,13 +23,13 @@
 
 /* Adjust for Dark Mode Glass */
 @media (prefers-color-scheme: dark) {
-  .navbar-style {
+  .navbarStyle {
     background: rgba(0, 0, 0, 0.2);
     border: 1px solid rgba(255, 255, 255, 0.1);
   }
 }
 
-.nav-link {
+.navLink {
   display: flex;
   list-style: none;
   margin: 0;
@@ -36,11 +37,11 @@
   gap: 10px;
 }
 
-.nav-item {
+.navItem {
   padding: 0;
 }
 
-.nav-item a {
+.navItem a {
   display: inline-block;
   text-decoration: none;
   color: var(--color-text-primary);
@@ -52,7 +53,7 @@
   transition: all 0.3s ease;
 }
 
-.nav-item a:hover {
+.navItem a:hover {
   background-color: rgba(128, 128, 128, 0.1);
   color: var(--color-accent);
 }
@@ -63,14 +64,14 @@
 }
 
 @media only screen and (max-width: 768px) {
-  .navbar-style {
+  .navbarStyle {
     top: auto;
     bottom: 20px; /* Move to bottom on mobile for better thumb reach */
     width: 90%;
     padding: 0 10px;
   }
   
-  .nav-item a {
+  .navItem a {
     font-size: 1rem;
     padding: 10px 15px;
   }
