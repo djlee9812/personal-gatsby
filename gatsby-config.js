@@ -18,14 +18,6 @@ module.exports = {
     {
       resolve: 'gatsby-source-filesystem',
       options: {
-        name: `images`,
-        path: `${__dirname}/src/images/`
-      },
-      __key: "images"
-    }, 
-    {
-      resolve: 'gatsby-source-filesystem',
-      options: {
         name: `blogs`,
         path: `${__dirname}/blogs/`
       },
@@ -69,6 +61,9 @@ module.exports = {
     {
       resolve: `gatsby-transformer-cloudinary`,
       options: {
+        cloudName: process.env.CLOUDINARY_CLOUD_NAME,
+        apiKey: process.env.CLOUDINARY_API_KEY,
+        apiSecret: process.env.CLOUDINARY_API_SECRET,
         transformTypes: [`CloudinaryMedia`],
       },
     },

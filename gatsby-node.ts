@@ -9,13 +9,14 @@ export const onPreBootstrap: GatsbyNode["onPreBootstrap"] = async () => {
 export const createPages: GatsbyNode["createPages"] = async ({ graphql, actions, reporter }) => {
   const { createPage } = actions;
 
-  const result: any = await graphql(`
-    query {
+  const result = await graphql<Queries.WebsiteUpdateCreatePagesQuery>(`
+    query WebsiteUpdateCreatePages {
       allFile(
         sort: {childMdx: {frontmatter: {date: DESC}}}
         filter: {sourceInstanceName: {eq: "blogs"}}
       ) {
         nodes {
+          absolutePath
           childMdx {
             frontmatter {
               slug
@@ -27,7 +28,7 @@ export const createPages: GatsbyNode["createPages"] = async ({ graphql, actions,
     }
   `);
 
-  if (result.errors) {
+  if (result.errors || !result.data) {
     reporter.panicOnBuild('Error loading MDX result', result.errors);
     return;
   }
@@ -35,12 +36,17 @@ export const createPages: GatsbyNode["createPages"] = async ({ graphql, actions,
   const posts = result.data.allFile.nodes;
   const blogPostTemplate = path.resolve(`src/templates/blog-post.tsx`);
 
-  posts.forEach((node: any) => {
+  posts.forEach((node) => {
     const mdxNode = node.childMdx;
-    if (mdxNode && mdxNode.frontmatter && mdxNode.frontmatter.slug) {
+    if (mdxNode?.frontmatter?.slug) {
+      /**
+       * We use the 'gatsby-plugin-mdx' layout pattern.
+       * The template path must be combined with the actual MDX file path via '?__contentFilePath='
+       * so that the MDX content is injected into the 'children' prop of the template.
+       */
       createPage({
         path: `/blog/${mdxNode.frontmatter.slug}`,
-        component: blogPostTemplate,
+        component: `${blogPostTemplate}?__contentFilePath=${node.absolutePath}`,
         context: {
           id: mdxNode.id,
         },
