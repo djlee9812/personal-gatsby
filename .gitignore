@@ -12,3 +12,5 @@ public
 
 # Generated Partytown library files
 static/~partytown/
+
+src/gatsby-types.d.ts
