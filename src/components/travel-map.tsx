@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { ComposableMap, Geographies, Geography, ZoomableGroup } from "react-simple-maps";
 import visitedCountries from "../data/visited-countries.json";
 import visitedStates from "../data/visited-states.json";
@@ -22,6 +22,11 @@ interface GeographyNode {
 
 const TravelMap = () => {
   const [position, setPosition] = useState<MapPosition>({ coordinates: [0, 20], zoom: 1 });
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
   const handleZoomIn = () => {
     if (position.zoom >= 8) return;
@@ -32,6 +37,10 @@ const TravelMap = () => {
     if (position.zoom <= 1) return;
     setPosition((pos: MapPosition) => ({ ...pos, zoom: pos.zoom / 1.5 }));
   };
+
+  if (!isClient) {
+    return <div style={{ width: "100%", height: "400px", background: "transparent" }} />;
+  }
 
   return (
     <div style={{ width: "100%", background: "transparent", position: "relative" }}>
