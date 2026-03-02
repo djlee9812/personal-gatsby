@@ -2,6 +2,8 @@
 
 Welcome to the source code for my personal website! This site serves as an ongoing catalog of my life, featuring a gallery of my travels, a blog for my thoughts, and information about my background and hobbies like snowboarding and music.
 
+The website can be accessed [here](https://www.dongjoonlee.com/)
+
 ## 🛠 Tech Stack
 
 - **Framework:** [Gatsby v5](https://www.gatsbyjs.com/)
