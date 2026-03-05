@@ -61,14 +61,15 @@ export const query = graphql`
         title
         date(formatString: "MMMM D, YYYY")
       }
-      body
+      excerpt(pruneLength: 160)
     }
   }
 `
 
 export const Head: HeadFC<Queries.BlogPostQuery> = ({ data }) => {
   const title = data?.mdx?.frontmatter?.title || "Blog Post";
-  return <Seo title={title} />;
+  const description = data?.mdx?.excerpt ?? undefined;
+  return <Seo title={title} description={description} />;
 }
 
 export default BlogPost

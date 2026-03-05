@@ -19,7 +19,7 @@ const BlogLink = ({ node }: BlogLinkProps) => {
       <h3>{title}</h3>
       <p className={styles.blogExcerpt}>{node.excerpt}</p>
       <div className={styles.readMore}>
-        Read Post <FontAwesomeIcon icon="arrow-right" size="xs" />
+        Read Post <FontAwesomeIcon icon={['fas', 'arrow-right']} size="xs" />
       </div>
     </Link>
   )

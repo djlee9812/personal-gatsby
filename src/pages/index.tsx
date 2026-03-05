@@ -51,9 +51,9 @@ const IndexPage = () => {
     }
   `);
 
-  const columnsImage = getImage(data?.columnsImg?.gatsbyImageData);
-  const snowboardingImage = getImage(data?.snowboardingImg?.gatsbyImageData);
-  const climbingImage = getImage(data?.climbingImg?.gatsbyImageData);
+  const columnsImage = getImage(data?.columnsImg?.gatsbyImageData ?? null);
+  const snowboardingImage = getImage(data?.snowboardingImg?.gatsbyImageData ?? null);
+  const climbingImage = getImage(data?.climbingImg?.gatsbyImageData ?? null);
 
   return (
     <Layout>
@@ -88,7 +88,7 @@ const IndexPage = () => {
           aria-label="Scroll to About Section"
         >
           <span>SCROLL TO EXPLORE</span>
-          <FontAwesomeIcon icon="arrow-down" />
+          <FontAwesomeIcon icon={['fas', 'arrow-down']} />
         </motion.button>
       </motion.header>
 
