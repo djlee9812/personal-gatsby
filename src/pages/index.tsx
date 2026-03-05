@@ -4,8 +4,10 @@ import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Layout from '../components/layout'
 import Seo from '../components/seo'
-import TravelMap from '../components/travel-map'
 import * as styles from '../components/index.module.css'
+import { TRAVEL_MAP_HEIGHT } from '../components/travel-map'
+
+const TravelMap = React.lazy(() => import('../components/travel-map'))
 import { motion, useScroll, useTransform, Variants } from 'framer-motion'
 import scrollTo from 'gatsby-plugin-smoothscroll'
 
@@ -202,7 +204,9 @@ const IndexPage = () => {
         </div>
 
         <motion.div className={styles.mapContainer} variants={fadeInUp}>
-          <TravelMap />
+          <React.Suspense fallback={<div style={{ width: '100%', height: TRAVEL_MAP_HEIGHT, background: 'transparent' }} aria-hidden="true" />}>
+            <TravelMap />
+          </React.Suspense>
         </motion.div>
       </motion.section>
 

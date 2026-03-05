@@ -6,6 +6,8 @@ import visitedStates from "../data/visited-states.json";
 const worldUrl = "https://raw.githubusercontent.com/mtraynham/natural-earth-topo/master/topojson/ne_50m_admin_0_map_units.json";
 const statesUrl = "https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json";
 
+export const TRAVEL_MAP_HEIGHT = 400;
+
 interface MapPosition {
   coordinates: [number, number];
   zoom: number;
@@ -39,7 +41,7 @@ const TravelMap = () => {
   };
 
   if (!isClient) {
-    return <div style={{ width: "100%", height: "400px", background: "transparent" }} />;
+    return <div style={{ width: "100%", height: TRAVEL_MAP_HEIGHT, background: "transparent" }} />;
   }
 
   return (
