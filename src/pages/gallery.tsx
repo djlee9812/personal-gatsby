@@ -3,7 +3,8 @@ import { graphql, PageProps, HeadFC } from 'gatsby'
 import { IGatsbyImageData } from 'gatsby-plugin-image'
 import * as globalStyles from '../components/global.module.css'
 import * as galleryStyles from '../components/gallery.module.css'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faArrowLeft, faArrowRight } from '../utils/fontawesome'
 import Layout from '../components/layout'
 import Seo from '../components/seo'
 import ImageCell from '../components/image-cell'
@@ -86,9 +87,12 @@ const Gallery = ({ data }: PageProps<Queries.GalleryQuery>) => {
     return (
       <Layout>
         <main className={globalStyles.navbarMargin} id="main">
-          <div className={globalStyles.container}>
+          <div className={`${globalStyles.pageHeader} ${globalStyles.pageHeaderTop} ${globalStyles.textCenter}`}>
             <h1>Gallery</h1>
-            <p>No tagged images found. Please add tags (e.g., 'travel', 'hobby') to your images in Cloudinary.</p>
+            <p>No tagged images found. Add tags (e.g. travel, hobby) to your images in Cloudinary.</p>
+          </div>
+          <div className={globalStyles.container}>
+            <p>No images to display.</p>
           </div>
         </main>
       </Layout>
@@ -128,19 +132,21 @@ const Gallery = ({ data }: PageProps<Queries.GalleryQuery>) => {
     <Layout>
       <main className={globalStyles.navbarMargin} id="main">
         {/* Navigation Header for Collections */}
-        <div className={galleryStyles.titleDiv}>
-          <div className={galleryStyles.arrowDiv}>
-            <button className={globalStyles.hiddenButton} onClick={decrementIndex} aria-label="Previous Collection">
-              <FontAwesomeIcon icon={['fas', 'arrow-left']} size="xl"/>
-            </button>
-          </div>
-          <div className={globalStyles.textCenter}>
-            <h1 className={globalStyles.marginSm}>{currentCollection.title}</h1>
-          </div>
-          <div className={galleryStyles.arrowDiv}>
-            <button className={globalStyles.hiddenButton} onClick={incrementIndex} aria-label="Next Collection">
-              <FontAwesomeIcon icon={['fas', 'arrow-right']} size="xl"/>
-            </button>
+        <div className={galleryStyles.pageHeaderWrap}>
+          <div className={galleryStyles.titleDiv}>
+            <div className={galleryStyles.arrowDiv}>
+              <button className={globalStyles.hiddenButton} onClick={decrementIndex} aria-label="Previous Collection">
+                <FontAwesomeIcon icon={faArrowLeft} size="xl"/>
+              </button>
+            </div>
+            <div className={`${globalStyles.textCenter} ${globalStyles.pageHeader}`}>
+              <h1 key={currentCollection.title}>{currentCollection.title}</h1>
+            </div>
+            <div className={galleryStyles.arrowDiv}>
+              <button className={globalStyles.hiddenButton} onClick={incrementIndex} aria-label="Next Collection">
+                <FontAwesomeIcon icon={faArrowRight} size="xl"/>
+              </button>
+            </div>
           </div>
         </div>
         

@@ -51,6 +51,32 @@ body {
   margin: 10px;
 }
 
+/* Shared page header (Blog, Gallery, Projects): title + optional subtext */
+.pageHeader {
+  padding-bottom: 2rem;
+}
+
+.pageHeader h1 {
+  font-family: var(--font-heading);
+  font-size: 2.5rem;
+  font-weight: 600;
+  margin: 0 0 0.5rem 0;
+  color: var(--color-text-primary);
+}
+
+.pageHeader p {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--color-text-secondary);
+  margin: 0;
+}
+
+/* Extra top spacing for Gallery so header isn’t tight under navbar */
+.pageHeaderTop {
+  padding-top: 2rem;
+}
+
 .hiddenButton {
   background: transparent;
   border: none !important;

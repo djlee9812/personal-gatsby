@@ -13,6 +13,9 @@ const Navbar = () => {
           <Link to="/gallery" activeClassName={styles.active}>Gallery</Link>
         </li>
         <li className={styles.navItem}>
+          <Link to="/projects" activeClassName={styles.active}>Projects</Link>
+        </li>
+        <li className={styles.navItem}>
           <Link to="/blog" activeClassName={styles.active}>Blog</Link>
         </li>
       </ul>
