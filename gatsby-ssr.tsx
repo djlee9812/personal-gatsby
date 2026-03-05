@@ -26,9 +26,9 @@ export const onRenderBody: GatsbySSR["onRenderBody"] = ({ setHtmlAttributes, set
         dangerouslySetInnerHTML={{
           __html: `
             window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', '${gaId}', {
+            window.gtag = function gtag(){window.dataLayer.push(arguments);}
+            window.gtag('js', new Date());
+            window.gtag('config', '${gaId}', {
               anonymize_ip: true,
               cookie_expires: 0,
             });

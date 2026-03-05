@@ -2,7 +2,6 @@ import * as React from "react"
 import { HeadFC } from "gatsby"
 import { motion, Variants } from "framer-motion"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faGithub } from "../utils/fontawesome"
 import * as globalStyles from "../components/global.module.css"
 import * as styles from "../components/projects.module.css"
 import Layout from "../components/layout"
@@ -59,7 +58,7 @@ function ProjectCard({ project }: { project: Project }) {
             rel="noopener noreferrer"
             aria-label="View on GitHub"
           >
-            <FontAwesomeIcon icon={faGithub} /> View on GitHub
+            <FontAwesomeIcon icon={['fab', 'github']} /> View on GitHub
           </a>
           {project.liveDemoUrl && (
             <a

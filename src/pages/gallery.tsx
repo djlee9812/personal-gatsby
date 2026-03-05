@@ -4,7 +4,6 @@ import { IGatsbyImageData } from 'gatsby-plugin-image'
 import * as globalStyles from '../components/global.module.css'
 import * as galleryStyles from '../components/gallery.module.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faArrowLeft, faArrowRight } from '../utils/fontawesome'
 import Layout from '../components/layout'
 import Seo from '../components/seo'
 import ImageCell from '../components/image-cell'
@@ -136,7 +135,7 @@ const Gallery = ({ data }: PageProps<Queries.GalleryQuery>) => {
           <div className={galleryStyles.titleDiv}>
             <div className={galleryStyles.arrowDiv}>
               <button className={globalStyles.hiddenButton} onClick={decrementIndex} aria-label="Previous Collection">
-                <FontAwesomeIcon icon={faArrowLeft} size="xl"/>
+                <FontAwesomeIcon icon={['fas', 'arrow-left']} size="xl"/>
               </button>
             </div>
             <div className={`${globalStyles.textCenter} ${globalStyles.pageHeader}`}>
@@ -144,7 +143,7 @@ const Gallery = ({ data }: PageProps<Queries.GalleryQuery>) => {
             </div>
             <div className={galleryStyles.arrowDiv}>
               <button className={globalStyles.hiddenButton} onClick={incrementIndex} aria-label="Next Collection">
-                <FontAwesomeIcon icon={faArrowRight} size="xl"/>
+                <FontAwesomeIcon icon={['fas', 'arrow-right']} size="xl"/>
               </button>
             </div>
           </div>
