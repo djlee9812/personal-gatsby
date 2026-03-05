@@ -1,7 +1,13 @@
-import type { GatsbyConfig } from "gatsby";
-import "dotenv/config";
+/**
+ * @typedef {import("gatsby").GatsbyConfig} GatsbyConfig
+ */
 
-const config: GatsbyConfig = {
+require("dotenv").config({
+  path: `.env`,
+});
+
+/** @type {GatsbyConfig} */
+const config = {
   graphqlTypegen: true,
   siteMetadata: {
     title: `Dongjoon Lee's Personal Website`,
@@ -68,4 +74,4 @@ const config: GatsbyConfig = {
   ],
 };
 
-export default config;
+module.exports = config;

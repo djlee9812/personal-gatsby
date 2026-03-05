@@ -19,5 +19,5 @@
       "*": ["src/*"]
     }
   },
-  "include": ["src/**/*", "gatsby-node.ts", "gatsby-config.ts", "plugins/**/*"]
+  "include": ["src/**/*", "gatsby-node.ts", "plugins/**/*"]
 }
