@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect, useMemo } from 'react';
-import { Canvas } from '@react-three/fiber';
+import { Canvas, useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
 import type { MotionValue } from 'framer-motion';
 
@@ -508,8 +508,16 @@ function mergeGeometries(geometries: THREE.BufferGeometry[]): THREE.BufferGeomet
   return merged;
 }
 
+// Idle animation: subtle pitch/yaw/roll and position bob (radians / units)
+const IDLE_PITCH_AMP = 0.14;
+const IDLE_YAW_AMP = 0.05;
+const IDLE_ROLL_AMP = 0.04;
+const IDLE_BOB_AMP = 0.35;
+const IDLE_SPEED = 0.38;
+
 function Airplane({ scrollProgress }: AirplaneProps) {
   const groupRef = useRef<THREE.Group>(null!);
+  const scrollRef = useRef(0);
 
   const mergedGeometry = useMemo(() => {
     const geos = [
@@ -528,18 +536,26 @@ function Airplane({ scrollProgress }: AirplaneProps) {
   }, []);
 
   useEffect(() => {
-    const baseScale = 0.62; // smaller in view
-    const updateFromScroll = (v: number) => {
-      if (!groupRef.current) return;
-      const s = baseScale * (1 - v * 0.05);
-      groupRef.current.scale.setScalar(s);
-      groupRef.current.rotation.y = -0.45 * v;
-      groupRef.current.rotation.x = 0.24 * v;
-    };
-    updateFromScroll(scrollProgress.get());
-    const unsub = scrollProgress.on('change', updateFromScroll);
+    scrollRef.current = scrollProgress.get();
+    const unsub = scrollProgress.on('change', (v) => {
+      scrollRef.current = v;
+    });
     return () => unsub();
   }, [scrollProgress]);
+
+  useFrame((state) => {
+    const g = groupRef.current;
+    if (!g) return;
+    const v = scrollRef.current;
+    const t = state.clock.elapsedTime * IDLE_SPEED;
+    const baseScale = 0.62;
+    g.scale.setScalar(baseScale * (1 - v * 0.05));
+    // pitch and roll mapped to aircraft axes not graphics axes
+    g.rotation.x = 0.24 * v + IDLE_ROLL_AMP * Math.sin(t);
+    g.rotation.y = -0.45 * v + IDLE_YAW_AMP * Math.sin(t * 0.7 + 1);
+    g.rotation.z = .18 + IDLE_PITCH_AMP * Math.sin(t * 0.5 + 2);
+    g.position.y = IDLE_BOB_AMP * Math.sin(t * 0.6 + 0.5);
+  });
 
   return (
     <group ref={groupRef} position={[0, 0, -1.5]}>
