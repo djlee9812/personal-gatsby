@@ -8,7 +8,15 @@
   --color-accent: #00b894; /* Teal */
   --color-highlight: #008f72; /* Darker Teal for better visibility on light bg */
   --color-border: #dfe6e9;
-  
+
+  /* Card surfaces (light mode: high contrast on light bg, WCAG-friendly) */
+  --color-card-bg: #ffffff;
+  --color-card-border: #e1e8ed;
+  --color-card-shadow: 0 1px 3px rgba(45, 52, 54, 0.08);
+  --color-card-hover-bg: #ffffff;
+  --color-card-hover-shadow: 0 10px 24px rgba(45, 52, 54, 0.12);
+  --color-card-hover-border: #b2bec3;
+
   /* Fonts */
   --font-heading: 'Josefin Sans', sans-serif;
   --font-body: 'Inconsolata', monospace;
@@ -24,6 +32,14 @@
     --color-accent: #55efc4; /* Lighter Teal */
     --color-highlight: #81ecec;
     --color-border: #636e72;
+
+    /* Card surfaces (dark mode: glass-style) */
+    --color-card-bg: rgba(43, 43, 55, 0.5);
+    --color-card-border: rgba(255, 255, 255, 0.1);
+    --color-card-shadow: none;
+    --color-card-hover-bg: rgba(43, 43, 55, 0.8);
+    --color-card-hover-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    --color-card-hover-border: var(--color-highlight);
   }
 }
 
