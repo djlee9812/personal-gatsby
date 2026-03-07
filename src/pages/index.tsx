@@ -8,6 +8,7 @@ import * as styles from '../components/index.module.css'
 import { TRAVEL_MAP_HEIGHT } from '../components/travel-map'
 
 const TravelMap = React.lazy(() => import('../components/travel-map'))
+const HeroScene = React.lazy(() => import('../components/hero-scene'))
 import { motion, useScroll, useTransform, Variants } from 'framer-motion'
 import scrollTo from 'gatsby-plugin-smoothscroll'
 
@@ -34,10 +35,10 @@ const staggerContainer: Variants = {
 const IndexPage = () => {
   const { scrollY } = useScroll();
   
-  // Transform scrollY to opacity: 1 at 0px, 0 at 300px
   const heroOpacity = useTransform(scrollY, [0, 300], [1, 0]);
   const heroScale = useTransform(scrollY, [0, 300], [1, 0.95]);
   const heroY = useTransform(scrollY, [0, 300], [0, 50]);
+  const scrollProgress = useTransform(scrollY, [0, 300], [0, 1]);
 
   const data = useStaticQuery<Queries.IndexPageCloudinaryQuery>(graphql`
     query IndexPageCloudinary {
@@ -64,7 +65,14 @@ const IndexPage = () => {
         className={styles.heroContainer}
         style={{ opacity: heroOpacity, scale: heroScale, y: heroY }}
       >
+        <div className={styles.hero3dWrapper}>
+          <React.Suspense fallback={null}>
+            <HeroScene scrollProgress={scrollProgress} />
+          </React.Suspense>
+        </div>
+
         <motion.div
+          className={styles.heroContent}
           initial="hidden"
           animate="visible"
           variants={staggerContainer}

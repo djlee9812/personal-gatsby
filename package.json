@@ -24,6 +24,7 @@
     "@mdx-js/mdx": "^2.0.0",
     "@mdx-js/react": "^2.0.0",
     "@qwik.dev/partytown": "^0.11.2",
+    "@react-three/fiber": "^8.18.0",
     "focus-trap-react": "^10.0.0",
     "framer-motion": "^12.34.2",
     "gatsby": "^5.13.6",
@@ -39,7 +40,8 @@
     "gatsby-transformer-sharp": "^5.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-simple-maps": "^3.0.0"
+    "react-simple-maps": "^3.0.0",
+    "three": "^0.183.2"
   },
   "devDependencies": {
     "@types/node": "^25.3.0",

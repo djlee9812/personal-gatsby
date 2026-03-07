@@ -13,6 +13,18 @@
   padding: 0 10%; /* Increased side padding */
 }
 
+.hero3dWrapper {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.heroContent {
+  position: relative;
+  z-index: 1;
+}
+
 .heroTitle {
   font-family: var(--font-heading);
   font-size: clamp(4rem, 12vw, 9rem); /* Larger font size */
@@ -56,6 +68,7 @@
   font-size: 0.9rem;
   opacity: 0.8;
   animation: bounce 2s infinite;
+  z-index: 1;
 }
 
 @keyframes bounce {

@@ -1,7 +1,6 @@
 declare module "*.module.css" {
-  const content: { [key: string]: string };
-  export default content;
-  export = content;
+  const classes: { readonly [key: string]: string };
+  export = classes;
 }
 
 declare module "*.png" {
