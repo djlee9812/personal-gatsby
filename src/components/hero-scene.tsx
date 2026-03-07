@@ -131,6 +131,10 @@ function createFuselageGeometry(): THREE.BufferGeometry {
   }
 
   const segs = FUSELAGE_SEGMENTS;
+  // Nose tip cap: single vertex at the very front
+  const firstSection = sections[0];
+  points.push(firstSection.x, firstSection.yOff, 0);
+
   for (const sec of sections) {
     if (sec.ry === 0 && sec.rz === 0) {
       for (let j = 0; j < segs; j++) {
@@ -147,13 +151,22 @@ function createFuselageGeometry(): THREE.BufferGeometry {
   }
 
   const numSections = sections.length;
+  const ringVertexOffset = 1; // after the nose-tip vertex
+
+  // Nose cap: triangles from tip (0) to first ring (1..segs)
+  for (let j = 0; j < segs; j++) {
+    const j1 = (j + 1) % segs;
+    indices.push(0, ringVertexOffset + j, ringVertexOffset + j1);
+  }
+
+  // Tube between sections (indices shifted by ringVertexOffset)
   for (let i = 0; i < numSections - 1; i++) {
     for (let j = 0; j < segs; j++) {
       const j1 = (j + 1) % segs;
-      const a = i * segs + j;
-      const b = i * segs + j1;
-      const c = (i + 1) * segs + j;
-      const d = (i + 1) * segs + j1;
+      const a = ringVertexOffset + i * segs + j;
+      const b = ringVertexOffset + i * segs + j1;
+      const c = ringVertexOffset + (i + 1) * segs + j;
+      const d = ringVertexOffset + (i + 1) * segs + j1;
       indices.push(a, c, b);
       indices.push(b, c, d);
     }
