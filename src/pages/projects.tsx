@@ -33,10 +33,16 @@ function ProjectCard({ project }: { project: Project }) {
       variants={fadeInUp}
     >
       {project.imagePath && (
-        <div className={styles.cardImageWrap}>
+        <div
+          className={
+            project.imageFit === "contain"
+              ? `${styles.cardImageWrap} ${styles.cardImageWrapContain}`
+              : styles.cardImageWrap
+          }
+        >
           <img
             src={project.imagePath}
-            alt=""
+            alt={`${project.title} screenshot`}
             loading="lazy"
           />
         </div>
@@ -52,14 +58,26 @@ function ProjectCard({ project }: { project: Project }) {
           ))}
         </ul>
         <div className={styles.cardLinks}>
-          <a
-            href={project.githubUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="View on GitHub"
-          >
-            <FontAwesomeIcon icon={['fab', 'github']} /> View on GitHub
-          </a>
+          {project.githubUrl && (
+            <a
+              href={project.githubUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="View on GitHub"
+            >
+              <FontAwesomeIcon icon={['fab', 'github']} /> View on GitHub
+            </a>
+          )}
+          {project.appStoreUrl && (
+            <a
+              href={project.appStoreUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Download on the App Store"
+            >
+              <FontAwesomeIcon icon={['fab', 'apple']} /> App Store
+            </a>
+          )}
           {project.liveDemoUrl && (
             <a
               href={project.liveDemoUrl}
@@ -100,7 +118,7 @@ const Projects = () => {
               viewport={{ once: true, margin: "-60px" }}
             >
               {projects.map((project) => (
-                <ProjectCard key={project.githubUrl} project={project} />
+                <ProjectCard key={project.title} project={project} />
               ))}
             </motion.div>
           </div>

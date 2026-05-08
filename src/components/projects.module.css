@@ -11,9 +11,13 @@
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 32px;
+  align-items: stretch;
 }
 
 .card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
   background: var(--color-card-bg);
   backdrop-filter: blur(10px);
   border: 1px solid var(--color-card-border);
@@ -36,7 +40,28 @@
   display: block;
 }
 
+/* Portrait / phone screenshots: full image visible, side bars, slightly inset (“zoomed out”). */
+.cardImageWrapContain {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cardImageWrapContain img {
+  width: auto;
+  height: auto;
+  /* ~10% narrower gutters than 72% / 88% (bars ≈ 90% of previous thickness). */
+  max-width: 75%;
+  max-height: 95%;
+  object-fit: contain;
+  object-position: center;
+}
+
 .cardBody {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
   padding: 24px;
 }
 
@@ -49,6 +74,7 @@
 }
 
 .cardDescription {
+  flex: 1 1 auto;
   font-family: var(--font-body);
   font-size: 0.95rem;
   line-height: 1.65;
@@ -95,7 +121,7 @@
 
 @media (max-width: 900px) {
   .section {
-    padding: 80px 20px;
+    padding: 0 20px 4rem;
   }
   .cardGrid {
     grid-template-columns: 1fr;
