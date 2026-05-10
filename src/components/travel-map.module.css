@@ -1,0 +1,109 @@
+.wrap {
+  width: 100%;
+  background: transparent;
+  position: relative;
+}
+
+.controlsZoom {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.zoomBtn {
+  width: 36px;
+  height: 36px;
+  background: #2b2b37;
+  color: #d4fcff;
+  border: 1px solid #444;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+.zoomBtn:focus-visible {
+  outline: 2px solid var(--color-accent, #00b894);
+  outline-offset: 2px;
+}
+
+.controlsToggle {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+}
+
+.toggleControl {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  background: rgba(43, 43, 55, 0.92);
+  border: 1px solid #444;
+  border-radius: 8px;
+}
+
+.toggleTitle {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: #d4fcff;
+  line-height: 1.2;
+  text-align: center;
+}
+
+.switchTrack {
+  flex-shrink: 0;
+  position: relative;
+  width: 44px;
+  height: 26px;
+  padding: 0;
+  border: 1px solid #555;
+  border-radius: 999px;
+  background: #1e1e26;
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.switchTrack:focus-visible {
+  outline: 2px solid var(--color-accent, #00b894);
+  outline-offset: 3px;
+}
+
+.switchTrackOn {
+  background: rgba(220, 174, 82, 0.35);
+  border-color: #dcae52;
+}
+
+.switchThumb {
+  position: absolute;
+  top: 50%;
+  left: 3px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #d4fcff;
+  transform: translateY(-50%);
+  transition: transform 0.15s ease, background 0.15s ease;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
+}
+
+.switchTrackOn .switchThumb {
+  transform: translate(18px, -50%);
+  background: #f0e6c8;
+}
+
+.routeLayer {
+  pointer-events: none;
+}
+
+/* Warm gold — distinct from visited land (#d4fcff) and site teal accent */
+.routeLayer path {
+  opacity: 0.52;
+}

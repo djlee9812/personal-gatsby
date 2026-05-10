@@ -1,23 +1,18 @@
-/** One leg from a Flighty export after stripping sensitive columns (see scripts/flighty-export-to-json.mjs). */
+/**
+ * Shape of src/data/flights.json — only fields shipped to the browser bundle.
+ * Year-only (no calendar dates); plus airline/flight/from/to for keys and filters.
+ */
 export interface FlightLeg {
-  date: string;
+  year: number;
   airline: string;
   flight: string;
   from: string;
   to: string;
-  aircraftType: string | null;
-  /** ISO local datetime from Flighty "Gate Departure (Scheduled)" */
-  departureScheduled: string | null;
-  departureActual: string | null;
-  /** ISO local datetime from Flighty "Gate Arrival (Scheduled)" */
-  arrivalScheduled: string | null;
-  arrivalActual: string | null;
 }
 
 export interface FlightsDataset {
   generatedAt: string;
   source: string;
-  sourceFile: string;
   flightCount: number;
   flights: FlightLeg[];
 }

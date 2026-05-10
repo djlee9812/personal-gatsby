@@ -3,7 +3,11 @@
  * Reads a Flighty CSV export from data/private/ (or a path argument / FLIGHTY_CSV_PATH)
  * and writes public-safe JSON to src/data/flights.json.
  *
- * Omits: PNR, seat, cabin, notes, tail number, terminals/gates, Flighty internal IDs.
+ * Omits from CSV: PNR, seat, cabin, notes, tail number, terminals/gates, Flighty internal IDs,
+ * aircraft type, and all scheduled/actual departure/arrival timestamps — those are not bundled
+ * so the client only ships what's needed for map arcs plus future year/airline filters.
+ *
+ * Each committed leg is only: year (no exact dates), airline, flight, from, to.
  */
 
 import fs from "fs";
@@ -72,27 +76,27 @@ function parseCsv(text) {
   return rows;
 }
 
-/** @param {string} s */
-function trimOrNull(s) {
-  const t = String(s ?? "").trim();
-  return t === "" ? null : t;
+/** @param {unknown} cell */
+function yearFromFlightyDate(cell) {
+  const s = String(cell ?? "").trim();
+  const m = s.match(/^(\d{4})\b/);
+  if (!m) return null;
+  const y = parseInt(m[1], 10);
+  if (!Number.isFinite(y) || y < 1900 || y > 2100) return null;
+  return y;
 }
 
 /** @param {Record<string, string>} row */
-function rowToLeg(row) {
-  const iso = (key) => trimOrNull(row[key]);
+function rowToPublicLeg(row) {
+  const year = yearFromFlightyDate(row.Date);
+  if (year === null) return null;
 
   return {
-    date: String(row.Date ?? "").trim(),
+    year,
     airline: String(row.Airline ?? "").trim(),
     flight: String(row.Flight ?? "").trim(),
     from: String(row.From ?? "").trim(),
     to: String(row.To ?? "").trim(),
-    aircraftType: iso("Aircraft Type Name"),
-    departureScheduled: iso("Gate Departure (Scheduled)"),
-    departureActual: iso("Gate Departure (Actual)"),
-    arrivalScheduled: iso("Gate Arrival (Scheduled)"),
-    arrivalActual: iso("Gate Arrival (Actual)"),
   };
 }
 
@@ -140,13 +144,13 @@ function main() {
     headers.forEach((h, i) => {
       row[h] = cells[i] ?? "";
     });
-    flights.push(rowToLeg(row));
+    const leg = rowToPublicLeg(row);
+    if (leg) flights.push(leg);
   }
 
   const out = {
     generatedAt: new Date().toISOString(),
     source: "FlightyExport",
-    sourceFile: path.basename(inputPath),
     flightCount: flights.length,
     flights,
   };

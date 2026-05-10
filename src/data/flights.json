@@ -1,3608 +1,2107 @@
 {
-  "generatedAt": "2026-05-10T01:55:40.987Z",
+  "generatedAt": "2026-05-10T02:50:54.639Z",
   "source": "FlightyExport",
-  "sourceFile": "FlightyExport-2026-05-10.csv",
   "flightCount": 300,
   "flights": [
     {
-      "date": "2006-03-24",
+      "year": 2006,
       "airline": "UAL",
       "flight": "838",
       "from": "ICN",
-      "to": "NRT",
-      "aircraftType": "Boeing 777",
-      "departureScheduled": "2006-03-24T12:40",
-      "departureActual": null,
-      "arrivalScheduled": "2006-03-24T14:55",
-      "arrivalActual": "2006-03-24T14:32"
+      "to": "NRT"
     },
     {
-      "date": "2006-03-24",
+      "year": 2006,
       "airline": "UAL",
       "flight": "880",
       "from": "NRT",
-      "to": "HNL",
-      "aircraftType": "Boeing 777",
-      "departureScheduled": "2006-03-24T19:00",
-      "departureActual": null,
-      "arrivalScheduled": "2006-03-24T06:43",
-      "arrivalActual": "2006-03-24T06:59"
+      "to": "HNL"
     },
     {
-      "date": "2006-04-02",
+      "year": 2006,
       "airline": "UAL",
       "flight": "879",
       "from": "HNL",
-      "to": "NRT",
-      "aircraftType": "Boeing 777",
-      "departureScheduled": "2006-04-02T09:45",
-      "departureActual": null,
-      "arrivalScheduled": "2006-04-03T13:25",
-      "arrivalActual": "2006-04-03T13:25"
+      "to": "NRT"
     },
     {
-      "date": "2006-04-03",
+      "year": 2006,
       "airline": "UAL",
       "flight": "883",
       "from": "NRT",
-      "to": "ICN",
-      "aircraftType": "Boeing 777",
-      "departureScheduled": "2006-04-03T17:30",
-      "departureActual": null,
-      "arrivalScheduled": "2006-04-03T20:10",
-      "arrivalActual": "2006-04-03T20:08"
+      "to": "ICN"
     },
     {
-      "date": "2006-12-24",
+      "year": 2006,
       "airline": "AAR",
       "flight": "8705",
       "from": "GMP",
-      "to": "KWJ",
-      "aircraftType": "Boeing 737-400",
-      "departureScheduled": "2006-12-24T14:00",
-      "departureActual": "2006-12-24T13:58",
-      "arrivalScheduled": "2006-12-24T14:55",
-      "arrivalActual": "2006-12-24T14:46"
+      "to": "KWJ"
     },
     {
-      "date": "2007-07-16",
+      "year": 2007,
       "airline": "KAL",
       "flight": "907",
       "from": "ICN",
-      "to": "LHR",
-      "aircraftType": "Boeing 747-400",
-      "departureScheduled": "2007-07-16T13:25",
-      "departureActual": "2007-07-16T13:58",
-      "arrivalScheduled": "2007-07-16T17:34",
-      "arrivalActual": "2007-07-16T17:39"
+      "to": "LHR"
     },
     {
-      "date": "2007-08-25",
+      "year": 2007,
       "airline": "KAL",
       "flight": "936",
       "from": "PRG",
-      "to": "ICN",
-      "aircraftType": "Airbus A330-300",
-      "departureScheduled": "2007-08-25T20:10",
-      "departureActual": "2007-08-25T20:10",
-      "arrivalScheduled": "2007-08-26T13:13",
-      "arrivalActual": "2007-08-26T13:18"
+      "to": "ICN"
     },
     {
-      "date": "2007-12-19",
+      "year": 2007,
       "airline": "UAL",
       "flight": "892",
       "from": "ICN",
-      "to": "SFO",
-      "aircraftType": "Boeing 777",
-      "departureScheduled": "2007-12-19T15:05",
-      "departureActual": "2007-12-19T14:57",
-      "arrivalScheduled": "2007-12-19T08:13",
-      "arrivalActual": "2007-12-19T07:29"
+      "to": "SFO"
     },
     {
-      "date": "2007-12-19",
+      "year": 2007,
       "airline": "UAL",
       "flight": "6416",
       "from": "SFO",
-      "to": "ABQ",
-      "aircraftType": "Bombardier CRJ",
-      "departureScheduled": "2007-12-19T12:25",
-      "departureActual": "2007-12-19T12:44",
-      "arrivalScheduled": "2007-12-19T15:41",
-      "arrivalActual": "2007-12-19T16:09"
+      "to": "ABQ"
     },
     {
-      "date": "2008-01-25",
+      "year": 2008,
       "airline": "UAL",
       "flight": "6393",
       "from": "ABQ",
-      "to": "SFO",
-      "aircraftType": "Bombardier CRJ",
-      "departureScheduled": "2008-01-25T06:17",
-      "departureActual": "2008-01-25T06:09",
-      "arrivalScheduled": "2008-01-25T07:55",
-      "arrivalActual": "2008-01-25T08:20"
+      "to": "SFO"
     },
     {
-      "date": "2008-01-25",
+      "year": 2008,
       "airline": "UAL",
       "flight": "893",
       "from": "SFO",
-      "to": "ICN",
-      "aircraftType": "Boeing 777",
-      "departureScheduled": "2008-01-25T13:39",
-      "departureActual": "2008-01-25T16:17",
-      "arrivalScheduled": "2008-01-26T19:35",
-      "arrivalActual": "2008-01-26T22:16"
+      "to": "ICN"
     },
     {
-      "date": "2008-02-18",
+      "year": 2008,
       "airline": "HVN",
       "flight": "937",
       "from": "ICN",
-      "to": "HAN",
-      "aircraftType": "Airbus A330-200",
-      "departureScheduled": "2008-02-18T10:15",
-      "departureActual": null,
-      "arrivalScheduled": "2008-02-18T13:15",
-      "arrivalActual": null
+      "to": "HAN"
     },
     {
-      "date": "2008-02-27",
+      "year": 2008,
       "airline": "HVN",
       "flight": "938",
       "from": "SGN",
-      "to": "ICN",
-      "aircraftType": "Airbus A330-200",
-      "departureScheduled": "2008-02-27T01:20",
-      "departureActual": null,
-      "arrivalScheduled": "2008-02-27T08:10",
-      "arrivalActual": null
+      "to": "ICN"
     },
     {
-      "date": "2008-05-10",
+      "year": 2008,
       "airline": "AAR",
       "flight": "3615",
       "from": "GMP",
-      "to": "SHA",
-      "aircraftType": "Airbus A321",
-      "departureScheduled": "2008-05-10T16:00",
-      "departureActual": "2008-05-10T15:58",
-      "arrivalScheduled": "2008-05-10T17:00",
-      "arrivalActual": "2008-05-10T16:58"
+      "to": "SHA"
     },
     {
-      "date": "2008-05-13",
+      "year": 2008,
       "airline": "AAR",
       "flight": "3625",
       "from": "SHA",
-      "to": "GMP",
-      "aircraftType": "Airbus A321",
-      "departureScheduled": "2008-05-13T18:00",
-      "departureActual": null,
-      "arrivalScheduled": "2008-05-13T20:50",
-      "arrivalActual": null
+      "to": "GMP"
     },
     {
-      "date": "2008-09-20",
+      "year": 2008,
       "airline": "AAR",
       "flight": "202",
       "from": "ICN",
-      "to": "LAX",
-      "aircraftType": "Boeing 747",
-      "departureScheduled": "2008-09-20T16:30",
-      "departureActual": "2008-09-20T16:34",
-      "arrivalScheduled": "2008-09-20T11:30",
-      "arrivalActual": "2008-09-20T11:32"
+      "to": "LAX"
     },
     {
-      "date": "2009-01-16",
+      "year": 2009,
       "airline": "SWA",
       "flight": "613",
       "from": "LAX",
-      "to": "ABQ",
-      "aircraftType": "Boeing 737-300",
-      "departureScheduled": "2009-01-16T17:05",
-      "departureActual": null,
-      "arrivalScheduled": "2009-01-16T19:55",
-      "arrivalActual": null
+      "to": "ABQ"
     },
     {
-      "date": "2009-01-19",
+      "year": 2009,
       "airline": "SWA",
       "flight": "1394",
       "from": "ABQ",
-      "to": "LAX",
-      "aircraftType": "Boeing 737-300",
-      "departureScheduled": "2009-01-19T15:25",
-      "departureActual": null,
-      "arrivalScheduled": "2009-01-19T16:35",
-      "arrivalActual": null
+      "to": "LAX"
     },
     {
-      "date": "2009-06-18",
+      "year": 2009,
       "airline": "DAL",
       "flight": "4822",
       "from": "LAX",
-      "to": "SLC",
-      "aircraftType": "Bombardier CRJ",
-      "departureScheduled": "2009-06-18T08:30",
-      "departureActual": "2009-06-18T08:24",
-      "arrivalScheduled": "2009-06-18T11:17",
-      "arrivalActual": "2009-06-18T11:30"
+      "to": "SLC"
     },
     {
-      "date": "2009-06-18",
+      "year": 2009,
       "airline": "DAL",
       "flight": "1204",
       "from": "SLC",
-      "to": "MDW",
-      "aircraftType": "Boeing 737-800",
-      "departureScheduled": "2009-06-18T13:30",
-      "departureActual": "2009-06-18T13:30",
-      "arrivalScheduled": "2009-06-18T17:37",
-      "arrivalActual": "2009-06-18T17:20"
+      "to": "MDW"
     },
     {
-      "date": "2009-06-21",
+      "year": 2009,
       "airline": "DAL",
       "flight": "1253",
       "from": "MDW",
-      "to": "SLC",
-      "aircraftType": "Boeing 737-800",
-      "departureScheduled": "2009-06-21T18:17",
-      "departureActual": "2009-06-21T19:46",
-      "arrivalScheduled": "2009-06-21T20:39",
-      "arrivalActual": "2009-06-21T22:04"
+      "to": "SLC"
     },
     {
-      "date": "2009-06-21",
+      "year": 2009,
       "airline": "DAL",
       "flight": "1253",
       "from": "SLC",
-      "to": "LAX",
-      "aircraftType": "Boeing 737-800",
-      "departureScheduled": "2009-06-21T21:29",
-      "departureActual": "2009-06-21T22:27",
-      "arrivalScheduled": "2009-06-21T22:27",
-      "arrivalActual": "2009-06-21T23:27"
+      "to": "LAX"
     },
     {
-      "date": "2009-12-20",
+      "year": 2009,
       "airline": "SWA",
       "flight": "2686",
       "from": "LAX",
-      "to": "ABQ",
-      "aircraftType": "Boeing 737-700",
-      "departureScheduled": "2009-12-20T16:45",
-      "departureActual": null,
-      "arrivalScheduled": "2009-12-20T19:35",
-      "arrivalActual": null
+      "to": "ABQ"
     },
     {
-      "date": "2009-12-31",
+      "year": 2009,
       "airline": "SWA",
       "flight": "5699",
       "from": "ABQ",
-      "to": "LAX",
-      "aircraftType": "Boeing 737-300",
-      "departureScheduled": "2009-12-31T11:25",
-      "departureActual": null,
-      "arrivalScheduled": "2009-12-31T12:30",
-      "arrivalActual": null
+      "to": "LAX"
     },
     {
-      "date": "2010-02-06",
+      "year": 2010,
       "airline": "VRD",
       "flight": "925",
       "from": "LAX",
-      "to": "SFO",
-      "aircraftType": "Airbus A320",
-      "departureScheduled": "2010-02-06T08:25",
-      "departureActual": null,
-      "arrivalScheduled": "2010-02-06T09:50",
-      "arrivalActual": null
+      "to": "SFO"
     },
     {
-      "date": "2010-02-08",
+      "year": 2010,
       "airline": "VRD",
       "flight": "944",
       "from": "SFO",
-      "to": "LAX",
-      "aircraftType": "Airbus A320",
-      "departureScheduled": "2010-02-08T18:55",
-      "departureActual": null,
-      "arrivalScheduled": "2010-02-08T20:15",
-      "arrivalActual": null
+      "to": "LAX"
     },
     {
-      "date": "2010-05-21",
+      "year": 2010,
       "airline": "SWA",
       "flight": "783",
       "from": "LAX",
-      "to": "ABQ",
-      "aircraftType": "Boeing 737-700",
-      "departureScheduled": "2010-05-21T20:15",
-      "departureActual": null,
-      "arrivalScheduled": "2010-05-21T23:05",
-      "arrivalActual": null
+      "to": "ABQ"
     },
     {
-      "date": "2010-05-24",
+      "year": 2010,
       "airline": "SWA",
       "flight": "40",
       "from": "ABQ",
-      "to": "LAX",
-      "aircraftType": "Boeing 737-700",
-      "departureScheduled": "2010-05-24T18:35",
-      "departureActual": null,
-      "arrivalScheduled": "2010-05-24T19:35",
-      "arrivalActual": null
+      "to": "LAX"
     },
     {
-      "date": "2010-06-25",
+      "year": 2010,
       "airline": "ASA",
       "flight": "149",
       "from": "LAX",
-      "to": "ANC",
-      "aircraftType": "Boeing 737-800",
-      "departureScheduled": "2010-06-25T08:00",
-      "departureActual": "2010-06-25T08:07",
-      "arrivalScheduled": "2010-06-25T12:15",
-      "arrivalActual": "2010-06-25T12:33"
+      "to": "ANC"
     },
     {
-      "date": "2010-07-04",
+      "year": 2010,
       "airline": "UAL",
       "flight": "8459",
       "from": "YVR",
-      "to": "LAX",
-      "aircraftType": null,
-      "departureScheduled": "2010-07-04T19:15",
-      "departureActual": "2010-07-04T19:22",
-      "arrivalScheduled": "2010-07-04T22:06",
-      "arrivalActual": "2010-07-04T22:06"
+      "to": "LAX"
     },
     {
-      "date": "2010-10-07",
+      "year": 2010,
       "airline": "KAL",
       "flight": "12",
       "from": "LAX",
-      "to": "ICN",
-      "aircraftType": "Boeing 747-400",
-      "departureScheduled": "2010-10-07T00:10",
-      "departureActual": null,
-      "arrivalScheduled": "2010-10-08T05:35",
-      "arrivalActual": null
+      "to": "ICN"
     },
     {
-      "date": "2010-10-12",
+      "year": 2010,
       "airline": "KAL",
       "flight": "11",
       "from": "ICN",
-      "to": "LAX",
-      "aircraftType": "Boeing 747-400",
-      "departureScheduled": "2010-10-12T20:00",
-      "departureActual": "2010-10-12T19:58",
-      "arrivalScheduled": "2010-10-12T14:50",
-      "arrivalActual": "2010-10-12T15:02"
+      "to": "LAX"
     },
     {
-      "date": "2011-07-22",
+      "year": 2011,
       "airline": "VRD",
       "flight": "312",
       "from": "LAX",
-      "to": "MCO",
-      "aircraftType": "Airbus A320",
-      "departureScheduled": "2011-07-22T08:00",
-      "departureActual": "2011-07-22T07:55",
-      "arrivalScheduled": "2011-07-22T16:00",
-      "arrivalActual": "2011-07-22T16:00"
+      "to": "MCO"
     },
     {
-      "date": "2011-07-30",
+      "year": 2011,
       "airline": "VRD",
       "flight": "315",
       "from": "MCO",
-      "to": "LAX",
-      "aircraftType": "Airbus A320",
-      "departureScheduled": "2011-07-30T19:20",
-      "departureActual": "2011-07-30T19:57",
-      "arrivalScheduled": "2011-07-30T21:25",
-      "arrivalActual": "2011-07-30T21:45"
+      "to": "LAX"
     },
     {
-      "date": "2011-08-01",
+      "year": 2011,
       "airline": "SWA",
       "flight": "618",
       "from": "LAX",
-      "to": "ABQ",
-      "aircraftType": "Boeing 737-700",
-      "departureScheduled": "2011-08-01T15:50",
-      "departureActual": null,
-      "arrivalScheduled": "2011-08-01T18:35",
-      "arrivalActual": null
+      "to": "ABQ"
     },
     {
-      "date": "2011-08-13",
+      "year": 2011,
       "airline": "VRD",
       "flight": "784",
       "from": "SEA",
-      "to": "LAX",
-      "aircraftType": "Airbus A319",
-      "departureScheduled": "2011-08-13T12:45",
-      "departureActual": "2011-08-13T12:38",
-      "arrivalScheduled": "2011-08-13T15:20",
-      "arrivalActual": "2011-08-13T15:13"
+      "to": "LAX"
     },
     {
-      "date": "2012-07-09",
+      "year": 2012,
       "airline": "AAR",
       "flight": "201",
       "from": "LAX",
-      "to": "ICN",
-      "aircraftType": "Boeing 747",
-      "departureScheduled": "2012-07-09T13:40",
-      "departureActual": "2012-07-09T13:36",
-      "arrivalScheduled": "2012-07-10T18:10",
-      "arrivalActual": "2012-07-10T18:25"
+      "to": "ICN"
     },
     {
-      "date": "2012-08-03",
+      "year": 2012,
       "airline": "AAR",
       "flight": "204",
       "from": "ICN",
-      "to": "LAX",
-      "aircraftType": "Boeing 777",
-      "departureScheduled": "2012-08-03T20:20",
-      "departureActual": "2012-08-03T20:25",
-      "arrivalScheduled": "2012-08-03T15:50",
-      "arrivalActual": "2012-08-03T16:34"
+      "to": "LAX"
     },
     {
-      "date": "2012-08-18",
+      "year": 2012,
       "airline": "SWA",
       "flight": "841",
       "from": "ABQ",
-      "to": "LAX",
-      "aircraftType": "Boeing 737-700",
-      "departureScheduled": "2012-08-18T17:30",
-      "departureActual": null,
-      "arrivalScheduled": "2012-08-18T18:25",
-      "arrivalActual": null
+      "to": "LAX"
     },
     {
-      "date": "2013-03-29",
+      "year": 2013,
       "airline": "VRD",
       "flight": "114",
       "from": "LAX",
-      "to": "IAD",
-      "aircraftType": null,
-      "departureScheduled": "2013-03-29T22:00",
-      "departureActual": "2013-03-29T21:50",
-      "arrivalScheduled": "2013-03-30T05:45",
-      "arrivalActual": "2013-03-30T05:40"
+      "to": "IAD"
     },
     {
-      "date": "2013-08-11",
+      "year": 2013,
       "airline": "SWA",
       "flight": "425",
       "from": "LAX",
-      "to": "ABQ",
-      "aircraftType": null,
-      "departureScheduled": "2013-08-11T14:55",
-      "departureActual": "2013-08-11T15:07",
-      "arrivalScheduled": "2013-08-11T17:40",
-      "arrivalActual": "2013-08-11T17:48"
+      "to": "ABQ"
     },
     {
-      "date": "2013-08-17",
+      "year": 2013,
       "airline": "SWA",
       "flight": "1112",
       "from": "ABQ",
-      "to": "LAX",
-      "aircraftType": null,
-      "departureScheduled": "2013-08-17T09:30",
-      "departureActual": "2013-08-17T09:44",
-      "arrivalScheduled": "2013-08-17T10:30",
-      "arrivalActual": "2013-08-17T10:41"
+      "to": "LAX"
     },
     {
-      "date": "2014-04-04",
+      "year": 2014,
       "airline": "ASA",
       "flight": "477",
       "from": "LAX",
-      "to": "SEA",
-      "aircraftType": "Boeing 737-900ER",
-      "departureScheduled": "2014-04-04T06:00",
-      "departureActual": "2014-04-04T05:59",
-      "arrivalScheduled": "2014-04-04T08:40",
-      "arrivalActual": "2014-04-04T08:37"
+      "to": "SEA"
     },
     {
-      "date": "2014-04-06",
+      "year": 2014,
       "airline": "ASA",
       "flight": "470",
       "from": "SEA",
-      "to": "LAX",
-      "aircraftType": "Boeing 737-800",
-      "departureScheduled": "2014-04-06T21:05",
-      "departureActual": "2014-04-06T21:22",
-      "arrivalScheduled": "2014-04-06T23:37",
-      "arrivalActual": "2014-04-06T23:40"
+      "to": "LAX"
     },
     {
-      "date": "2014-06-27",
+      "year": 2014,
       "airline": "THA",
       "flight": "693",
       "from": "LAX",
-      "to": "ICN",
-      "aircraftType": null,
-      "departureScheduled": "2014-06-27T01:25",
-      "departureActual": "2014-06-27T01:28",
-      "arrivalScheduled": "2014-06-28T06:00",
-      "arrivalActual": "2014-06-28T06:10"
+      "to": "ICN"
     },
     {
-      "date": "2014-07-19",
+      "year": 2014,
       "airline": "THA",
       "flight": "692",
       "from": "ICN",
-      "to": "LAX",
-      "aircraftType": "Boeing 777",
-      "departureScheduled": "2014-07-19T22:20",
-      "departureActual": "2014-07-19T22:31",
-      "arrivalScheduled": "2014-07-19T17:55",
-      "arrivalActual": "2014-07-19T18:01"
+      "to": "LAX"
     },
     {
-      "date": "2014-07-20",
+      "year": 2014,
       "airline": "ASA",
       "flight": "1878",
       "from": "LAX",
-      "to": "SFO",
-      "aircraftType": "Boeing 737-800",
-      "departureScheduled": "2014-07-20T13:30",
-      "departureActual": "2014-07-20T13:26",
-      "arrivalScheduled": "2014-07-20T14:45",
-      "arrivalActual": "2014-07-20T14:38"
+      "to": "SFO"
     },
     {
-      "date": "2014-08-02",
+      "year": 2014,
       "airline": "UAL",
       "flight": "842",
       "from": "SFO",
-      "to": "LAX",
-      "aircraftType": "Airbus A320",
-      "departureScheduled": "2014-08-02T15:53",
-      "departureActual": "2014-08-02T15:52",
-      "arrivalScheduled": "2014-08-02T17:32",
-      "arrivalActual": "2014-08-02T17:31"
+      "to": "LAX"
     },
     {
-      "date": "2014-08-03",
+      "year": 2014,
       "airline": "SWA",
       "flight": "365",
       "from": "LAX",
-      "to": "ABQ",
-      "aircraftType": "Boeing 737-700",
-      "departureScheduled": "2014-08-03T10:40",
-      "departureActual": "2014-08-03T10:41",
-      "arrivalScheduled": "2014-08-03T13:25",
-      "arrivalActual": "2014-08-03T13:29"
+      "to": "ABQ"
     },
     {
-      "date": "2014-08-13",
+      "year": 2014,
       "airline": "SWA",
       "flight": "4389",
       "from": "ABQ",
-      "to": "LAX",
-      "aircraftType": null,
-      "departureScheduled": "2014-08-13T19:10",
-      "departureActual": "2014-08-13T19:08",
-      "arrivalScheduled": "2014-08-13T20:10",
-      "arrivalActual": "2014-08-13T19:55"
+      "to": "LAX"
     },
     {
-      "date": "2015-05-07",
+      "year": 2015,
       "airline": "SWA",
       "flight": "734",
       "from": "LAX",
-      "to": "ABQ",
-      "aircraftType": "Boeing 737-700",
-      "departureScheduled": "2015-05-07T22:00",
-      "departureActual": "2015-05-07T22:24",
-      "arrivalScheduled": "2015-05-08T00:45",
-      "arrivalActual": "2015-05-08T01:02"
+      "to": "ABQ"
     },
     {
-      "date": "2015-05-09",
+      "year": 2015,
       "airline": "SWA",
       "flight": "1891",
       "from": "ABQ",
-      "to": "LAS",
-      "aircraftType": "Boeing 737-700",
-      "departureScheduled": "2015-05-09T17:25",
-      "departureActual": "2015-05-09T17:26",
-      "arrivalScheduled": "2015-05-09T18:00",
-      "arrivalActual": "2015-05-09T17:58"
+      "to": "LAS"
     },
     {
-      "date": "2015-05-09",
+      "year": 2015,
       "airline": "SWA",
       "flight": "2026",
       "from": "LAS",
-      "to": "LAX",
-      "aircraftType": "Boeing 737-300",
-      "departureScheduled": "2015-05-09T19:10",
-      "departureActual": "2015-05-09T19:14",
-      "arrivalScheduled": "2015-05-09T20:15",
-      "arrivalActual": "2015-05-09T20:24"
+      "to": "LAX"
     },
     {
-      "date": "2015-06-12",
+      "year": 2015,
       "airline": "SWA",
       "flight": "4084",
       "from": "LAX",
-      "to": "ABQ",
-      "aircraftType": "Boeing 737-700",
-      "departureScheduled": "2015-06-12T13:25",
-      "departureActual": "2015-06-12T14:14",
-      "arrivalScheduled": "2015-06-12T16:15",
-      "arrivalActual": "2015-06-12T17:01"
+      "to": "ABQ"
     },
     {
-      "date": "2015-06-16",
+      "year": 2015,
       "airline": "SWA",
       "flight": "4821",
       "from": "ABQ",
-      "to": "LAX",
-      "aircraftType": "Boeing 737-700",
-      "departureScheduled": "2015-06-16T17:25",
-      "departureActual": "2015-06-16T18:30",
-      "arrivalScheduled": "2015-06-16T18:20",
-      "arrivalActual": "2015-06-16T19:30"
+      "to": "LAX"
     },
     {
-      "date": "2016-01-06",
+      "year": 2016,
       "airline": "SWA",
       "flight": "2673",
       "from": "SNA",
-      "to": "PHX",
-      "aircraftType": "Boeing 737-800",
-      "departureScheduled": "2016-01-06T14:05",
-      "departureActual": "2016-01-06T14:12",
-      "arrivalScheduled": "2016-01-06T16:15",
-      "arrivalActual": "2016-01-06T16:21"
+      "to": "PHX"
     },
     {
-      "date": "2016-01-10",
+      "year": 2016,
       "airline": "SWA",
       "flight": "1915",
       "from": "PHX",
-      "to": "SNA",
-      "aircraftType": "Boeing 737-700",
-      "departureScheduled": "2016-01-10T12:05",
-      "departureActual": "2016-01-10T12:00",
-      "arrivalScheduled": "2016-01-10T12:20",
-      "arrivalActual": "2016-01-10T12:26"
+      "to": "SNA"
     },
     {
-      "date": "2016-02-11",
+      "year": 2016,
       "airline": "SWA",
       "flight": "267",
       "from": "LAX",
-      "to": "SJC",
-      "aircraftType": "Boeing 737-700",
-      "departureScheduled": "2016-02-11T11:20",
-      "departureActual": "2016-02-11T11:18",
-      "arrivalScheduled": "2016-02-11T12:25",
-      "arrivalActual": "2016-02-11T12:22"
+      "to": "SJC"
     },
     {
-      "date": "2016-06-04",
+      "year": 2016,
       "airline": "SWA",
       "flight": "2999",
       "from": "LAX",
-      "to": "ABQ",
-      "aircraftType": "Boeing 737-700",
-      "departureScheduled": "2016-06-04T16:00",
-      "departureActual": "2016-06-04T16:11",
-      "arrivalScheduled": "2016-06-04T18:45",
-      "arrivalActual": "2016-06-04T19:02"
+      "to": "ABQ"
     },
     {
-      "date": "2016-06-10",
+      "year": 2016,
       "airline": "SWA",
       "flight": "2386",
       "from": "ABQ",
-      "to": "PHX",
-      "aircraftType": "Boeing 737-300",
-      "departureScheduled": "2016-06-10T17:10",
-      "departureActual": "2016-06-10T18:35",
-      "arrivalScheduled": "2016-06-10T17:20",
-      "arrivalActual": "2016-06-10T19:23"
+      "to": "PHX"
     },
     {
-      "date": "2016-06-10",
+      "year": 2016,
       "airline": "SWA",
       "flight": "604",
       "from": "PHX",
-      "to": "LAX",
-      "aircraftType": "Boeing 737-700",
-      "departureScheduled": "2016-06-10T18:35",
-      "departureActual": "2016-06-10T18:40",
-      "arrivalScheduled": "2016-06-10T19:50",
-      "arrivalActual": "2016-06-10T19:58"
+      "to": "LAX"
     },
     {
-      "date": "2016-07-03",
+      "year": 2016,
       "airline": "SWA",
       "flight": "494",
       "from": "LAX",
-      "to": "PHX",
-      "aircraftType": "Boeing 737-700",
-      "departureScheduled": "2016-07-03T11:15",
-      "departureActual": "2016-07-03T11:18",
-      "arrivalScheduled": "2016-07-03T12:35",
-      "arrivalActual": "2016-07-03T12:35"
+      "to": "PHX"
     },
     {
-      "date": "2016-07-03",
+      "year": 2016,
       "airline": "SWA",
       "flight": "6728",
       "from": "PHX",
-      "to": "ABQ",
-      "aircraftType": "Boeing 737-700",
-      "departureScheduled": "2016-07-03T14:30",
-      "departureActual": "2016-07-03T14:29",
-      "arrivalScheduled": "2016-07-03T16:35",
-      "arrivalActual": "2016-07-03T16:27"
+      "to": "ABQ"
     },
     {
-      "date": "2016-07-08",
+      "year": 2016,
       "airline": "SWA",
       "flight": "1545",
       "from": "ABQ",
-      "to": "LAX",
-      "aircraftType": "Boeing 737-700",
-      "departureScheduled": "2016-07-08T20:40",
-      "departureActual": "2016-07-08T21:41",
-      "arrivalScheduled": "2016-07-08T21:30",
-      "arrivalActual": "2016-07-08T22:46"
+      "to": "LAX"
     },
     {
-      "date": "2016-07-23",
+      "year": 2016,
       "airline": "UAL",
       "flight": "1878",
       "from": "LAX",
-      "to": "BOS",
-      "aircraftType": "Boeing 737-800",
-      "departureScheduled": "2016-07-23T20:30",
-      "departureActual": "2016-07-23T20:42",
-      "arrivalScheduled": "2016-07-24T05:04",
-      "arrivalActual": "2016-07-24T05:10"
+      "to": "BOS"
     },
     {
-      "date": "2016-08-07",
+      "year": 2016,
       "airline": "DAL",
       "flight": "427",
       "from": "JFK",
-      "to": "LAX",
-      "aircraftType": "Boeing 757-200",
-      "departureScheduled": "2016-08-07T21:40",
-      "departureActual": "2016-08-07T21:51",
-      "arrivalScheduled": "2016-08-08T01:03",
-      "arrivalActual": "2016-08-08T01:10"
+      "to": "LAX"
     },
     {
-      "date": "2017-01-05",
+      "year": 2017,
       "airline": "SWA",
       "flight": "416",
       "from": "LAX",
-      "to": "ABQ",
-      "aircraftType": "Boeing 737-700",
-      "departureScheduled": "2017-01-05T08:30",
-      "departureActual": "2017-01-05T08:47",
-      "arrivalScheduled": "2017-01-05T11:15",
-      "arrivalActual": "2017-01-05T11:27"
+      "to": "ABQ"
     },
     {
-      "date": "2017-01-08",
+      "year": 2017,
       "airline": "SWA",
       "flight": "2750",
       "from": "ABQ",
-      "to": "LAX",
-      "aircraftType": "Boeing 737-700",
-      "departureScheduled": "2017-01-08T17:35",
-      "departureActual": "2017-01-08T18:00",
-      "arrivalScheduled": "2017-01-08T18:35",
-      "arrivalActual": "2017-01-08T19:08"
+      "to": "LAX"
     },
     {
-      "date": "2017-02-16",
+      "year": 2017,
       "airline": "SWA",
       "flight": "4767",
       "from": "LAX",
-      "to": "SJC",
-      "aircraftType": "Boeing 737-700",
-      "departureScheduled": "2017-02-16T12:15",
-      "departureActual": "2017-02-16T12:13",
-      "arrivalScheduled": "2017-02-16T13:25",
-      "arrivalActual": "2017-02-16T13:28"
+      "to": "SJC"
     },
     {
-      "date": "2017-04-05",
+      "year": 2017,
       "airline": "AAL",
       "flight": "2507",
       "from": "LAX",
-      "to": "BOS",
-      "aircraftType": "Boeing 737-800",
-      "departureScheduled": "2017-04-05T22:30",
-      "departureActual": "2017-04-05T22:32",
-      "arrivalScheduled": "2017-04-06T07:12",
-      "arrivalActual": "2017-04-06T07:01"
+      "to": "BOS"
     },
     {
-      "date": "2017-04-09",
+      "year": 2017,
       "airline": "AAL",
       "flight": "147",
       "from": "BOS",
-      "to": "LAX",
-      "aircraftType": "Boeing 737-800",
-      "departureScheduled": "2017-04-09T14:55",
-      "departureActual": "2017-04-09T14:51",
-      "arrivalScheduled": "2017-04-09T18:27",
-      "arrivalActual": "2017-04-09T18:04"
+      "to": "LAX"
     },
     {
-      "date": "2017-05-31",
+      "year": 2017,
       "airline": "DAL",
       "flight": "1719",
       "from": "LAX",
-      "to": "HNL",
-      "aircraftType": "Boeing 737-900ER",
-      "departureScheduled": "2017-05-31T10:25",
-      "departureActual": "2017-05-31T10:26",
-      "arrivalScheduled": "2017-05-31T13:17",
-      "arrivalActual": "2017-05-31T13:07"
+      "to": "HNL"
     },
     {
-      "date": "2017-06-06",
+      "year": 2017,
       "airline": "DAL",
       "flight": "1283",
       "from": "HNL",
-      "to": "LAX",
-      "aircraftType": "Boeing 767-300",
-      "departureScheduled": "2017-06-06T10:48",
-      "departureActual": "2017-06-06T10:45",
-      "arrivalScheduled": "2017-06-06T19:20",
-      "arrivalActual": "2017-06-06T19:17"
+      "to": "LAX"
     },
     {
-      "date": "2017-06-21",
+      "year": 2017,
       "airline": "KAL",
       "flight": "18",
       "from": "LAX",
-      "to": "ICN",
-      "aircraftType": "Boeing 747-8",
-      "departureScheduled": "2017-06-21T12:40",
-      "departureActual": "2017-06-21T12:53",
-      "arrivalScheduled": "2017-06-22T17:50",
-      "arrivalActual": "2017-06-22T17:42"
+      "to": "ICN"
     },
     {
-      "date": "2017-07-10",
+      "year": 2017,
       "airline": "KAL",
       "flight": "2707",
       "from": "GMP",
-      "to": "HND",
-      "aircraftType": "Boeing 777-300",
-      "departureScheduled": "2017-07-10T09:00",
-      "departureActual": "2017-07-10T09:03",
-      "arrivalScheduled": "2017-07-10T11:05",
-      "arrivalActual": "2017-07-10T11:14"
+      "to": "HND"
     },
     {
-      "date": "2017-07-14",
+      "year": 2017,
       "airline": "SIA",
       "flight": "12",
       "from": "NRT",
-      "to": "LAX",
-      "aircraftType": "Boeing 777-300 ER",
-      "departureScheduled": "2017-07-14T19:15",
-      "departureActual": "2017-07-14T19:37",
-      "arrivalScheduled": "2017-07-14T13:25",
-      "arrivalActual": "2017-07-14T13:34"
+      "to": "LAX"
     },
     {
-      "date": "2017-08-22",
+      "year": 2017,
       "airline": "JBU",
       "flight": "504",
       "from": "LGB",
-      "to": "BOS",
-      "aircraftType": "Airbus A320",
-      "departureScheduled": "2017-08-22T21:35",
-      "departureActual": "2017-08-22T21:23",
-      "arrivalScheduled": "2017-08-23T05:58",
-      "arrivalActual": "2017-08-23T05:21"
+      "to": "BOS"
     },
     {
-      "date": "2017-12-20",
+      "year": 2017,
       "airline": "UAL",
       "flight": "593",
       "from": "BOS",
-      "to": "DEN",
-      "aircraftType": "Boeing 737-900ER",
-      "departureScheduled": "2017-12-20T18:15",
-      "departureActual": "2017-12-20T18:21",
-      "arrivalScheduled": "2017-12-20T21:05",
-      "arrivalActual": "2017-12-20T21:01"
+      "to": "DEN"
     },
     {
-      "date": "2017-12-20",
+      "year": 2017,
       "airline": "UAL",
       "flight": "815",
       "from": "DEN",
-      "to": "LAX",
-      "aircraftType": "Boeing 757-300",
-      "departureScheduled": "2017-12-20T22:51",
-      "departureActual": "2017-12-20T23:11",
-      "arrivalScheduled": "2017-12-21T00:30",
-      "arrivalActual": "2017-12-21T00:49"
+      "to": "LAX"
     },
     {
-      "date": "2018-01-06",
+      "year": 2018,
       "airline": "AAL",
       "flight": "1098",
       "from": "LAX",
-      "to": "BOS",
-      "aircraftType": "Airbus A321",
-      "departureScheduled": "2018-01-06T21:05",
-      "departureActual": "2018-01-06T21:20",
-      "arrivalScheduled": "2018-01-07T05:28",
-      "arrivalActual": "2018-01-07T05:26"
+      "to": "BOS"
     },
     {
-      "date": "2018-03-25",
+      "year": 2018,
       "airline": "NKS",
       "flight": "609",
       "from": "BOS",
-      "to": "FLL",
-      "aircraftType": "Airbus A321",
-      "departureScheduled": "2018-03-25T11:02",
-      "departureActual": "2018-03-25T10:54",
-      "arrivalScheduled": "2018-03-25T14:36",
-      "arrivalActual": "2018-03-25T14:00"
+      "to": "FLL"
     },
     {
-      "date": "2018-03-29",
+      "year": 2018,
       "airline": "NKS",
       "flight": "616",
       "from": "FLL",
-      "to": "BOS",
-      "aircraftType": "Airbus A321",
-      "departureScheduled": "2018-03-29T15:36",
-      "departureActual": "2018-03-29T15:46",
-      "arrivalScheduled": "2018-03-29T18:56",
-      "arrivalActual": "2018-03-29T18:53"
+      "to": "BOS"
     },
     {
-      "date": "2018-05-25",
+      "year": 2018,
       "airline": "AAL",
       "flight": "305",
       "from": "BOS",
-      "to": "LAX",
-      "aircraftType": "Boeing 737-800",
-      "departureScheduled": "2018-05-25T18:29",
-      "departureActual": "2018-05-25T18:22",
-      "arrivalScheduled": "2018-05-25T22:10",
-      "arrivalActual": "2018-05-25T21:59"
+      "to": "LAX"
     },
     {
-      "date": "2018-05-30",
+      "year": 2018,
       "airline": "SWA",
       "flight": "106",
       "from": "LAX",
-      "to": "ABQ",
-      "aircraftType": "Boeing 737-700",
-      "departureScheduled": "2018-05-30T09:00",
-      "departureActual": "2018-05-30T09:29",
-      "arrivalScheduled": "2018-05-30T12:05",
-      "arrivalActual": "2018-05-30T12:09"
+      "to": "ABQ"
     },
     {
-      "date": "2018-06-01",
+      "year": 2018,
       "airline": "SWA",
       "flight": "756",
       "from": "ABQ",
-      "to": "LAX",
-      "aircraftType": "Boeing 737-800",
-      "departureScheduled": "2018-06-01T20:15",
-      "departureActual": "2018-06-01T20:14",
-      "arrivalScheduled": "2018-06-01T21:20",
-      "arrivalActual": "2018-06-01T21:20"
+      "to": "LAX"
     },
     {
-      "date": "2018-06-06",
+      "year": 2018,
       "airline": "HAL",
       "flight": "3",
       "from": "LAX",
-      "to": "HNL",
-      "aircraftType": "Airbus A330-200",
-      "departureScheduled": "2018-06-06T10:00",
-      "departureActual": "2018-06-06T09:52",
-      "arrivalScheduled": "2018-06-06T13:05",
-      "arrivalActual": "2018-06-06T12:24"
+      "to": "HNL"
     },
     {
-      "date": "2018-06-06",
+      "year": 2018,
       "airline": "HAL",
       "flight": "459",
       "from": "HNL",
-      "to": "ICN",
-      "aircraftType": "Airbus A330-200",
-      "departureScheduled": "2018-06-06T14:35",
-      "departureActual": "2018-06-06T14:58",
-      "arrivalScheduled": "2018-06-07T20:00",
-      "arrivalActual": "2018-06-07T20:34"
+      "to": "ICN"
     },
     {
-      "date": "2018-07-21",
+      "year": 2018,
       "airline": "APJ",
       "flight": "12",
       "from": "ICN",
-      "to": "KIX",
-      "aircraftType": "Airbus A320",
-      "departureScheduled": "2018-07-21T07:30",
-      "departureActual": null,
-      "arrivalScheduled": "2018-07-21T09:15",
-      "arrivalActual": "2018-07-21T11:34"
+      "to": "KIX"
     },
     {
-      "date": "2018-07-22",
+      "year": 2018,
       "airline": "APJ",
       "flight": "11",
       "from": "KIX",
-      "to": "ICN",
-      "aircraftType": "Airbus A320",
-      "departureScheduled": "2018-07-22T20:00",
-      "departureActual": "2018-07-22T20:02",
-      "arrivalScheduled": "2018-07-22T21:50",
-      "arrivalActual": null
+      "to": "ICN"
     },
     {
-      "date": "2018-08-25",
+      "year": 2018,
       "airline": "CCA",
       "flight": "138",
       "from": "GMP",
-      "to": "PEK",
-      "aircraftType": "Boeing 737-800",
-      "departureScheduled": "2018-08-25T09:25",
-      "departureActual": null,
-      "arrivalScheduled": "2018-08-25T11:00",
-      "arrivalActual": "2018-08-25T10:42"
+      "to": "PEK"
     },
     {
-      "date": "2018-08-25",
+      "year": 2018,
       "airline": "CCA",
       "flight": "911",
       "from": "PEK",
-      "to": "ARN",
-      "aircraftType": "Airbus A330-300",
-      "departureScheduled": "2018-08-25T13:50",
-      "departureActual": "2018-08-25T13:41",
-      "arrivalScheduled": "2018-08-25T17:20",
-      "arrivalActual": "2018-08-25T16:48"
+      "to": "ARN"
     },
     {
-      "date": "2018-08-28",
+      "year": 2018,
       "airline": "ICE",
       "flight": "307",
       "from": "ARN",
-      "to": "KEF",
-      "aircraftType": "Boeing 757-200",
-      "departureScheduled": "2018-08-28T14:20",
-      "departureActual": "2018-08-28T14:40",
-      "arrivalScheduled": "2018-08-28T15:30",
-      "arrivalActual": "2018-08-28T15:57"
+      "to": "KEF"
     },
     {
-      "date": "2018-08-31",
+      "year": 2018,
       "airline": "ICE",
       "flight": "631",
       "from": "KEF",
-      "to": "BOS",
-      "aircraftType": "Boeing 757-300",
-      "departureScheduled": "2018-08-31T17:20",
-      "departureActual": "2018-08-31T17:35",
-      "arrivalScheduled": "2018-08-31T18:55",
-      "arrivalActual": "2018-08-31T19:07"
+      "to": "BOS"
     },
     {
-      "date": "2018-09-14",
+      "year": 2018,
       "airline": "POE",
       "flight": "938",
       "from": "BOS",
-      "to": "YTZ",
-      "aircraftType": "DHC-8-400 Dash 8Q",
-      "departureScheduled": "2018-09-14T09:20",
-      "departureActual": "2018-09-14T09:20",
-      "arrivalScheduled": "2018-09-14T11:19",
-      "arrivalActual": "2018-09-14T10:48"
+      "to": "YTZ"
     },
     {
-      "date": "2018-11-21",
+      "year": 2018,
       "airline": "UAL",
       "flight": "717",
       "from": "BOS",
-      "to": "LAX",
-      "aircraftType": "Boeing 747-100",
-      "departureScheduled": "2018-11-21T17:50",
-      "departureActual": "2018-11-21T18:05",
-      "arrivalScheduled": "2018-11-21T21:25",
-      "arrivalActual": "2018-11-21T21:48"
+      "to": "LAX"
     },
     {
-      "date": "2018-11-26",
+      "year": 2018,
       "airline": "UAL",
       "flight": "2402",
       "from": "LAX",
-      "to": "BOS",
-      "aircraftType": "Boeing 757-200",
-      "departureScheduled": "2018-11-26T22:39",
-      "departureActual": "2018-11-26T23:30",
-      "arrivalScheduled": "2018-11-27T07:03",
-      "arrivalActual": "2018-11-27T07:52"
+      "to": "BOS"
     },
     {
-      "date": "2018-12-21",
+      "year": 2018,
       "airline": "JBU",
       "flight": "405",
       "from": "BOS",
-      "to": "LGB",
-      "aircraftType": "Airbus A320",
-      "departureScheduled": "2018-12-21T17:10",
-      "departureActual": "2018-12-21T18:16",
-      "arrivalScheduled": "2018-12-21T20:51",
-      "arrivalActual": "2018-12-21T21:28"
+      "to": "LGB"
     },
     {
-      "date": "2019-01-06",
+      "year": 2019,
       "airline": "JBU",
       "flight": "504",
       "from": "LGB",
-      "to": "BOS",
-      "aircraftType": "Airbus A320",
-      "departureScheduled": "2019-01-06T20:40",
-      "departureActual": "2019-01-06T20:38",
-      "arrivalScheduled": "2019-01-07T04:54",
-      "arrivalActual": "2019-01-07T04:35"
+      "to": "BOS"
     },
     {
-      "date": "2019-01-13",
+      "year": 2019,
       "airline": "JBU",
       "flight": "597",
       "from": "BOS",
-      "to": "SEA",
-      "aircraftType": "Airbus A321",
-      "departureScheduled": "2019-01-13T07:06",
-      "departureActual": "2019-01-13T06:57",
-      "arrivalScheduled": "2019-01-13T10:40",
-      "arrivalActual": "2019-01-13T09:59"
+      "to": "SEA"
     },
     {
-      "date": "2019-01-21",
+      "year": 2019,
       "airline": "NOZ",
       "flight": "7742",
       "from": "LAX",
-      "to": "MAD",
-      "aircraftType": "Boeing 787-9",
-      "departureScheduled": "2019-01-21T19:40",
-      "departureActual": "2019-01-21T19:41",
-      "arrivalScheduled": "2019-01-22T15:20",
-      "arrivalActual": "2019-01-22T15:29"
+      "to": "MAD"
     },
     {
-      "date": "2019-01-27",
+      "year": 2019,
       "airline": "VLG",
       "flight": "3965",
       "from": "VLC",
-      "to": "SVQ",
-      "aircraftType": "Airbus A320",
-      "departureScheduled": "2019-01-27T14:40",
-      "departureActual": "2019-01-27T14:32",
-      "arrivalScheduled": "2019-01-27T15:50",
-      "arrivalActual": "2019-01-27T15:33"
+      "to": "SVQ"
     },
     {
-      "date": "2019-01-29",
+      "year": 2019,
       "airline": "RYR",
       "flight": "4008",
       "from": "SVQ",
-      "to": "RAK",
-      "aircraftType": "Boeing 737",
-      "departureScheduled": "2019-01-29T16:45",
-      "departureActual": "2019-01-29T19:10",
-      "arrivalScheduled": "2019-01-29T18:10",
-      "arrivalActual": null
+      "to": "RAK"
     },
     {
-      "date": "2019-02-01",
+      "year": 2019,
       "airline": "MAC",
       "flight": "702",
       "from": "RAK",
-      "to": "FEZ",
-      "aircraftType": "Airbus A320",
-      "departureScheduled": "2019-02-01T15:10",
-      "departureActual": null,
-      "arrivalScheduled": "2019-02-01T16:10",
-      "arrivalActual": null
+      "to": "FEZ"
     },
     {
-      "date": "2019-02-02",
+      "year": 2019,
       "airline": "RYR",
       "flight": "9017",
       "from": "FEZ",
-      "to": "BCN",
-      "aircraftType": "Boeing 737-800",
-      "departureScheduled": "2019-02-02T21:35",
-      "departureActual": null,
-      "arrivalScheduled": "2019-02-02T23:30",
-      "arrivalActual": "2019-02-02T23:30"
+      "to": "BCN"
     },
     {
-      "date": "2019-02-05",
+      "year": 2019,
       "airline": "IBE",
       "flight": "2625",
       "from": "BCN",
-      "to": "BOS",
-      "aircraftType": "Airbus A330-200",
-      "departureScheduled": "2019-02-05T17:45",
-      "departureActual": "2019-02-05T17:45",
-      "arrivalScheduled": "2019-02-05T20:25",
-      "arrivalActual": "2019-02-05T20:34"
+      "to": "BOS"
     },
     {
-      "date": "2019-03-23",
+      "year": 2019,
       "airline": "ACA",
       "flight": "8457",
       "from": "BOS",
-      "to": "YUL",
-      "aircraftType": "Bombardier CRJ900",
-      "departureScheduled": "2019-03-23T10:35",
-      "departureActual": "2019-03-23T11:10",
-      "arrivalScheduled": "2019-03-23T11:54",
-      "arrivalActual": "2019-03-23T12:19"
+      "to": "YUL"
     },
     {
-      "date": "2019-03-23",
+      "year": 2019,
       "airline": "ACA",
       "flight": "11",
       "from": "YUL",
-      "to": "PVG",
-      "aircraftType": "Boeing 787-8",
-      "departureScheduled": "2019-03-23T14:05",
-      "departureActual": "2019-03-23T14:13",
-      "arrivalScheduled": "2019-03-24T16:25",
-      "arrivalActual": "2019-03-24T16:22"
+      "to": "PVG"
     },
     {
-      "date": "2019-04-01",
+      "year": 2019,
       "airline": "ACA",
       "flight": "12",
       "from": "PVG",
-      "to": "YUL",
-      "aircraftType": "Boeing 787-8",
-      "departureScheduled": "2019-04-01T16:50",
-      "departureActual": "2019-04-01T17:27",
-      "arrivalScheduled": "2019-04-01T18:35",
-      "arrivalActual": "2019-04-01T19:01"
+      "to": "YUL"
     },
     {
-      "date": "2019-04-01",
+      "year": 2019,
       "airline": "ACA",
       "flight": "8466",
       "from": "YUL",
-      "to": "BOS",
-      "aircraftType": "Bombardier CRJ200",
-      "departureScheduled": "2019-04-01T20:00",
-      "departureActual": "2019-04-01T19:58",
-      "arrivalScheduled": "2019-04-01T21:17",
-      "arrivalActual": "2019-04-01T21:10"
+      "to": "BOS"
     },
     {
-      "date": "2019-05-23",
+      "year": 2019,
       "airline": "JBU",
       "flight": "405",
       "from": "BOS",
-      "to": "LGB",
-      "aircraftType": "Airbus A320",
-      "departureScheduled": "2019-05-23T17:40",
-      "departureActual": "2019-05-23T17:32",
-      "arrivalScheduled": "2019-05-23T21:00",
-      "arrivalActual": "2019-05-23T21:15"
+      "to": "LGB"
     },
     {
-      "date": "2019-05-28",
+      "year": 2019,
       "airline": "ASA",
       "flight": "1787",
       "from": "LAX",
-      "to": "SEA",
-      "aircraftType": "Airbus A320",
-      "departureScheduled": "2019-05-28T10:55",
-      "departureActual": "2019-05-28T11:01",
-      "arrivalScheduled": "2019-05-28T13:50",
-      "arrivalActual": "2019-05-28T14:07"
+      "to": "SEA"
     },
     {
-      "date": "2019-08-24",
+      "year": 2019,
       "airline": "ASA",
       "flight": "2868",
       "from": "PAE",
-      "to": "LAX",
-      "aircraftType": "Embraer 175",
-      "departureScheduled": "2019-08-24T19:10",
-      "departureActual": "2019-08-24T19:01",
-      "arrivalScheduled": "2019-08-24T22:00",
-      "arrivalActual": "2019-08-24T21:46"
+      "to": "LAX"
     },
     {
-      "date": "2019-08-27",
+      "year": 2019,
       "airline": "NKS",
       "flight": "949",
       "from": "LAX",
-      "to": "OAK",
-      "aircraftType": "Airbus A319",
-      "departureScheduled": "2019-08-27T08:45",
-      "departureActual": "2019-08-27T08:39",
-      "arrivalScheduled": "2019-08-27T10:05",
-      "arrivalActual": "2019-08-27T09:59"
+      "to": "OAK"
     },
     {
-      "date": "2019-08-29",
+      "year": 2019,
       "airline": "NKS",
       "flight": "506",
       "from": "OAK",
-      "to": "LAX",
-      "aircraftType": "Airbus A319",
-      "departureScheduled": "2019-08-29T21:22",
-      "departureActual": "2019-08-29T21:18",
-      "arrivalScheduled": "2019-08-29T22:50",
-      "arrivalActual": "2019-08-29T23:14"
+      "to": "LAX"
     },
     {
-      "date": "2019-09-01",
+      "year": 2019,
       "airline": "JBU",
       "flight": "988",
       "from": "LAX",
-      "to": "BOS",
-      "aircraftType": "Airbus A321",
-      "departureScheduled": "2019-09-01T23:50",
-      "departureActual": "2019-09-02T00:16",
-      "arrivalScheduled": "2019-09-02T08:33",
-      "arrivalActual": "2019-09-02T09:16"
+      "to": "BOS"
     },
     {
-      "date": "2019-12-20",
+      "year": 2019,
       "airline": "AAL",
       "flight": "211",
       "from": "BOS",
-      "to": "LAX",
-      "aircraftType": "Airbus A321",
-      "departureScheduled": "2019-12-20T06:10",
-      "departureActual": "2019-12-20T06:11",
-      "arrivalScheduled": "2019-12-20T10:08",
-      "arrivalActual": "2019-12-20T09:27"
+      "to": "LAX"
     },
     {
-      "date": "2020-02-01",
+      "year": 2020,
       "airline": "JBU",
       "flight": "504",
       "from": "LGB",
-      "to": "BOS",
-      "aircraftType": "Airbus A320",
-      "departureScheduled": "2020-02-01T19:31",
-      "departureActual": "2020-02-01T19:24",
-      "arrivalScheduled": "2020-02-02T03:44",
-      "arrivalActual": "2020-02-02T03:35"
+      "to": "BOS"
     },
     {
-      "date": "2020-03-14",
+      "year": 2020,
       "airline": "JBU",
       "flight": "405",
       "from": "BOS",
-      "to": "LGB",
-      "aircraftType": "Airbus A320",
-      "departureScheduled": "2020-03-14T17:21",
-      "departureActual": "2020-03-14T17:14",
-      "arrivalScheduled": "2020-03-14T20:59",
-      "arrivalActual": "2020-03-14T21:07"
+      "to": "LGB"
     },
     {
-      "date": "2020-12-12",
+      "year": 2020,
       "airline": "JBU",
       "flight": "687",
       "from": "BOS",
-      "to": "LAX",
-      "aircraftType": "Airbus A321",
-      "departureScheduled": "2020-12-12T15:50",
-      "departureActual": "2020-12-12T15:46",
-      "arrivalScheduled": "2020-12-12T19:10",
-      "arrivalActual": "2020-12-12T18:59"
+      "to": "LAX"
     },
     {
-      "date": "2021-01-23",
+      "year": 2021,
       "airline": "JBU",
       "flight": "888",
       "from": "LAX",
-      "to": "BOS",
-      "aircraftType": "Airbus A321",
-      "departureScheduled": "2021-01-23T23:25",
-      "departureActual": "2021-01-23T23:20",
-      "arrivalScheduled": null,
-      "arrivalActual": "2021-01-24T07:11"
+      "to": "BOS"
     },
     {
-      "date": "2021-05-22",
+      "year": 2021,
       "airline": "DAL",
       "flight": "1604",
       "from": "BOS",
-      "to": "MIA",
-      "aircraftType": "Airbus A320",
-      "departureScheduled": "2021-05-22T15:47",
-      "departureActual": "2021-05-22T15:43",
-      "arrivalScheduled": "2021-05-22T19:15",
-      "arrivalActual": "2021-05-22T18:34"
+      "to": "MIA"
     },
     {
-      "date": "2021-05-27",
+      "year": 2021,
       "airline": "DAL",
       "flight": "1176",
       "from": "MIA",
-      "to": "BOS",
-      "aircraftType": "Airbus A320",
-      "departureScheduled": "2021-05-27T20:30",
-      "departureActual": "2021-05-27T20:24",
-      "arrivalScheduled": "2021-05-27T23:48",
-      "arrivalActual": "2021-05-27T23:25"
+      "to": "BOS"
     },
     {
-      "date": "2021-06-05",
+      "year": 2021,
       "airline": "JBU",
       "flight": "187",
       "from": "BOS",
-      "to": "LAX",
-      "aircraftType": "Airbus A321",
-      "departureScheduled": "2021-06-05T18:00",
-      "departureActual": "2021-06-05T17:52",
-      "arrivalScheduled": null,
-      "arrivalActual": "2021-06-05T20:38"
+      "to": "LAX"
     },
     {
-      "date": "2021-06-09",
+      "year": 2021,
       "airline": "ACA",
       "flight": "553",
       "from": "LAX",
-      "to": "YVR",
-      "aircraftType": "Boeing 737 MAX 8",
-      "departureScheduled": "2021-06-09T08:40",
-      "departureActual": "2021-06-09T08:55",
-      "arrivalScheduled": null,
-      "arrivalActual": "2021-06-09T11:38"
+      "to": "YVR"
     },
     {
-      "date": "2021-06-09",
+      "year": 2021,
       "airline": "ACA",
       "flight": "63",
       "from": "YVR",
-      "to": "ICN",
-      "aircraftType": "Boeing 787-9",
-      "departureScheduled": "2021-06-09T13:05",
-      "departureActual": "2021-06-09T13:08",
-      "arrivalScheduled": null,
-      "arrivalActual": "2021-06-10T15:37"
+      "to": "ICN"
     },
     {
-      "date": "2021-06-28",
+      "year": 2021,
       "airline": "AAR",
       "flight": "8927",
       "from": "GMP",
-      "to": "CJU",
-      "aircraftType": "Airbus A321",
-      "departureScheduled": "2021-06-28T09:50",
-      "departureActual": "2021-06-28T09:57",
-      "arrivalScheduled": null,
-      "arrivalActual": "2021-06-28T11:08"
+      "to": "CJU"
     },
     {
-      "date": "2021-07-01",
+      "year": 2021,
       "airline": "AAR",
       "flight": "8972",
       "from": "CJU",
-      "to": "GMP",
-      "aircraftType": "Airbus A330-300",
-      "departureScheduled": "2021-07-01T17:40",
-      "departureActual": "2021-07-01T17:38",
-      "arrivalScheduled": null,
-      "arrivalActual": "2021-07-01T18:46"
+      "to": "GMP"
     },
     {
-      "date": "2021-07-08",
+      "year": 2021,
       "airline": "ACA",
       "flight": "64",
       "from": "ICN",
-      "to": "YVR",
-      "aircraftType": "Boeing 787-9",
-      "departureScheduled": "2021-07-08T17:50",
-      "departureActual": "2021-07-08T17:49",
-      "arrivalScheduled": null,
-      "arrivalActual": "2021-07-08T11:25"
+      "to": "YVR"
     },
     {
-      "date": "2021-07-08",
+      "year": 2021,
       "airline": "ACA",
       "flight": "556",
       "from": "YVR",
-      "to": "LAX",
-      "aircraftType": "Boeing 737 MAX 8",
-      "departureScheduled": "2021-07-08T13:45",
-      "departureActual": "2021-07-08T14:24",
-      "arrivalScheduled": null,
-      "arrivalActual": "2021-07-08T17:22"
+      "to": "LAX"
     },
     {
-      "date": "2021-07-20",
+      "year": 2021,
       "airline": "AAL",
       "flight": "1292",
       "from": "LAX",
-      "to": "BNA",
-      "aircraftType": "Airbus A321",
-      "departureScheduled": "2021-07-20T23:55",
-      "departureActual": "2021-07-20T23:50",
-      "arrivalScheduled": "2021-07-21T06:04",
-      "arrivalActual": "2021-07-21T06:07"
+      "to": "BNA"
     },
     {
-      "date": "2021-07-21",
+      "year": 2021,
       "airline": "AAL",
       "flight": "4727",
       "from": "BNA",
-      "to": "LGA",
-      "aircraftType": "Embraer 175",
-      "departureScheduled": "2021-07-21T07:10",
-      "departureActual": "2021-07-21T07:01",
-      "arrivalScheduled": "2021-07-21T10:27",
-      "arrivalActual": "2021-07-21T10:18"
+      "to": "LGA"
     },
     {
-      "date": "2021-08-04",
+      "year": 2021,
       "airline": "ASA",
       "flight": "221",
       "from": "JFK",
-      "to": "SEA",
-      "aircraftType": "Airbus A321neo",
-      "departureScheduled": "2021-08-04T17:55",
-      "departureActual": "2021-08-04T17:47",
-      "arrivalScheduled": "2021-08-04T21:15",
-      "arrivalActual": "2021-08-04T20:41"
+      "to": "SEA"
     },
     {
-      "date": "2021-08-09",
+      "year": 2021,
       "airline": "ASA",
       "flight": "2310",
       "from": "SEA",
-      "to": "BZN",
-      "aircraftType": "DHC-8-400 Dash 8Q",
-      "departureScheduled": "2021-08-09T07:58",
-      "departureActual": "2021-08-09T07:56",
-      "arrivalScheduled": "2021-08-09T10:51",
-      "arrivalActual": "2021-08-09T10:45"
+      "to": "BZN"
     },
     {
-      "date": "2021-08-14",
+      "year": 2021,
       "airline": "DAL",
       "flight": "4016",
       "from": "BZN",
-      "to": "LAX",
-      "aircraftType": "Embraer 175",
-      "departureScheduled": "2021-08-14T16:08",
-      "departureActual": "2021-08-14T15:58",
-      "arrivalScheduled": "2021-08-14T17:42",
-      "arrivalActual": "2021-08-14T17:42"
+      "to": "LAX"
     },
     {
-      "date": "2021-08-29",
+      "year": 2021,
       "airline": "UAL",
       "flight": "2283",
       "from": "LAX",
-      "to": "DEN",
-      "aircraftType": "Airbus A320",
-      "departureScheduled": "2021-08-29T18:50",
-      "departureActual": "2021-08-29T18:46",
-      "arrivalScheduled": "2021-08-29T22:07",
-      "arrivalActual": "2021-08-29T21:56"
+      "to": "DEN"
     },
     {
-      "date": "2021-08-29",
+      "year": 2021,
       "airline": "UAL",
       "flight": "1638",
       "from": "DEN",
-      "to": "BOS",
-      "aircraftType": "Boeing 737-900ER",
-      "departureScheduled": "2021-08-29T23:55",
-      "departureActual": "2021-08-29T23:52",
-      "arrivalScheduled": "2021-08-30T05:46",
-      "arrivalActual": "2021-08-30T05:36"
+      "to": "BOS"
     },
     {
-      "date": "2021-11-23",
+      "year": 2021,
       "airline": "ACA",
       "flight": "8607",
       "from": "BOS",
-      "to": "YUL",
-      "aircraftType": "Embraer 175",
-      "departureScheduled": "2021-11-23T10:25",
-      "departureActual": "2021-11-23T10:21",
-      "arrivalScheduled": "2021-11-23T11:43",
-      "arrivalActual": "2021-11-23T11:34"
+      "to": "YUL"
     },
     {
-      "date": "2021-11-28",
+      "year": 2021,
       "airline": "ACA",
       "flight": "8608",
       "from": "YUL",
-      "to": "BOS",
-      "aircraftType": "Embraer 175 E2",
-      "departureScheduled": "2021-11-28T13:25",
-      "departureActual": "2021-11-28T13:43",
-      "arrivalScheduled": "2021-11-28T14:45",
-      "arrivalActual": "2021-11-28T14:57"
+      "to": "BOS"
     },
     {
-      "date": "2021-12-14",
+      "year": 2021,
       "airline": "UAL",
       "flight": "1814",
       "from": "BOS",
-      "to": "LAX",
-      "aircraftType": "Boeing 737 MAX 9",
-      "departureScheduled": "2021-12-14T17:56",
-      "departureActual": "2021-12-14T17:59",
-      "arrivalScheduled": "2021-12-14T21:31",
-      "arrivalActual": "2021-12-14T21:20"
+      "to": "LAX"
     },
     {
-      "date": "2022-01-08",
+      "year": 2022,
       "airline": "ASA",
       "flight": "527",
       "from": "SNA",
-      "to": "SEA",
-      "aircraftType": "Boeing 737-800",
-      "departureScheduled": "2022-01-08T08:15",
-      "departureActual": "2022-01-08T08:07",
-      "arrivalScheduled": "2022-01-08T11:15",
-      "arrivalActual": "2022-01-08T11:00"
+      "to": "SEA"
     },
     {
-      "date": "2022-01-12",
+      "year": 2022,
       "airline": "ASA",
       "flight": "1308",
       "from": "SEA",
-      "to": "SJC",
-      "aircraftType": "Airbus A320",
-      "departureScheduled": "2022-01-12T15:59",
-      "departureActual": "2022-01-12T16:14",
-      "arrivalScheduled": "2022-01-12T18:10",
-      "arrivalActual": "2022-01-12T18:38"
+      "to": "SJC"
     },
     {
-      "date": "2022-01-18",
+      "year": 2022,
       "airline": "ASA",
       "flight": "3331",
       "from": "SJC",
-      "to": "LAX",
-      "aircraftType": "Embraer 175",
-      "departureScheduled": "2022-01-18T18:55",
-      "departureActual": "2022-01-18T19:56",
-      "arrivalScheduled": "2022-01-18T20:18",
-      "arrivalActual": "2022-01-18T21:15"
+      "to": "LAX"
     },
     {
-      "date": "2022-01-25",
+      "year": 2022,
       "airline": "UAL",
       "flight": "1882",
       "from": "LAX",
-      "to": "EWR",
-      "aircraftType": "Boeing 787-10",
-      "departureScheduled": "2022-01-25T21:30",
-      "departureActual": "2022-01-25T23:05",
-      "arrivalScheduled": "2022-01-26T05:23",
-      "arrivalActual": "2022-01-26T07:09"
+      "to": "EWR"
     },
     {
-      "date": "2022-01-26",
+      "year": 2022,
       "airline": "UAL",
       "flight": "2266",
       "from": "EWR",
-      "to": "BOS",
-      "aircraftType": "Airbus A320",
-      "departureScheduled": "2022-01-26T06:55",
-      "departureActual": "2022-01-26T06:50",
-      "arrivalScheduled": "2022-01-26T08:09",
-      "arrivalActual": "2022-01-26T07:46"
+      "to": "BOS"
     },
     {
-      "date": "2022-03-20",
+      "year": 2022,
       "airline": "JBU",
       "flight": "1173",
       "from": "BOS",
-      "to": "AUA",
-      "aircraftType": "Airbus A320",
-      "departureScheduled": "2022-03-20T11:32",
-      "departureActual": "2022-03-20T11:29",
-      "arrivalScheduled": null,
-      "arrivalActual": "2022-03-20T16:09"
+      "to": "AUA"
     },
     {
-      "date": "2022-03-23",
+      "year": 2022,
       "airline": "JBU",
       "flight": "74",
       "from": "AUA",
-      "to": "BOS",
-      "aircraftType": "Airbus A321",
-      "departureScheduled": "2022-03-23T13:05",
-      "departureActual": "2022-03-23T13:00",
-      "arrivalScheduled": "2022-03-23T18:07",
-      "arrivalActual": "2022-03-23T17:44"
+      "to": "BOS"
     },
     {
-      "date": "2022-03-23",
+      "year": 2022,
       "airline": "NKS",
       "flight": "1027",
       "from": "BOS",
-      "to": "MSY",
-      "aircraftType": "Airbus A320",
-      "departureScheduled": "2022-03-23T21:15",
-      "departureActual": "2022-03-23T21:07",
-      "arrivalScheduled": "2022-03-23T23:55",
-      "arrivalActual": "2022-03-24T00:43"
+      "to": "MSY"
     },
     {
-      "date": "2022-03-26",
+      "year": 2022,
       "airline": "DAL",
       "flight": "875",
       "from": "MSY",
-      "to": "ATL",
-      "aircraftType": "Boeing 757-200",
-      "departureScheduled": "2022-03-26T05:30",
-      "departureActual": "2022-03-26T05:28",
-      "arrivalScheduled": "2022-03-26T07:56",
-      "arrivalActual": "2022-03-26T07:46"
+      "to": "ATL"
     },
     {
-      "date": "2022-03-26",
+      "year": 2022,
       "airline": "DAL",
       "flight": "415",
       "from": "ATL",
-      "to": "BOS",
-      "aircraftType": "Airbus A321",
-      "departureScheduled": "2022-03-26T08:40",
-      "departureActual": "2022-03-26T08:48",
-      "arrivalScheduled": "2022-03-26T11:16",
-      "arrivalActual": "2022-03-26T11:12"
+      "to": "BOS"
     },
     {
-      "date": "2022-05-04",
+      "year": 2022,
       "airline": "NKS",
       "flight": "641",
       "from": "BOS",
-      "to": "LAS",
-      "aircraftType": "Airbus A319",
-      "departureScheduled": "2022-05-04T18:15",
-      "departureActual": "2022-05-04T19:29",
-      "arrivalScheduled": "2022-05-04T21:05",
-      "arrivalActual": "2022-05-04T21:44"
+      "to": "LAS"
     },
     {
-      "date": "2022-05-07",
+      "year": 2022,
       "airline": "NKS",
       "flight": "640",
       "from": "LAS",
-      "to": "BOS",
-      "aircraftType": "Airbus A319",
-      "departureScheduled": "2022-05-07T23:15",
-      "departureActual": "2022-05-07T23:11",
-      "arrivalScheduled": "2022-05-08T07:10",
-      "arrivalActual": "2022-05-08T07:19"
+      "to": "BOS"
     },
     {
-      "date": "2022-06-25",
+      "year": 2022,
       "airline": "AAL",
       "flight": "4552",
       "from": "BOS",
-      "to": "YYZ",
-      "aircraftType": "Embraer 175",
-      "departureScheduled": "2022-06-25T07:54",
-      "departureActual": "2022-06-25T07:49",
-      "arrivalScheduled": "2022-06-25T09:45",
-      "arrivalActual": "2022-06-25T09:37"
+      "to": "YYZ"
     },
     {
-      "date": "2022-06-27",
+      "year": 2022,
       "airline": "AAL",
       "flight": "1398",
       "from": "BUF",
-      "to": "ORD",
-      "aircraftType": "Airbus A319",
-      "departureScheduled": "2022-06-27T18:38",
-      "departureActual": "2022-06-27T18:36",
-      "arrivalScheduled": "2022-06-27T19:29",
-      "arrivalActual": "2022-06-27T19:32"
+      "to": "ORD"
     },
     {
-      "date": "2022-07-01",
+      "year": 2022,
       "airline": "AAL",
       "flight": "1172",
       "from": "ORD",
-      "to": "BOS",
-      "aircraftType": "Boeing 737 MAX 8",
-      "departureScheduled": "2022-07-01T18:45",
-      "departureActual": "2022-07-01T19:27",
-      "arrivalScheduled": "2022-07-01T22:00",
-      "arrivalActual": "2022-07-01T22:50"
+      "to": "BOS"
     },
     {
-      "date": "2022-07-02",
+      "year": 2022,
       "airline": "DAL",
       "flight": "5727",
       "from": "BOS",
-      "to": "LGA",
-      "aircraftType": "Embraer 175",
-      "departureScheduled": "2022-07-02T08:00",
-      "departureActual": "2022-07-02T07:52",
-      "arrivalScheduled": "2022-07-02T09:33",
-      "arrivalActual": "2022-07-02T09:11"
+      "to": "LGA"
     },
     {
-      "date": "2022-07-04",
+      "year": 2022,
       "airline": "DAL",
       "flight": "2440",
       "from": "LGA",
-      "to": "BOS",
-      "aircraftType": "Airbus A220-100",
-      "departureScheduled": "2022-07-04T21:59",
-      "departureActual": "2022-07-04T22:13",
-      "arrivalScheduled": "2022-07-04T23:16",
-      "arrivalActual": "2022-07-04T23:16"
+      "to": "BOS"
     },
     {
-      "date": "2022-07-15",
+      "year": 2022,
       "airline": "DAL",
       "flight": "5798",
       "from": "BOS",
-      "to": "DCA",
-      "aircraftType": "Embraer 175",
-      "departureScheduled": "2022-07-15T21:00",
-      "departureActual": "2022-07-15T22:06",
-      "arrivalScheduled": "2022-07-15T22:39",
-      "arrivalActual": "2022-07-16T00:43"
+      "to": "DCA"
     },
     {
-      "date": "2022-07-18",
+      "year": 2022,
       "airline": "DAL",
       "flight": "5597",
       "from": "DCA",
-      "to": "BOS",
-      "aircraftType": "Embraer 175",
-      "departureScheduled": "2022-07-18T17:45",
-      "departureActual": "2022-07-18T19:01",
-      "arrivalScheduled": "2022-07-18T19:32",
-      "arrivalActual": "2022-07-18T21:16"
+      "to": "BOS"
     },
     {
-      "date": "2022-08-02",
+      "year": 2022,
       "airline": "UAL",
       "flight": "333",
       "from": "BOS",
-      "to": "LAX",
-      "aircraftType": "Boeing 737 MAX 9",
-      "departureScheduled": "2022-08-02T18:13",
-      "departureActual": "2022-08-02T18:10",
-      "arrivalScheduled": "2022-08-02T21:28",
-      "arrivalActual": "2022-08-02T21:09"
+      "to": "LAX"
     },
     {
-      "date": "2022-08-12",
+      "year": 2022,
       "airline": "AAR",
       "flight": "203",
       "from": "LAX",
-      "to": "ICN",
-      "aircraftType": "Airbus A350-900",
-      "departureScheduled": "2022-08-12T23:00",
-      "departureActual": "2022-08-12T23:05",
-      "arrivalScheduled": "2022-08-14T04:00",
-      "arrivalActual": "2022-08-14T03:45"
+      "to": "ICN"
     },
     {
-      "date": "2022-09-05",
+      "year": 2022,
       "airline": "ACA",
       "flight": "62",
       "from": "ICN",
-      "to": "YYZ",
-      "aircraftType": "Boeing 787-9",
-      "departureScheduled": "2022-09-05T18:45",
-      "departureActual": "2022-09-05T19:46",
-      "arrivalScheduled": "2022-09-05T18:40",
-      "arrivalActual": "2022-09-05T20:00"
+      "to": "YYZ"
     },
     {
-      "date": "2022-09-06",
+      "year": 2022,
       "airline": "ACA",
       "flight": "8690",
       "from": "YYZ",
-      "to": "BOS",
-      "aircraftType": "Embraer 175",
-      "departureScheduled": "2022-09-06T08:45",
-      "departureActual": "2022-09-06T09:00",
-      "arrivalScheduled": "2022-09-06T10:22",
-      "arrivalActual": "2022-09-06T10:47"
+      "to": "BOS"
     },
     {
-      "date": "2022-10-15",
+      "year": 2022,
       "airline": "DAL",
       "flight": "5724",
       "from": "BOS",
-      "to": "DCA",
-      "aircraftType": "Embraer 175",
-      "departureScheduled": "2022-10-15T08:15",
-      "departureActual": "2022-10-15T08:12",
-      "arrivalScheduled": "2022-10-15T10:13",
-      "arrivalActual": "2022-10-15T10:05"
+      "to": "DCA"
     },
     {
-      "date": "2022-10-18",
+      "year": 2022,
       "airline": "DAL",
       "flight": "5639",
       "from": "DCA",
-      "to": "BOS",
-      "aircraftType": "Embraer 175",
-      "departureScheduled": "2022-10-18T12:59",
-      "departureActual": "2022-10-18T12:51",
-      "arrivalScheduled": "2022-10-18T14:39",
-      "arrivalActual": "2022-10-18T14:37"
+      "to": "BOS"
     },
     {
-      "date": "2022-11-21",
+      "year": 2022,
       "airline": "KLM",
       "flight": "618",
       "from": "BOS",
-      "to": "AMS",
-      "aircraftType": "Airbus A330-200",
-      "departureScheduled": "2022-11-21T22:10",
-      "departureActual": "2022-11-21T22:06",
-      "arrivalScheduled": "2022-11-22T10:50",
-      "arrivalActual": "2022-11-22T10:59"
+      "to": "AMS"
     },
     {
-      "date": "2022-11-26",
+      "year": 2022,
       "airline": "KLM",
       "flight": "617",
       "from": "AMS",
-      "to": "BOS",
-      "aircraftType": "Airbus A330-300",
-      "departureScheduled": "2022-11-26T18:05",
-      "departureActual": "2022-11-26T18:01",
-      "arrivalScheduled": "2022-11-26T20:05",
-      "arrivalActual": "2022-11-26T19:36"
+      "to": "BOS"
     },
     {
-      "date": "2022-12-17",
+      "year": 2022,
       "airline": "UAL",
       "flight": "3505",
       "from": "BOS",
-      "to": "EWR",
-      "aircraftType": "Embraer 175",
-      "departureScheduled": "2022-12-17T18:09",
-      "departureActual": "2022-12-17T18:13",
-      "arrivalScheduled": "2022-12-17T19:44",
-      "arrivalActual": "2022-12-17T19:25"
+      "to": "EWR"
     },
     {
-      "date": "2022-12-17",
+      "year": 2022,
       "airline": "UAL",
       "flight": "2215",
       "from": "EWR",
-      "to": "LAX",
-      "aircraftType": "Boeing 787-10",
-      "departureScheduled": "2022-12-17T20:30",
-      "departureActual": "2022-12-17T21:20",
-      "arrivalScheduled": "2022-12-17T23:34",
-      "arrivalActual": "2022-12-17T23:56"
+      "to": "LAX"
     },
     {
-      "date": "2023-01-06",
+      "year": 2023,
       "airline": "SWA",
       "flight": "2743",
       "from": "LGB",
-      "to": "SJC",
-      "aircraftType": "Boeing 737-700",
-      "departureScheduled": "2023-01-06T07:05",
-      "departureActual": "2023-01-06T07:00",
-      "arrivalScheduled": "2023-01-06T08:20",
-      "arrivalActual": "2023-01-06T08:09"
+      "to": "SJC"
     },
     {
-      "date": "2023-01-09",
+      "year": 2023,
       "airline": "SWA",
       "flight": "480",
       "from": "SJC",
-      "to": "LGB",
-      "aircraftType": "Boeing 737-800",
-      "departureScheduled": "2023-01-09T19:45",
-      "departureActual": "2023-01-09T19:41",
-      "arrivalScheduled": "2023-01-09T21:00",
-      "arrivalActual": "2023-01-09T20:58"
+      "to": "LGB"
     },
     {
-      "date": "2023-01-13",
+      "year": 2023,
       "airline": "DAL",
       "flight": "7",
       "from": "LAX",
-      "to": "HND",
-      "aircraftType": "Airbus A330-900neo",
-      "departureScheduled": "2023-01-13T09:55",
-      "departureActual": "2023-01-13T10:12",
-      "arrivalScheduled": "2023-01-14T15:10",
-      "arrivalActual": "2023-01-14T14:41"
+      "to": "HND"
     },
     {
-      "date": "2023-01-21",
+      "year": 2023,
       "airline": "DAL",
       "flight": "296",
       "from": "HND",
-      "to": "ATL",
-      "aircraftType": "Airbus A350-900",
-      "departureScheduled": "2023-01-21T19:20",
-      "departureActual": "2023-01-21T19:37",
-      "arrivalScheduled": "2023-01-21T17:40",
-      "arrivalActual": "2023-01-21T18:00"
+      "to": "ATL"
     },
     {
-      "date": "2023-01-21",
+      "year": 2023,
       "airline": "DAL",
       "flight": "661",
       "from": "ATL",
-      "to": "BOS",
-      "aircraftType": "Airbus A321neo",
-      "departureScheduled": "2023-01-21T22:10",
-      "departureActual": "2023-01-21T22:46",
-      "arrivalScheduled": "2023-01-22T00:42",
-      "arrivalActual": "2023-01-22T00:59"
+      "to": "BOS"
     },
     {
-      "date": "2023-01-22",
+      "year": 2023,
       "airline": "DAL",
       "flight": "5846",
       "from": "BOS",
-      "to": "DCA",
-      "aircraftType": "Embraer 175",
-      "departureScheduled": "2023-01-22T18:00",
-      "departureActual": "2023-01-22T18:01",
-      "arrivalScheduled": "2023-01-22T20:00",
-      "arrivalActual": "2023-01-22T20:35"
+      "to": "DCA"
     },
     {
-      "date": "2023-01-28",
+      "year": 2023,
       "airline": "DAL",
       "flight": "5855",
       "from": "DCA",
-      "to": "BOS",
-      "aircraftType": "Embraer 175",
-      "departureScheduled": "2023-01-28T11:15",
-      "departureActual": "2023-01-28T11:07",
-      "arrivalScheduled": "2023-01-28T12:46",
-      "arrivalActual": "2023-01-28T12:25"
+      "to": "BOS"
     },
     {
-      "date": "2023-01-29",
+      "year": 2023,
       "airline": "JBU",
       "flight": "349",
       "from": "BOS",
-      "to": "SAV",
-      "aircraftType": "Airbus A320",
-      "departureScheduled": "2023-01-29T10:55",
-      "departureActual": "2023-01-29T10:56",
-      "arrivalScheduled": "2023-01-29T13:46",
-      "arrivalActual": "2023-01-29T13:42"
+      "to": "SAV"
     },
     {
-      "date": "2023-02-01",
+      "year": 2023,
       "airline": "JBU",
       "flight": "250",
       "from": "SAV",
-      "to": "BOS",
-      "aircraftType": "Airbus A320",
-      "departureScheduled": "2023-02-01T14:35",
-      "departureActual": "2023-02-01T14:21",
-      "arrivalScheduled": "2023-02-01T16:58",
-      "arrivalActual": "2023-02-01T16:33"
+      "to": "BOS"
     },
     {
-      "date": "2023-03-01",
+      "year": 2023,
       "airline": "DAL",
       "flight": "365",
       "from": "BOS",
-      "to": "SFO",
-      "aircraftType": "Airbus A321neo",
-      "departureScheduled": "2023-03-01T07:35",
-      "departureActual": "2023-03-01T08:20",
-      "arrivalScheduled": "2023-03-01T11:48",
-      "arrivalActual": "2023-03-01T12:36"
+      "to": "SFO"
     },
     {
-      "date": "2023-03-07",
+      "year": 2023,
       "airline": "DAL",
       "flight": "365",
       "from": "SFO",
-      "to": "BOS",
-      "aircraftType": "Airbus A321neo",
-      "departureScheduled": "2023-03-07T13:00",
-      "departureActual": "2023-03-07T15:08",
-      "arrivalScheduled": "2023-03-07T21:31",
-      "arrivalActual": "2023-03-07T23:06"
+      "to": "BOS"
     },
     {
-      "date": "2023-03-21",
+      "year": 2023,
       "airline": "AFR",
       "flight": "333",
       "from": "BOS",
-      "to": "CDG",
-      "aircraftType": "Boeing 777-300 ER",
-      "departureScheduled": "2023-03-21T18:30",
-      "departureActual": "2023-03-21T21:03",
-      "arrivalScheduled": "2023-03-22T06:10",
-      "arrivalActual": "2023-03-22T08:32"
+      "to": "CDG"
     },
     {
-      "date": "2023-03-22",
+      "year": 2023,
       "airline": "AFR",
       "flight": "1814",
       "from": "CDG",
-      "to": "ZRH",
-      "aircraftType": "Airbus A320",
-      "departureScheduled": "2023-03-22T16:25",
-      "departureActual": "2023-03-22T16:25",
-      "arrivalScheduled": "2023-03-22T17:40",
-      "arrivalActual": "2023-03-22T17:27"
+      "to": "ZRH"
     },
     {
-      "date": "2023-03-29",
+      "year": 2023,
       "airline": "KLM",
       "flight": "1930",
       "from": "GVA",
-      "to": "AMS",
-      "aircraftType": "Embraer 190",
-      "departureScheduled": "2023-03-29T14:10",
-      "departureActual": "2023-03-29T14:10",
-      "arrivalScheduled": "2023-03-29T15:50",
-      "arrivalActual": "2023-03-29T15:46"
+      "to": "AMS"
     },
     {
-      "date": "2023-03-29",
+      "year": 2023,
       "airline": "KLM",
       "flight": "617",
       "from": "AMS",
-      "to": "BOS",
-      "aircraftType": "Airbus A330-300",
-      "departureScheduled": "2023-03-29T17:00",
-      "departureActual": "2023-03-29T17:51",
-      "arrivalScheduled": "2023-03-29T18:35",
-      "arrivalActual": "2023-03-29T19:08"
+      "to": "BOS"
     },
     {
-      "date": "2023-06-05",
+      "year": 2023,
       "airline": "DAL",
       "flight": "833",
       "from": "BOS",
-      "to": "LAX",
-      "aircraftType": "Boeing 757-200",
-      "departureScheduled": "2023-06-05T20:30",
-      "departureActual": "2023-06-05T21:39",
-      "arrivalScheduled": "2023-06-05T23:55",
-      "arrivalActual": "2023-06-06T00:42"
+      "to": "LAX"
     },
     {
-      "date": "2023-06-20",
+      "year": 2023,
       "airline": "DAL",
       "flight": "878",
       "from": "LAX",
-      "to": "BOS",
-      "aircraftType": "Boeing 757-200",
-      "departureScheduled": "2023-06-20T15:25",
-      "departureActual": "2023-06-20T15:24",
-      "arrivalScheduled": "2023-06-20T23:59",
-      "arrivalActual": "2023-06-20T23:56"
+      "to": "BOS"
     },
     {
-      "date": "2023-08-19",
+      "year": 2023,
       "airline": "DAL",
       "flight": "1410",
       "from": "BOS",
-      "to": "AUS",
-      "aircraftType": "Airbus A220-100",
-      "departureScheduled": "2023-08-19T07:10",
-      "departureActual": "2023-08-19T07:07",
-      "arrivalScheduled": "2023-08-19T10:32",
-      "arrivalActual": "2023-08-19T10:17"
+      "to": "AUS"
     },
     {
-      "date": "2023-08-21",
+      "year": 2023,
       "airline": "DAL",
       "flight": "1697",
       "from": "AUS",
-      "to": "BOS",
-      "aircraftType": "Airbus A220-100",
-      "departureScheduled": "2023-08-21T18:45",
-      "departureActual": "2023-08-21T18:42",
-      "arrivalScheduled": "2023-08-21T23:57",
-      "arrivalActual": "2023-08-21T23:43"
+      "to": "BOS"
     },
     {
-      "date": "2023-09-01",
+      "year": 2023,
       "airline": "DAL",
       "flight": "589",
       "from": "BOS",
-      "to": "LAS",
-      "aircraftType": "Airbus A321neo",
-      "departureScheduled": "2023-09-01T19:05",
-      "departureActual": "2023-09-01T20:02",
-      "arrivalScheduled": "2023-09-01T22:01",
-      "arrivalActual": "2023-09-01T22:32"
+      "to": "LAS"
     },
     {
-      "date": "2023-09-04",
+      "year": 2023,
       "airline": "DAL",
       "flight": "441",
       "from": "LAS",
-      "to": "BOS",
-      "aircraftType": "Airbus A321neo",
-      "departureScheduled": "2023-09-04T23:11",
-      "departureActual": "2023-09-04T23:06",
-      "arrivalScheduled": "2023-09-05T07:22",
-      "arrivalActual": "2023-09-05T07:10"
+      "to": "BOS"
     },
     {
-      "date": "2023-09-08",
+      "year": 2023,
       "airline": "AAL",
       "flight": "2138",
       "from": "BOS",
-      "to": "ORD",
-      "aircraftType": "Boeing 737-800",
-      "departureScheduled": "2023-09-08T05:35",
-      "departureActual": "2023-09-08T05:27",
-      "arrivalScheduled": "2023-09-08T07:29",
-      "arrivalActual": "2023-09-08T07:11"
+      "to": "ORD"
     },
     {
-      "date": "2023-09-11",
+      "year": 2023,
       "airline": "AAL",
       "flight": "1461",
       "from": "ORD",
-      "to": "BOS",
-      "aircraftType": "Boeing 737-800",
-      "departureScheduled": "2023-09-11T17:30",
-      "departureActual": "2023-09-11T17:54",
-      "arrivalScheduled": "2023-09-11T20:48",
-      "arrivalActual": "2023-09-11T21:55"
+      "to": "BOS"
     },
     {
-      "date": "2023-10-12",
+      "year": 2023,
       "airline": "DAL",
       "flight": "224",
       "from": "BOS",
-      "to": "CDG",
-      "aircraftType": "Airbus A330-900neo",
-      "departureScheduled": "2023-10-12T18:55",
-      "departureActual": "2023-10-12T18:49",
-      "arrivalScheduled": "2023-10-13T07:55",
-      "arrivalActual": "2023-10-13T08:11"
+      "to": "CDG"
     },
     {
-      "date": "2023-10-18",
+      "year": 2023,
       "airline": "AFR",
       "flight": "1780",
       "from": "CDG",
-      "to": "LHR",
-      "aircraftType": "Airbus A220-300",
-      "departureScheduled": "2023-10-18T13:20",
-      "departureActual": "2023-10-18T13:37",
-      "arrivalScheduled": "2023-10-18T13:45",
-      "arrivalActual": "2023-10-18T14:20"
+      "to": "LHR"
     },
     {
-      "date": "2023-10-18",
+      "year": 2023,
       "airline": "VIR",
       "flight": "11",
       "from": "LHR",
-      "to": "BOS",
-      "aircraftType": "Airbus A330-900neo",
-      "departureScheduled": "2023-10-18T18:15",
-      "departureActual": "2023-10-18T18:26",
-      "arrivalScheduled": "2023-10-18T21:00",
-      "arrivalActual": "2023-10-18T20:50"
+      "to": "BOS"
     },
     {
-      "date": "2023-11-18",
+      "year": 2023,
       "airline": "DAL",
       "flight": "124",
       "from": "BOS",
-      "to": "LIS",
-      "aircraftType": "Boeing 767-300",
-      "departureScheduled": "2023-11-18T19:45",
-      "departureActual": "2023-11-18T19:38",
-      "arrivalScheduled": "2023-11-19T07:15",
-      "arrivalActual": "2023-11-19T07:07"
+      "to": "LIS"
     },
     {
-      "date": "2023-11-24",
+      "year": 2023,
       "airline": "KLM",
       "flight": "1694",
       "from": "LIS",
-      "to": "AMS",
-      "aircraftType": "Boeing 737-800",
-      "departureScheduled": "2023-11-24T11:35",
-      "departureActual": "2023-11-24T11:55",
-      "arrivalScheduled": "2023-11-24T15:30",
-      "arrivalActual": "2023-11-24T15:50"
+      "to": "AMS"
     },
     {
-      "date": "2023-11-24",
+      "year": 2023,
       "airline": "KLM",
       "flight": "617",
       "from": "AMS",
-      "to": "BOS",
-      "aircraftType": "Boeing 787-9",
-      "departureScheduled": "2023-11-24T17:15",
-      "departureActual": "2023-11-24T17:47",
-      "arrivalScheduled": "2023-11-24T19:05",
-      "arrivalActual": "2023-11-24T19:09"
+      "to": "BOS"
     },
     {
-      "date": "2023-11-25",
+      "year": 2023,
       "airline": "ACA",
       "flight": "8605",
       "from": "BOS",
-      "to": "YUL",
-      "aircraftType": "Embraer 175 E2",
-      "departureScheduled": "2023-11-25T10:20",
-      "departureActual": "2023-11-25T10:18",
-      "arrivalScheduled": "2023-11-25T11:48",
-      "arrivalActual": "2023-11-25T11:46"
+      "to": "YUL"
     },
     {
-      "date": "2023-11-29",
+      "year": 2023,
       "airline": "ACA",
       "flight": "752",
       "from": "YUL",
-      "to": "BOS",
-      "aircraftType": "Airbus A220-300",
-      "departureScheduled": "2023-11-29T16:20",
-      "departureActual": "2023-11-29T16:05",
-      "arrivalScheduled": "2023-11-29T17:51",
-      "arrivalActual": "2023-11-29T17:23"
+      "to": "BOS"
     },
     {
-      "date": "2023-12-17",
+      "year": 2023,
       "airline": "DAL",
       "flight": "977",
       "from": "BOS",
-      "to": "SFO",
-      "aircraftType": "Airbus A321neo",
-      "departureScheduled": "2023-12-17T07:50",
-      "departureActual": "2023-12-17T07:51",
-      "arrivalScheduled": "2023-12-17T12:02",
-      "arrivalActual": "2023-12-17T11:31"
+      "to": "SFO"
     },
     {
-      "date": "2023-12-20",
+      "year": 2023,
       "airline": "SWA",
       "flight": "2057",
       "from": "SJC",
-      "to": "LGB",
-      "aircraftType": "Boeing 737-700",
-      "departureScheduled": "2023-12-20T17:30",
-      "departureActual": "2023-12-20T17:25",
-      "arrivalScheduled": "2023-12-20T18:45",
-      "arrivalActual": "2023-12-20T18:37"
+      "to": "LGB"
     },
     {
-      "date": "2023-12-21",
+      "year": 2023,
       "airline": "DAL",
       "flight": "1884",
       "from": "LAX",
-      "to": "SJD",
-      "aircraftType": "Boeing 757-200",
-      "departureScheduled": "2023-12-21T13:30",
-      "departureActual": "2023-12-21T13:41",
-      "arrivalScheduled": "2023-12-21T17:08",
-      "arrivalActual": "2023-12-21T17:15"
+      "to": "SJD"
     },
     {
-      "date": "2023-12-24",
+      "year": 2023,
       "airline": "DAL",
       "flight": "1876",
       "from": "SJD",
-      "to": "LAX",
-      "aircraftType": "Airbus A321neo",
-      "departureScheduled": "2023-12-24T12:48",
-      "departureActual": "2023-12-24T12:41",
-      "arrivalScheduled": "2023-12-24T14:43",
-      "arrivalActual": "2023-12-24T14:31"
+      "to": "LAX"
     },
     {
-      "date": "2024-01-05",
+      "year": 2024,
       "airline": "DAL",
       "flight": "1483",
       "from": "LAX",
-      "to": "SLC",
-      "aircraftType": "Airbus A321",
-      "departureScheduled": "2024-01-05T19:16",
-      "departureActual": "2024-01-05T19:31",
-      "arrivalScheduled": "2024-01-05T22:15",
-      "arrivalActual": "2024-01-05T22:36"
+      "to": "SLC"
     },
     {
-      "date": "2024-01-08",
+      "year": 2024,
       "airline": "DAL",
       "flight": "2528",
       "from": "SLC",
-      "to": "BOS",
-      "aircraftType": "Airbus A321neo",
-      "departureScheduled": "2024-01-08T17:20",
-      "departureActual": "2024-01-08T17:24",
-      "arrivalScheduled": "2024-01-08T23:54",
-      "arrivalActual": "2024-01-08T23:49"
+      "to": "BOS"
     },
     {
-      "date": "2024-03-07",
+      "year": 2024,
       "airline": "DAL",
       "flight": "1570",
       "from": "BOS",
-      "to": "MCO",
-      "aircraftType": "Airbus A321",
-      "departureScheduled": "2024-03-07T11:10",
-      "departureActual": "2024-03-07T11:06",
-      "arrivalScheduled": "2024-03-07T14:28",
-      "arrivalActual": "2024-03-07T14:12"
+      "to": "MCO"
     },
     {
-      "date": "2024-03-11",
+      "year": 2024,
       "airline": "DAL",
       "flight": "1570",
       "from": "MCO",
-      "to": "BOS",
-      "aircraftType": "Airbus A321",
-      "departureScheduled": "2024-03-11T16:21",
-      "departureActual": "2024-03-11T16:25",
-      "arrivalScheduled": "2024-03-11T19:26",
-      "arrivalActual": "2024-03-11T19:17"
+      "to": "BOS"
     },
     {
-      "date": "2024-03-19",
+      "year": 2024,
       "airline": "DAL",
       "flight": "2611",
       "from": "BOS",
-      "to": "JFK",
-      "aircraftType": "Airbus A220-300",
-      "departureScheduled": "2024-03-19T06:00",
-      "departureActual": "2024-03-19T05:46",
-      "arrivalScheduled": "2024-03-19T07:30",
-      "arrivalActual": "2024-03-19T07:06"
+      "to": "JFK"
     },
     {
-      "date": "2024-03-19",
+      "year": 2024,
       "airline": "CPA",
       "flight": "831",
       "from": "JFK",
-      "to": "HKG",
-      "aircraftType": "Airbus A350-900",
-      "departureScheduled": "2024-03-19T14:50",
-      "departureActual": "2024-03-19T14:53",
-      "arrivalScheduled": "2024-03-20T18:50",
-      "arrivalActual": "2024-03-20T18:37"
+      "to": "HKG"
     },
     {
-      "date": "2024-03-24",
+      "year": 2024,
       "airline": "CPA",
       "flight": "420",
       "from": "HKG",
-      "to": "TPE",
-      "aircraftType": "Airbus A321neo",
-      "departureScheduled": "2024-03-24T13:50",
-      "departureActual": "2024-03-24T13:47",
-      "arrivalScheduled": "2024-03-24T15:50",
-      "arrivalActual": "2024-03-24T15:41"
+      "to": "TPE"
     },
     {
-      "date": "2024-03-28",
+      "year": 2024,
       "airline": "AAR",
       "flight": "714",
       "from": "TPE",
-      "to": "ICN",
-      "aircraftType": "Airbus A330-300",
-      "departureScheduled": "2024-03-28T16:55",
-      "departureActual": "2024-03-28T17:45",
-      "arrivalScheduled": "2024-03-28T20:25",
-      "arrivalActual": "2024-03-28T21:02"
+      "to": "ICN"
     },
     {
-      "date": "2024-04-15",
+      "year": 2024,
       "airline": "KAL",
       "flight": "91",
       "from": "ICN",
-      "to": "BOS",
-      "aircraftType": "Boeing 777-300 ER",
-      "departureScheduled": "2024-04-15T09:30",
-      "departureActual": "2024-04-15T09:26",
-      "arrivalScheduled": "2024-04-15T10:30",
-      "arrivalActual": "2024-04-15T10:24"
+      "to": "BOS"
     },
     {
-      "date": "2024-06-14",
+      "year": 2024,
       "airline": "DAL",
       "flight": "5605",
       "from": "BOS",
-      "to": "BNA",
-      "aircraftType": "Embraer 175 E2",
-      "departureScheduled": "2024-06-14T19:55",
-      "departureActual": "2024-06-14T19:49",
-      "arrivalScheduled": "2024-06-14T21:53",
-      "arrivalActual": "2024-06-14T22:06"
+      "to": "BNA"
     },
     {
-      "date": "2024-06-18",
+      "year": 2024,
       "airline": "DAL",
       "flight": "2708",
       "from": "BOS",
-      "to": "BNA",
-      "aircraftType": "Airbus A220-100",
-      "departureScheduled": "2024-06-18T15:59",
-      "departureActual": "2024-06-18T15:50",
-      "arrivalScheduled": "2024-06-18T17:55",
-      "arrivalActual": "2024-06-18T17:37"
+      "to": "BNA"
     },
     {
-      "date": "2024-07-17",
+      "year": 2024,
       "airline": "DAL",
       "flight": "408",
       "from": "BOS",
-      "to": "LAS",
-      "aircraftType": "Airbus A321neo",
-      "departureScheduled": "2024-07-17T18:05",
-      "departureActual": "2024-07-17T18:02",
-      "arrivalScheduled": "2024-07-17T21:02",
-      "arrivalActual": "2024-07-17T20:50"
+      "to": "LAS"
     },
     {
-      "date": "2024-07-22",
+      "year": 2024,
       "airline": "SWA",
       "flight": "715",
       "from": "LAS",
-      "to": "LGB",
-      "aircraftType": "Boeing 737 MAX 8",
-      "departureScheduled": "2024-07-22T17:25",
-      "departureActual": "2024-07-22T18:13",
-      "arrivalScheduled": "2024-07-22T18:40",
-      "arrivalActual": "2024-07-22T19:14"
+      "to": "LGB"
     },
     {
-      "date": "2024-07-29",
+      "year": 2024,
       "airline": "DAL",
       "flight": "507",
       "from": "LAX",
-      "to": "BOS",
-      "aircraftType": "Boeing 757-200",
-      "departureScheduled": "2024-07-29T21:21",
-      "departureActual": "2024-07-29T21:22",
-      "arrivalScheduled": "2024-07-30T05:55",
-      "arrivalActual": "2024-07-30T05:36"
+      "to": "BOS"
     },
     {
-      "date": "2024-08-29",
+      "year": 2024,
       "airline": "JBU",
       "flight": "777",
       "from": "BOS",
-      "to": "LAS",
-      "aircraftType": "Airbus A321",
-      "departureScheduled": "2024-08-29T18:15",
-      "departureActual": "2024-08-29T18:09",
-      "arrivalScheduled": "2024-08-29T21:10",
-      "arrivalActual": "2024-08-29T20:47"
+      "to": "LAS"
     },
     {
-      "date": "2024-09-02",
+      "year": 2024,
       "airline": "DAL",
       "flight": "381",
       "from": "LAS",
-      "to": "BOS",
-      "aircraftType": "Airbus A321neo",
-      "departureScheduled": "2024-09-02T22:14",
-      "departureActual": "2024-09-02T22:03",
-      "arrivalScheduled": "2024-09-03T06:30",
-      "arrivalActual": "2024-09-03T05:58"
+      "to": "BOS"
     },
     {
-      "date": "2024-09-30",
+      "year": 2024,
       "airline": "DAL",
       "flight": "1019",
       "from": "BOS",
-      "to": "DTW",
-      "aircraftType": "Airbus A321",
-      "departureScheduled": "2024-09-30T05:20",
-      "departureActual": "2024-09-30T05:15",
-      "arrivalScheduled": "2024-09-30T07:23",
-      "arrivalActual": "2024-09-30T07:33"
+      "to": "DTW"
     },
     {
-      "date": "2024-10-02",
+      "year": 2024,
       "airline": "JBU",
       "flight": "1136",
       "from": "DTW",
-      "to": "BOS",
-      "aircraftType": "Airbus A220-300",
-      "departureScheduled": "2024-10-02T19:15",
-      "departureActual": "2024-10-02T19:03",
-      "arrivalScheduled": "2024-10-02T21:07",
-      "arrivalActual": "2024-10-02T20:45"
+      "to": "BOS"
     },
     {
-      "date": "2024-10-25",
+      "year": 2024,
       "airline": "DAL",
       "flight": "58",
       "from": "BOS",
-      "to": "LHR",
-      "aircraftType": "Airbus A330-300",
-      "departureScheduled": "2024-10-25T19:20",
-      "departureActual": "2024-10-25T19:13",
-      "arrivalScheduled": "2024-10-26T07:05",
-      "arrivalActual": "2024-10-26T06:49"
+      "to": "LHR"
     },
     {
-      "date": "2024-10-31",
+      "year": 2024,
       "airline": "DAL",
       "flight": "5985",
       "from": "LHR",
-      "to": "BOS",
-      "aircraftType": "Airbus A330-900neo",
-      "departureScheduled": "2024-10-31T14:35",
-      "departureActual": "2024-10-31T14:27",
-      "arrivalScheduled": "2024-10-31T18:30",
-      "arrivalActual": "2024-10-31T17:46"
+      "to": "BOS"
     },
     {
-      "date": "2024-11-13",
+      "year": 2024,
       "airline": "AAL",
       "flight": "464",
       "from": "BOS",
-      "to": "DCA",
-      "aircraftType": "Airbus A319",
-      "departureScheduled": "2024-11-13T18:30",
-      "departureActual": "2024-11-13T18:25",
-      "arrivalScheduled": "2024-11-13T20:21",
-      "arrivalActual": "2024-11-13T19:43"
+      "to": "DCA"
     },
     {
-      "date": "2024-11-16",
+      "year": 2024,
       "airline": "AAL",
       "flight": "1399",
       "from": "DCA",
-      "to": "BOS",
-      "aircraftType": "Airbus A319",
-      "departureScheduled": "2024-11-16T17:00",
-      "departureActual": "2024-11-16T16:53",
-      "arrivalScheduled": "2024-11-16T18:42",
-      "arrivalActual": "2024-11-16T18:18"
+      "to": "BOS"
     },
     {
-      "date": "2024-12-17",
+      "year": 2024,
       "airline": "DAL",
       "flight": "408",
       "from": "BOS",
-      "to": "LAS",
-      "aircraftType": "Airbus A321neo",
-      "departureScheduled": "2024-12-17T17:30",
-      "departureActual": "2024-12-17T17:29",
-      "arrivalScheduled": "2024-12-17T20:44",
-      "arrivalActual": "2024-12-17T20:40"
+      "to": "LAS"
     },
     {
-      "date": "2024-12-21",
+      "year": 2024,
       "airline": "DAL",
       "flight": "2120",
       "from": "LAS",
-      "to": "LAX",
-      "aircraftType": "Airbus A319",
-      "departureScheduled": "2024-12-21T18:05",
-      "departureActual": "2024-12-21T19:01",
-      "arrivalScheduled": "2024-12-21T19:26",
-      "arrivalActual": "2024-12-21T20:23"
+      "to": "LAX"
     },
     {
-      "date": "2024-12-24",
+      "year": 2024,
       "airline": "AMX",
       "flight": "647",
       "from": "LAX",
-      "to": "MEX",
-      "aircraftType": "Boeing 787-8",
-      "departureScheduled": "2024-12-24T11:30",
-      "departureActual": "2024-12-24T11:22",
-      "arrivalScheduled": "2024-12-24T17:05",
-      "arrivalActual": "2024-12-24T16:59"
+      "to": "MEX"
     },
     {
-      "date": "2024-12-29",
+      "year": 2024,
       "airline": "DAL",
       "flight": "630",
       "from": "MEX",
-      "to": "LAX",
-      "aircraftType": "Boeing 757-200",
-      "departureScheduled": "2024-12-29T16:45",
-      "departureActual": "2024-12-29T16:46",
-      "arrivalScheduled": "2024-12-29T19:04",
-      "arrivalActual": "2024-12-29T19:13"
+      "to": "LAX"
     },
     {
-      "date": "2024-12-31",
+      "year": 2024,
       "airline": "SAS",
       "flight": "932",
       "from": "LAX",
-      "to": "CPH",
-      "aircraftType": "Airbus A350-900",
-      "departureScheduled": "2024-12-31T17:40",
-      "departureActual": "2024-12-31T17:37",
-      "arrivalScheduled": "2025-01-01T13:20",
-      "arrivalActual": "2025-01-01T13:03"
+      "to": "CPH"
     },
     {
-      "date": "2025-01-05",
+      "year": 2025,
       "airline": "SAS",
       "flight": "537",
       "from": "CPH",
-      "to": "DUB",
-      "aircraftType": "Airbus A320neo",
-      "departureScheduled": "2025-01-05T07:55",
-      "departureActual": "2025-01-05T08:04",
-      "arrivalScheduled": "2025-01-05T09:20",
-      "arrivalActual": "2025-01-05T09:31"
+      "to": "DUB"
     },
     {
-      "date": "2025-01-09",
+      "year": 2025,
       "airline": "EIN",
       "flight": "135",
       "from": "SNN",
-      "to": "BOS",
-      "aircraftType": "Airbus A321neo",
-      "departureScheduled": "2025-01-09T14:45",
-      "departureActual": "2025-01-09T14:19",
-      "arrivalScheduled": "2025-01-09T16:50",
-      "arrivalActual": null
+      "to": "BOS"
     },
     {
-      "date": "2025-02-06",
+      "year": 2025,
       "airline": "JBU",
       "flight": "393",
       "from": "BOS",
-      "to": "DEN",
-      "aircraftType": "Airbus A320",
-      "departureScheduled": "2025-02-06T20:15",
-      "departureActual": "2025-02-06T20:32",
-      "arrivalScheduled": "2025-02-06T22:59",
-      "arrivalActual": "2025-02-06T23:53"
+      "to": "DEN"
     },
     {
-      "date": "2025-02-09",
+      "year": 2025,
       "airline": "UAL",
       "flight": "2610",
       "from": "DEN",
-      "to": "BOS",
-      "aircraftType": "Boeing 757-200",
-      "departureScheduled": "2025-02-09T23:59",
-      "departureActual": "2025-02-09T23:56",
-      "arrivalScheduled": "2025-02-10T05:56",
-      "arrivalActual": "2025-02-10T05:04"
+      "to": "BOS"
     },
     {
-      "date": "2025-03-11",
+      "year": 2025,
       "airline": "KLM",
       "flight": "6016",
       "from": "BOS",
-      "to": "AMS",
-      "aircraftType": "Airbus A330-900neo",
-      "departureScheduled": "2025-03-11T20:05",
-      "departureActual": "2025-03-11T20:01",
-      "arrivalScheduled": "2025-03-12T08:10",
-      "arrivalActual": "2025-03-12T08:04"
+      "to": "AMS"
     },
     {
-      "date": "2025-03-12",
+      "year": 2025,
       "airline": "KLM",
       "flight": "569",
       "from": "AMS",
-      "to": "JRO",
-      "aircraftType": "Boeing 787-10",
-      "departureScheduled": "2025-03-12T10:00",
-      "departureActual": "2025-03-12T10:30",
-      "arrivalScheduled": "2025-03-12T20:40",
-      "arrivalActual": "2025-03-12T21:04"
+      "to": "JRO"
     },
     {
-      "date": "2025-03-15",
+      "year": 2025,
       "airline": "ATC",
       "flight": "157",
       "from": "ARK",
-      "to": "ZNZ",
-      "aircraftType": "DHC-8-400 Dash 8Q",
-      "departureScheduled": "2025-03-15T08:00",
-      "departureActual": null,
-      "arrivalScheduled": "2025-03-15T09:10",
-      "arrivalActual": null
+      "to": "ZNZ"
     },
     {
-      "date": "2025-03-18",
+      "year": 2025,
       "airline": "KLM",
       "flight": "571",
       "from": "DAR",
-      "to": "AMS",
-      "aircraftType": "Boeing 777-200 ER",
-      "departureScheduled": "2025-03-18T23:59",
-      "departureActual": "2025-03-18T23:58",
-      "arrivalScheduled": "2025-03-19T07:40",
-      "arrivalActual": "2025-03-19T07:30"
+      "to": "AMS"
     },
     {
-      "date": "2025-03-19",
+      "year": 2025,
       "airline": "KLM",
       "flight": "617",
       "from": "AMS",
-      "to": "BOS",
-      "aircraftType": "Boeing 777-200 ER",
-      "departureScheduled": "2025-03-19T17:25",
-      "departureActual": "2025-03-19T17:40",
-      "arrivalScheduled": "2025-03-19T20:15",
-      "arrivalActual": "2025-03-19T20:16"
+      "to": "BOS"
     },
     {
-      "date": "2025-03-28",
+      "year": 2025,
       "airline": "AAL",
       "flight": "2159",
       "from": "BOS",
-      "to": "DCA",
-      "aircraftType": "Airbus A319",
-      "departureScheduled": "2025-03-28T05:43",
-      "departureActual": "2025-03-28T05:46",
-      "arrivalScheduled": "2025-03-28T07:31",
-      "arrivalActual": "2025-03-28T07:25"
+      "to": "DCA"
     },
     {
-      "date": "2025-03-31",
+      "year": 2025,
       "airline": "AAL",
       "flight": "2140",
       "from": "DCA",
-      "to": "BOS",
-      "aircraftType": "Airbus A319",
-      "departureScheduled": "2025-03-31T17:20",
-      "departureActual": "2025-03-31T18:14",
-      "arrivalScheduled": "2025-03-31T18:58",
-      "arrivalActual": "2025-03-31T19:57"
+      "to": "BOS"
     },
     {
-      "date": "2025-05-01",
+      "year": 2025,
       "airline": "CFG",
       "flight": "2039",
       "from": "BOS",
-      "to": "FRA",
-      "aircraftType": "Airbus A330-900neo",
-      "departureScheduled": "2025-05-01T16:15",
-      "departureActual": "2025-05-01T16:17",
-      "arrivalScheduled": "2025-05-02T05:15",
-      "arrivalActual": "2025-05-02T05:42"
+      "to": "FRA"
     },
     {
-      "date": "2025-05-02",
+      "year": 2025,
       "airline": "CFG",
       "flight": "4355",
       "from": "FRA",
-      "to": "MXP",
-      "aircraftType": "Airbus A320",
-      "departureScheduled": "2025-05-02T06:50",
-      "departureActual": "2025-05-02T06:58",
-      "arrivalScheduled": "2025-05-02T08:00",
-      "arrivalActual": "2025-05-02T07:58"
+      "to": "MXP"
     },
     {
-      "date": "2025-05-05",
+      "year": 2025,
       "airline": "CFG",
       "flight": "4356",
       "from": "MXP",
-      "to": "FRA",
-      "aircraftType": "Airbus A320neo",
-      "departureScheduled": "2025-05-05T09:00",
-      "departureActual": "2025-05-05T09:13",
-      "arrivalScheduled": "2025-05-05T10:10",
-      "arrivalActual": "2025-05-05T10:30"
+      "to": "FRA"
     },
     {
-      "date": "2025-05-05",
+      "year": 2025,
       "airline": "CFG",
       "flight": "2038",
       "from": "FRA",
-      "to": "BOS",
-      "aircraftType": "Airbus A330-900neo",
-      "departureScheduled": "2025-05-05T11:40",
-      "departureActual": "2025-05-05T11:44",
-      "arrivalScheduled": "2025-05-05T13:55",
-      "arrivalActual": "2025-05-05T13:55"
+      "to": "BOS"
     },
     {
-      "date": "2025-05-17",
+      "year": 2025,
       "airline": "UAL",
       "flight": "226",
       "from": "BOS",
-      "to": "IAH",
-      "aircraftType": "Boeing 737-800",
-      "departureScheduled": "2025-05-17T07:15",
-      "departureActual": "2025-05-17T07:17",
-      "arrivalScheduled": "2025-05-17T10:41",
-      "arrivalActual": "2025-05-17T10:38"
+      "to": "IAH"
     },
     {
-      "date": "2025-05-17",
+      "year": 2025,
       "airline": "UAL",
       "flight": "5281",
       "from": "IAH",
-      "to": "BJX",
-      "aircraftType": "Embraer 175",
-      "departureScheduled": "2025-05-17T12:23",
-      "departureActual": "2025-05-17T12:19",
-      "arrivalScheduled": "2025-05-17T13:43",
-      "arrivalActual": "2025-05-17T13:40"
+      "to": "BJX"
     },
     {
-      "date": "2025-05-20",
+      "year": 2025,
       "airline": "UAL",
       "flight": "1072",
       "from": "BJX",
-      "to": "IAH",
-      "aircraftType": "Airbus A320",
-      "departureScheduled": "2025-05-20T11:45",
-      "departureActual": "2025-05-20T11:32",
-      "arrivalScheduled": "2025-05-20T14:52",
-      "arrivalActual": "2025-05-20T14:35"
+      "to": "IAH"
     },
     {
-      "date": "2025-05-20",
+      "year": 2025,
       "airline": "UAL",
       "flight": "2439",
       "from": "IAH",
-      "to": "BOS",
-      "aircraftType": "Boeing 737-800",
-      "departureScheduled": "2025-05-20T16:25",
-      "departureActual": "2025-05-20T16:20",
-      "arrivalScheduled": "2025-05-20T21:21",
-      "arrivalActual": "2025-05-20T20:54"
+      "to": "BOS"
     },
     {
-      "date": "2025-05-22",
+      "year": 2025,
       "airline": "DAL",
       "flight": "5687",
       "from": "BOS",
-      "to": "DCA",
-      "aircraftType": "Embraer 175",
-      "departureScheduled": "2025-05-22T06:10",
-      "departureActual": "2025-05-22T06:00",
-      "arrivalScheduled": "2025-05-22T08:00",
-      "arrivalActual": "2025-05-22T07:45"
+      "to": "DCA"
     },
     {
-      "date": "2025-05-27",
+      "year": 2025,
       "airline": "DAL",
       "flight": "5710",
       "from": "DCA",
-      "to": "BOS",
-      "aircraftType": "Embraer 175",
-      "departureScheduled": "2025-05-27T06:00",
-      "departureActual": "2025-05-27T05:52",
-      "arrivalScheduled": "2025-05-27T07:40",
-      "arrivalActual": "2025-05-27T07:14"
+      "to": "BOS"
     },
     {
-      "date": "2025-06-13",
+      "year": 2025,
       "airline": "AAL",
       "flight": "3233",
       "from": "BOS",
-      "to": "ORD",
-      "aircraftType": "Boeing 737 MAX 8",
-      "departureScheduled": "2025-06-13T19:30",
-      "departureActual": "2025-06-13T19:31",
-      "arrivalScheduled": "2025-06-13T21:24",
-      "arrivalActual": "2025-06-13T21:39"
+      "to": "ORD"
     },
     {
-      "date": "2025-06-15",
+      "year": 2025,
       "airline": "AAL",
       "flight": "2682",
       "from": "ORD",
-      "to": "BOS",
-      "aircraftType": "Boeing 737-800",
-      "departureScheduled": "2025-06-15T20:40",
-      "departureActual": "2025-06-15T23:11",
-      "arrivalScheduled": "2025-06-16T00:20",
-      "arrivalActual": "2025-06-16T02:24"
+      "to": "BOS"
     },
     {
-      "date": "2025-07-16",
+      "year": 2025,
       "airline": "DAL",
       "flight": "321",
       "from": "BOS",
-      "to": "LAX",
-      "aircraftType": "Boeing 757-200",
-      "departureScheduled": "2025-07-16T20:35",
-      "departureActual": "2025-07-16T20:29",
-      "arrivalScheduled": "2025-07-16T23:52",
-      "arrivalActual": "2025-07-16T23:59"
+      "to": "LAX"
     },
     {
-      "date": "2025-07-21",
+      "year": 2025,
       "airline": "DAL",
       "flight": "507",
       "from": "LAX",
-      "to": "BOS",
-      "aircraftType": "Boeing 757-200",
-      "departureScheduled": "2025-07-21T21:04",
-      "departureActual": "2025-07-21T20:57",
-      "arrivalScheduled": "2025-07-22T05:35",
-      "arrivalActual": "2025-07-22T05:35"
+      "to": "BOS"
     },
     {
-      "date": "2025-08-30",
+      "year": 2025,
       "airline": "JBU",
       "flight": "1317",
       "from": "BOS",
-      "to": "ATL",
-      "aircraftType": "Airbus A220-300",
-      "departureScheduled": "2025-08-30T10:45",
-      "departureActual": "2025-08-30T10:42",
-      "arrivalScheduled": "2025-08-30T13:34",
-      "arrivalActual": "2025-08-30T13:24"
+      "to": "ATL"
     },
     {
-      "date": "2025-09-02",
+      "year": 2025,
       "airline": "JBU",
       "flight": "696",
       "from": "ATL",
-      "to": "BOS",
-      "aircraftType": "Airbus A320",
-      "departureScheduled": "2025-09-02T06:00",
-      "departureActual": "2025-09-02T05:52",
-      "arrivalScheduled": "2025-09-02T08:33",
-      "arrivalActual": "2025-09-02T08:02"
+      "to": "BOS"
     },
     {
-      "date": "2025-09-03",
+      "year": 2025,
       "airline": "KLM",
       "flight": "6095",
       "from": "BOS",
-      "to": "AMS",
-      "aircraftType": "Airbus A330-900neo",
-      "departureScheduled": "2025-09-03T16:50",
-      "departureActual": "2025-09-03T16:47",
-      "arrivalScheduled": "2025-09-04T05:40",
-      "arrivalActual": "2025-09-04T05:21"
+      "to": "AMS"
     },
     {
-      "date": "2025-09-04",
+      "year": 2025,
       "airline": "KLM",
       "flight": "427",
       "from": "AMS",
-      "to": "DXB",
-      "aircraftType": "Boeing 777-300 ER",
-      "departureScheduled": "2025-09-04T14:20",
-      "departureActual": "2025-09-04T14:45",
-      "arrivalScheduled": "2025-09-04T23:00",
-      "arrivalActual": "2025-09-04T23:32"
+      "to": "DXB"
     },
     {
-      "date": "2025-09-10",
+      "year": 2025,
       "airline": "AFR",
       "flight": "655",
       "from": "DXB",
-      "to": "CDG",
-      "aircraftType": "Boeing 777-300 ER",
-      "departureScheduled": "2025-09-10T00:40",
-      "departureActual": "2025-09-10T00:39",
-      "arrivalScheduled": "2025-09-10T06:00",
-      "arrivalActual": "2025-09-10T05:54"
+      "to": "CDG"
     },
     {
-      "date": "2025-09-10",
+      "year": 2025,
       "airline": "AFR",
       "flight": "5599",
       "from": "CDG",
-      "to": "LAX",
-      "aircraftType": "Airbus A350-900",
-      "departureScheduled": "2025-09-10T15:35",
-      "departureActual": "2025-09-10T16:07",
-      "arrivalScheduled": "2025-09-10T18:25",
-      "arrivalActual": "2025-09-10T18:26"
+      "to": "LAX"
     },
     {
-      "date": "2025-09-15",
+      "year": 2025,
       "airline": "DAL",
       "flight": "507",
       "from": "LAX",
-      "to": "BOS",
-      "aircraftType": "Boeing 757-200",
-      "departureScheduled": "2025-09-15T21:00",
-      "departureActual": "2025-09-15T20:56",
-      "arrivalScheduled": "2025-09-16T05:35",
-      "arrivalActual": "2025-09-16T05:30"
+      "to": "BOS"
     },
     {
-      "date": "2025-12-10",
+      "year": 2025,
       "airline": "AAL",
       "flight": "2760",
       "from": "BOS",
-      "to": "LAX",
-      "aircraftType": "Airbus A321",
-      "departureScheduled": "2025-12-10T18:25",
-      "departureActual": "2025-12-10T18:16",
-      "arrivalScheduled": "2025-12-10T21:54",
-      "arrivalActual": "2025-12-10T21:28"
+      "to": "LAX"
     },
     {
-      "date": "2025-12-15",
+      "year": 2025,
       "airline": "JAL",
       "flight": "69",
       "from": "LAX",
-      "to": "KIX",
-      "aircraftType": "Boeing 787-9",
-      "departureScheduled": "2025-12-15T13:10",
-      "departureActual": "2025-12-15T13:13",
-      "arrivalScheduled": "2025-12-16T18:50",
-      "arrivalActual": "2025-12-16T18:39"
+      "to": "KIX"
     },
     {
-      "date": "2025-12-19",
+      "year": 2025,
       "airline": "CSZ",
       "flight": "674",
       "from": "KIX",
-      "to": "WUX",
-      "aircraftType": "Boeing 737-800",
-      "departureScheduled": "2025-12-19T13:10",
-      "departureActual": "2025-12-19T13:26",
-      "arrivalScheduled": "2025-12-19T15:05",
-      "arrivalActual": "2025-12-19T15:25"
+      "to": "WUX"
     },
     {
-      "date": "2025-12-24",
+      "year": 2025,
       "airline": "KAL",
       "flight": "882",
       "from": "PVG",
-      "to": "ICN",
-      "aircraftType": "Boeing 787-10",
-      "departureScheduled": "2025-12-24T11:20",
-      "departureActual": "2025-12-24T11:20",
-      "arrivalScheduled": "2025-12-24T14:25",
-      "arrivalActual": "2025-12-24T14:29"
+      "to": "ICN"
     },
     {
-      "date": "2026-01-13",
+      "year": 2026,
       "airline": "KAL",
       "flight": "781",
       "from": "ICN",
-      "to": "FUK",
-      "aircraftType": "Boeing 737 MAX 8",
-      "departureScheduled": "2026-01-13T18:40",
-      "departureActual": "2026-01-13T18:49",
-      "arrivalScheduled": "2026-01-13T20:05",
-      "arrivalActual": "2026-01-13T20:18"
+      "to": "FUK"
     },
     {
-      "date": "2026-01-16",
+      "year": 2026,
       "airline": "JAL",
       "flight": "316",
       "from": "FUK",
-      "to": "HND",
-      "aircraftType": "Airbus A350-900",
-      "departureScheduled": "2026-01-16T13:55",
-      "departureActual": "2026-01-16T13:58",
-      "arrivalScheduled": "2026-01-16T15:30",
-      "arrivalActual": "2026-01-16T15:30"
+      "to": "HND"
     },
     {
-      "date": "2026-01-20",
+      "year": 2026,
       "airline": "JAL",
       "flight": "8",
       "from": "NRT",
-      "to": "BOS",
-      "aircraftType": "Boeing 787-9",
-      "departureScheduled": "2026-01-20T18:50",
-      "departureActual": "2026-01-20T19:17",
-      "arrivalScheduled": "2026-01-20T17:35",
-      "arrivalActual": "2026-01-20T17:30"
+      "to": "BOS"
     },
     {
-      "date": "2026-04-15",
+      "year": 2026,
       "airline": "DAL",
       "flight": "2646",
       "from": "BOS",
-      "to": "ORD",
-      "aircraftType": "Airbus A319",
-      "departureScheduled": "2026-04-15T16:55",
-      "departureActual": "2026-04-15T17:11",
-      "arrivalScheduled": "2026-04-15T18:59",
-      "arrivalActual": "2026-04-15T19:30"
+      "to": "ORD"
     },
     {
-      "date": "2026-04-18",
+      "year": 2026,
       "airline": "AAL",
       "flight": "2784",
       "from": "ORD",
-      "to": "BOS",
-      "aircraftType": "Boeing 737-800",
-      "departureScheduled": "2026-04-18T20:56",
-      "departureActual": "2026-04-18T22:41",
-      "arrivalScheduled": "2026-04-19T00:25",
-      "arrivalActual": "2026-04-19T01:47"
+      "to": "BOS"
     },
     {
-      "date": "2026-04-23",
+      "year": 2026,
       "airline": "AFR",
       "flight": "333",
       "from": "BOS",
-      "to": "CDG",
-      "aircraftType": "Airbus A350-900",
-      "departureScheduled": "2026-04-23T17:10",
-      "departureActual": "2026-04-23T16:59",
-      "arrivalScheduled": "2026-04-24T06:10",
-      "arrivalActual": "2026-04-24T06:13"
+      "to": "CDG"
     },
     {
-      "date": "2026-04-28",
+      "year": 2026,
       "airline": "AFR",
       "flight": "1082",
       "from": "CDG",
-      "to": "PRG",
-      "aircraftType": "Airbus A220-300",
-      "departureScheduled": "2026-04-28T17:55",
-      "departureActual": "2026-04-28T18:45",
-      "arrivalScheduled": "2026-04-28T19:35",
-      "arrivalActual": "2026-04-28T20:15"
+      "to": "PRG"
     },
     {
-      "date": "2026-05-03",
+      "year": 2026,
       "airline": "AUA",
       "flight": "644",
       "from": "PRG",
-      "to": "VIE",
-      "aircraftType": "Embraer 195",
-      "departureScheduled": "2026-05-03T11:15",
-      "departureActual": "2026-05-03T11:16",
-      "arrivalScheduled": "2026-05-03T12:05",
-      "arrivalActual": "2026-05-03T12:00"
+      "to": "VIE"
     },
     {
-      "date": "2026-05-04",
+      "year": 2026,
       "airline": "AUA",
       "flight": "31",
       "from": "VIE",
-      "to": "BOS",
-      "aircraftType": "Boeing 767-300",
-      "departureScheduled": "2026-05-04T10:40",
-      "departureActual": "2026-05-04T10:44",
-      "arrivalScheduled": "2026-05-04T13:50",
-      "arrivalActual": "2026-05-04T13:39"
+      "to": "BOS"
     },
     {
-      "date": "2026-06-07",
+      "year": 2026,
       "airline": "DAL",
       "flight": "627",
       "from": "BOS",
-      "to": "CUN",
-      "aircraftType": "Boeing 737-800",
-      "departureScheduled": "2026-06-07T09:03",
-      "departureActual": null,
-      "arrivalScheduled": "2026-06-07T12:30",
-      "arrivalActual": null
+      "to": "CUN"
     },
     {
-      "date": "2026-06-10",
+      "year": 2026,
       "airline": "AMX",
       "flight": "511",
       "from": "CUN",
-      "to": "MEX",
-      "aircraftType": "Boeing 737 MAX 9",
-      "departureScheduled": "2026-06-10T08:09",
-      "departureActual": null,
-      "arrivalScheduled": "2026-06-10T09:35",
-      "arrivalActual": null
+      "to": "MEX"
     },
     {
-      "date": "2026-06-11",
+      "year": 2026,
       "airline": "AMX",
       "flight": "206",
       "from": "MEX",
-      "to": "GDL",
-      "aircraftType": "Boeing 737 MAX 9",
-      "departureScheduled": "2026-06-11T07:30",
-      "departureActual": null,
-      "arrivalScheduled": "2026-06-11T08:58",
-      "arrivalActual": null
+      "to": "GDL"
     },
     {
-      "date": "2004-06-29",
+      "year": 2004,
       "airline": "UAL",
       "flight": "892",
       "from": "ICN",
-      "to": "SFO",
-      "aircraftType": null,
-      "departureScheduled": "2004-06-29T00:00",
-      "departureActual": null,
-      "arrivalScheduled": null,
-      "arrivalActual": null
+      "to": "SFO"
     },
     {
-      "date": "2005-02-26",
+      "year": 2005,
       "airline": "AAR",
       "flight": "8705",
       "from": "GMP",
-      "to": "KWJ",
-      "aircraftType": null,
-      "departureScheduled": "2005-02-26T00:00",
-      "departureActual": null,
-      "arrivalScheduled": null,
-      "arrivalActual": null
+      "to": "KWJ"
     },
     {
-      "date": "2002-05-10",
+      "year": 2002,
       "airline": "KAL",
       "flight": "1229",
       "from": "GMP",
-      "to": "CJU",
-      "aircraftType": null,
-      "departureScheduled": "2002-05-10T00:00",
-      "departureActual": null,
-      "arrivalScheduled": null,
-      "arrivalActual": null
+      "to": "CJU"
     },
     {
-      "date": "2005-12-02",
+      "year": 2005,
       "airline": "AAR",
       "flight": "8915",
       "from": "GMP",
-      "to": "CJU",
-      "aircraftType": null,
-      "departureScheduled": "2005-12-02T00:00",
-      "departureActual": null,
-      "arrivalScheduled": null,
-      "arrivalActual": null
+      "to": "CJU"
     },
     {
-      "date": "2005-06-04",
+      "year": 2005,
       "airline": "KAL",
       "flight": "1307",
       "from": "GMP",
-      "to": "KWJ",
-      "aircraftType": null,
-      "departureScheduled": "2005-06-04T00:00",
-      "departureActual": null,
-      "arrivalScheduled": null,
-      "arrivalActual": null
+      "to": "KWJ"
     },
     {
-      "date": "2005-07-23",
+      "year": 2005,
       "airline": "KAL",
       "flight": "0002",
       "from": "NRT",
-      "to": "ICN",
-      "aircraftType": null,
-      "departureScheduled": "2005-07-23T00:00",
-      "departureActual": null,
-      "arrivalScheduled": null,
-      "arrivalActual": null
+      "to": "ICN"
     },
     {
-      "date": "2005-03-01",
+      "year": 2005,
       "airline": "AAR",
       "flight": "8708",
       "from": "KWJ",
-      "to": "GMP",
-      "aircraftType": null,
-      "departureScheduled": "2005-03-01T00:00",
-      "departureActual": null,
-      "arrivalScheduled": null,
-      "arrivalActual": null
+      "to": "GMP"
     },
     {
-      "date": "2001-08-30",
+      "year": 2001,
       "airline": "AAR",
       "flight": "263",
       "from": "GUM",
-      "to": "ICN",
-      "aircraftType": null,
-      "departureScheduled": "2001-08-30T00:00",
-      "departureActual": null,
-      "arrivalScheduled": null,
-      "arrivalActual": null
+      "to": "ICN"
     },
     {
-      "date": "2001-08-26",
+      "year": 2001,
       "airline": "AAR",
       "flight": "264",
       "from": "ICN",
-      "to": "GUM",
-      "aircraftType": null,
-      "departureScheduled": "2001-08-26T00:00",
-      "departureActual": null,
-      "arrivalScheduled": null,
-      "arrivalActual": null
+      "to": "GUM"
     },
     {
-      "date": "2003-08-17",
+      "year": 2003,
       "airline": "KAL",
       "flight": "822",
       "from": "NAN",
-      "to": "ICN",
-      "aircraftType": null,
-      "departureScheduled": "2003-08-17T00:00",
-      "departureActual": null,
-      "arrivalScheduled": null,
-      "arrivalActual": null
+      "to": "ICN"
     },
     {
-      "date": "2012-08-07",
+      "year": 2012,
       "airline": "SWA",
       "flight": "763",
       "from": "LAX",
-      "to": "ABQ",
-      "aircraftType": "Boeing 737-700",
-      "departureScheduled": "2012-08-07T10:40",
-      "departureActual": "2012-08-07T10:43",
-      "arrivalScheduled": "2012-08-07T13:25",
-      "arrivalActual": "2012-08-07T13:41"
+      "to": "ABQ"
     },
     {
-      "date": "2004-08-24",
+      "year": 2004,
       "airline": "UAL",
       "flight": "893",
       "from": "SFO",
-      "to": "ICN",
-      "aircraftType": null,
-      "departureScheduled": "2004-08-24T00:00",
-      "departureActual": null,
-      "arrivalScheduled": null,
-      "arrivalActual": null
+      "to": "ICN"
     },
     {
-      "date": "2004-08-24",
+      "year": 2004,
       "airline": "UAL",
       "flight": "893",
       "from": "DEN",
-      "to": "SFO",
-      "aircraftType": null,
-      "departureScheduled": "2004-08-24T00:00",
-      "departureActual": null,
-      "arrivalScheduled": null,
-      "arrivalActual": null
+      "to": "SFO"
     },
     {
-      "date": "2002-05-12",
+      "year": 2002,
       "airline": "KAL",
       "flight": "1230",
       "from": "CJU",
-      "to": "GMP",
-      "aircraftType": null,
-      "departureScheduled": "2002-05-12T00:00",
-      "departureActual": null,
-      "arrivalScheduled": null,
-      "arrivalActual": null
+      "to": "GMP"
     },
     {
-      "date": "2004-06-29",
+      "year": 2004,
       "airline": "UAL",
       "flight": "7133",
       "from": "DEN",
-      "to": "ABQ",
-      "aircraftType": null,
-      "departureScheduled": "2004-06-29T00:00",
-      "departureActual": null,
-      "arrivalScheduled": null,
-      "arrivalActual": null
+      "to": "ABQ"
     },
     {
-      "date": "2004-08-24",
+      "year": 2004,
       "airline": "UAL",
       "flight": "495",
       "from": "ABQ",
-      "to": "DEN",
-      "aircraftType": null,
-      "departureScheduled": "2004-08-24T00:00",
-      "departureActual": null,
-      "arrivalScheduled": null,
-      "arrivalActual": null
+      "to": "DEN"
     },
     {
-      "date": "2003-11-01",
+      "year": 2003,
       "airline": "KAL",
       "flight": "1515",
       "from": "GMP",
-      "to": "TAE",
-      "aircraftType": null,
-      "departureScheduled": "2003-11-01T00:00",
-      "departureActual": null,
-      "arrivalScheduled": null,
-      "arrivalActual": null
+      "to": "TAE"
     },
     {
-      "date": "2003-11-02",
+      "year": 2003,
       "airline": "AAR",
       "flight": "8316",
       "from": "TAE",
-      "to": "GMP",
-      "aircraftType": null,
-      "departureScheduled": "2003-11-02T00:00",
-      "departureActual": null,
-      "arrivalScheduled": null,
-      "arrivalActual": null
+      "to": "GMP"
     },
     {
-      "date": "2005-12-05",
+      "year": 2005,
       "airline": "AAR",
       "flight": "8950",
       "from": "CJU",
-      "to": "GMP",
-      "aircraftType": null,
-      "departureScheduled": "2005-12-05T00:00",
-      "departureActual": null,
-      "arrivalScheduled": null,
-      "arrivalActual": null
+      "to": "GMP"
     },
     {
-      "date": "2003-08-13",
+      "year": 2003,
       "airline": "KAL",
       "flight": "821",
       "from": "ICN",
-      "to": "NAN",
-      "aircraftType": null,
-      "departureScheduled": "2003-08-13T00:00",
-      "departureActual": null,
-      "arrivalScheduled": null,
-      "arrivalActual": null
+      "to": "NAN"
     },
     {
-      "date": "2004-06-29",
+      "year": 2004,
       "airline": "UAL",
       "flight": "252",
       "from": "SFO",
-      "to": "DEN",
-      "aircraftType": null,
-      "departureScheduled": "2004-06-29T00:00",
-      "departureActual": null,
-      "arrivalScheduled": null,
-      "arrivalActual": null
+      "to": "DEN"
     },
     {
-      "date": "2005-07-19",
+      "year": 2005,
       "airline": "KAL",
       "flight": "6707",
       "from": "GMP",
-      "to": "HND",
-      "aircraftType": null,
-      "departureScheduled": "2005-07-19T00:00",
-      "departureActual": null,
-      "arrivalScheduled": null,
-      "arrivalActual": null
+      "to": "HND"
     }
   ]
 }
