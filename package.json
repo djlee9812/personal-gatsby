@@ -12,7 +12,8 @@
     "start": "gatsby develop",
     "build": "gatsby build",
     "serve": "gatsby serve",
-    "clean": "gatsby clean"
+    "clean": "gatsby clean",
+    "flights:build": "node scripts/flighty-export-to-json.mjs"
   },
   "dependencies": {
     "@fontsource/inconsolata": "^4.5.9",
