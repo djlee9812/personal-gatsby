@@ -125,10 +125,74 @@
   margin-bottom: 1.5rem;
 }
 
-.postContent h2, .postContent h3 {
-  margin-top: 2.5rem;
+.postContent img {
+  max-width: min(420px, 100%);
+  height: auto;
+  display: block;
+  margin: 1.5rem auto;
+  border-radius: 8px;
+}
+
+.postContent figure {
+  margin: 2rem 0;
+}
+
+.postContent figure img {
+  margin: 0 auto;
+}
+
+.postContent figcaption {
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  font-style: italic;
+  color: var(--color-text-secondary);
+  text-align: center;
+  margin-top: 1rem;
+  line-height: 1.5;
+}
+
+.postContent h2 {
+  font-family: var(--font-heading);
+  font-size: 1.65rem;
+  margin-top: 2.75rem;
   margin-bottom: 1rem;
   color: var(--color-highlight);
+}
+
+.postContent h2:first-of-type {
+  margin-top: 1.5rem;
+}
+
+.postContent h3 {
+  font-family: var(--font-heading);
+  font-size: 1.2rem;
+  margin-top: 2rem;
+  margin-bottom: 0.65rem;
+  color: var(--color-highlight);
+}
+
+/* Flag emoji prefix in MDX headings (blog posts); aria-label carries country names for AT */
+.postContent h3 :global(.heading-flag) {
+  margin-left: 0.35em;
+  white-space: nowrap;
+  font-family: "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji",
+    sans-serif;
+  font-style: normal;
+  letter-spacing: 0.03em;
+}
+
+.postContent ul,
+.postContent ol {
+  margin: 0 0 1.5rem;
+  padding-left: 1.35rem;
+}
+
+.postContent li {
+  margin-bottom: 0.45rem;
+}
+
+.postContent li::marker {
+  color: var(--color-text-secondary);
 }
 
 @media (max-width: 768px) {
