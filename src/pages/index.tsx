@@ -197,6 +197,7 @@ const IndexPage = () => {
 
       {/* 4. Travel Section */}
       <motion.section 
+        id="travel-map"
         className={styles.section}
         initial="hidden"
         whileInView="visible"
