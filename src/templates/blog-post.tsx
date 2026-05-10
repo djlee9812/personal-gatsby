@@ -22,6 +22,7 @@ const BlogPost = ({ data, children }: PageProps<Queries.BlogPostQuery>) => {
   }
 
   const { frontmatter } = data.mdx;
+  const tags = frontmatter?.tags?.filter((tag): tag is string => Boolean(tag)) ?? [];
 
   return (
     <Layout>
@@ -42,6 +43,13 @@ const BlogPost = ({ data, children }: PageProps<Queries.BlogPostQuery>) => {
           <header className={styles.postHeader}>
             <span className={styles.postMeta}>{frontmatter?.date}</span>
             <h1 className={styles.postTitle}>{frontmatter?.title}</h1>
+            {tags.length > 0 && (
+              <ul className={`${styles.tagList} ${styles.tagListCentered}`} aria-label="Tags">
+                {tags.map((tag) => (
+                  <li key={tag} className={styles.tag}>{tag}</li>
+                ))}
+              </ul>
+            )}
             <div className={styles.hr} />
           </header>
           
@@ -60,6 +68,7 @@ export const query = graphql`
       frontmatter {
         title
         date(formatString: "MMMM D, YYYY")
+        tags
       }
       excerpt(pruneLength: 160)
     }

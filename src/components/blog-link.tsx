@@ -12,11 +12,19 @@ const BlogLink = ({ node }: BlogLinkProps) => {
   const title = frontmatter?.title;
   const date = frontmatter?.date;
   const slug = frontmatter?.slug;
-  
+  const tags = frontmatter?.tags?.filter((tag): tag is string => Boolean(tag)) ?? [];
+
   return (
     <Link to={`/blog/${slug}`} className={styles.blogCard}>
       <span className={styles.blogDate}>{date}</span>
       <h3>{title}</h3>
+      {tags.length > 0 && (
+        <ul className={styles.tagList} aria-label="Tags">
+          {tags.map((tag) => (
+            <li key={tag} className={styles.tag}>{tag}</li>
+          ))}
+        </ul>
+      )}
       <p className={styles.blogExcerpt}>{node.excerpt}</p>
       <div className={styles.readMore}>
         Read Post <FontAwesomeIcon icon={['fas', 'arrow-right']} size="xs" />

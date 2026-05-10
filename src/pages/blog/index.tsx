@@ -80,6 +80,7 @@ export const query = graphql`
             title
             date(formatString:"MMMM D, YYYY")
             slug
+            tags
           }
           id
         }
