@@ -149,6 +149,7 @@
 }
 
 .postContent p {
+  margin-top: 0; /* UA default 1em top margin skews side-by-side layouts (e.g. trip columns) */
   margin-bottom: 1.5rem;
 }
 
@@ -188,6 +189,84 @@
   text-align: center;
   margin-top: 1rem;
   line-height: 1.5;
+}
+
+/* Optional: left-align a hero figure with body text (see MDX class on <figure>) */
+.postContent :global(figure.post-figure--left) {
+  margin: 1.25rem 0 2rem;
+}
+
+.postContent :global(figure.post-figure--left img) {
+  margin-left: 0;
+  margin-right: auto;
+}
+
+/* Asymmetric trip rows: full-width h3 above; text + image in columns; --reverse swaps on wide */
+.postContent :global(.trip-asymmetric) {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+  align-items: start;
+  margin: 0 0 2.25rem;
+}
+
+.postContent h3 + :global(.trip-asymmetric) {
+  margin-top: 0;
+}
+
+.postContent :global(.trip-asymmetric__text) {
+  min-width: 0;
+  align-self: start;
+}
+
+.postContent :global(.trip-asymmetric__text p:last-child) {
+  margin-bottom: 0;
+}
+
+.postContent :global(.trip-asymmetric figure.trip-asymmetric__figure) {
+  margin: 0;
+  align-self: start;
+}
+
+.postContent :global(.trip-asymmetric figure.trip-asymmetric__figure img) {
+  margin: 0;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+@media (min-width: 769px) {
+  .postContent :global(.trip-asymmetric) {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 1.75rem;
+  }
+
+  .postContent :global(.trip-asymmetric__text) {
+    order: 1;
+  }
+
+  .postContent :global(figure.trip-asymmetric__figure) {
+    order: 2;
+  }
+
+  .postContent :global(.trip-asymmetric--reverse .trip-asymmetric__text) {
+    order: 2;
+  }
+
+  .postContent :global(.trip-asymmetric--reverse figure.trip-asymmetric__figure) {
+    order: 1;
+  }
+}
+
+@media (max-width: 768px) {
+  .postContent :global(.trip-asymmetric__text) {
+    order: 1 !important;
+  }
+
+  .postContent :global(.trip-asymmetric figure.trip-asymmetric__figure) {
+    order: 2 !important;
+  }
 }
 
 .postContent h2 {
