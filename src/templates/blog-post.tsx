@@ -28,7 +28,7 @@ const BlogPost = ({ data, children }: PageProps<Queries.BlogPostQuery>) => {
     <Layout>
       <div className={globalStyles.navbarMargin}>
         <motion.div 
-          className={`${globalStyles.container} ${styles.blogContainer}`}
+          className={styles.blogContainer}
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
