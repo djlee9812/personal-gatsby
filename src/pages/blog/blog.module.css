@@ -214,6 +214,30 @@
   margin-top: 0;
 }
 
+/* Full-width visit date under h3, above asymmetric body (food/travel posts) */
+.postContent :global(.post-title-band) {
+  margin: 0 0 1rem;
+  border-bottom: 1px solid var(--color-border);
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+}
+
+.postContent :global(.post-title-band time) {
+  font-variant-numeric: tabular-nums;
+}
+
+.postContent h3 + :global(.post-title-band) {
+  margin-top: 0;
+}
+
+.postContent :global(.post-title-band) + :global(.trip-asymmetric) {
+  margin-top: 0;
+}
+
 .postContent :global(.trip-asymmetric__text) {
   min-width: 0;
   align-self: start;
@@ -226,6 +250,18 @@
 .postContent :global(.trip-asymmetric figure.trip-asymmetric__figure) {
   margin: 0;
   align-self: start;
+}
+
+.postContent :global(.trip-asymmetric__figure-stack) {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  min-width: 0;
+  align-self: start;
+}
+
+.postContent :global(.trip-asymmetric__figure-stack figure.trip-asymmetric__figure) {
+  margin: 0;
 }
 
 .postContent :global(.trip-asymmetric figure.trip-asymmetric__figure img) {
@@ -246,7 +282,8 @@
     order: 1;
   }
 
-  .postContent :global(figure.trip-asymmetric__figure) {
+  .postContent :global(figure.trip-asymmetric__figure),
+  .postContent :global(.trip-asymmetric__figure-stack) {
     order: 2;
   }
 
@@ -254,7 +291,8 @@
     order: 2;
   }
 
-  .postContent :global(.trip-asymmetric--reverse figure.trip-asymmetric__figure) {
+  .postContent :global(.trip-asymmetric--reverse figure.trip-asymmetric__figure),
+  .postContent :global(.trip-asymmetric--reverse .trip-asymmetric__figure-stack) {
     order: 1;
   }
 }
@@ -264,7 +302,8 @@
     order: 1 !important;
   }
 
-  .postContent :global(.trip-asymmetric figure.trip-asymmetric__figure) {
+  .postContent :global(.trip-asymmetric figure.trip-asymmetric__figure),
+  .postContent :global(.trip-asymmetric .trip-asymmetric__figure-stack) {
     order: 2 !important;
   }
 }
