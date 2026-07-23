@@ -16,7 +16,9 @@ const BlogLink = ({ node }: BlogLinkProps) => {
 
   return (
     <Link to={`/blog/${slug}`} className={styles.blogCard}>
-      <span className={styles.blogDate}>{date}</span>
+      <div className={styles.blogMeta}>
+        <span className={styles.blogDate}>{date}</span>
+      </div>
       <h3>{title}</h3>
       {tags.length > 0 && (
         <ul className={styles.tagList} aria-label="Tags">
@@ -27,7 +29,7 @@ const BlogLink = ({ node }: BlogLinkProps) => {
       )}
       <p className={styles.blogExcerpt}>{node.excerpt}</p>
       <div className={styles.readMore}>
-        Read Post <FontAwesomeIcon icon={['fas', 'arrow-right']} size="xs" />
+        Read Post <FontAwesomeIcon icon={['fas', 'arrow-right']} size="xs" aria-hidden="true" />
       </div>
     </Link>
   )

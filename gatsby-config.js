@@ -19,7 +19,14 @@ const config = {
     "gatsby-plugin-sitemap",
     "gatsby-plugin-sharp",
     "gatsby-transformer-sharp",
-    "gatsby-plugin-mdx",
+    {
+      resolve: "gatsby-plugin-mdx",
+      options: {
+        mdxOptions: {
+          rehypePlugins: [require("rehype-unwrap-images")],
+        },
+      },
+    },
     {
       resolve: "gatsby-source-filesystem",
       options: {

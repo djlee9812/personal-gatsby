@@ -1,11 +1,46 @@
-/* Single-post layout: horizontal inset matches listing cards (page padding + card padding ~1.5rem). */
+/*
+ * Shared blog tokens. Breakout / section gap inherit to Asymmetric,
+ * ImageGrid, and essay heading breakouts.
+ */
 .blogContainer {
-  max-width: 800px;
+  --blog-breakout-width: min(100vw - 2rem, 56rem);
+  --blog-section-gap: 2.5rem;
+  /*
+   * Shared prose measure in rem (not ch). ch is font-relative, so 72ch on the
+   * header (inherited proportional font) was narrower than 72ch on .postContent
+   * (Inconsolata). rem keeps header + body on the same column.
+   */
+  --blog-prose-max: 42rem;
+  /*
+   * Breakout positioning relative to the prose column. Notes posts center
+   * breakouts; essays left-rail them (see .blogContainerEssay).
+   */
+  --blog-breakout-left: 50%;
+  --blog-breakout-transform: translateX(-50%);
+  /* Standard (non-essay): chrome sized to prose column + padding */
+  max-width: calc(var(--blog-prose-max) + 2 * clamp(1.75rem, 5vw, 2.75rem) + 30px);
   margin: 0 auto;
   width: 100%;
   box-sizing: border-box;
   overflow-wrap: break-word;
+  /* Breakouts use translateX; don't clip them inside the essay chrome */
+  overflow-x: visible;
   padding: 15px clamp(1.75rem, 5vw, 2.75rem);
+}
+
+/*
+ * Essay: wider chrome + left rail. Prose, headings, and breakouts share the
+ * shell's left edge so images extend right without a centered-prose "jog".
+ */
+.blogContainerEssay {
+  max-width: 1120px;
+  --blog-breakout-left: auto;
+  --blog-breakout-transform: none;
+}
+
+.blogContainerEssay .postHeader {
+  margin-left: 0;
+  margin-right: auto;
 }
 
 .backLinkContainer {
@@ -26,6 +61,11 @@
 
 .backLink:hover {
   color: var(--color-accent);
+}
+
+.backLink:focus-visible {
+  outline: 2px solid var(--color-highlight);
+  outline-offset: 2px;
 }
 
 .blogGrid {
@@ -57,6 +97,11 @@
   background: var(--color-card-hover-bg);
 }
 
+.blogCard:focus-visible {
+  outline: 2px solid var(--color-highlight);
+  outline-offset: 2px;
+}
+
 .blogCard h3 {
   margin: 0 0 0.5rem 0;
   font-family: var(--font-heading);
@@ -64,11 +109,18 @@
   font-size: 1.5rem;
 }
 
+.blogMeta {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 0.5rem 0.75rem;
+  margin-bottom: 1rem;
+}
+
 .blogDate {
   font-family: var(--font-body);
   font-size: 0.85rem;
   color: var(--color-text-secondary);
-  margin-bottom: 1rem;
   display: block;
 }
 
@@ -86,13 +138,12 @@
   flex-wrap: wrap;
   gap: 0.4rem;
   list-style: none;
-  margin: 0 0 1rem 0;
+  margin: 0.75rem 0 0;
   padding: 0;
 }
 
 .tagListCentered {
   justify-content: center;
-  margin: 0.75rem 0 0;
 }
 
 .tag {
@@ -102,7 +153,7 @@
   text-transform: uppercase;
   color: var(--color-text-secondary);
   background: transparent;
-  border: 1px solid var(--color-border);
+  border: 1px solid var(--color-card-hover-border);
   border-radius: 999px;
   padding: 0.2rem 0.6rem;
   line-height: 1;
@@ -118,14 +169,16 @@
   gap: 0.5rem;
 }
 
-/* Post Template Styles */
+/* Post header + article share --blog-prose-max. Notes: centered in chrome.
+ * Essays: left-railed via .blogContainerEssay .postHeader / .postContentEssay. */
 .postHeader {
-  margin-bottom: 3rem;
-  text-align: center;
+  margin: 0 auto 3rem;
+  text-align: left;
+  max-width: min(var(--blog-prose-max), 100%);
 }
 
 .postTitle {
-  font-size: 3rem;
+  font-size: 2.15rem;
   margin-bottom: 0.5rem;
   color: var(--color-highlight);
 }
@@ -138,37 +191,51 @@
 .hr {
   height: 2px;
   width: 100px;
-  background: linear-gradient(90deg, transparent, var(--color-highlight), transparent);
-  margin: 2rem auto;
+  background: linear-gradient(90deg, var(--color-highlight), transparent);
+  margin: 2rem 0 0;
 }
 
+/*
+ * Prose stays at --blog-prose-max for readability.
+ * Essay headings widen only when the next sibling is a breakout layout.
+ */
 .postContent {
   font-family: var(--font-body);
   line-height: 1.8;
   font-size: 1.1rem;
   overflow-wrap: break-word;
   word-wrap: break-word;
+  max-width: min(var(--blog-prose-max), 100%);
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .postContent p {
-  margin-top: 0; /* UA default 1em top margin skews side-by-side layouts (e.g. trip columns) */
+  margin-top: 0; /* UA default 1em top margin skews side-by-side layouts */
   margin-bottom: 1.5rem;
 }
 
 .postContent a,
 .postContent a:visited {
   color: var(--color-accent);
-  text-decoration: none;
-}
-
-.postContent a:hover {
-  color: var(--color-highlight);
   text-decoration: underline;
   text-underline-offset: 0.15em;
 }
 
+.postContent a:hover {
+  color: var(--color-highlight);
+  text-decoration-thickness: 2px;
+}
+
+.postContent a:focus-visible {
+  outline: 2px solid var(--color-highlight);
+  outline-offset: 2px;
+}
+
+/* Default markdown/legacy images fill the prose measure */
 .postContent img {
-  max-width: min(420px, 100%);
+  max-width: 100%;
+  width: 100%;
   height: auto;
   display: block;
   margin: 1.5rem auto;
@@ -183,42 +250,28 @@
   margin: 0 auto;
 }
 
+/* Single source for all blog captions (BlogImage + ImageGrid figcaptions). */
 .postContent figcaption {
   font-family: var(--font-body);
   font-size: 0.9rem;
   font-style: italic;
   color: var(--color-text-secondary);
   text-align: center;
-  margin-top: 1rem;
+  margin-top: 0.75rem;
   line-height: 1.5;
 }
 
-/* Optional: left-align a hero figure with body text (see MDX class on <figure>) */
-.postContent :global(figure.post-figure--left) {
-  margin: 1.25rem 0 2rem;
+/* Left-aligned caption variant (Image align="left"); global hook beats the
+ * element rule above. */
+.postContent :global(.blog-caption-left) {
+  text-align: left;
 }
 
-.postContent :global(figure.post-figure--left img) {
-  margin-left: 0;
-  margin-right: auto;
-}
-
-/* Asymmetric trip rows: full-width h3 above; text + image in columns; --reverse swaps on wide */
-.postContent :global(.trip-asymmetric) {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 1.25rem;
-  align-items: start;
-  margin: 0 0 2.25rem;
-}
-
-.postContent h3 + :global(.trip-asymmetric) {
-  margin-top: 0;
-}
-
-/* Full-width visit date under h3, above asymmetric body (food/travel posts) */
+/* Visit date/location under h2/h3 — fit-content so the hairline tracks the text */
 .postContent :global(.post-title-band) {
-  margin: 0 0 1rem;
+  width: fit-content;
+  max-width: 100%;
+  margin: 0 0 0.85rem;
   border-bottom: 1px solid var(--color-border);
   font-family: var(--font-body);
   font-size: 0.9rem;
@@ -232,82 +285,9 @@
   font-variant-numeric: tabular-nums;
 }
 
+.postContent h2 + :global(.post-title-band),
 .postContent h3 + :global(.post-title-band) {
   margin-top: 0;
-}
-
-.postContent :global(.post-title-band) + :global(.trip-asymmetric) {
-  margin-top: 0;
-}
-
-.postContent :global(.trip-asymmetric__text) {
-  min-width: 0;
-  align-self: start;
-}
-
-.postContent :global(.trip-asymmetric__text p:last-child) {
-  margin-bottom: 0;
-}
-
-.postContent :global(.trip-asymmetric figure.trip-asymmetric__figure) {
-  margin: 0;
-  align-self: start;
-}
-
-.postContent :global(.trip-asymmetric__figure-stack) {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  min-width: 0;
-  align-self: start;
-}
-
-.postContent :global(.trip-asymmetric__figure-stack figure.trip-asymmetric__figure) {
-  margin: 0;
-}
-
-.postContent :global(.trip-asymmetric figure.trip-asymmetric__figure img) {
-  margin: 0;
-  width: 100%;
-  max-width: 100%;
-  height: auto;
-  border-radius: 8px;
-}
-
-@media (min-width: 769px) {
-  .postContent :global(.trip-asymmetric) {
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-    gap: 1.75rem;
-  }
-
-  .postContent :global(.trip-asymmetric__text) {
-    order: 1;
-  }
-
-  .postContent :global(figure.trip-asymmetric__figure),
-  .postContent :global(.trip-asymmetric__figure-stack) {
-    order: 2;
-  }
-
-  .postContent :global(.trip-asymmetric--reverse .trip-asymmetric__text) {
-    order: 2;
-  }
-
-  .postContent :global(.trip-asymmetric--reverse figure.trip-asymmetric__figure),
-  .postContent :global(.trip-asymmetric--reverse .trip-asymmetric__figure-stack) {
-    order: 1;
-  }
-}
-
-@media (max-width: 768px) {
-  .postContent :global(.trip-asymmetric__text) {
-    order: 1 !important;
-  }
-
-  .postContent :global(.trip-asymmetric figure.trip-asymmetric__figure),
-  .postContent :global(.trip-asymmetric .trip-asymmetric__figure-stack) {
-    order: 2 !important;
-  }
 }
 
 .postContent h2 {
@@ -330,14 +310,16 @@
   color: var(--color-highlight);
 }
 
-/* Flag emoji prefix in MDX headings (blog posts); aria-label carries country names for AT */
-.postContent h3 :global(.heading-flag) {
+/* Flag emoji in MDX headings / TitleBand; aria-label carries country names for AT */
+.postContent h3 :global(.heading-flag),
+.postContent :global(.post-title-band .heading-flag) {
   margin-left: 0.35em;
   white-space: nowrap;
   font-family: "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji",
     sans-serif;
   font-style: normal;
   letter-spacing: 0.03em;
+  text-transform: none;
 }
 
 .postContent ul,
@@ -354,11 +336,159 @@
   color: var(--color-text-secondary);
 }
 
+.postContent code {
+  font-family: var(--font-body);
+  font-size: 0.9em;
+  background: color-mix(in srgb, var(--color-text-primary) 7%, transparent);
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  padding: 0.12em 0.35em;
+}
+
+.postContent pre {
+  margin: 0 0 1.5rem;
+  padding: 1rem 1.2rem;
+  overflow-x: auto;
+  background: var(--color-card-bg);
+  border: 1px solid var(--color-card-border);
+  border-radius: 8px;
+  box-shadow: var(--color-card-shadow);
+}
+
+.postContent pre code {
+  background: none;
+  border: none;
+  border-radius: 0;
+  padding: 0;
+  font-size: 0.95em;
+}
+
+.postContent blockquote {
+  margin: 0 0 1.5rem;
+  padding: 0.15rem 0 0.15rem 1.15rem;
+  border-left: 3px solid var(--color-accent);
+  color: var(--color-text-secondary);
+}
+
+.postContent blockquote p:last-child {
+  margin-bottom: 0;
+}
+
+/*
+ * Essay overrides — after base .postContent heading rules so they win
+ * (equal specificity; source order decides).
+ */
+/* Left-rail: share the shell left edge with breakouts (images extend right). */
+.postContentEssay {
+  margin-left: 0;
+  margin-right: auto;
+}
+
+.postContentEssay :global(figure) {
+  margin: 2.25rem 0;
+}
+
+/* Asymmetric stacked media: beat .postContent img so images stay modest +
+ * left-railed. Breakout rows (columns Asymmetric + ImageGrid) override below. */
+.postContent :global(.blog-media) img,
+.postContent :global(.blog-media) figure img {
+  margin: 0;
+  width: auto;
+  max-width: min(26rem, 100%);
+}
+
+.postContent :global(.blog-breakout) :global(.blog-media) img,
+.postContent :global(.blog-breakout) :global(.blog-media) figure img {
+  width: 100%;
+  max-width: 100%;
+}
+
+/* ImageGrid: equal-height row — width follows aspect (overrides breakout fill). */
+.postContent :global(.blog-image-grid) :global(.blog-media) img,
+.postContent :global(.blog-image-grid) :global(.blog-media) figure img {
+  width: auto;
+  max-width: 100%;
+  height: min(42vh, 24rem);
+  object-fit: contain;
+}
+
+@media (max-width: 768px) {
+  .postContent :global(.blog-image-grid) :global(.blog-media) img,
+  .postContent :global(.blog-image-grid) :global(.blog-media) figure img {
+    width: 100%;
+    height: auto;
+    max-height: min(50vh, 28rem);
+  }
+}
+
+.postContentEssay :global(.blog-media figure) {
+  margin: 0;
+}
+
+/* ImageGrid / breakout figures — same margin kill as .blog-media (essay
+ * figure rule is higher specificity than ImageGrid .cell). */
+.postContentEssay :global(.blog-breakout figure) {
+  margin: 0;
+}
+
+/*
+ * Widen headings above a breakout so they span the visual block. Left-rail
+ * already aligns them — no translateX needed. TitleBand stays fit-content.
+ */
+.postContentEssay h2:has(+ :global(.blog-breakout)),
+.postContentEssay h3:has(+ :global(.blog-breakout)),
+.postContentEssay h2:has(+ :global(.post-title-band) + :global(.blog-breakout)),
+.postContentEssay h3:has(+ :global(.post-title-band) + :global(.blog-breakout)) {
+  width: var(--blog-breakout-width);
+  max-width: none;
+}
+
+.postContentEssay h2 {
+  margin-top: 3rem;
+  margin-bottom: 0.75rem;
+}
+
+.postContentEssay h2:first-of-type {
+  margin-top: 1.5rem;
+}
+
+.postContentEssay h3 {
+  margin-top: 2.75rem;
+  margin-bottom: 0.85rem;
+  font-size: 1.35rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .backLink {
+    transition: none;
+  }
+
+  .blogCard {
+    transition: none;
+  }
+
+  .blogCard:hover {
+    transform: none;
+  }
+}
+
 @media (max-width: 768px) {
   .blogGrid {
     grid-template-columns: 1fr;
   }
   .postTitle {
-    font-size: 2.2rem;
+    font-size: 1.85rem;
+  }
+
+  .postContentEssay h2:has(+ :global(.blog-breakout)),
+  .postContentEssay h3:has(+ :global(.blog-breakout)),
+  .postContentEssay h2:has(+ :global(.post-title-band) + :global(.blog-breakout)),
+  .postContentEssay h3:has(+ :global(.post-title-band) + :global(.blog-breakout)) {
+    width: 100%;
+  }
+
+  .postContentEssay h3 {
+    font-size: 1.2rem;
+    margin-top: 2.25rem;
   }
 }

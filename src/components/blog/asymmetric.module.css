@@ -1,0 +1,159 @@
+/*
+ * Text + image section.
+ * - .asymmetric base is a single column (mobile-first).
+ * - Columns mode (>=769px, has media, long copy) breaks out to --blog-breakout-width.
+ * - Stacked mode (short copy / layout="stack") stays in the prose column.
+ * Breakout offset comes from --blog-breakout-* tokens (centered on notes,
+ * left-railed on essays).
+ */
+.asymmetric {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+  align-items: start;
+  margin: 0 0 var(--blog-section-gap, 2.5rem);
+  width: var(--blog-breakout-width, min(100vw - 2rem, 56rem));
+  max-width: none;
+  position: relative;
+  left: var(--blog-breakout-left, 50%);
+  transform: var(--blog-breakout-transform, translateX(-50%));
+}
+
+/*
+ * Single-column variants (stacked / text-only): sit in the prose column,
+ * NOT the breakout box.
+ */
+.textOnly,
+.stacked {
+  grid-template-columns: 1fr;
+  width: 100%;
+  left: auto;
+  transform: none;
+}
+
+.textOnly {
+  margin-bottom: 1.25rem;
+}
+
+.textOnly .text,
+.stacked .text {
+  max-width: 100%;
+}
+
+.text {
+  min-width: 0;
+}
+
+.text p:last-child {
+  margin-bottom: 0;
+}
+
+.media {
+  margin: 0;
+  min-width: 0;
+}
+
+/* Figure margin reset lives in blog.module.css (.postContentEssay
+ * :global(.blog-media figure)) — it must win over the essay figure margin,
+ * which requires matching in the same stylesheet at higher specificity. */
+
+/*
+ * Base image = modest left-aligned look: natural aspect, no crop, height-capped.
+ * Shared by stacked sections AND mobile (single column). Columns mode (desktop)
+ * overrides below to a cropped, column-filling image.
+ */
+.media img {
+  margin: 0;
+  width: auto;
+  max-width: min(26rem, 100%);
+  height: auto;
+  max-height: 30rem;
+  /* Override shared .img defaults so photos keep natural aspect */
+  aspect-ratio: auto;
+  object-fit: contain;
+  border-radius: 8px;
+  display: block;
+}
+
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  min-width: 0;
+}
+
+/* Caption typography/alignment is single-sourced in blog.module.css. */
+
+/* Stacked: keep the modest image on the prose left rail (not centered). */
+.stacked .media,
+.stacked .stack {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+}
+
+/* Shrink-wrap figure so caption sits under the image, not the full column. */
+.stacked .media :global(figure) {
+  width: fit-content;
+  max-width: 100%;
+}
+
+@media (min-width: 769px) {
+  /* Two columns only for real columns-mode rows */
+  .asymmetric:not(.textOnly):not(.stacked) {
+    /* Slight text bias — balances copy against the image column */
+    grid-template-columns: minmax(0, 1.12fr) minmax(0, 0.88fr);
+    gap: 1.75rem;
+    /* Top-align so text and image start on the same line (centering made the
+     * taller text column start well above the image). */
+    align-items: start;
+  }
+
+  /* Columns mode: image fills its column and is cropped to a capped height,
+   * overriding the base modest look. */
+  .asymmetric:not(.textOnly):not(.stacked) .media img {
+    width: 100%;
+    max-width: 100%;
+    max-height: min(58vh, 24rem);
+    object-fit: cover;
+    object-position: center;
+    margin: 0;
+  }
+
+  .asymmetric:not(.textOnly):not(.stacked) .stack .media img {
+    max-height: min(48vh, 20rem);
+  }
+
+  .asymmetric:not(.textOnly):not(.stacked) .text {
+    order: 1;
+  }
+
+  .asymmetric:not(.textOnly):not(.stacked) .media,
+  .asymmetric:not(.textOnly):not(.stacked) .stack {
+    order: 2;
+  }
+
+  .reverse .text {
+    order: 2;
+  }
+
+  .reverse .media,
+  .reverse .stack {
+    order: 1;
+  }
+}
+
+@media (max-width: 768px) {
+  .asymmetric {
+    width: 100%;
+    left: auto;
+    transform: none;
+    gap: 0.85rem;
+    margin-bottom: 2rem;
+  }
+
+  .stack {
+    gap: 0.75rem;
+    align-items: start;
+  }
+}

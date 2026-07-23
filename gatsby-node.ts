@@ -6,6 +6,24 @@ export const onPreBootstrap: GatsbyNode["onPreBootstrap"] = async () => {
   await copyLibFiles(path.join(process.cwd(), "static", "~partytown"));
 };
 
+export const createSchemaCustomization: GatsbyNode["createSchemaCustomization"] = ({
+  actions,
+}) => {
+  const { createTypes } = actions;
+  createTypes(`
+    type Mdx implements Node {
+      frontmatter: MdxFrontmatter
+    }
+    type MdxFrontmatter {
+      title: String
+      date: Date @dateformat
+      slug: String
+      tags: [String]
+      layout: String
+    }
+  `);
+};
+
 export const createPages: GatsbyNode["createPages"] = async ({ graphql, actions, reporter }) => {
   const { createPage } = actions;
 

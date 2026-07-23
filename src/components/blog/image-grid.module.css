@@ -1,0 +1,71 @@
+/* Same breakout measure as Asymmetric / essay section headers */
+.grid {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin: 0 0 var(--blog-section-gap, 2.5rem);
+  width: var(--blog-breakout-width, min(100vw - 2rem, 56rem));
+  max-width: none;
+  position: relative;
+  left: var(--blog-breakout-left, 50%);
+  transform: var(--blog-breakout-transform, translateX(-50%));
+}
+
+/* Shared row height; width follows each photo's aspect (no crop). */
+.grid img {
+  margin: 0;
+  width: auto;
+  max-width: 100%;
+  height: min(42vh, 24rem);
+  object-fit: contain;
+  object-position: center;
+  border-radius: 8px;
+  display: block;
+}
+
+.cell {
+  margin: 0;
+  min-width: 0;
+}
+
+.cell :global(figure) {
+  margin: 0;
+  width: fit-content;
+  max-width: 100%;
+}
+
+/* Caption typography is single-sourced in blog.module.css (.postContent figcaption). */
+
+@media (min-width: 640px) {
+  .grid {
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 1.25rem;
+  }
+
+  .cell {
+    flex: 0 1 auto;
+  }
+}
+
+@media (max-width: 768px) {
+  .grid {
+    width: 100%;
+    left: auto;
+    transform: none;
+  }
+
+  /* Stacked: full width, natural height (shared height less useful). */
+  .grid img {
+    width: 100%;
+    height: auto;
+    max-height: min(50vh, 28rem);
+    object-fit: contain;
+  }
+
+  .cell :global(figure) {
+    width: 100%;
+  }
+}

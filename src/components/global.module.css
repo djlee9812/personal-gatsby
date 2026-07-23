@@ -5,8 +5,9 @@
   --color-bg-secondary: #ffffff;
   --color-text-primary: #2d3436;
   --color-text-secondary: #636e72;
-  --color-accent: #00b894; /* Teal */
-  --color-highlight: #008f72; /* Darker Teal for better visibility on light bg */
+  /* Accent ≥4.5:1 on #f8f9fa (was #00b894 ≈2.4:1) */
+  --color-accent: #007a63;
+  --color-highlight: #006b56;
   --color-border: #dfe6e9;
 
   /* Card surfaces (light mode: high contrast on light bg, WCAG-friendly) */
