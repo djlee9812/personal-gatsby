@@ -215,6 +215,15 @@
   margin-bottom: 1.5rem;
 }
 
+/* Inconsolata default import is 400-only — load 700 in layout for these to show. */
+.postContent strong {
+  font-weight: 700;
+}
+
+.postContent em {
+  font-style: italic;
+}
+
 .postContent a,
 .postContent a:visited {
   color: var(--color-accent);
@@ -403,21 +412,80 @@
   max-width: 100%;
 }
 
-/* ImageGrid: equal-height row — width follows aspect (overrides breakout fill). */
+/* ImageGrid heights/fit — single source for .postContent (beats breakout fill).
+ * Tokens --blog-grid-row-h / --blog-grid-mosaic-h are set on .blog-image-grid. */
 .postContent :global(.blog-image-grid) :global(.blog-media) img,
 .postContent :global(.blog-image-grid) :global(.blog-media) figure img {
-  width: auto;
+  width: 100%;
   max-width: 100%;
-  height: min(42vh, 24rem);
+  height: auto;
+  max-height: min(50vh, 28rem);
   object-fit: contain;
 }
 
-@media (max-width: 768px) {
-  .postContent :global(.blog-image-grid) :global(.blog-media) img,
-  .postContent :global(.blog-image-grid) :global(.blog-media) figure img {
+/* Mosaic mobile only — short cover row (do not leave unscoped or it beats desktop). */
+@media (max-width: 639px) {
+  .postContent :global(.blog-image-grid[data-mobile="mosaic"]) :global(.blog-media) img,
+  .postContent
+    :global(.blog-image-grid[data-mobile="mosaic"])
+    :global(.blog-media)
+    figure
+    img {
     width: 100%;
-    height: auto;
-    max-height: min(50vh, 28rem);
+    max-height: none;
+    height: var(--blog-grid-mosaic-h, min(36vh, 16rem));
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .postContent
+    :global(.blog-image-grid[data-mobile="mosaic"] .blog-grid-tall-mobile)
+    :global(img),
+  .postContent
+    :global(.blog-image-grid[data-mobile="mosaic"] .blog-grid-tall-mobile)
+    :global(figure img) {
+    height: var(--cover-height-mobile);
+  }
+}
+
+@media (min-width: 640px) {
+  /* Non-mosaic: equal-height contain (Tresind / croissant pairs). */
+  .postContent
+    :global(.blog-image-grid[data-mobile="stack"])
+    :global(.blog-media)
+    img,
+  .postContent
+    :global(.blog-image-grid[data-mobile="stack"])
+    :global(.blog-media)
+    figure
+    img {
+    width: auto;
+    max-width: 100%;
+    max-height: none;
+    height: var(--blog-grid-row-h, min(42vh, 24rem));
+    object-fit: contain;
+  }
+
+  .postContent
+    :global(.blog-image-grid[data-mobile="stack"])
+    :global(.blog-media)
+    figure {
+    width: fit-content;
+    max-width: 100%;
+  }
+
+  /* Mosaic desktop: cover at mosaic height (not the taller contain-pair row). */
+  .postContent :global(.blog-image-grid[data-mobile="mosaic"]) :global(.blog-media) img,
+  .postContent
+    :global(.blog-image-grid[data-mobile="mosaic"])
+    :global(.blog-media)
+    figure
+    img {
+    width: 100%;
+    max-height: none;
+    height: var(--blog-grid-mosaic-h, min(36vh, 16rem));
+    object-fit: cover;
+    object-position: center;
   }
 }
 

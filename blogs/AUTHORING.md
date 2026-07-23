@@ -69,12 +69,17 @@ A paragraph (or few) of copy.
 
 ```mdx
 <ImageGrid
+  mobile="mosaic"  // optional: 2-up cover on small screens
   images={[
     { src: "...", alt: "...", caption: "..." },
     { src: "...", alt: "...", caption: "..." },
   ]}
 />
 ```
+
+- Default: full-width stack on mobile; equal-height **contain** row on tablet+ (no crop — good for captioned pairs).
+- `mobile="mosaic"`: 2-up **cover** grid on small screens (food dumps); leftover 3rd stays one-cell wide and centered. Desktop mosaic also uses cover at the shared row height.
+- Per-image crop tweaks: `objectPosition`, `objectFit`, `coverHeightMobile` (needs `mobile="mosaic"`; below 640px only). Prefer `coverHeightMobile` over `coverHeight` — the latter is inline and overrides every breakpoint. Do not set both.
 
 ### Heading alignment (essay)
 

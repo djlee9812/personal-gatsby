@@ -17,6 +17,16 @@
   border-radius: 8px;
 }
 
+/*
+ * Fill mode (Asymmetric / ImageGrid): parent owns width/height. Don't force
+ * width:100% + height:auto here — that breaks equal-height contain rows.
+ */
+.figureFill .img {
+  width: auto;
+  max-width: 100%;
+  height: auto;
+}
+
 /* Fills the prose measure (default) */
 .content {
   width: 100%;

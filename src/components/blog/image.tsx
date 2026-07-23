@@ -17,6 +17,17 @@ export type BlogImageProps = {
    */
   width?: number
   height?: number
+  /** CSS object-position when the layout crops (e.g. ImageGrid cover). */
+  objectPosition?: string
+  /** CSS object-fit override (ImageGrid defaults to cover). */
+  objectFit?: React.CSSProperties["objectFit"]
+  /**
+   * CSS height for cover-crop layouts (ImageGrid). Separate from intrinsic
+   * `height` (source pixels). e.g. "min(42vh, 26rem)" for tall portraits.
+   */
+  coverHeight?: string
+  /** Override Cloudinary/layout `sizes` (e.g. ImageGrid mosaic ~50vw cells). */
+  sizes?: string
   className?: string
   loading?: "lazy" | "eager"
 }
@@ -96,17 +107,24 @@ const BlogImage = ({
   align = "center",
   width,
   height,
+  objectPosition,
+  objectFit,
+  coverHeight,
+  sizes: sizesOverride,
   className,
   loading = "lazy",
 }: BlogImageProps) => {
   if (!src) return null
 
   const isContentLeft = size === "content" && align === "left"
+  const sizes =
+    sizesOverride ??
+    (isContentLeft ? SIZES_CONTENT_LEFT : SIZES_ATTR[size])
   const optimized = optimizeCloudinaryImage(src, {
     // Delivery width is layout-based — never use intrinsic CLS dims here
     // (AUTHORING may pass width={4032} for aspect-ratio only).
     width: isContentLeft ? DEFAULT_WIDTH_CONTENT_LEFT : DEFAULT_WIDTH[size],
-    sizes: isContentLeft ? SIZES_CONTENT_LEFT : SIZES_ATTR[size],
+    sizes,
   })
 
   const figureClass = [
@@ -125,10 +143,15 @@ const BlogImage = ({
     .filter(Boolean)
     .join(" ")
 
-  /* When both dims are known, reserve that ratio before decode (no shared crop). */
-  const imgStyle =
-    width && height
-      ? ({ aspectRatio: `${width} / ${height}` } as React.CSSProperties)
+  /* Intrinsic ratio for CLS; crop framing for ImageGrid cover layouts. */
+  const imgStyle: React.CSSProperties | undefined =
+    width || height || objectPosition || objectFit || coverHeight
+      ? {
+          ...(width && height ? { aspectRatio: `${width} / ${height}` } : null),
+          ...(objectPosition ? { objectPosition } : null),
+          ...(objectFit ? { objectFit } : null),
+          ...(coverHeight ? { height: coverHeight } : null),
+        }
       : undefined
 
   const img = (

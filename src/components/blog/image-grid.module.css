@@ -1,26 +1,23 @@
-/* Same breakout measure as Asymmetric / essay section headers */
+/* Same breakout measure as Asymmetric / essay section headers.
+ * Img height/fit for posts are single-sourced in blog.module.css via the
+ * tokens below (module rules lose to .postContent specificity). */
 .grid {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
+  display: grid;
+  /* Mobile default: stack. Tablet+ uses --blog-grid-cols. */
+  grid-template-columns: 1fr;
+  --blog-grid-gap: 0.75rem;
+  --blog-grid-row-h: min(42vh, 24rem);
+  /* Mosaic (food dumps): shorter cover row than contain pairs */
+  --blog-grid-mosaic-h: min(36vh, 16rem);
+  gap: var(--blog-grid-gap);
   margin: 0 0 var(--blog-section-gap, 2.5rem);
   width: var(--blog-breakout-width, min(100vw - 2rem, 56rem));
-  max-width: none;
+  max-width: 100%;
+  box-sizing: border-box;
   position: relative;
   left: var(--blog-breakout-left, 50%);
   transform: var(--blog-breakout-transform, translateX(-50%));
-}
-
-/* Shared row height; width follows each photo's aspect (no crop). */
-.grid img {
-  margin: 0;
-  width: auto;
-  max-width: 100%;
-  height: min(42vh, 24rem);
-  object-fit: contain;
-  object-position: center;
-  border-radius: 8px;
-  display: block;
+  align-items: start;
 }
 
 .cell {
@@ -30,23 +27,97 @@
 
 .cell :global(figure) {
   margin: 0;
-  width: fit-content;
+  width: 100%;
   max-width: 100%;
 }
 
-/* Caption typography is single-sourced in blog.module.css (.postContent figcaption). */
+/* Stacked mobile fallback (outside .postContent). Posts override in blog.module. */
+.grid img {
+  margin: 0;
+  width: 100%;
+  height: auto;
+  max-height: min(50vh, 28rem);
+  object-fit: contain;
+  object-position: center;
+  border-radius: 8px;
+  display: block;
+}
+
+/*
+ * Opt-in mobile mosaic (`mobile="mosaic"`): 2-up cover. Leftover odd last
+ * child (not only-child) keeps one-cell width and centers on the second row.
+ */
+.mobileMosaic {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.mobileMosaic .cell:last-child:nth-child(odd):not(:only-child) {
+  grid-column: 1 / -1;
+  justify-self: center;
+  width: calc((100% - var(--blog-grid-gap)) / 2);
+}
+
+/*
+ * Mobile 3+2 food dumps are two adjacent mosaics. Match the between-grid
+ * margin to the in-grid row gap so the five shots read as one block.
+ */
+@media (max-width: 639px) {
+  .mobileMosaic:has(+ .mobileMosaic) {
+    margin-bottom: var(--blog-grid-gap);
+  }
+}
 
 @media (min-width: 640px) {
   .grid {
+    --blog-grid-gap: 1.25rem;
+    gap: var(--blog-grid-gap);
+  }
+
+  /*
+   * Non-mosaic: flex row + fixed img height + width:auto (original equal-height
+   * contain). CSS grid 1fr columns + full-bleed figures fought that layout.
+   */
+  .grid:not(.mobileMosaic) {
+    display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
     align-items: flex-start;
     justify-content: flex-start;
-    gap: 1.25rem;
   }
 
-  .cell {
+  .grid:not(.mobileMosaic) .cell {
     flex: 0 1 auto;
+    min-width: 0;
+  }
+
+  .grid:not(.mobileMosaic) .cell :global(figure) {
+    width: fit-content;
+    max-width: 100%;
+  }
+
+  .grid:not(.mobileMosaic) img {
+    width: auto;
+    max-width: 100%;
+    height: var(--blog-grid-row-h);
+    max-height: none;
+    object-fit: contain;
+  }
+
+  .mobileMosaic {
+    grid-template-columns: repeat(var(--blog-grid-cols, 2), minmax(0, 1fr));
+  }
+
+  .mobileMosaic img {
+    width: 100%;
+    height: var(--blog-grid-mosaic-h);
+    max-height: none;
+    object-fit: cover;
+  }
+
+  .mobileMosaic .cell:last-child:nth-child(odd):not(:only-child) {
+    grid-column: auto;
+    justify-self: auto;
+    width: auto;
   }
 }
 
@@ -55,17 +126,5 @@
     width: 100%;
     left: auto;
     transform: none;
-  }
-
-  /* Stacked: full width, natural height (shared height less useful). */
-  .grid img {
-    width: 100%;
-    height: auto;
-    max-height: min(50vh, 28rem);
-    object-fit: contain;
-  }
-
-  .cell :global(figure) {
-    width: 100%;
   }
 }

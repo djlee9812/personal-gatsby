@@ -3,6 +3,7 @@ import Navbar from './navbar'
 import Footer from './footer'
 import * as styles from './layout.module.css'
 import '@fontsource/inconsolata'
+import '@fontsource/inconsolata/700.css'
 import '@fontsource/josefin-sans'
 
 interface LayoutProps {
