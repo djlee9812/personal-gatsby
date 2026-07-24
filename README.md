@@ -47,8 +47,8 @@ The website can be accessed [here](https://www.dongjoonlee.com/)
 
 GitHub Actions (`.github/workflows/ci.yml`) runs on pushes and pull requests:
 
-1. `npm run build`
-2. `npm run typecheck` (after build, so Gatsby GraphQL types exist)
+1. `npm run build` (also generates `src/gatsby-types.d.ts` via `graphqlTypegen.generateOnBuild`)
+2. `npm run typecheck`
 3. `npm run test:links` (internal links in `public/`)
 4. `npm run test:e2e` (Playwright smokes)
 

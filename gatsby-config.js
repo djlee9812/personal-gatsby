@@ -8,7 +8,10 @@ require("dotenv").config({
 
 /** @type {GatsbyConfig} */
 const config = {
-  graphqlTypegen: true,
+  graphqlTypegen: {
+    // Default is develop-only; CI typechecks after `gatsby build`.
+    generateOnBuild: true,
+  },
   siteMetadata: {
     title: `Dongjoon Lee's Personal Website`,
     siteUrl: `https://www.dongjoonlee.com`,
