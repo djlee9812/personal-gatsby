@@ -72,7 +72,6 @@
     "ip": "^2.0.1",
     "debug": "^4.3.5",
     "tmp": "^0.2.3",
-    "@builder.io/partytown": "npm:@qwik.dev/partytown@^0.11.2",
     "cloudinary": "^2.10.0",
     "@babel/plugin-proposal-optional-chaining": "npm:@babel/plugin-transform-optional-chaining@^7.28.0",
     "@babel/plugin-proposal-nullish-coalescing-operator": "npm:@babel/plugin-transform-nullish-coalescing-operator@^7.28.0",
