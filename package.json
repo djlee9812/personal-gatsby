@@ -13,15 +13,18 @@
     "build": "gatsby build",
     "serve": "gatsby serve",
     "clean": "gatsby clean",
+    "typecheck": "tsc --noEmit",
+    "test:e2e": "playwright test",
+    "test:links": "linkinator ./public --config ./linkinator.config.json",
     "flights:build": "node scripts/flighty-export-to-json.mjs && node scripts/generate-airport-coordinates.mjs"
   },
   "dependencies": {
     "@fontsource/inconsolata": "^4.5.9",
     "@fontsource/josefin-sans": "^4.5.11",
-    "@fortawesome/fontawesome-svg-core": "^6.5.2",
-    "@fortawesome/free-brands-svg-icons": "^6.5.2",
-    "@fortawesome/free-solid-svg-icons": "^6.5.2",
-    "@fortawesome/react-fontawesome": "^0.2.2",
+    "@fortawesome/fontawesome-svg-core": "^6.7.2",
+    "@fortawesome/free-brands-svg-icons": "^6.7.2",
+    "@fortawesome/free-solid-svg-icons": "^6.7.2",
+    "@fortawesome/react-fontawesome": "^3.5.0",
     "@mdx-js/mdx": "^2.0.0",
     "@mdx-js/react": "^2.0.0",
     "@qwik.dev/partytown": "^0.11.2",
@@ -47,10 +50,13 @@
     "three": "^0.183.2"
   },
   "devDependencies": {
+    "@playwright/test": "^1.61.1",
     "@types/node": "^25.3.0",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
     "@types/react-simple-maps": "^3.0.6",
+    "@types/three": "^0.185.1",
+    "linkinator": "^8.0.2",
     "typescript": "^5.9.3",
     "web-vitals": "^3.0.4"
   },
@@ -65,6 +71,13 @@
     "follow-redirects": "^1.15.6",
     "ip": "^2.0.1",
     "debug": "^4.3.5",
-    "tmp": "^0.2.3"
+    "tmp": "^0.2.3",
+    "@builder.io/partytown": "npm:@qwik.dev/partytown@^0.11.2",
+    "cloudinary": "^2.10.0",
+    "@babel/plugin-proposal-optional-chaining": "npm:@babel/plugin-transform-optional-chaining@^7.28.0",
+    "@babel/plugin-proposal-nullish-coalescing-operator": "npm:@babel/plugin-transform-nullish-coalescing-operator@^7.28.0",
+    "@babel/plugin-proposal-numeric-separator": "npm:@babel/plugin-transform-numeric-separator@^7.28.0",
+    "@babel/plugin-proposal-class-properties": "npm:@babel/plugin-transform-class-properties@^7.28.0",
+    "@babel/plugin-proposal-object-rest-spread": "npm:@babel/plugin-transform-object-rest-spread@^7.28.0"
   }
 }

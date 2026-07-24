@@ -3,8 +3,12 @@ import { Link } from 'gatsby'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import * as styles from '../pages/blog/blog.module.css'
 
+type BlogLinkNode = NonNullable<
+  Queries.BlogIndexQuery["allFile"]["nodes"][number]["childMdx"]
+>
+
 interface BlogLinkProps {
-  node: Queries.Mdx
+  node: BlogLinkNode
 }
 
 const BlogLink = ({ node }: BlogLinkProps) => {

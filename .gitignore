@@ -16,3 +16,9 @@ static/~partytown/
 src/gatsby-types.d.ts
 
 data/private/
+
+# Playwright
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/

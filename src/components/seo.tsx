@@ -12,9 +12,9 @@ const Seo = ({ title, description, pathname, children }: SeoProps) => {
   const { title: defaultTitle, description: defaultDescription, siteUrl } = useSiteMetadata()
 
   const seo = {
-    title: title ? `${title} | ${defaultTitle}` : defaultTitle,
-    description: description || defaultDescription,
-    url: `${siteUrl}${pathname || ``}`,
+    title: title ? `${title} | ${defaultTitle ?? ""}` : (defaultTitle ?? ""),
+    description: description || defaultDescription || "",
+    url: `${siteUrl ?? ""}${pathname || ``}`,
   }
 
   const schemaOrgJSONLD = {

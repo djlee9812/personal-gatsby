@@ -14,6 +14,7 @@ The website can be accessed [here](https://www.dongjoonlee.com/)
 - **Icons:** [FontAwesome](https://fontawesome.com/)
 - **Deployment:** [Netlify](https://www.netlify.com/)
 
+
 ## 📂 Project Structure
 
 - `src/pages/`: Main entry points for the site (Home, Gallery, Blog).
@@ -22,6 +23,7 @@ The website can be accessed [here](https://www.dongjoonlee.com/)
 - `blogs/`: MDX files for blog content.
 - `gallery/`: MDX files and image data for the gallery.
 - `src/images/`: Static images used across the site.
+
 
 ## 🚀 Getting Started
 
@@ -40,3 +42,27 @@ The website can be accessed [here](https://www.dongjoonlee.com/)
     ```shell
     npm run build
     ```
+
+## ✅ CI checks
+
+GitHub Actions (`.github/workflows/ci.yml`) runs on pushes and pull requests:
+
+1. `npm run build`
+2. `npm run typecheck` (after build, so Gatsby GraphQL types exist)
+3. `npm run test:links` (internal links in `public/`)
+4. `npm run test:e2e` (Playwright smokes)
+
+Add these repository secrets so the Cloudinary-backed build works in CI:
+
+- `CLOUDINARY_CLOUD_NAME`
+- `CLOUDINARY_API_KEY`
+- `CLOUDINARY_API_SECRET`
+
+Locally (after a build):
+
+```shell
+npm run typecheck
+npm run test:links
+npx playwright install chromium   # once
+npm run test:e2e
+```
