@@ -19,7 +19,7 @@ export type AsymmetricProps = {
 
 /* Below this many characters of body copy, a 2-column row leaves an empty
  * gutter beside the image, so auto layout stacks into the prose column. */
-const STACK_CHAR_THRESHOLD = 360
+const STACK_CHAR_THRESHOLD = 330
 
 function isFillableImage(
   child: React.ReactNode

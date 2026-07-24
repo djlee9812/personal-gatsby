@@ -133,12 +133,13 @@
     order: 2;
   }
 
-  .reverse .text {
+  /* Must match columns specificity above or reverse never wins. */
+  .asymmetric.reverse:not(.textOnly):not(.stacked) .text {
     order: 2;
   }
 
-  .reverse .media,
-  .reverse .stack {
+  .asymmetric.reverse:not(.textOnly):not(.stacked) .media,
+  .asymmetric.reverse:not(.textOnly):not(.stacked) .stack {
     order: 1;
   }
 }

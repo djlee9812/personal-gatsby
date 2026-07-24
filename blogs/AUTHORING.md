@@ -57,7 +57,7 @@ A paragraph (or few) of copy.
 </Asymmetric>
 ```
 
-- **Short copy (< ~360 chars)** → image stacks under the text on the prose left rail (modest size). `reverse` is ignored when stacked.
+- **Short copy (< ~330 chars)** → image stacks under the text on the prose left rail (modest size). `reverse` is ignored when stacked.
 - **Longer copy** → two columns (text | image), top-aligned.
 - `reverse` swaps columns in columns mode only: `<Asymmetric reverse>`.
 - Force a mode with `layout="stack"` or `layout="columns"`.
