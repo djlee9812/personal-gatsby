@@ -13,7 +13,9 @@ import {
 } from "./src/utils/blog-slug";
 
 export const onPreBootstrap: GatsbyNode["onPreBootstrap"] = async () => {
-  await copyLibFiles(path.join(process.cwd(), "static", "~partytown"));
+  await copyLibFiles(path.join(process.cwd(), "static", "~partytown"), {
+    debugDir: false,
+  });
 };
 
 export const createSchemaCustomization: GatsbyNode["createSchemaCustomization"] = ({

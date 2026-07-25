@@ -59,7 +59,6 @@ const config = {
         },
       },
     },
-    "gatsby-plugin-smoothscroll",
     {
       resolve: "gatsby-source-cloudinary",
       options: {

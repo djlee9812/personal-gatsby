@@ -9,7 +9,6 @@ import TravelMapWhenVisible from '../components/travel-map-when-visible'
 
 const HeroScene = React.lazy(() => import('../components/hero-scene'))
 import { motion, useReducedMotion, useScroll, useTransform, Variants } from 'framer-motion'
-import scrollTo from 'gatsby-plugin-smoothscroll'
 
 // Animation Variants
 const fadeInUp: Variants = {
@@ -63,7 +62,7 @@ const HomeHeroChrome: React.FC<HomeHeroChromeProps> = ({
       initial={reducedMotion ? false : { opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={reducedMotion ? { duration: 0 } : { delay: 1, duration: 1 }}
-      onClick={() => scrollTo('#about')}
+      onClick={() => document.getElementById('about')?.scrollIntoView()}
       style={{ background: 'none', border: 'none', cursor: 'pointer' }}
       aria-label="Scroll to About Section"
     >
@@ -158,7 +157,7 @@ const IndexPage = () => {
             <p>
               I graduated with a Master's degree from <span className={styles.highlight}>MIT AeroAstro</span> in 2023, 
               where I researched <span className={styles.highlight}>aircraft design optimization</span>. 
-              You can find my thesis <a href="https://dspace.mit.edu/handle/1721.1/151601" target="_blank" rel="noreferrer" style={{ color: 'var(--color-accent)' }}>here</a>.
+              You can find my thesis <a href="https://dspace.mit.edu/handle/1721.1/151601" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--color-accent)' }}>here</a>.
             </p>
             <p>
               Currently, I work as a Software Developer at <span className={styles.highlight}>MathWorks</span> on 

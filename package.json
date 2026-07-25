@@ -40,7 +40,6 @@
     "gatsby-plugin-robots-txt": "^1.8.0",
     "gatsby-plugin-sharp": "^5.0.0",
     "gatsby-plugin-sitemap": "^6.0.0",
-    "gatsby-plugin-smoothscroll": "^1.2.0",
     "gatsby-source-cloudinary": "^0.6.1",
     "gatsby-source-filesystem": "^5.0.0",
     "gatsby-transformer-cloudinary": "^4.7.0",
@@ -59,8 +58,7 @@
     "@types/react-simple-maps": "^3.0.6",
     "@types/three": "^0.185.1",
     "linkinator": "^8.0.2",
-    "typescript": "^5.9.3",
-    "web-vitals": "^3.0.4"
+    "typescript": "^5.9.3"
   },
   "engines": {
     "node": ">=22"

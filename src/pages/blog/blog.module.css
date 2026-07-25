@@ -206,10 +206,6 @@
   padding: 0;
 }
 
-.tagListCentered {
-  justify-content: center;
-}
-
 .tag {
   font-family: var(--font-body);
   font-size: 0.75rem;
@@ -384,6 +380,7 @@
 }
 
 /* Flag emoji in MDX headings / TitleBand; aria-label carries country names for AT */
+.postContent h2 :global(.heading-flag),
 .postContent h3 :global(.heading-flag),
 .postContent :global(.post-title-band .heading-flag) {
   margin-left: 0.35em;

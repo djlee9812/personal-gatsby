@@ -1,6 +1,14 @@
 import * as React from 'react'
 import * as styles from './footer.module.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import type { IconProp } from '@fortawesome/fontawesome-svg-core'
+
+const SOCIAL_LINKS: ReadonlyArray<{ href: string; label: string; icon: IconProp }> = [
+  { href: 'https://www.github.com/djlee9812/', label: 'GitHub', icon: ['fab', 'github'] },
+  { href: 'https://www.instagram.com/djlee9812/', label: 'Instagram', icon: ['fab', 'instagram'] },
+  { href: 'https://www.linkedin.com/in/dongjoon-lee/', label: 'LinkedIn', icon: ['fab', 'linkedin'] },
+  { href: 'https://www.goodreads.com/dongjoonlee/', label: 'Goodreads', icon: ['fab', 'goodreads'] },
+]
 
 const Footer = () => {
   return (
@@ -8,26 +16,18 @@ const Footer = () => {
       <p>Made by Dongjoon Lee</p>
       <div id="links-div">
         <ul className={styles.links}>
-          <li>
-            <a href="https://www.github.com/djlee9812/" aria-label="Github link">
-              <FontAwesomeIcon icon={['fab', 'github']} />
-            </a>
-          </li>
-          <li>
-            <a href="https://www.instagram.com/djlee9812/" aria-label="Instagram link">
-              <FontAwesomeIcon icon={['fab', 'instagram']} />
-            </a>
-          </li>
-          <li>
-            <a href="https://www.linkedin.com/in/dongjoon-lee/" aria-label="LinkedIn link">
-              <FontAwesomeIcon icon={['fab', 'linkedin']} />
-            </a>
-          </li>
-          <li>
-            <a href="https://www.goodreads.com/dongjoonlee/" aria-label="GoodReads link">
-              <FontAwesomeIcon icon={['fab', 'goodreads']} />
-            </a>
-          </li>
+          {SOCIAL_LINKS.map(({ href, label, icon }) => (
+            <li key={href}>
+              <a
+                href={href}
+                aria-label={label}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <FontAwesomeIcon icon={icon} aria-hidden="true" />
+              </a>
+            </li>
+          ))}
         </ul>
       </div>
       <p>Connect with me on these platforms</p>

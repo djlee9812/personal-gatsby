@@ -6,23 +6,33 @@ The website can be accessed [here](https://www.dongjoonlee.com/)
 
 ## 🛠 Tech Stack
 
-- **Framework:** [Gatsby v5](https://www.gatsbyjs.com/)
+- **Framework:** [Gatsby v5](https://www.gatsbyjs.com/) — near-term strategy is stay on latest Gatsby 5.x; MDX and Cloudinary content stay portable without a framework migration.
 - **Language:** [TypeScript](https://www.typescriptlang.org/)
 - **Styling:** CSS Modules
 - **Animations:** [Framer Motion](https://www.framer.com/motion/)
-- **Content:** [MDX](https://mdxjs.com/) (for blog posts and gallery data)
+- **Content:** [MDX](https://mdxjs.com/) for blog posts; [Cloudinary](https://cloudinary.com/) GraphQL (`src/pages/gallery.tsx`, image tags) for the gallery
 - **Icons:** [FontAwesome](https://fontawesome.com/)
 - **Deployment:** [Netlify](https://www.netlify.com/)
+
+### Dependency overrides
+
+`package.json` `overrides` pin patched transitive versions. Do not remove them blindly:
+
+- Security patches for packages like `cookie`, `webpack`, `minimatch`, `cross-spawn`, and similar transitive deps
+- Babel `@babel/plugin-proposal-*` aliases remapped to `@babel/plugin-transform-*` for Gatsby compatibility
+- Review when Dependabot PRs land; drop an override only if the parent dependency already pulls a safe version
 
 
 ## 📂 Project Structure
 
-- `src/pages/`: Main entry points for the site (Home, Gallery, Blog).
-- `src/components/`: Reusable React components.
-- `src/hooks/`: Custom React hooks (e.g., site metadata).
 - `blogs/`: MDX files for blog content.
-- `gallery/`: MDX files and image data for the gallery.
+- `src/pages/`: Main entry points (Home, Gallery, Blog, Projects).
+- `src/components/`: Reusable React components.
+- `src/data/`: Static data (e.g. flight routes).
+- `src/hooks/`: Custom React hooks (e.g., site metadata).
 - `src/images/`: Static images used across the site.
+- `scripts/`: Build helpers (e.g. Flighty export → flight JSON).
+- `e2e/`: Playwright end-to-end tests.
 
 
 ## 🚀 Getting Started
@@ -43,11 +53,21 @@ The website can be accessed [here](https://www.dongjoonlee.com/)
     npm run build
     ```
 
+4.  **Unit tests:**
+    ```shell
+    npm test
+    ```
+
+5.  **Rebuild flight map data** (optional; after updating Flighty exports):
+    ```shell
+    npm run flights:build
+    ```
+
 ## ✅ CI checks
 
-GitHub Actions (`.github/workflows/ci.yml`) runs on pushes and pull requests:
+GitHub Actions (`.github/workflows/ci.yml`) runs on pushes and pull requests, including unit tests:
 
-1. `npm test` (unit tests under `src/utils/*.test.ts`)
+1. `npm test` (unit tests under `src/utils/*.test.ts` and `src/lib/*.test.ts`)
 2. `npm run build` (also generates `src/gatsby-types.d.ts` via `graphqlTypegen.generateOnBuild`)
 3. `npm run typecheck`
 4. `npm run test:links` (internal links in `public/`)

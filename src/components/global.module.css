@@ -44,6 +44,10 @@
   }
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -62,10 +66,6 @@ body {
 
 .navbarMargin {
   padding-top: 80px;
-}
-
-.marginSm {
-  margin: 10px;
 }
 
 /* Shared page header (Blog, Gallery, Projects): title + optional subtext */
