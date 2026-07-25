@@ -47,10 +47,11 @@ The website can be accessed [here](https://www.dongjoonlee.com/)
 
 GitHub Actions (`.github/workflows/ci.yml`) runs on pushes and pull requests:
 
-1. `npm run build` (also generates `src/gatsby-types.d.ts` via `graphqlTypegen.generateOnBuild`)
-2. `npm run typecheck`
-3. `npm run test:links` (internal links in `public/`)
-4. `npm run test:e2e` (Playwright smokes)
+1. `npm test` (unit tests under `src/utils/*.test.ts`)
+2. `npm run build` (also generates `src/gatsby-types.d.ts` via `graphqlTypegen.generateOnBuild`)
+3. `npm run typecheck`
+4. `npm run test:links` (internal links in `public/`)
+5. `npm run test:e2e` (Playwright smokes)
 
 Add these repository secrets so the Cloudinary-backed build works in CI:
 
@@ -58,11 +59,13 @@ Add these repository secrets so the Cloudinary-backed build works in CI:
 - `CLOUDINARY_API_KEY`
 - `CLOUDINARY_API_SECRET`
 
-Locally (after a build):
+Locally:
 
 ```shell
+npm test                      # unit tests (no build needed)
 npm run typecheck
-npm run test:links
+npm run build
+npm run test:links            # after a build
 npx playwright install chromium   # once
 npm run test:e2e
 ```
