@@ -17,6 +17,8 @@ import { fileURLToPath } from "url";
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.join(__dirname, "..");
 
+const REQUIRED_HEADERS = ["Date", "From", "To"];
+
 /** @param {string} text */
 function parseCsv(text) {
   const rows = [];
@@ -91,12 +93,17 @@ function rowToPublicLeg(row) {
   const year = yearFromFlightyDate(row.Date);
   if (year === null) return null;
 
+  const from = String(row.From ?? "").trim();
+  const to = String(row.To ?? "").trim();
+  if (from.length !== 3 || to.length !== 3) return null;
+  if (from.toUpperCase() === to.toUpperCase()) return null;
+
   return {
     year,
     airline: String(row.Airline ?? "").trim(),
     flight: String(row.Flight ?? "").trim(),
-    from: String(row.From ?? "").trim(),
-    to: String(row.To ?? "").trim(),
+    from,
+    to,
   };
 }
 
@@ -135,6 +142,12 @@ function main() {
   }
 
   const headers = rows[0].map((h) => String(h).trim());
+  const missingHeaders = REQUIRED_HEADERS.filter((h) => !headers.includes(h));
+  if (missingHeaders.length > 0) {
+    console.error(`CSV missing required header(s): ${missingHeaders.join(", ")}`);
+    process.exit(1);
+  }
+
   const flights = [];
 
   for (let r = 1; r < rows.length; r++) {
@@ -146,6 +159,13 @@ function main() {
     });
     const leg = rowToPublicLeg(row);
     if (leg) flights.push(leg);
+  }
+
+  if (flights.length === 0 && process.env.ALLOW_EMPTY_FLIGHTS !== "1") {
+    console.error(
+      "Parsed 0 flights; refusing to overwrite flights.json. Set ALLOW_EMPTY_FLIGHTS=1 to allow an empty write.",
+    );
+    process.exit(1);
   }
 
   const out = {

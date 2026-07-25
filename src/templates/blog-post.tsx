@@ -23,12 +23,12 @@ const BlogPost = ({
   if (!data || !data.mdx) {
     return (
       <Layout>
-        <div className={globalStyles.navbarMargin}>
+        <main className={globalStyles.navbarMargin} id="main">
           <div className={globalStyles.container}>
             <p>Loading or post not found...</p>
             <Link to="/blog">Back to blog</Link>
           </div>
-        </div>
+        </main>
       </Layout>
     );
   }
@@ -42,7 +42,7 @@ const BlogPost = ({
 
   return (
     <Layout>
-      <div className={globalStyles.navbarMargin}>
+      <main className={globalStyles.navbarMargin} id="main">
         <div className={shellClassName} style={{ marginTop: '2rem' }}>
           <div className={styles.backLinkContainer}>
             <Link to="/blog" className={styles.backLink}>
@@ -86,7 +86,7 @@ const BlogPost = ({
             aria-label="Adjacent posts after article"
           />
         </div>
-      </div>
+      </main>
     </Layout>
   )
 }

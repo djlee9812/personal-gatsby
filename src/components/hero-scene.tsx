@@ -545,8 +545,16 @@ function Airplane({ scrollProgress }: AirplaneProps) {
       createPylonGeometry(-1),
       createPylonGeometry(1),
     ];
-    return mergeGeometries(geos);
+    const merged = mergeGeometries(geos);
+    for (const g of geos) g.dispose();
+    return merged;
   }, []);
+
+  useEffect(() => {
+    return () => {
+      mergedGeometry.dispose();
+    };
+  }, [mergedGeometry]);
 
   useEffect(() => {
     scrollRef.current = scrollProgress.get();
@@ -588,38 +596,63 @@ interface HeroSceneProps {
 }
 
 const DESKTOP_QUERY = '(min-width: 901px)';
+const REDUCED_MOTION_QUERY = '(prefers-reduced-motion: reduce)';
 
 const HeroScene: React.FC<HeroSceneProps> = ({ scrollProgress }) => {
-  const [shouldRender, setShouldRender] = useState(false);
+  const wrapperRef = useRef<HTMLDivElement>(null);
+  const [isDesktop, setIsDesktop] = useState(false);
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
 
   useEffect(() => {
-    const mql = window.matchMedia(DESKTOP_QUERY);
-    const update = () => setShouldRender(mql.matches);
-    update();
-    mql.addEventListener('change', update);
-    return () => mql.removeEventListener('change', update);
+    const desktopMql = window.matchMedia(DESKTOP_QUERY);
+    const reducedMql = window.matchMedia(REDUCED_MOTION_QUERY);
+    const updateDesktop = () => setIsDesktop(desktopMql.matches);
+    const updateReduced = () => setPrefersReducedMotion(reducedMql.matches);
+    updateDesktop();
+    updateReduced();
+    desktopMql.addEventListener('change', updateDesktop);
+    reducedMql.addEventListener('change', updateReduced);
+    return () => {
+      desktopMql.removeEventListener('change', updateDesktop);
+      reducedMql.removeEventListener('change', updateReduced);
+    };
   }, []);
 
-  if (!shouldRender) return null;
+  useEffect(() => {
+    if (!isDesktop || prefersReducedMotion) return;
+    const el = wrapperRef.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => setIsVisible(entry.isIntersecting),
+      { threshold: 0, rootMargin: '100px' }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [isDesktop, prefersReducedMotion]);
+
+  if (!isDesktop || prefersReducedMotion) return null;
 
   return (
-    <div style={{ width: '100%', height: '100%' }}>
-      <Canvas
-        gl={{ alpha: true, antialias: true }}
-        dpr={[1, 1.5]}
-        camera={{
-          fov: 35,
-          position: [12, 7, -8],
-          near: 0.1,
-          far: 100,
-        }}
-        style={{ background: 'transparent' }}
-      >
-        <ambientLight intensity={0.6} />
-        <directionalLight position={[10, 12, -5]} intensity={0.8} />
-        <directionalLight position={[-5, 3, 8]} intensity={0.3} />
-        <Airplane scrollProgress={scrollProgress} />
-      </Canvas>
+    <div ref={wrapperRef} style={{ width: '100%', height: '100%' }}>
+      {isVisible ? (
+        <Canvas
+          gl={{ alpha: true, antialias: true }}
+          dpr={[1, 1.5]}
+          camera={{
+            fov: 35,
+            position: [12, 7, -8],
+            near: 0.1,
+            far: 100,
+          }}
+          style={{ background: 'transparent' }}
+        >
+          <ambientLight intensity={0.6} />
+          <directionalLight position={[10, 12, -5]} intensity={0.8} />
+          <directionalLight position={[-5, 3, 8]} intensity={0.3} />
+          <Airplane scrollProgress={scrollProgress} />
+        </Canvas>
+      ) : null}
     </div>
   );
 };

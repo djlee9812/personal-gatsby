@@ -5,7 +5,7 @@ import * as styles from './blog.module.css'
 import Layout from '../../components/layout'
 import Seo from '../../components/seo'
 import BlogLink  from '../../components/blog-link'
-import { motion } from 'framer-motion'
+import { motion, useReducedMotion } from 'framer-motion'
 import { normalizeBlogSlug } from '../../utils/blog-slug'
 
 const containerVariants = {
@@ -25,22 +25,24 @@ const itemVariants = {
 
 const Blog = ({ data }: PageProps<Queries.BlogIndexQuery>) => {
   const nodes = data.allFile.nodes;
+  const prefersReducedMotion = useReducedMotion();
+  const enterInitial = prefersReducedMotion ? false : "hidden";
   
   return (
     <Layout>
-      <div className={globalStyles.navbarMargin}>
+      <main className={globalStyles.navbarMargin} id="main">
         <div className={`${globalStyles.pageHeader} ${globalStyles.pageHeaderTop} ${globalStyles.textCenter}`}>
           <motion.h1
-            initial={{ opacity: 0, y: -20 }}
+            initial={prefersReducedMotion ? false : { opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
+            transition={prefersReducedMotion ? { duration: 0 } : { duration: 0.5 }}
           >
             Blog
           </motion.h1>
           <motion.p
-            initial={{ opacity: 0 }}
+            initial={prefersReducedMotion ? false : { opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
+            transition={prefersReducedMotion ? { duration: 0 } : { duration: 0.5, delay: 0.2 }}
           >
             Thoughts, technical logs, and life updates.
           </motion.p>
@@ -50,7 +52,7 @@ const Blog = ({ data }: PageProps<Queries.BlogIndexQuery>) => {
           <motion.div 
             className={styles.blogGrid}
             variants={containerVariants}
-            initial="hidden"
+            initial={enterInitial}
             animate="show"
           >
             {nodes.map((node) => {
@@ -64,7 +66,7 @@ const Blog = ({ data }: PageProps<Queries.BlogIndexQuery>) => {
             })}
           </motion.div>
         </div>
-      </div>
+      </main>
     </Layout>
   )
 }

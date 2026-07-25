@@ -23,6 +23,7 @@ const ImageCell = ({ image, alt, onClick }: ImageCellProps) => {
   
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter' || e.key === ' ') {
+      if (e.key === ' ') e.preventDefault();
       onClick();
     }
   };

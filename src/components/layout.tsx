@@ -17,6 +17,7 @@ interface LayoutProps {
 const Layout = ({ children }: LayoutProps) => {
   return (
     <div>
+      <a href="#main" className={styles.skipLink}>Skip to content</a>
       <Navbar />
       <div className={styles.contentDiv}>
         {children}

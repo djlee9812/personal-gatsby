@@ -1,6 +1,5 @@
 import * as React from "react"
 import { graphql, PageProps, HeadFC } from 'gatsby'
-import { IGatsbyImageData } from 'gatsby-plugin-image'
 import * as globalStyles from '../components/global.module.css'
 import * as galleryStyles from '../components/gallery.module.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -113,19 +112,27 @@ const Gallery = ({ data }: PageProps<Queries.GalleryQuery>) => {
   }
 
   const openModal = (index: number) => {
+    if (!imgList[index]?.secure_url) return
     setImgIndex(index);
     setModalShow(true);
   }
 
   const closeModal = () => setModalShow(false);
 
-  const nextImg = () => {
-    setImgIndex(prev => (prev === imgList.length - 1 ? 0 : prev + 1));
+  const stepModalIndex = (direction: 1 | -1) => {
+    setImgIndex((prev) => {
+      const len = imgList.length
+      if (len === 0) return prev
+      for (let step = 1; step <= len; step++) {
+        const next = (prev + direction * step + len * step) % len
+        if (imgList[next]?.secure_url) return next
+      }
+      return prev
+    })
   }
 
-  const prevImg = () => {
-    setImgIndex(prev => (prev === 0 ? imgList.length - 1 : prev - 1));
-  }
+  const nextImg = () => stepModalIndex(1)
+  const prevImg = () => stepModalIndex(-1)
 
   return (
     <Layout>
@@ -152,13 +159,15 @@ const Gallery = ({ data }: PageProps<Queries.GalleryQuery>) => {
         {/* Masonry Grid */}
         <section className={galleryStyles.masonry}>
           {visibleImages.map((node, index) => {
+            if (!node.thumb || !node.secure_url) return null
+
             const id = node.id;
             const alt = node.context?.custom?.alt || `Gallery Image ${index}`; 
             
             return (
               <ImageCell 
                 key={id} 
-                image={node.thumb as IGatsbyImageData} 
+                image={node.thumb} 
                 alt={alt} 
                 onClick={() => openModal(index)}
               />
@@ -173,9 +182,9 @@ const Gallery = ({ data }: PageProps<Queries.GalleryQuery>) => {
       </main>
       
       {/* Lightbox Modal */}
-      {modalShow && imgList[imgIndex] ? (
+      {modalShow && imgList[imgIndex]?.secure_url ? (
         <ImageModal 
-          image={imgList[imgIndex].full as IGatsbyImageData} 
+          src={imgList[imgIndex].secure_url ?? ""} 
           alt={imgList[imgIndex].context?.custom?.alt || `Gallery Image ${imgIndex}`} 
           close={closeModal} 
           nextImg={nextImg} 
@@ -200,11 +209,6 @@ export const query = graphql`
         }
         thumb: gatsbyImageData(
           width: 600
-          placeholder: BLURRED
-          layout: CONSTRAINED
-        )
-        full: gatsbyImageData(
-          width: 1600
           placeholder: BLURRED
           layout: CONSTRAINED
         )

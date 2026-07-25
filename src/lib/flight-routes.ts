@@ -14,10 +14,15 @@ export interface DrawableFlightRoute {
 
 const GREAT_CIRCLE_SEGMENTS = 36;
 
-function normalizeIata(code: string): string {
+/** Trim + uppercase IATA airport code. */
+export function normalizeAirportCode(code: string): string {
   return String(code ?? "")
     .trim()
     .toUpperCase();
+}
+
+function isValidIataCode(code: string): boolean {
+  return code.length === 3;
 }
 
 /**
@@ -42,12 +47,15 @@ function legKey(leg: FlightLeg, index: number): string {
  * Skips legs when either endpoint is missing from `lookup`.
  */
 export function buildDrawableRoutes(legs: FlightLeg[], lookup: AirportCoordinatesMap): DrawableFlightRoute[] {
+  if (!Array.isArray(legs)) return [];
+
   const routes: DrawableFlightRoute[] = [];
 
   legs.forEach((leg, index) => {
-    const fromCode = normalizeIata(leg.from);
-    const toCode = normalizeIata(leg.to);
-    if (fromCode.length !== 3 || toCode.length !== 3) return;
+    const fromCode = normalizeAirportCode(leg.from);
+    const toCode = normalizeAirportCode(leg.to);
+    if (!isValidIataCode(fromCode) || !isValidIataCode(toCode)) return;
+    if (fromCode === toCode) return;
 
     const from = lookup[fromCode];
     const to = lookup[toCode];

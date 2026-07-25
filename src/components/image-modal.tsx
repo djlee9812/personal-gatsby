@@ -1,24 +1,28 @@
 import * as React from 'react'
-import { GatsbyImage, IGatsbyImageData } from 'gatsby-plugin-image'
 import FocusTrap from 'focus-trap-react'
 import * as globalStyles from './global.module.css'
 import * as styles from './image-modal.module.css'
+import { optimizeCloudinaryImage } from './blog/cloudinary'
 
 interface ImageModalProps {
-  image: IGatsbyImageData
+  src: string
   alt: string
   close: () => void
   nextImg: () => void
   prevImg: () => void
 }
 
-const ImageModal = ({ image, alt, close, nextImg, prevImg }: ImageModalProps) => {
+const ImageModal = ({ src, alt, close, nextImg, prevImg }: ImageModalProps) => {
   const modalRef = React.useRef<HTMLDivElement>(null)
   const closeRef = React.useRef<HTMLButtonElement>(null)
   const titleId = React.useId()
   const displayAlt = (alt ?? "").trim() || "Gallery image"
 
+  const optimized = optimizeCloudinaryImage(src, { width: 1600, sizes: "90vw" })
+  const hasMedia = Boolean((src ?? "").trim())
+
   React.useEffect(() => {
+    if (!hasMedia) return
     const previousOverflow = document.body.style.overflow
     document.body.style.overflow = "hidden"
     closeRef.current?.focus()
@@ -26,7 +30,7 @@ const ImageModal = ({ image, alt, close, nextImg, prevImg }: ImageModalProps) =>
     return () => {
       document.body.style.overflow = previousOverflow
     }
-  }, [])
+  }, [hasMedia])
 
   const handleKey = (event: React.KeyboardEvent | KeyboardEvent) => {
     if (event.key === 'Escape') {
@@ -47,6 +51,10 @@ const ImageModal = ({ image, alt, close, nextImg, prevImg }: ImageModalProps) =>
     if (event.target === modalRef.current) {
       close()
     }
+  }
+
+  if (!hasMedia) {
+    return null
   }
 
   return (
@@ -80,7 +88,15 @@ const ImageModal = ({ image, alt, close, nextImg, prevImg }: ImageModalProps) =>
           >
             <span aria-hidden="true">&times;</span>
           </button>
-          <GatsbyImage className={styles.modalImage} image={image} alt={displayAlt} objectFit="contain" />
+          <img
+            className={styles.modalImage}
+            src={optimized.src}
+            srcSet={optimized.srcSet}
+            sizes={optimized.sizes}
+            alt={displayAlt}
+            loading="eager"
+            decoding="async"
+          />
         </div>
       </div>
     </FocusTrap>

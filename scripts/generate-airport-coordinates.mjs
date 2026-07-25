@@ -29,15 +29,20 @@ function main() {
     process.exit(1);
   }
 
-  /** @type {{ flights: { from: string; to: string }[] }} */
+  /** @type {{ flights?: unknown }} */
   const dataset = JSON.parse(fs.readFileSync(flightsPath, "utf8"));
   /** @type {Record<string, [number, number]>} */
   const master = JSON.parse(fs.readFileSync(masterPath, "utf8"));
 
+  if (!Array.isArray(dataset.flights)) {
+    console.error(`${path.relative(ROOT, flightsPath)} must contain a flights array.`);
+    process.exit(1);
+  }
+
   const codes = new Set();
-  for (const leg of dataset.flights ?? []) {
-    const from = String(leg.from ?? "").trim().toUpperCase();
-    const to = String(leg.to ?? "").trim().toUpperCase();
+  for (const leg of dataset.flights) {
+    const from = String(leg?.from ?? "").trim().toUpperCase();
+    const to = String(leg?.to ?? "").trim().toUpperCase();
     if (from.length === 3) codes.add(from);
     if (to.length === 3) codes.add(to);
   }
@@ -53,9 +58,10 @@ function main() {
   }
 
   if (missing.length > 0) {
-    console.warn(
-      `Missing coordinates for ${missing.length} IATA code(s): ${missing.slice(0, 20).join(", ")}${missing.length > 20 ? ", …" : ""}`,
+    console.error(
+      `Missing coordinates for ${missing.length} IATA code(s): ${missing.join(", ")}`,
     );
+    process.exit(1);
   }
 
   fs.mkdirSync(path.dirname(outPath), { recursive: true });

@@ -5,11 +5,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Layout from '../components/layout'
 import Seo from '../components/seo'
 import * as styles from '../components/index.module.css'
-import { TRAVEL_MAP_HEIGHT } from '../components/travel-map-constants'
+import TravelMapWhenVisible from '../components/travel-map-when-visible'
 
-const TravelMap = React.lazy(() => import('../components/travel-map'))
 const HeroScene = React.lazy(() => import('../components/hero-scene'))
-import { motion, useScroll, useTransform, Variants } from 'framer-motion'
+import { motion, useReducedMotion, useScroll, useTransform, Variants } from 'framer-motion'
 import scrollTo from 'gatsby-plugin-smoothscroll'
 
 // Animation Variants
@@ -32,13 +31,88 @@ const staggerContainer: Variants = {
   }
 }
 
+type HomeHeroChromeProps = {
+  enterInitial: false | "hidden"
+  reducedMotion: boolean
+}
+
+const HomeHeroChrome: React.FC<HomeHeroChromeProps> = ({
+  enterInitial,
+  reducedMotion,
+}) => (
+  <>
+    <motion.div
+      className={styles.heroContent}
+      initial={enterInitial}
+      animate="visible"
+      variants={staggerContainer}
+    >
+      <motion.h1 className={styles.heroTitle} variants={fadeInUp}>
+        DONGJOON<br/>LEE
+      </motion.h1>
+
+      <motion.div className={styles.heroSubtitle} variants={fadeInUp}>
+        <span>Software Engineer.</span>
+        <span>Aerospace Background.</span>
+        <span>Based in Boston.</span>
+      </motion.div>
+    </motion.div>
+
+    <motion.button
+      className={styles.scrollIndicator}
+      initial={reducedMotion ? false : { opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={reducedMotion ? { duration: 0 } : { delay: 1, duration: 1 }}
+      onClick={() => scrollTo('#about')}
+      style={{ background: 'none', border: 'none', cursor: 'pointer' }}
+      aria-label="Scroll to About Section"
+    >
+      <span>SCROLL TO EXPLORE</span>
+      <FontAwesomeIcon icon={['fas', 'arrow-down']} />
+    </motion.button>
+  </>
+)
+
+const HomeHeroAnimated: React.FC = () => {
+  const { scrollY } = useScroll()
+  const heroOpacity = useTransform(scrollY, [0, 300], [1, 0])
+  const heroScale = useTransform(scrollY, [0, 300], [1, 0.95])
+  const heroY = useTransform(scrollY, [0, 300], [0, 50])
+  const scrollProgress = useTransform(scrollY, [0, 300], [0, 1])
+
+  return (
+    <motion.header
+      className={styles.heroContainer}
+      style={{ opacity: heroOpacity, scale: heroScale, y: heroY }}
+    >
+      <div className={styles.hero3dWrapper}>
+        <React.Suspense fallback={null}>
+          <HeroScene scrollProgress={scrollProgress} />
+        </React.Suspense>
+      </div>
+      <HomeHeroChrome enterInitial="hidden" reducedMotion={false} />
+    </motion.header>
+  )
+}
+
+const HomeHeroStatic: React.FC = () => (
+  <motion.header className={styles.heroContainer}>
+    <div className={styles.hero3dWrapper} />
+    <HomeHeroChrome enterInitial={false} reducedMotion />
+  </motion.header>
+)
+
 const IndexPage = () => {
-  const { scrollY } = useScroll();
-  
-  const heroOpacity = useTransform(scrollY, [0, 300], [1, 0]);
-  const heroScale = useTransform(scrollY, [0, 300], [1, 0.95]);
-  const heroY = useTransform(scrollY, [0, 300], [0, 50]);
-  const scrollProgress = useTransform(scrollY, [0, 300], [0, 1]);
+  const prefersReducedMotion = useReducedMotion();
+  const [hydrated, setHydrated] = React.useState(false);
+  React.useEffect(() => {
+    setHydrated(true);
+  }, []);
+
+  // SSR + first client paint both use Static (avoids hydration mismatch).
+  // Only mount Animated (and lazy Three.js) once we know motion is allowed.
+  const showAnimatedHero = hydrated && prefersReducedMotion === false;
+  const enterInitial = prefersReducedMotion === true ? false : "hidden";
 
   const data = useStaticQuery<Queries.IndexPageCloudinaryQuery>(graphql`
     query IndexPageCloudinary {
@@ -60,53 +134,15 @@ const IndexPage = () => {
 
   return (
     <Layout>
+      <main id="main">
       {/* 1. Hero Section */}
-      <motion.header 
-        className={styles.heroContainer}
-        style={{ opacity: heroOpacity, scale: heroScale, y: heroY }}
-      >
-        <div className={styles.hero3dWrapper}>
-          <React.Suspense fallback={null}>
-            <HeroScene scrollProgress={scrollProgress} />
-          </React.Suspense>
-        </div>
-
-        <motion.div
-          className={styles.heroContent}
-          initial="hidden"
-          animate="visible"
-          variants={staggerContainer}
-        >
-          <motion.h1 className={styles.heroTitle} variants={fadeInUp}>
-            DONGJOON<br/>LEE
-          </motion.h1>
-          
-          <motion.div className={styles.heroSubtitle} variants={fadeInUp}>
-            <span>Software Engineer.</span>
-            <span>Aerospace Background.</span>
-            <span>Based in Boston.</span>
-          </motion.div>
-        </motion.div>
-
-        <motion.button 
-          className={styles.scrollIndicator}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1, duration: 1 }}
-          onClick={() => scrollTo('#about')}
-          style={{ background: 'none', border: 'none', cursor: 'pointer' }}
-          aria-label="Scroll to About Section"
-        >
-          <span>SCROLL TO EXPLORE</span>
-          <FontAwesomeIcon icon={['fas', 'arrow-down']} />
-        </motion.button>
-      </motion.header>
+      {showAnimatedHero ? <HomeHeroAnimated /> : <HomeHeroStatic />}
 
       {/* 2. About Section */}
       <motion.section 
         id="about"
         className={styles.section}
-        initial="hidden"
+        initial={enterInitial}
         whileInView="visible"
         viewport={{ once: true, margin: "-100px" }}
         variants={staggerContainer}
@@ -151,7 +187,7 @@ const IndexPage = () => {
       {/* 3. Hobbies / Featured Section */}
       <motion.section 
         className={styles.section}
-        initial="hidden"
+        initial={enterInitial}
         whileInView="visible"
         viewport={{ once: true, margin: "-100px" }}
         variants={staggerContainer}
@@ -199,7 +235,7 @@ const IndexPage = () => {
       <motion.section 
         id="travel-map"
         className={styles.section}
-        initial="hidden"
+        initial={enterInitial}
         whileInView="visible"
         viewport={{ once: true, margin: "-100px" }}
         variants={staggerContainer}
@@ -213,12 +249,11 @@ const IndexPage = () => {
         </div>
 
         <motion.div className={styles.mapContainer} variants={fadeInUp}>
-          <React.Suspense fallback={<div style={{ width: '100%', height: TRAVEL_MAP_HEIGHT, background: 'transparent' }} aria-hidden="true" />}>
-            <TravelMap />
-          </React.Suspense>
+          <TravelMapWhenVisible />
         </motion.div>
       </motion.section>
 
+      </main>
     </Layout>
   )
 }

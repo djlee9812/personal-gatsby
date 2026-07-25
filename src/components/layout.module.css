@@ -1,3 +1,21 @@
+.skipLink {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 10000;
+  padding: 0.75rem 1.25rem;
+  background: var(--color-bg-secondary);
+  color: var(--color-text-primary);
+  font-family: var(--font-body);
+  text-decoration: none;
+  border: 2px solid var(--color-highlight);
+}
+
+.skipLink:focus {
+  left: 0.5rem;
+  top: 0.5rem;
+}
+
 .contentDiv {
   min-height: calc(100vh - 10em - 50px);
 }

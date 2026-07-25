@@ -1,6 +1,6 @@
 import * as React from "react"
 import { HeadFC } from "gatsby"
-import { motion, Variants } from "framer-motion"
+import { motion, useReducedMotion, Variants } from "framer-motion"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import * as globalStyles from "../components/global.module.css"
 import * as styles from "../components/projects.module.css"
@@ -95,12 +95,15 @@ function ProjectCard({ project }: { project: Project }) {
 }
 
 const Projects = () => {
+  const prefersReducedMotion = useReducedMotion();
+  const enterInitial = prefersReducedMotion ? false : "hidden";
+
   return (
     <Layout>
-      <main className={globalStyles.navbarMargin}>
+      <main className={globalStyles.navbarMargin} id="main">
         <motion.section
           className={styles.section}
-          initial="hidden"
+          initial={enterInitial}
           whileInView="visible"
           viewport={{ once: true, margin: "-80px" }}
           variants={staggerContainer}
@@ -113,7 +116,7 @@ const Projects = () => {
             <motion.div
               className={styles.cardGrid}
               variants={staggerContainer}
-              initial="hidden"
+              initial={enterInitial}
               whileInView="visible"
               viewport={{ once: true, margin: "-60px" }}
             >
