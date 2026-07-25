@@ -1,6 +1,7 @@
 import React from 'react';
 import type { GatsbySSR } from "gatsby";
 import { Partytown } from "@qwik.dev/partytown/react";
+import "./src/utils/fontawesome";
 
 export const onRenderBody: GatsbySSR["onRenderBody"] = ({ setHtmlAttributes, setHeadComponents, setPreBodyComponents }) => {
   setHtmlAttributes({ lang: 'en' });

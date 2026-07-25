@@ -31,11 +31,19 @@
 /*
  * Essay: wider chrome + left rail. Prose, headings, and breakouts share the
  * shell's left edge so images extend right without a centered-prose "jog".
+ *
+ * Left-railed breakouts must NOT use 100vw-2rem: that width is measured from the
+ * viewport edge, but the row starts inside the shell padding, so it overflowed
+ * on mid-width desktops. Cap to viewport minus the same horizontal padding.
  */
 .blogContainerEssay {
   max-width: 1120px;
   --blog-breakout-left: auto;
   --blog-breakout-transform: none;
+  --blog-breakout-width: min(
+    56rem,
+    calc(100vw - 2 * clamp(1.75rem, 5vw, 2.75rem))
+  );
 }
 
 .blogContainerEssay .postHeader {
@@ -66,6 +74,62 @@
 .backLink:focus-visible {
   outline: 2px solid var(--color-highlight);
   outline-offset: 2px;
+}
+
+/*
+ * Adjacent-post nav: same text-link language as .backLink.
+ * Notes: prose rail (shell is already prose-constrained).
+ * Essay: breakout rail so Newer lines up with Asymmetric's right-column edge.
+ */
+.postNav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+  max-width: min(var(--blog-prose-max), 100%);
+  margin: 1.25rem auto 0;
+}
+
+.blogContainerEssay .postNav {
+  width: var(--blog-breakout-width);
+  max-width: none;
+  position: relative;
+  left: var(--blog-breakout-left, auto);
+  transform: var(--blog-breakout-transform, none);
+  margin-left: 0;
+  margin-right: auto;
+}
+
+.postNavBottom {
+  margin-top: 3rem;
+  margin-bottom: 0;
+}
+
+/* Top nav is desktop-only — mobile uses bottom after finishing. */
+@media (max-width: 768px) {
+  .postNavTop {
+    display: none;
+  }
+}
+
+.postNavLink {
+  flex-shrink: 0;
+  gap: 0.5rem;
+}
+
+.postNavOlder {
+  justify-content: flex-start;
+}
+
+.postNavNewer {
+  justify-content: flex-end;
+  margin-left: auto;
+}
+
+.postNavSpacer {
+  flex: 1;
+  min-width: 0;
 }
 
 .blogGrid {
@@ -546,6 +610,14 @@
   }
   .postTitle {
     font-size: 1.85rem;
+  }
+
+  /* Essay breakout offset is desktop-only; mobile stays in the content column */
+  .blogContainerEssay .postNav {
+    width: 100%;
+    max-width: min(var(--blog-prose-max), 100%);
+    left: auto;
+    transform: none;
   }
 
   .postContentEssay h2:has(+ :global(.blog-breakout)),

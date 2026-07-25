@@ -6,9 +6,20 @@ import * as styles from '../pages/blog/blog.module.css'
 import Layout from '../components/layout'
 import Seo from '../components/seo'
 import { blogMdxComponents } from '../components/blog/mdx-components'
+import PostNav, { PostNeighbor } from '../components/blog/post-nav'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
-const BlogPost = ({ data, children }: PageProps<Queries.BlogPostQuery>) => {
+type BlogPostPageContext = {
+  older?: PostNeighbor | null
+  newer?: PostNeighbor | null
+  showTopNav?: boolean
+}
+
+const BlogPost = ({
+  data,
+  children,
+  pageContext,
+}: PageProps<Queries.BlogPostQuery, BlogPostPageContext>) => {
   if (!data || !data.mdx) {
     return (
       <Layout>
@@ -25,6 +36,7 @@ const BlogPost = ({ data, children }: PageProps<Queries.BlogPostQuery>) => {
   const { frontmatter } = data.mdx;
   const tags = frontmatter?.tags?.filter((tag): tag is string => Boolean(tag)) ?? [];
   const isEssay = frontmatter?.layout === "essay";
+  const { older, newer, showTopNav = false } = pageContext;
 
   const shellClassName = `${styles.blogContainer}${isEssay ? ` ${styles.blogContainerEssay}` : ""}`
 
@@ -48,6 +60,14 @@ const BlogPost = ({ data, children }: PageProps<Queries.BlogPostQuery>) => {
                 ))}
               </ul>
             )}
+            {showTopNav && (
+              <PostNav
+                older={older}
+                newer={newer}
+                className={styles.postNavTop}
+                aria-label="Adjacent posts before article"
+              />
+            )}
             <div className={styles.hr} />
           </header>
 
@@ -58,6 +78,13 @@ const BlogPost = ({ data, children }: PageProps<Queries.BlogPostQuery>) => {
               {children}
             </MDXProvider>
           </article>
+
+          <PostNav
+            older={older}
+            newer={newer}
+            className={styles.postNavBottom}
+            aria-label="Adjacent posts after article"
+          />
         </div>
       </div>
     </Layout>
