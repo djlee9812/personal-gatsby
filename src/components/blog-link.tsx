@@ -2,6 +2,7 @@ import * as React from "react"
 import { Link } from 'gatsby'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import * as styles from '../pages/blog/blog.module.css'
+import { normalizeBlogSlug } from '../utils/blog-slug'
 
 type BlogLinkNode = NonNullable<
   Queries.BlogIndexQuery["allFile"]["nodes"][number]["childMdx"]
@@ -13,10 +14,14 @@ interface BlogLinkProps {
 
 const BlogLink = ({ node }: BlogLinkProps) => {
   const frontmatter = node?.frontmatter;
-  const title = frontmatter?.title;
+  const title = frontmatter?.title?.trim() || "Untitled";
   const date = frontmatter?.date;
-  const slug = frontmatter?.slug;
+  const slug = normalizeBlogSlug(frontmatter?.slug);
   const tags = frontmatter?.tags?.filter((tag): tag is string => Boolean(tag)) ?? [];
+
+  if (!slug) {
+    return null
+  }
 
   return (
     <Link to={`/blog/${slug}`} className={styles.blogCard}>

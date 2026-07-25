@@ -6,12 +6,11 @@ import flightsDataset from "../data/flights.json";
 import airportCoordinates from "../data/airport-coordinates.json";
 import type { FlightsDataset } from "../data/flights.types";
 import { buildDrawableRoutes, type AirportCoordinatesMap } from "../lib/flight-routes";
+import { TRAVEL_MAP_HEIGHT } from "./travel-map-constants";
 import * as styles from "./travel-map.module.css";
 
 const worldUrl = "https://raw.githubusercontent.com/mtraynham/natural-earth-topo/master/topojson/ne_50m_admin_0_map_units.json";
 const statesUrl = "https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json";
-
-export const TRAVEL_MAP_HEIGHT = 400;
 
 const FLIGHTS_STORAGE_KEY = "travel-map-show-flights";
 

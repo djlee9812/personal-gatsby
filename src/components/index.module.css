@@ -28,7 +28,7 @@
 .heroTitle {
   font-family: var(--font-heading);
   font-size: clamp(4rem, 12vw, 9rem); /* Larger font size */
-  font-weight: 800; /* Extra bold */
+  font-weight: 700;
   margin: 0;
   letter-spacing: -0.04em;
   line-height: 0.9;

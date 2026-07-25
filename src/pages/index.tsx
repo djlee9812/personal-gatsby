@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Layout from '../components/layout'
 import Seo from '../components/seo'
 import * as styles from '../components/index.module.css'
-import { TRAVEL_MAP_HEIGHT } from '../components/travel-map'
+import { TRAVEL_MAP_HEIGHT } from '../components/travel-map-constants'
 
 const TravelMap = React.lazy(() => import('../components/travel-map'))
 const HeroScene = React.lazy(() => import('../components/hero-scene'))
@@ -223,6 +223,8 @@ const IndexPage = () => {
   )
 }
 
-export const Head: HeadFC = () => <Seo />
+export const Head: HeadFC = ({ location }) => (
+  <Seo pathname={location.pathname} />
+)
 
 export default IndexPage

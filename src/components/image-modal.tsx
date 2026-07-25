@@ -13,19 +13,20 @@ interface ImageModalProps {
 }
 
 const ImageModal = ({ image, alt, close, nextImg, prevImg }: ImageModalProps) => {
-  const [imgData, setImgData] = React.useState(image);
-  const [altText, setAltText] = React.useState(alt);
+  const modalRef = React.useRef<HTMLDivElement>(null)
+  const closeRef = React.useRef<HTMLButtonElement>(null)
+  const titleId = React.useId()
+  const displayAlt = (alt ?? "").trim() || "Gallery image"
 
-  const modalRef = React.useRef<HTMLDivElement>(null);
-  const closeRef = React.useRef<HTMLButtonElement>(null);
-  
   React.useEffect(() => {
-    setImgData(image);
-    setAltText(alt);
-    if (closeRef.current) {
-      closeRef.current.focus();
+    const previousOverflow = document.body.style.overflow
+    document.body.style.overflow = "hidden"
+    closeRef.current?.focus()
+
+    return () => {
+      document.body.style.overflow = previousOverflow
     }
-  }, [image, alt]);
+  }, [])
 
   const handleKey = (event: React.KeyboardEvent | KeyboardEvent) => {
     if (event.key === 'Escape') {
@@ -44,32 +45,42 @@ const ImageModal = ({ image, alt, close, nextImg, prevImg }: ImageModalProps) =>
 
   const clickModal = (event: React.MouseEvent) => {
     if (event.target === modalRef.current) {
-      close()  
+      close()
     }
   }
 
   return (
-    <FocusTrap>
-      <div 
-        className={styles.modal} 
-        ref={modalRef} 
-        role="button"
-        tabIndex={-1}
-        aria-label="Close modal"
-        onClick={clickModal} 
-        onKeyDown={handleKey} 
+    <FocusTrap
+      focusTrapOptions={{
+        escapeDeactivates: false,
+        allowOutsideClick: true,
+        onDeactivate: close,
+      }}
+    >
+      <div
+        className={styles.modal}
+        ref={modalRef}
+        onClick={clickModal}
+        onKeyDown={handleKey}
       >
-        <div 
+        <div
           className={styles.modalContent}
           role="dialog"
           aria-modal="true"
+          aria-labelledby={titleId}
           tabIndex={-1}
         >
-          <h3 className={styles.modalTitle}>{altText}</h3>
-          <button className={`${globalStyles.hiddenButton} ${styles.closeBtn}`} onClick={close} onKeyDown={handleKey} ref={closeRef}>
-            <span>&times;</span>
+          <h3 id={titleId} className={styles.modalTitle}>{displayAlt}</h3>
+          <button
+            type="button"
+            className={`${globalStyles.hiddenButton} ${styles.closeBtn}`}
+            onClick={close}
+            aria-label="Close"
+            ref={closeRef}
+          >
+            <span aria-hidden="true">&times;</span>
           </button>
-          <GatsbyImage className={styles.modalImage} image={imgData} alt={altText} objectFit="contain" />
+          <GatsbyImage className={styles.modalImage} image={image} alt={displayAlt} objectFit="contain" />
         </div>
       </div>
     </FocusTrap>

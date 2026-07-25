@@ -7,6 +7,10 @@ import {
   shouldShowTopNav,
   type PostNavSource,
 } from "./src/utils/blog-post-nav";
+import {
+  findDuplicateSlugs,
+  normalizeBlogSlug,
+} from "./src/utils/blog-slug";
 
 export const onPreBootstrap: GatsbyNode["onPreBootstrap"] = async () => {
   await copyLibFiles(path.join(process.cwd(), "static", "~partytown"));
@@ -42,7 +46,9 @@ type BlogPostNode = BlogFileNode & {
 };
 
 function isBlogPostNode(node: BlogFileNode): node is BlogPostNode {
-  return Boolean(node.childMdx?.frontmatter?.slug && node.childMdx.id);
+  return Boolean(
+    normalizeBlogSlug(node.childMdx?.frontmatter?.slug) && node.childMdx?.id
+  );
 }
 
 export const createPages: GatsbyNode["createPages"] = async ({ graphql, actions, reporter }) => {
@@ -78,16 +84,38 @@ export const createPages: GatsbyNode["createPages"] = async ({ graphql, actions,
   }
 
   // Date DESC (slug ASC tiebreaker): index 0 = newest, last = oldest.
-  const posts = result.data.allFile.nodes.filter(isBlogPostNode);
+  const allNodes = result.data.allFile.nodes;
+  const skipped = allNodes.filter(
+    (node) =>
+      node.childMdx && !normalizeBlogSlug(node.childMdx.frontmatter?.slug)
+  );
+  if (skipped.length > 0) {
+    reporter.warn(
+      `Skipping ${skipped.length} blog file(s) without frontmatter.slug`
+    );
+  }
+
+  const posts = allNodes.filter(isBlogPostNode);
+  const normalizedSlugs = posts.map(
+    (post) => normalizeBlogSlug(post.childMdx.frontmatter.slug)!
+  );
+  const duplicateSlugs = findDuplicateSlugs(normalizedSlugs);
+  if (duplicateSlugs.length > 0) {
+    reporter.panicOnBuild(
+      `Duplicate blog frontmatter.slug value(s): ${duplicateSlugs.join(", ")}`
+    );
+    return;
+  }
+
   const navSources: PostNavSource[] = posts.map((node) => ({
-    slug: node.childMdx.frontmatter.slug,
+    slug: normalizeBlogSlug(node.childMdx.frontmatter.slug)!,
     title: node.childMdx.frontmatter.title,
   }));
   const blogPostTemplate = path.resolve(`src/templates/blog-post.tsx`);
 
   posts.forEach((node, index) => {
     const mdxNode = node.childMdx;
-    const slug = mdxNode.frontmatter.slug;
+    const slug = normalizeBlogSlug(mdxNode.frontmatter.slug)!;
     const { older, newer } = getNeighbors(navSources, index);
     const showTopNav = shouldShowTopNav(countPostWords(mdxNode.body));
 

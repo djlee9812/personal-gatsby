@@ -6,6 +6,7 @@ import Layout from '../../components/layout'
 import Seo from '../../components/seo'
 import BlogLink  from '../../components/blog-link'
 import { motion } from 'framer-motion'
+import { normalizeBlogSlug } from '../../utils/blog-slug'
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -53,10 +54,11 @@ const Blog = ({ data }: PageProps<Queries.BlogIndexQuery>) => {
             animate="show"
           >
             {nodes.map((node) => {
-              if (!node.childMdx) return null;
+              const mdx = node.childMdx
+              if (!mdx || !normalizeBlogSlug(mdx.frontmatter?.slug)) return null
               return (
-                <motion.div key={node.childMdx.id} variants={itemVariants}>
-                  <BlogLink node={node.childMdx} />
+                <motion.div key={mdx.id} variants={itemVariants}>
+                  <BlogLink node={mdx} />
                 </motion.div>
               )
             })}
@@ -88,6 +90,8 @@ export const query = graphql`
     }
   }
 `
-export const Head: HeadFC = () => <Seo title="Blog" />
+export const Head: HeadFC = ({ location }) => (
+  <Seo title="Blog" pathname={location.pathname} />
+)
 
 export default Blog

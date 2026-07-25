@@ -105,10 +105,16 @@ export const query = graphql`
   }
 `
 
-export const Head: HeadFC<Queries.BlogPostQuery> = ({ data }) => {
+export const Head: HeadFC<Queries.BlogPostQuery> = ({ data, location }) => {
   const title = data?.mdx?.frontmatter?.title || "Blog Post";
   const description = data?.mdx?.excerpt ?? undefined;
-  return <Seo title={title} description={description} />;
+  return (
+    <Seo
+      title={title}
+      description={description}
+      pathname={location.pathname}
+    />
+  );
 }
 
 export default BlogPost

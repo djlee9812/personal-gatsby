@@ -176,7 +176,7 @@ const Gallery = ({ data }: PageProps<Queries.GalleryQuery>) => {
       {modalShow && imgList[imgIndex] ? (
         <ImageModal 
           image={imgList[imgIndex].full as IGatsbyImageData} 
-          alt={imgList[imgIndex].context?.custom?.alt || ""} 
+          alt={imgList[imgIndex].context?.custom?.alt || `Gallery Image ${imgIndex}`} 
           close={closeModal} 
           nextImg={nextImg} 
           prevImg={prevImg}
@@ -212,6 +212,8 @@ export const query = graphql`
     }
   }
 `
-export const Head: HeadFC = () => <Seo title="Gallery" />
+export const Head: HeadFC = ({ location }) => (
+  <Seo title="Gallery" pathname={location.pathname} />
+)
 
 export default Gallery

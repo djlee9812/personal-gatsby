@@ -1,5 +1,6 @@
 import * as React from 'react'
 import { useSiteMetadata } from '../hooks/use-site-metadata'
+import { buildSeoUrl } from '../utils/seo-url'
 
 interface SeoProps {
   title?: string
@@ -14,14 +15,14 @@ const Seo = ({ title, description, pathname, children }: SeoProps) => {
   const seo = {
     title: title ? `${title} | ${defaultTitle ?? ""}` : (defaultTitle ?? ""),
     description: description || defaultDescription || "",
-    url: `${siteUrl ?? ""}${pathname || ``}`,
+    url: buildSeoUrl(siteUrl, pathname),
   }
 
   const schemaOrgJSONLD = {
     "@context": "http://schema.org",
     "@type": "Person",
     "name": "Dongjoon Lee",
-    "url": seo.url,
+    "url": siteUrl ?? seo.url,
     "affiliation": [
       {
         "@type": "Organization",
@@ -33,7 +34,7 @@ const Seo = ({ title, description, pathname, children }: SeoProps) => {
       }
     ],
     "jobTitle": "Software Engineer",
-    "description": seo.description
+    "description": defaultDescription || seo.description
   }
 
   return (
@@ -54,7 +55,6 @@ const Seo = ({ title, description, pathname, children }: SeoProps) => {
       <meta name="twitter:description" content={seo.description} />
       <meta name="twitter:url" content={seo.url} />
 
-      {/* Structured Data for AI Agents */}
       <script type="application/ld+json">
         {JSON.stringify(schemaOrgJSONLD)}
       </script>

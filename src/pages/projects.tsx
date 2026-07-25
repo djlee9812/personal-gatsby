@@ -128,6 +128,8 @@ const Projects = () => {
   )
 }
 
-export const Head: HeadFC = () => <Seo title="Projects" />
+export const Head: HeadFC = ({ location }) => (
+  <Seo title="Projects" pathname={location.pathname} />
+)
 
 export default Projects

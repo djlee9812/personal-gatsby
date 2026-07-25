@@ -16,7 +16,9 @@ const Navbar = () => {
           <Link to="/projects" activeClassName={styles.active}>Projects</Link>
         </li>
         <li className={styles.navItem}>
-          <Link to="/blog" activeClassName={styles.active}>Blog</Link>
+          <Link to="/blog" activeClassName={styles.active} partiallyActive>
+            Blog
+          </Link>
         </li>
       </ul>
     </nav>

@@ -17,6 +17,7 @@ describe("toNeighbor", () => {
     })
     assert.equal(toNeighbor(null), null)
     assert.equal(toNeighbor({ slug: "" }), null)
+    assert.equal(toNeighbor({ slug: "   " }), null)
   })
 })
 

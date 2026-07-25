@@ -2,9 +2,13 @@ import * as React from 'react'
 import Navbar from './navbar'
 import Footer from './footer'
 import * as styles from './layout.module.css'
-import '@fontsource/inconsolata'
-import '@fontsource/inconsolata/700.css'
-import '@fontsource/josefin-sans'
+/* Side-effect: :root tokens + body styles must load on every route (incl. homepage). */
+import './global.module.css'
+import '@fontsource/inconsolata/latin-400.css'
+import '@fontsource/inconsolata/latin-700.css'
+import '@fontsource/josefin-sans/latin-400.css'
+import '@fontsource/josefin-sans/latin-600.css'
+import '@fontsource/josefin-sans/latin-700.css'
 
 interface LayoutProps {
   children: React.ReactNode

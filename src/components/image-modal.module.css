@@ -30,7 +30,7 @@
   left: 50%;
   transform: translateX(-50%);
   color: #fff;
-  font-family: 'Josefin Sans', sans-serif;
+  font-family: var(--font-heading);
   font-size: 1.2rem;
   margin: 0;
   white-space: nowrap;
@@ -51,9 +51,18 @@
   z-index: 10;
 }
 
-.closeBtn:hover, .closeBtn:focus {
+.closeBtn:hover {
   color: var(--color-accent);
+}
+
+.closeBtn:focus {
   outline: none;
+}
+
+.closeBtn:focus-visible {
+  color: var(--color-accent);
+  outline: 2px solid var(--color-highlight);
+  outline-offset: 4px;
 }
 
 .modalImage {

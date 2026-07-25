@@ -29,8 +29,10 @@ export function countPostWords(text: string | null | undefined): number {
 export function toNeighbor(
   post: PostNavSource | null | undefined
 ): PostNeighbor | null {
-  if (!post?.slug) return null
-  return { slug: post.slug, title: post.title?.trim() ? post.title : "" }
+  if (!post) return null
+  const slug = post.slug?.trim()
+  if (!slug) return null
+  return { slug, title: post.title?.trim() ? post.title.trim() : "" }
 }
 
 /** Date-DESC list: index 0 = newest. Newer = lower index; older = higher. */
