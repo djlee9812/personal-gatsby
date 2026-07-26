@@ -1,4 +1,4 @@
-import * as React from 'react'
+
 import { Link } from 'gatsby'
 import * as styles from './navbar.module.css'
 

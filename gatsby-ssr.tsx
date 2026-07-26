@@ -1,19 +1,34 @@
-import React from 'react';
-import type { GatsbySSR } from "gatsby";
-import { Partytown } from "@qwik.dev/partytown/react";
-import "./src/utils/fontawesome";
 
-export const onRenderBody: GatsbySSR["onRenderBody"] = ({ setHtmlAttributes, setHeadComponents, setPreBodyComponents }) => {
-  setHtmlAttributes({ lang: 'en' });
-  
-  const gaId = process.env.GATSBY_GA_ID;
-  const gtmId = process.env.GATSBY_GTAG_ID;
+import type { GatsbySSR } from "gatsby"
+import { Partytown } from "@qwik.dev/partytown/react"
+import "./src/utils/fontawesome"
+import { QueryErrorBoundary } from "./src/components/query-error-boundary"
+import { locationResetKey } from "./src/utils/location-reset-key"
+
+export const wrapPageElement: GatsbySSR["wrapPageElement"] = ({
+  element,
+  props,
+}) => (
+  <QueryErrorBoundary resetKey={locationResetKey(props.location)}>
+    {element}
+  </QueryErrorBoundary>
+)
+
+export const onRenderBody: GatsbySSR["onRenderBody"] = ({
+  setHtmlAttributes,
+  setHeadComponents,
+}) => {
+  setHtmlAttributes({ lang: "en" })
+
+  // Single analytics path: GA4 via Partytown (`GATSBY_GA_ID`).
+  // Do not set GATSBY_GTAG_ID — unused (incomplete GTM noscript path removed).
+  const gaId = process.env.GATSBY_GA_ID
 
   if (gaId && gaId !== "undefined" && gaId !== "") {
     setHeadComponents([
-      <Partytown 
-        key="partytown" 
-        forward={['gtag', 'dataLayer.push']} 
+      <Partytown
+        key="partytown"
+        forward={["gtag", "dataLayer.push"]}
         lib="/~partytown/"
       />,
       <script
@@ -36,20 +51,6 @@ export const onRenderBody: GatsbySSR["onRenderBody"] = ({ setHtmlAttributes, set
           `,
         }}
       />,
-    ]);
+    ])
   }
-
-  if (gtmId && gtmId !== "undefined" && gtmId !== "") {
-    setPreBodyComponents([
-      <noscript
-        key="gtm-noscript"
-        dangerouslySetInnerHTML={{
-          __html: `
-            <iframe src="https://www.googletagmanager.com/ns.html?id=${gtmId}" height="0" width="0"
-                style="display:none;visibility:hidden"></iframe>
-          `,
-        }}
-      />,
-    ]);
-  }
-};
+}

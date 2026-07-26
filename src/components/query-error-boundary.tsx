@@ -1,4 +1,8 @@
 import * as React from 'react';
+import {
+  isStaticQueryErrorMessage,
+  QueryErrorFallback,
+} from './query-error-fallback';
 
 interface State {
   hasError: boolean;
@@ -7,6 +11,8 @@ interface State {
 
 interface Props {
   children: React.ReactNode;
+  /** When this changes, clear a sticky error after navigation. */
+  resetKey?: string;
 }
 
 /**
@@ -25,6 +31,16 @@ export class QueryErrorBoundary extends React.Component<Props, State> {
     return { hasError: true, message };
   }
 
+  componentDidUpdate(prevProps: Props): void {
+    if (
+      this.state.hasError &&
+      prevProps.resetKey !== this.props.resetKey &&
+      this.props.resetKey !== undefined
+    ) {
+      this.setState({ hasError: false, message: '' });
+    }
+  }
+
   componentDidCatch(error: unknown): void {
     console.error('QueryErrorBoundary caught:', error);
   }
@@ -32,44 +48,10 @@ export class QueryErrorBoundary extends React.Component<Props, State> {
   render(): React.ReactNode {
     if (!this.state.hasError) return this.props.children;
 
-    const isStaticQueryError =
-      this.state.message.includes('StaticQuery') &&
-      this.state.message.includes('could not be fetched');
+    const kind = isStaticQueryErrorMessage(this.state.message)
+      ? 'static-query'
+      : 'generic';
 
-    return (
-      <div
-        style={{
-          padding: '2rem',
-          maxWidth: '480px',
-          margin: '4rem auto',
-          fontFamily: 'system-ui, sans-serif',
-          textAlign: 'center',
-        }}
-      >
-        <h2 style={{ marginBottom: '1rem', fontSize: '1.25rem' }}>
-          {isStaticQueryError ? 'Page data not ready' : 'Something went wrong'}
-        </h2>
-        <p style={{ color: '#666', marginBottom: '1.5rem' }}>
-          {isStaticQueryError
-            ? 'This is usually a temporary issue. Refreshing the page often fixes it.'
-            : 'Try refreshing the page.'}
-        </p>
-        <button
-          type="button"
-          onClick={() => window.location.reload()}
-          style={{
-            padding: '0.5rem 1rem',
-            fontSize: '1rem',
-            cursor: 'pointer',
-            backgroundColor: '#333',
-            color: '#fff',
-            border: 'none',
-            borderRadius: '4px',
-          }}
-        >
-          Refresh page
-        </button>
-      </div>
-    );
+    return <QueryErrorFallback kind={kind} />;
   }
 }

@@ -1,0 +1,16 @@
+# Netlify build for the Gatsby site.
+# Cloudinary + analytics env vars must be set in the Netlify UI (or linked .env).
+
+[build]
+  command = "npm run build"
+  publish = "public"
+
+[build.environment]
+  NODE_VERSION = "22"
+
+# Required for gallery GraphQL at build time:
+#   CLOUDINARY_CLOUD_NAME
+#   CLOUDINARY_API_KEY
+#   CLOUDINARY_API_SECRET
+# Optional analytics (GA4 via Partytown):
+#   GATSBY_GA_ID

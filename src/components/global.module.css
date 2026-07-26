@@ -21,6 +21,15 @@
   /* Fonts */
   --font-heading: 'Josefin Sans', sans-serif;
   --font-body: 'Inconsolata', monospace;
+
+  /*
+   * Layout max widths (safe in property values).
+   * Media-query breakpoints cannot use var() reliably — see src/styles/breakpoints.ts
+   * and use exclusive pairs: max-width 767px / min-width 768px.
+   */
+  --layout-max-narrow: 1000px;
+  --layout-max-blog-essay: 1120px;
+  --layout-max-wide: 1200px;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -96,18 +105,23 @@ body {
 
 .hiddenButton {
   background: transparent;
-  border: none !important;
+  border: none;
   cursor: pointer;
   color: var(--color-text-primary);
 }
 
+/* !important is required so Framer Motion / component transitions cannot override OS reduced-motion. */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
   *::after {
+    /* biome-ignore lint/complexity/noImportantStyles: must beat all animation/transition declarations */
     animation-duration: 0.01ms !important;
+    /* biome-ignore lint/complexity/noImportantStyles: must beat all animation/transition declarations */
     animation-iteration-count: 1 !important;
+    /* biome-ignore lint/complexity/noImportantStyles: must beat all animation/transition declarations */
     transition-duration: 0.01ms !important;
+    /* biome-ignore lint/complexity/noImportantStyles: must beat html { scroll-behavior: smooth } */
     scroll-behavior: auto !important;
   }
 }

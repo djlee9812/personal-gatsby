@@ -1,5 +1,5 @@
-import * as React from "react"
-import { Link, HeadFC } from "gatsby"
+
+import { Link, type HeadFC } from "gatsby"
 import * as globalStyles from '../components/global.module.css'
 import Layout from '../components/layout'
 import Seo from '../components/seo'

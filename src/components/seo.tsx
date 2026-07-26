@@ -1,4 +1,4 @@
-import * as React from 'react'
+import type * as React from 'react'
 import { useSiteMetadata } from '../hooks/use-site-metadata'
 import { buildSeoUrl } from '../utils/seo-url'
 

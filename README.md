@@ -28,9 +28,9 @@ The website can be accessed [here](https://www.dongjoonlee.com/)
 - `blogs/`: MDX files for blog content.
 - `src/pages/`: Main entry points (Home, Gallery, Blog, Projects).
 - `src/components/`: Reusable React components.
-- `src/data/`: Static data (e.g. flight routes).
+- `src/data/`: Static data (e.g. flight routes, projects).
 - `src/hooks/`: Custom React hooks (e.g., site metadata).
-- `src/images/`: Static images used across the site.
+- `src/utils/` / `src/lib/`: Shared helpers (blog nav, Cloudinary URLs, flight routes).
 - `scripts/`: Build helpers (e.g. Flighty export → flight JSON).
 - `e2e/`: Playwright end-to-end tests.
 
@@ -73,7 +73,8 @@ GitHub Actions (`.github/workflows/ci.yml`) runs on pushes and pull requests, in
 4. `npm run test:links` (internal links in `public/`)
 5. `npm run test:e2e` (Playwright smokes)
 
-Add these repository secrets so the Cloudinary-backed build works in CI:
+Add these repository secrets so the Cloudinary-backed build works in CI
+(and the same names under **Dependabot secrets** so Dependabot PRs can build):
 
 - `CLOUDINARY_CLOUD_NAME`
 - `CLOUDINARY_API_KEY`
@@ -84,8 +85,15 @@ Locally:
 ```shell
 npm test                      # unit tests (no build needed)
 npm run typecheck
+npm run lint                  # Biome
 npm run build
 npm run test:links            # after a build
 npx playwright install chromium   # once
 npm run test:e2e
 ```
+
+### Image pipelines
+
+- **Gallery:** `gatsby-source-cloudinary` → GraphQL thumbs; lightbox uses `optimizeCloudinaryImage`.
+- **Blog MDX:** hand-authored Cloudinary URLs via `src/components/blog/image.tsx` + `optimizeCloudinaryImage` (responsive `srcSet`).
+- **Projects:** Cloudinary URLs in `src/data/projects.ts` go through the same optimizer; non-Cloudinary URLs pass through unchanged.

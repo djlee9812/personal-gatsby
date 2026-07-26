@@ -1,5 +1,5 @@
 import * as React from "react"
-import { graphql, PageProps, HeadFC } from 'gatsby'
+import { graphql, type PageProps, type HeadFC } from 'gatsby'
 import * as globalStyles from '../components/global.module.css'
 import * as galleryStyles from '../components/gallery.module.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -63,6 +63,8 @@ const Gallery = ({ data }: PageProps<Queries.GalleryQuery>) => {
   const numPages = collections.length;
   const currentCollection = numPages > 0 ? collections[galIndex] : null;
 
+  // Re-bind when the active collection changes (loader node remounts).
+  // biome-ignore lint/correctness/useExhaustiveDependencies: intentional — loader remounts per collection
   React.useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -78,7 +80,7 @@ const Gallery = ({ data }: PageProps<Queries.GalleryQuery>) => {
     }
 
     return () => observer.disconnect();
-  }, [currentCollection]); 
+  }, [currentCollection]);
 
   // Handle cases where no valid Cloudinary images/tags are found.
   if (numPages === 0 || !currentCollection) {

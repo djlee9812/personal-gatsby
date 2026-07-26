@@ -86,7 +86,7 @@
 /* 2. Content Sections */
 .section {
   padding: 120px 0;
-  max-width: 1000px; /* Clean, contained width */
+  max-width: var(--layout-max-narrow);
   margin: 0 auto;
   position: relative;
 }

@@ -1,7 +1,7 @@
 /*
  * Text + image section.
  * - .asymmetric base is a single column (mobile-first).
- * - Columns mode (>=769px, has media, long copy) breaks out to --blog-breakout-width.
+ * - Columns mode (>=768px, has media, long copy) breaks out to --blog-breakout-width.
  * - Stacked mode (short copy / layout="stack") stays in the prose column.
  * Breakout offset comes from --blog-breakout-* tokens (centered on notes,
  * left-railed on essays).
@@ -35,13 +35,13 @@
   margin-bottom: 1.25rem;
 }
 
+.text {
+  min-width: 0;
+}
+
 .textOnly .text,
 .stacked .text {
   max-width: 100%;
-}
-
-.text {
-  min-width: 0;
 }
 
 .text p:last-child {
@@ -98,7 +98,7 @@
   max-width: 100%;
 }
 
-@media (min-width: 769px) {
+@media (min-width: 768px) {
   /* Two columns only for real columns-mode rows */
   .asymmetric:not(.textOnly):not(.stacked) {
     /* Slight text bias — balances copy against the image column */
@@ -144,7 +144,7 @@
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   .asymmetric {
     width: 100%;
     left: auto;

@@ -1,4 +1,4 @@
-import * as React from 'react'
+
 import * as styles from './footer.module.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import type { IconProp } from '@fortawesome/fontawesome-svg-core'

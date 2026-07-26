@@ -1,5 +1,6 @@
-import * as React from "react"
-import { optimizeCloudinaryImage } from "./cloudinary"
+import type * as React from "react"
+import { optimizeCloudinaryImage } from "../../utils/cloudinary"
+import { SIZES_BELOW_MD } from "../../styles/breakpoints"
 import * as styles from "./image.module.css"
 
 export type BlogImageSize = "content" | "wide" | "full" | "fill"
@@ -33,15 +34,15 @@ export type BlogImageProps = {
 }
 
 const SIZES_ATTR: Record<BlogImageSize, string> = {
-  content: "(max-width: 768px) 100vw, min(42rem, 100%)",
-  wide: "(max-width: 768px) 100vw, min(100vw - 2rem, 56rem)",
+  content: `${SIZES_BELOW_MD} 100vw, min(42rem, 100%)`,
+  wide: `${SIZES_BELOW_MD} 100vw, min(100vw - 2rem, 56rem)`,
   full: "100vw",
   /* Half-column Asymmetric / ImageGrid cells — avoid content-width downloads */
-  fill: "(max-width: 768px) 100vw, min(28rem, 45vw)",
+  fill: `${SIZES_BELOW_MD} 100vw, min(28rem, 45vw)`,
 }
 
 /* Left-aligned content (passport / docs) caps at ~18rem in CSS */
-const SIZES_CONTENT_LEFT = "(max-width: 768px) 100vw, min(18rem, 100%)"
+const SIZES_CONTENT_LEFT = `${SIZES_BELOW_MD} 100vw, min(18rem, 100%)`
 
 const DEFAULT_WIDTH: Record<BlogImageSize, number> = {
   content: 800,

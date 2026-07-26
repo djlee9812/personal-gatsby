@@ -76,7 +76,7 @@
 }
 
 /* Mobile Adjustments */
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   .closeBtn {
     top: -40px;
     right: 0;

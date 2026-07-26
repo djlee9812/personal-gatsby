@@ -71,7 +71,7 @@
 /* Caption typography is single-sourced in blog.module.css (.postContent
  * figcaption); the left-align variant uses the global .blog-caption-left hook. */
 
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   /* On mobile, wide collapses to content width (no breakout) */
   .wide {
     width: 100%;

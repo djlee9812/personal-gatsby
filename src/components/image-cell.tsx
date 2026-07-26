@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { GatsbyImage, IGatsbyImageData } from 'gatsby-plugin-image'
+import { GatsbyImage, type IGatsbyImageData } from 'gatsby-plugin-image'
 import * as styles from './image-cell.module.css'
 
 interface ImageCellProps {

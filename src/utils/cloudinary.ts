@@ -48,7 +48,7 @@ export function optimizeCloudinaryImage(
   options: CloudinaryImageOptions = {}
 ): { src: string; srcSet?: string; sizes?: string } {
   if (!src || !isCloudinaryUploadUrl(src)) {
-    return { src };
+    return { src, sizes: options.sizes };
   }
 
   const width = options.width ?? 800;

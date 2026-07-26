@@ -2,7 +2,7 @@ import * as React from 'react'
 import FocusTrap from 'focus-trap-react'
 import * as globalStyles from './global.module.css'
 import * as styles from './image-modal.module.css'
-import { optimizeCloudinaryImage } from './blog/cloudinary'
+import { optimizeCloudinaryImage } from '../utils/cloudinary'
 
 interface ImageModalProps {
   src: string

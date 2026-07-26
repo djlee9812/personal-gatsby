@@ -10,9 +10,9 @@
  * Each committed leg is only: year (no exact dates), airline, flight, from, to.
  */
 
-import fs from "fs";
-import path from "path";
-import { fileURLToPath } from "url";
+import fs from "node:fs";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.join(__dirname, "..");
@@ -177,7 +177,7 @@ function main() {
 
   const outPath = path.join(ROOT, "src", "data", "flights.json");
   fs.mkdirSync(path.dirname(outPath), { recursive: true });
-  fs.writeFileSync(outPath, JSON.stringify(out, null, 2) + "\n", "utf8");
+  fs.writeFileSync(outPath, `${JSON.stringify(out, null, 2)}\n`, "utf8");
   console.log(`Wrote ${flights.length} flights to ${path.relative(ROOT, outPath)}`);
 }
 

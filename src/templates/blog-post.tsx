@@ -1,13 +1,15 @@
-import * as React from 'react'
-import { graphql, PageProps, HeadFC, Link } from 'gatsby'
+
+import { graphql, type PageProps, type HeadFC, Link } from 'gatsby'
 import { MDXProvider } from '@mdx-js/react'
 import * as globalStyles from '../components/global.module.css'
-import * as styles from '../pages/blog/blog.module.css'
+import * as styles from '../components/blog/blog.module.css'
 import Layout from '../components/layout'
 import Seo from '../components/seo'
 import { blogMdxComponents } from '../components/blog/mdx-components'
-import PostNav, { PostNeighbor } from '../components/blog/post-nav'
+import PostNav, { type PostNeighbor } from '../components/blog/post-nav'
+import TagList from '../components/blog/tag-list'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import '../components/blog/blog-fragments'
 
 type BlogPostPageContext = {
   older?: PostNeighbor | null
@@ -20,7 +22,7 @@ const BlogPost = ({
   children,
   pageContext,
 }: PageProps<Queries.BlogPostQuery, BlogPostPageContext>) => {
-  if (!data || !data.mdx) {
+  if (!data?.mdx) {
     return (
       <Layout>
         <main className={globalStyles.navbarMargin} id="main">
@@ -34,7 +36,6 @@ const BlogPost = ({
   }
 
   const { frontmatter } = data.mdx;
-  const tags = frontmatter?.tags?.filter((tag): tag is string => Boolean(tag)) ?? [];
   const isEssay = frontmatter?.layout === "essay";
   const { older, newer, showTopNav = false } = pageContext;
 
@@ -53,13 +54,7 @@ const BlogPost = ({
           <header className={styles.postHeader}>
             <span className={styles.postMeta}>{frontmatter?.date}</span>
             <h1 className={styles.postTitle}>{frontmatter?.title}</h1>
-            {tags.length > 0 && (
-              <ul className={styles.tagList} aria-label="Tags">
-                {tags.map((tag) => (
-                  <li key={tag} className={styles.tag}>{tag}</li>
-                ))}
-              </ul>
-            )}
+            <TagList tags={frontmatter?.tags} />
             {showTopNav && (
               <PostNav
                 older={older}
@@ -94,13 +89,10 @@ const BlogPost = ({
 export const query = graphql`
   query BlogPost($id: String) {
     mdx(id: {eq: $id}) {
+      ...BlogPostFields
       frontmatter {
-        title
-        date(formatString: "MMMM D, YYYY")
-        tags
         layout
       }
-      excerpt(pruneLength: 160)
     }
   }
 `

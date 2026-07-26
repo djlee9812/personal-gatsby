@@ -1,7 +1,8 @@
-import * as React from "react"
+
 import { Link } from 'gatsby'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import * as styles from '../pages/blog/blog.module.css'
+import * as styles from './blog/blog.module.css'
+import TagList from './blog/tag-list'
 import { normalizeBlogSlug } from '../utils/blog-slug'
 
 type BlogLinkNode = NonNullable<
@@ -17,7 +18,6 @@ const BlogLink = ({ node }: BlogLinkProps) => {
   const title = frontmatter?.title?.trim() || "Untitled";
   const date = frontmatter?.date;
   const slug = normalizeBlogSlug(frontmatter?.slug);
-  const tags = frontmatter?.tags?.filter((tag): tag is string => Boolean(tag)) ?? [];
 
   if (!slug) {
     return null
@@ -29,14 +29,10 @@ const BlogLink = ({ node }: BlogLinkProps) => {
         <span className={styles.blogDate}>{date}</span>
       </div>
       <h3>{title}</h3>
-      {tags.length > 0 && (
-        <ul className={styles.tagList} aria-label="Tags">
-          {tags.map((tag) => (
-            <li key={tag} className={styles.tag}>{tag}</li>
-          ))}
-        </ul>
-      )}
-      <p className={styles.blogExcerpt}>{node.excerpt}</p>
+      <TagList tags={frontmatter?.tags} />
+      {node.excerpt?.trim() ? (
+        <p className={styles.blogExcerpt}>{node.excerpt.trim()}</p>
+      ) : null}
       <div className={styles.readMore}>
         Read Post <FontAwesomeIcon icon={['fas', 'arrow-right']} size="xs" aria-hidden="true" />
       </div>

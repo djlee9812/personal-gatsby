@@ -1,27 +1,14 @@
-import * as React from "react"
-import { graphql, PageProps, HeadFC } from 'gatsby'
+
+import { graphql, type PageProps, type HeadFC } from 'gatsby'
 import * as globalStyles from '../../components/global.module.css'
-import * as styles from './blog.module.css'
+import * as styles from '../../components/blog/blog.module.css'
 import Layout from '../../components/layout'
 import Seo from '../../components/seo'
 import BlogLink  from '../../components/blog-link'
 import { motion, useReducedMotion } from 'framer-motion'
 import { normalizeBlogSlug } from '../../utils/blog-slug'
-
-const containerVariants = {
-  hidden: { opacity: 0 },
-  show: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.1
-    }
-  }
-}
-
-const itemVariants = {
-  hidden: { opacity: 0, y: 20 },
-  show: { opacity: 1, y: 0 }
-}
+import { blogListContainer, blogListItem } from '../../utils/motion-variants'
+import '../../components/blog/blog-fragments'
 
 const Blog = ({ data }: PageProps<Queries.BlogIndexQuery>) => {
   const nodes = data.allFile.nodes;
@@ -51,7 +38,7 @@ const Blog = ({ data }: PageProps<Queries.BlogIndexQuery>) => {
         <div className={globalStyles.container}>
           <motion.div 
             className={styles.blogGrid}
-            variants={containerVariants}
+            variants={blogListContainer}
             initial={enterInitial}
             animate="show"
           >
@@ -59,7 +46,7 @@ const Blog = ({ data }: PageProps<Queries.BlogIndexQuery>) => {
               const mdx = node.childMdx
               if (!mdx || !normalizeBlogSlug(mdx.frontmatter?.slug)) return null
               return (
-                <motion.div key={mdx.id} variants={itemVariants}>
+                <motion.div key={mdx.id} variants={blogListItem}>
                   <BlogLink node={mdx} />
                 </motion.div>
               )
@@ -79,14 +66,7 @@ export const query = graphql`
     ) {
       nodes {
         childMdx {
-          excerpt(pruneLength: 150)
-          frontmatter {
-            title
-            date(formatString:"MMMM D, YYYY")
-            slug
-            tags
-          }
-          id
+          ...BlogPostCardFields
         }
       }
     }

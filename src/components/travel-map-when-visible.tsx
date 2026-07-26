@@ -1,5 +1,6 @@
 import * as React from "react"
-import { TRAVEL_MAP_HEIGHT } from "./travel-map-constants"
+import * as styles from "./travel-map.module.css"
+import { TRAVEL_MAP_ASPECT_RATIO } from "./travel-map-constants"
 
 const TravelMap = React.lazy(() => import("./travel-map"))
 
@@ -34,18 +35,23 @@ const TravelMapWhenVisible = () => {
     return () => observer.disconnect()
   }, [shouldLoad])
 
+  // Inline aspect-ratio mirrors CSS so Suspense fallback works before CSS module loads.
+  const slotStyle: React.CSSProperties = {
+    width: "100%",
+    aspectRatio: TRAVEL_MAP_ASPECT_RATIO,
+    background: "transparent",
+  }
+
   return (
     <div ref={sentinelRef}>
       {shouldLoad ? (
         <React.Suspense
-          fallback={
-            <div style={{ width: "100%", height: TRAVEL_MAP_HEIGHT, background: "transparent" }} aria-hidden="true" />
-          }
+          fallback={<div style={slotStyle} className={styles.slot} aria-hidden="true" />}
         >
           <TravelMap />
         </React.Suspense>
       ) : (
-        <div style={{ width: "100%", height: TRAVEL_MAP_HEIGHT, background: "transparent" }} aria-hidden="true" />
+        <div style={slotStyle} className={styles.slot} aria-hidden="true" />
       )}
     </div>
   )

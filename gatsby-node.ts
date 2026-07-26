@@ -1,4 +1,4 @@
-import path from "path";
+import path from "node:path";
 import { copyLibFiles } from "@qwik.dev/partytown/utils";
 import type { GatsbyNode } from "gatsby";
 import {
@@ -12,10 +12,29 @@ import {
   normalizeBlogSlug,
 } from "./src/utils/blog-slug";
 
+// Shared with gatsby-config via CommonJS (Gatsby loads config as CJS).
+const { maxResults: CLOUDINARY_GALLERY_MAX_RESULTS } = require("./cloudinary-gallery-config");
+
 export const onPreBootstrap: GatsbyNode["onPreBootstrap"] = async () => {
   await copyLibFiles(path.join(process.cwd(), "static", "~partytown"), {
     debugDir: false,
   });
+};
+
+/**
+ * Warn when the sourced gallery hit the plugin page size (likely truncated).
+ * Uses in-memory node count instead of a second Cloudinary Admin API round-trip.
+ */
+export const onPostBootstrap: GatsbyNode["onPostBootstrap"] = ({
+  getNodesByType,
+  reporter,
+}) => {
+  const count = getNodesByType("CloudinaryMedia").length;
+  if (count >= CLOUDINARY_GALLERY_MAX_RESULTS) {
+    reporter.warn(
+      `Cloudinary gallery may be truncated: sourced ${count} image(s) (maxResults=${CLOUDINARY_GALLERY_MAX_RESULTS}). Raise maxResults or paginate in cloudinary-gallery-config.js.`
+    );
+  }
 };
 
 export const createSchemaCustomization: GatsbyNode["createSchemaCustomization"] = ({

@@ -1,7 +1,7 @@
-import * as React from "react"
+
 import { Link } from "gatsby"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import * as styles from "../../pages/blog/blog.module.css"
+import * as styles from "./blog.module.css"
 import type { PostNeighbor } from "../../utils/blog-post-nav"
 
 export type { PostNeighbor }

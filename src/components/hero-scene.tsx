@@ -1,7 +1,9 @@
-import React, { useRef, useState, useEffect, useMemo } from 'react';
+import type React from 'react';
+import { useRef, useState, useEffect, useMemo } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
 import type { MotionValue } from 'framer-motion';
+import { DESKTOP_HERO_QUERY } from '../styles/breakpoints';
 
 // ---------------------------------------------------------------------------
 // Axis convention: +X = forward (nose), +Y = up, +Z = right (starboard)
@@ -47,7 +49,6 @@ const VTAIL_ROOT_CHORD = 2.2;
 const VTAIL_TAPER = 0.333;
 const VTAIL_TIP_CHORD = VTAIL_ROOT_CHORD * VTAIL_TAPER;
 const VTAIL_THICKNESS = 0.07;
-const VTAIL_SWEEP = 1.2;
 const VTAIL_TE_SWEEP_DEG = 28;    // trailing edge sweep (side view), less than LE
 const VTAIL_X_OFFSET = -3.0;
 
@@ -111,7 +112,7 @@ function createFuselageGeometry(): THREE.BufferGeometry {
   for (let i = 1; i <= 8; i++) {
     const t = i / 8;
     const x = noseStart - t * NOSE_CONE_LENGTH;
-    const rNorm = Math.pow(t, 0.45);
+    const rNorm = t ** 0.45;
     sections.push({ x, ry: ry * rNorm, rz: rz * rNorm, yOff: 0 });
   }
   // Main body (slight oval: depth/width 1.05)
@@ -393,7 +394,6 @@ function createEngineGeometry(side: 1 | -1): THREE.BufferGeometry {
   const cy = ENGINE_Y_OFFSET;
   const cz = ENGINE_SPAN_POS * side;
   const rMax = ENGINE_DIAMETER / 2;
-  const halfLen = ENGINE_LENGTH / 2;
   const segs = ENGINE_SEGMENTS;
   const numSections = NACELLE_SECTIONS.length;
   // x: section.x is fraction in [-0.5, 0.5] along length → world x = cx + section.x * ENGINE_LENGTH
@@ -595,7 +595,7 @@ interface HeroSceneProps {
   scrollProgress: MotionValue<number>;
 }
 
-const DESKTOP_QUERY = '(min-width: 901px)';
+const DESKTOP_QUERY = DESKTOP_HERO_QUERY;
 const REDUCED_MOTION_QUERY = '(prefers-reduced-motion: reduce)';
 
 const HeroScene: React.FC<HeroSceneProps> = ({ scrollProgress }) => {

@@ -1,11 +1,11 @@
 .masonry {
   padding: 1rem;
-  margin-bottom: 30px !important;
   margin: auto;
+  margin-bottom: 30px;
   box-sizing: border-box;
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 767px) {
   .masonry {
     width: 100%;
     display: flex;
@@ -17,7 +17,7 @@
 @media only screen and (min-width: 768px) {
   .masonry {
     width: 100%;
-    max-width: 1200px;
+    max-width: var(--layout-max-wide);
     column-count: 3;
     column-gap: 1rem;
   }
@@ -33,14 +33,14 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  max-width: 1200px;
+  max-width: var(--layout-max-wide);
   margin: 0 auto;
 }
 
 .arrowDiv {
   padding: 0 1.5rem;
 }
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 767px) {
   .arrowDiv {
     padding: 0 1rem;
   }

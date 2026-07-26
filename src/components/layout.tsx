@@ -1,4 +1,4 @@
-import * as React from 'react'
+import type * as React from 'react'
 import Navbar from './navbar'
 import Footer from './footer'
 import * as styles from './layout.module.css'

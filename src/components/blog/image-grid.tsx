@@ -1,4 +1,4 @@
-import * as React from "react"
+import type * as React from "react"
 import BlogImage from "./image"
 import * as styles from "./image-grid.module.css"
 

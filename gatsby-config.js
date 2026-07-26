@@ -6,6 +6,8 @@ require("dotenv").config({
   path: `.env`,
 });
 
+const { maxResults: cloudinaryMaxResults } = require("./cloudinary-gallery-config");
+
 /** @type {GatsbyConfig} */
 const config = {
   graphqlTypegen: {
@@ -66,7 +68,7 @@ const config = {
         apiKey: process.env.CLOUDINARY_API_KEY,
         apiSecret: process.env.CLOUDINARY_API_SECRET,
         resourceType: "image",
-        maxResults: 500,
+        maxResults: cloudinaryMaxResults,
         context: true,
         tags: true,
       },

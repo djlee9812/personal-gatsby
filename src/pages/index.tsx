@@ -1,5 +1,5 @@
 import * as React from "react"
-import { Link, HeadFC, useStaticQuery, graphql } from 'gatsby'
+import { Link, type HeadFC, useStaticQuery, graphql } from 'gatsby'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Layout from '../components/layout'
@@ -8,27 +8,11 @@ import * as styles from '../components/index.module.css'
 import TravelMapWhenVisible from '../components/travel-map-when-visible'
 
 const HeroScene = React.lazy(() => import('../components/hero-scene'))
-import { motion, useReducedMotion, useScroll, useTransform, Variants } from 'framer-motion'
+import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion'
+import { fadeInUp, staggerContainer } from '../utils/motion-variants'
 
-// Animation Variants
-const fadeInUp: Variants = {
-  hidden: { opacity: 0, y: 30 },
-  visible: { 
-    opacity: 1, 
-    y: 0,
-    transition: { duration: 0.6, ease: "easeOut" }
-  }
-}
-
-const staggerContainer: Variants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.2
-    }
-  }
-}
+const homeFade = fadeInUp({ y: 30, duration: 0.6 })
+const homeStagger = staggerContainer(0.2)
 
 type HomeHeroChromeProps = {
   enterInitial: false | "hidden"
@@ -44,13 +28,13 @@ const HomeHeroChrome: React.FC<HomeHeroChromeProps> = ({
       className={styles.heroContent}
       initial={enterInitial}
       animate="visible"
-      variants={staggerContainer}
+      variants={homeStagger}
     >
-      <motion.h1 className={styles.heroTitle} variants={fadeInUp}>
+      <motion.h1 className={styles.heroTitle} variants={homeFade}>
         DONGJOON<br/>LEE
       </motion.h1>
 
-      <motion.div className={styles.heroSubtitle} variants={fadeInUp}>
+      <motion.div className={styles.heroSubtitle} variants={homeFade}>
         <span>Software Engineer.</span>
         <span>Aerospace Background.</span>
         <span>Based in Boston.</span>
@@ -144,12 +128,12 @@ const IndexPage = () => {
         initial={enterInitial}
         whileInView="visible"
         viewport={{ once: true, margin: "-100px" }}
-        variants={staggerContainer}
+        variants={homeStagger}
       >
         <div className={styles.sectionTitle}>01 / About Me</div>
         
         <div className={styles.aboutGrid}>
-          <motion.div className={styles.aboutText} variants={fadeInUp}>
+          <motion.div className={styles.aboutText} variants={homeFade}>
             <p>
               Hi, I'm Dongjoon! I was born in <span className={styles.highlight}>Seoul, Korea</span> and moved 
               to <span className={styles.highlight}>Southern California</span> in the fourth grade.
@@ -157,7 +141,7 @@ const IndexPage = () => {
             <p>
               I graduated with a Master's degree from <span className={styles.highlight}>MIT AeroAstro</span> in 2023, 
               where I researched <span className={styles.highlight}>aircraft design optimization</span>. 
-              You can find my thesis <a href="https://dspace.mit.edu/handle/1721.1/151601" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--color-accent)' }}>here</a>.
+              You can find <a href="https://dspace.mit.edu/handle/1721.1/151601" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--color-accent)' }}>my MIT thesis</a>.
             </p>
             <p>
               Currently, I work as a Software Developer at <span className={styles.highlight}>MathWorks</span> on 
@@ -169,7 +153,7 @@ const IndexPage = () => {
             </p>
           </motion.div>
 
-          <motion.div className={styles.portraitContainer} variants={fadeInUp}>
+          <motion.div className={styles.portraitContainer} variants={homeFade}>
             {columnsImage ? (
               <GatsbyImage 
                 image={columnsImage} 
@@ -189,7 +173,7 @@ const IndexPage = () => {
         initial={enterInitial}
         whileInView="visible"
         viewport={{ once: true, margin: "-100px" }}
-        variants={staggerContainer}
+        variants={homeStagger}
       >
         <div className={styles.sectionTitle}>02 / Hobbies</div>
         
@@ -237,7 +221,7 @@ const IndexPage = () => {
         initial={enterInitial}
         whileInView="visible"
         viewport={{ once: true, margin: "-100px" }}
-        variants={staggerContainer}
+        variants={homeStagger}
       >
         <div className={styles.sectionTitle}>03 / Travel</div>
         
@@ -247,7 +231,7 @@ const IndexPage = () => {
           </p>
         </div>
 
-        <motion.div className={styles.mapContainer} variants={fadeInUp}>
+        <motion.div className={styles.mapContainer} variants={homeFade}>
           <TravelMapWhenVisible />
         </motion.div>
       </motion.section>

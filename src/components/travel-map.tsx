@@ -1,4 +1,4 @@
-import React, { useEffect, useId, useMemo, useState } from "react";
+import { useEffect, useId, useMemo, useState } from "react";
 import { ComposableMap, Geographies, Geography, Line, ZoomableGroup } from "react-simple-maps";
 import visitedCountries from "../data/visited-countries.json";
 import visitedStates from "../data/visited-states.json";
@@ -6,7 +6,7 @@ import flightsDataset from "../data/flights.json";
 import airportCoordinates from "../data/airport-coordinates.json";
 import type { FlightsDataset } from "../data/flights.types";
 import { buildDrawableRoutes, type AirportCoordinatesMap } from "../lib/flight-routes";
-import { TRAVEL_MAP_HEIGHT } from "./travel-map-constants";
+import { TRAVEL_MAP_HEIGHT, TRAVEL_MAP_WIDTH } from "./travel-map-constants";
 import * as styles from "./travel-map.module.css";
 
 const worldUrl = "/geo/ne_50m_admin_0_map_units.json";
@@ -16,6 +16,10 @@ const FLIGHTS_STORAGE_KEY = "travel-map-show-flights";
 const VISITED_FILL = "#d4fcff";
 const UNVISITED_FILL = "#2B2B37";
 const ROUTE_STROKE = "#dcae52";
+
+const MAP_COLOR_DESCRIPTION =
+  "Light teal regions are places visited. Dark regions have not been visited.";
+const MAP_FLIGHTS_DESCRIPTION = " Gold lines show flight routes.";
 
 interface MapPosition {
   coordinates: [number, number];
@@ -48,7 +52,7 @@ async function loadGeography(url: string): Promise<object> {
 
 const TravelMap = () => {
   const flightsLabelId = useId();
-  const legendId = useId();
+  const colorDescId = useId();
   const [position, setPosition] = useState<MapPosition>({ coordinates: [0, 20], zoom: 1 });
   const [showFlights, setShowFlights] = useState(false);
   const [worldGeo, setWorldGeo] = useState<object | null>(null);
@@ -57,7 +61,7 @@ const TravelMap = () => {
 
   const drawableRoutes = useMemo(
     () => (showFlights ? buildDrawableRoutes(typedFlights.flights ?? [], typedAirports) : []),
-    [showFlights, typedFlights.flights, typedAirports],
+    [showFlights],
   );
 
   useEffect(() => {
@@ -121,12 +125,23 @@ const TravelMap = () => {
   }
 
   if (!worldGeo || !statesGeo) {
-    return <div style={{ width: "100%", height: TRAVEL_MAP_HEIGHT, background: "transparent" }} aria-hidden="true" />;
+    return <div className={styles.slot} aria-hidden="true" />;
   }
 
+  const colorDescription =
+    MAP_COLOR_DESCRIPTION + (showFlights ? MAP_FLIGHTS_DESCRIPTION : "");
+
   return (
-    <div className={styles.wrap} aria-describedby={legendId}>
-      <ComposableMap projectionConfig={{ scale: 145 }}>
+    <div className={styles.wrap} aria-describedby={colorDescId}>
+      <p id={colorDescId} className={styles.srOnly}>
+        {colorDescription}
+      </p>
+      <ComposableMap
+        projectionConfig={{ scale: 145 }}
+        width={TRAVEL_MAP_WIDTH}
+        height={TRAVEL_MAP_HEIGHT}
+        style={{ width: "100%", height: "auto" }}
+      >
         <ZoomableGroup
           zoom={position.zoom}
           center={position.coordinates}
@@ -192,35 +207,6 @@ const TravelMap = () => {
           ) : null}
         </ZoomableGroup>
       </ComposableMap>
-
-      <ul id={legendId} className={styles.legend} aria-label="Map legend">
-        <li className={styles.legendItem}>
-          <span
-            className={`${styles.legendSwatch} ${styles.legendSwatchVisited}`}
-            style={{ background: VISITED_FILL }}
-            aria-hidden
-          />
-          Visited
-        </li>
-        <li className={styles.legendItem}>
-          <span
-            className={`${styles.legendSwatch} ${styles.legendSwatchUnvisited}`}
-            style={{ background: UNVISITED_FILL }}
-            aria-hidden
-          />
-          Not visited
-        </li>
-        {showFlights ? (
-          <li className={styles.legendItem}>
-            <span
-              className={`${styles.legendSwatch} ${styles.legendSwatchRoute}`}
-              style={{ borderTopColor: ROUTE_STROKE }}
-              aria-hidden
-            />
-            Flight routes
-          </li>
-        ) : null}
-      </ul>
 
       <div className={styles.controlsToggle}>
         <div className={styles.toggleControl}>

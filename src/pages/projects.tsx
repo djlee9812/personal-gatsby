@@ -1,6 +1,6 @@
-import * as React from "react"
-import { HeadFC } from "gatsby"
-import { motion, useReducedMotion, Variants } from "framer-motion"
+
+import type { HeadFC } from "gatsby"
+import { motion, useReducedMotion } from "framer-motion"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import * as globalStyles from "../components/global.module.css"
 import * as styles from "../components/projects.module.css"
@@ -8,31 +8,38 @@ import Layout from "../components/layout"
 import Seo from "../components/seo"
 import { projects } from "../data/projects"
 import type { Project } from "../data/projects"
+import { optimizeCloudinaryImage } from "../utils/cloudinary"
+import { fadeInUp, staggerContainer } from "../utils/motion-variants"
+import { SIZES_BELOW_PAGE } from "../styles/breakpoints"
 
-const fadeInUp: Variants = {
-  hidden: { opacity: 0, y: 24 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.4, ease: "easeOut" },
-  },
-}
+const projectFade = fadeInUp({ y: 24, duration: 0.4 })
+const projectStagger = staggerContainer(0.1)
 
-const staggerContainer: Variants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: { staggerChildren: 0.1 },
-  },
-}
+const PROJECT_IMAGE_SIZES = `${SIZES_BELOW_PAGE} 100vw, 480px`
+
+/** Static project data — precompute delivery URLs once at module load. */
+const projectImages = new Map(
+  projects.map((project) => [
+    project.title,
+    project.imagePath
+      ? optimizeCloudinaryImage(project.imagePath, {
+          width: 480,
+          widths: [480, 800],
+          sizes: PROJECT_IMAGE_SIZES,
+        })
+      : null,
+  ])
+)
 
 function ProjectCard({ project }: { project: Project }) {
+  const image = projectImages.get(project.title) ?? null
+
   return (
     <motion.article
       className={styles.card}
-      variants={fadeInUp}
+      variants={projectFade}
     >
-      {project.imagePath && (
+      {image && (
         <div
           className={
             project.imageFit === "contain"
@@ -41,7 +48,9 @@ function ProjectCard({ project }: { project: Project }) {
           }
         >
           <img
-            src={project.imagePath}
+            src={image.src}
+            {...(image.srcSet ? { srcSet: image.srcSet } : {})}
+            {...(image.sizes ? { sizes: image.sizes } : {})}
             alt={`${project.title} screenshot`}
             loading="lazy"
           />
@@ -101,13 +110,7 @@ const Projects = () => {
   return (
     <Layout>
       <main className={globalStyles.navbarMargin} id="main">
-        <motion.section
-          className={styles.section}
-          initial={enterInitial}
-          whileInView="visible"
-          viewport={{ once: true, margin: "-80px" }}
-          variants={staggerContainer}
-        >
+        <section className={styles.section}>
           <div className={`${globalStyles.pageHeader} ${globalStyles.pageHeaderTop} ${globalStyles.textCenter}`}>
             <h1>Projects</h1>
             <p>A few things I've built: simulations, tools, and side projects.</p>
@@ -115,7 +118,7 @@ const Projects = () => {
           <div className={globalStyles.container}>
             <motion.div
               className={styles.cardGrid}
-              variants={staggerContainer}
+              variants={projectStagger}
               initial={enterInitial}
               whileInView="visible"
               viewport={{ once: true, margin: "-60px" }}
@@ -125,7 +128,7 @@ const Projects = () => {
               ))}
             </motion.div>
           </div>
-        </motion.section>
+        </section>
       </main>
     </Layout>
   )

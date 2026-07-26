@@ -58,12 +58,13 @@
   color: var(--color-accent);
 }
 
-.active {
-  color: var(--color-accent) !important;
+/* Beat `.navItem a` color without !important (Gatsby activeClassName on the <a>). */
+.navItem a.active {
+  color: var(--color-accent);
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 767px) {
   .navbarStyle {
     top: auto;
     bottom: 20px; /* Move to bottom on mobile for better thumb reach */
