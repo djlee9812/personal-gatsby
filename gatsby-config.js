@@ -10,6 +10,9 @@ const { maxResults: cloudinaryMaxResults } = require("./cloudinary-gallery-confi
 
 /** @type {GatsbyConfig} */
 const config = {
+  // Match tsconfig `"jsx": "react-jsx"` so type-only React imports are valid.
+  // Gatsby defaults to classic JSX (`React.createElement`), which needs a value import.
+  jsxRuntime: "automatic",
   graphqlTypegen: {
     // Default is develop-only; CI typechecks after `gatsby build`.
     generateOnBuild: true,

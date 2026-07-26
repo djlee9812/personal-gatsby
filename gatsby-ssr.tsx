@@ -1,4 +1,4 @@
-
+import React from "react"
 import type { GatsbySSR } from "gatsby"
 import { Partytown } from "@qwik.dev/partytown/react"
 import "./src/utils/fontawesome"
@@ -8,11 +8,12 @@ import { locationResetKey } from "./src/utils/location-reset-key"
 export const wrapPageElement: GatsbySSR["wrapPageElement"] = ({
   element,
   props,
-}) => (
-  <QueryErrorBoundary resetKey={locationResetKey(props.location)}>
-    {element}
-  </QueryErrorBoundary>
-)
+}) =>
+  React.createElement(
+    QueryErrorBoundary,
+    { resetKey: locationResetKey(props.location) },
+    element
+  )
 
 export const onRenderBody: GatsbySSR["onRenderBody"] = ({
   setHtmlAttributes,
@@ -26,20 +27,20 @@ export const onRenderBody: GatsbySSR["onRenderBody"] = ({
 
   if (gaId && gaId !== "undefined" && gaId !== "") {
     setHeadComponents([
-      <Partytown
-        key="partytown"
-        forward={["gtag", "dataLayer.push"]}
-        lib="/~partytown/"
-      />,
-      <script
-        key="gtag-js"
-        type="text/partytown"
-        src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}
-      />,
-      <script
-        key="gtag-init"
-        type="text/partytown"
-        dangerouslySetInnerHTML={{
+      React.createElement(Partytown, {
+        key: "partytown",
+        forward: ["gtag", "dataLayer.push"],
+        lib: "/~partytown/",
+      }),
+      React.createElement("script", {
+        key: "gtag-js",
+        type: "text/partytown",
+        src: `https://www.googletagmanager.com/gtag/js?id=${gaId}`,
+      }),
+      React.createElement("script", {
+        key: "gtag-init",
+        type: "text/partytown",
+        dangerouslySetInnerHTML: {
           __html: `
             window.dataLayer = window.dataLayer || [];
             window.gtag = function gtag(){window.dataLayer.push(arguments);}
@@ -49,8 +50,8 @@ export const onRenderBody: GatsbySSR["onRenderBody"] = ({
               cookie_expires: 0,
             });
           `,
-        }}
-      />,
+        },
+      }),
     ])
   }
 }
