@@ -30,6 +30,9 @@
   --layout-max-narrow: 1000px;
   --layout-max-blog-essay: 1120px;
   --layout-max-wide: 1200px;
+
+  /* FA v7 defaults to fixed-width (fa-fw); hug glyph like v6 so edge-aligned icons stay flush. */
+  --fa-width: auto;
 }
 
 @media (prefers-color-scheme: dark) {
