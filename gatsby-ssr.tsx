@@ -1,3 +1,5 @@
+// Parcel compiles root Gatsby files with classic JSX; keep React in scope at runtime.
+// biome-ignore lint/correctness/noUnusedImports: required for Parcel classic JSX transform
 import React from "react"
 import type { GatsbySSR } from "gatsby"
 import { Partytown } from "@qwik.dev/partytown/react"
@@ -22,7 +24,6 @@ export const onRenderBody: GatsbySSR["onRenderBody"] = ({
 
   // Single analytics path: GA4 via Partytown (`GATSBY_GA_ID`).
   // Do not set GATSBY_GTAG_ID — unused (incomplete GTM noscript path removed).
-  // `import React` kept for Parcel's classic JSX transform of root Gatsby files.
   const gaId = process.env.GATSBY_GA_ID
 
   if (gaId && gaId !== "undefined" && gaId !== "") {
