@@ -8,12 +8,11 @@ import { locationResetKey } from "./src/utils/location-reset-key"
 export const wrapPageElement: GatsbySSR["wrapPageElement"] = ({
   element,
   props,
-}) =>
-  React.createElement(
-    QueryErrorBoundary,
-    { resetKey: locationResetKey(props.location) },
-    element
-  )
+}) => (
+  <QueryErrorBoundary resetKey={locationResetKey(props.location)}>
+    {element}
+  </QueryErrorBoundary>
+)
 
 export const onRenderBody: GatsbySSR["onRenderBody"] = ({
   setHtmlAttributes,
@@ -23,24 +22,25 @@ export const onRenderBody: GatsbySSR["onRenderBody"] = ({
 
   // Single analytics path: GA4 via Partytown (`GATSBY_GA_ID`).
   // Do not set GATSBY_GTAG_ID — unused (incomplete GTM noscript path removed).
+  // `import React` kept for Parcel's classic JSX transform of root Gatsby files.
   const gaId = process.env.GATSBY_GA_ID
 
   if (gaId && gaId !== "undefined" && gaId !== "") {
     setHeadComponents([
-      React.createElement(Partytown, {
-        key: "partytown",
-        forward: ["gtag", "dataLayer.push"],
-        lib: "/~partytown/",
-      }),
-      React.createElement("script", {
-        key: "gtag-js",
-        type: "text/partytown",
-        src: `https://www.googletagmanager.com/gtag/js?id=${gaId}`,
-      }),
-      React.createElement("script", {
-        key: "gtag-init",
-        type: "text/partytown",
-        dangerouslySetInnerHTML: {
+      <Partytown
+        key="partytown"
+        forward={["gtag", "dataLayer.push"]}
+        lib="/~partytown/"
+      />,
+      <script
+        key="gtag-js"
+        type="text/partytown"
+        src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}
+      />,
+      <script
+        key="gtag-init"
+        type="text/partytown"
+        dangerouslySetInnerHTML={{
           __html: `
             window.dataLayer = window.dataLayer || [];
             window.gtag = function gtag(){window.dataLayer.push(arguments);}
@@ -50,8 +50,8 @@ export const onRenderBody: GatsbySSR["onRenderBody"] = ({
               cookie_expires: 0,
             });
           `,
-        },
-      }),
+        }}
+      />,
     ])
   }
 }
