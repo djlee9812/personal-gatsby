@@ -59,7 +59,8 @@
   outline: none;
 }
 
-.closeBtn:focus-visible {
+/* Higher specificity than `.hiddenButton:focus-visible` (same button also gets that class). */
+.modalContent .closeBtn:focus-visible {
   color: var(--color-accent);
   outline: 2px solid var(--color-highlight);
   outline-offset: 4px;

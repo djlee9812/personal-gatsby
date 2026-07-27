@@ -10,6 +10,8 @@ import TravelMapWhenVisible from '../components/travel-map-when-visible'
 const HeroScene = React.lazy(() => import('../components/hero-scene'))
 import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion'
 import { fadeInUp, staggerContainer } from '../utils/motion-variants'
+import { DESKTOP_HERO_QUERY } from '../styles/breakpoints'
+import { useMatchMedia } from '../hooks/use-match-media'
 
 const homeFade = fadeInUp({ y: 30, duration: 0.6 })
 const homeStagger = staggerContainer(0.2)
@@ -57,6 +59,9 @@ const HomeHeroChrome: React.FC<HomeHeroChromeProps> = ({
 )
 
 const HomeHeroAnimated: React.FC = () => {
+  // Gate the lazy Three.js child only — keep chrome mounted across breakpoint
+  // crossings so scroll motion / entrance state are not remounted.
+  const isDesktop = useMatchMedia(DESKTOP_HERO_QUERY)
   const { scrollY } = useScroll()
   const heroOpacity = useTransform(scrollY, [0, 300], [1, 0])
   const heroScale = useTransform(scrollY, [0, 300], [1, 0.95])
@@ -69,9 +74,11 @@ const HomeHeroAnimated: React.FC = () => {
       style={{ opacity: heroOpacity, scale: heroScale, y: heroY }}
     >
       <div className={styles.hero3dWrapper}>
-        <React.Suspense fallback={null}>
-          <HeroScene scrollProgress={scrollProgress} />
-        </React.Suspense>
+        {isDesktop ? (
+          <React.Suspense fallback={null}>
+            <HeroScene scrollProgress={scrollProgress} />
+          </React.Suspense>
+        ) : null}
       </div>
       <HomeHeroChrome enterInitial="hidden" reducedMotion={false} />
     </motion.header>
@@ -93,7 +100,8 @@ const IndexPage = () => {
   }, []);
 
   // SSR + first client paint both use Static (avoids hydration mismatch).
-  // Only mount Animated (and lazy Three.js) once we know motion is allowed.
+  // Animated chrome mounts whenever motion is allowed; Three.js still only
+  // loads when HomeHeroAnimated renders <HeroScene/> behind isDesktop.
   const showAnimatedHero = hydrated && prefersReducedMotion === false;
   const enterInitial = prefersReducedMotion === true ? false : "hidden";
 

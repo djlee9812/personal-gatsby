@@ -166,6 +166,12 @@
   transform: translateY(-5px);
 }
 
+.hobbyCard:focus-visible {
+  /* overflow: hidden clips outlines drawn outside the border, so inset it. */
+  outline: 2px solid var(--color-highlight);
+  outline-offset: -2px;
+}
+
 .cardOverlay {
   position: absolute;
   bottom: 0;

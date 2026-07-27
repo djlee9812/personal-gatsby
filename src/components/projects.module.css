@@ -120,6 +120,11 @@
   text-decoration: underline;
 }
 
+.cardLinks a:focus-visible {
+  outline: 2px solid var(--color-highlight);
+  outline-offset: 2px;
+}
+
 @media (max-width: 900px) {
   .section {
     padding: 0 20px 4rem;

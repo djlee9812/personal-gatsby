@@ -33,6 +33,9 @@
 
   /* FA v7 defaults to fixed-width (fa-fw); hug glyph like v6 so edge-aligned icons stay flush. */
   --fa-width: auto;
+
+  /* Fixed mobile bottom pill (~60px) + bottom:20px inset; keep content/anchors clear of it. */
+  --mobile-nav-clearance: calc(100px + env(safe-area-inset-bottom, 0px));
 }
 
 @media (prefers-color-scheme: dark) {
@@ -58,6 +61,13 @@
 
 html {
   scroll-behavior: smooth;
+}
+
+/* Fixed pill navbar sits bottom:20px + ~60px tall on mobile; keep scrolled-to targets clear of it. */
+@media only screen and (max-width: 767px) {
+  html {
+    scroll-padding-bottom: var(--mobile-nav-clearance);
+  }
 }
 
 body {
@@ -111,6 +121,12 @@ body {
   border: none;
   cursor: pointer;
   color: var(--color-text-primary);
+}
+
+.hiddenButton:focus-visible {
+  color: var(--color-accent);
+  outline: 2px solid var(--color-highlight);
+  outline-offset: 2px;
 }
 
 /* !important is required so Framer Motion / component transitions cannot override OS reduced-motion. */

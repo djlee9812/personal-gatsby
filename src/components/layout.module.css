@@ -1,3 +1,11 @@
+/* Clears the fixed mobile bottom nav so the last interactive content (incl. footer
+   links) can scroll above the pill's hit box. Desktop keeps top nav — no bottom pad. */
+@media only screen and (max-width: 767px) {
+  .page {
+    padding-bottom: var(--mobile-nav-clearance);
+  }
+}
+
 .skipLink {
   position: absolute;
   left: -9999px;

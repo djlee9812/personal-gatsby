@@ -22,12 +22,26 @@ export const onRenderBody: GatsbySSR["onRenderBody"] = ({
 }) => {
   setHtmlAttributes({ lang: "en" })
 
+  const headComponents = [
+    <link
+      key="preconnect-cloudinary"
+      rel="preconnect"
+      href="https://res.cloudinary.com"
+      crossOrigin="anonymous"
+    />,
+    <link
+      key="dns-cloudinary"
+      rel="dns-prefetch"
+      href="https://res.cloudinary.com"
+    />,
+  ]
+
   // Single analytics path: GA4 via Partytown (`GATSBY_GA_ID`).
   // Do not set GATSBY_GTAG_ID — unused (incomplete GTM noscript path removed).
   const gaId = process.env.GATSBY_GA_ID
 
   if (gaId && gaId !== "undefined" && gaId !== "") {
-    setHeadComponents([
+    headComponents.push(
       <Partytown
         key="partytown"
         forward={["gtag", "dataLayer.push"]}
@@ -53,6 +67,8 @@ export const onRenderBody: GatsbySSR["onRenderBody"] = ({
           `,
         }}
       />,
-    ])
+    )
   }
+
+  setHeadComponents(headComponents)
 }

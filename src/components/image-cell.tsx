@@ -39,8 +39,10 @@ const ImageCell = ({ image, alt, onClick }: ImageCellProps) => {
       onKeyDown={handleKeyDown}
       role="button"
       tabIndex={0}
+      aria-label={alt}
     >
-      <GatsbyImage className={`${styles.masonryImg} ${hoverStyle}`} image={image} alt={alt}/>
+      {/* Decorative: accessible name comes from the button aria-label. */}
+      <GatsbyImage className={`${styles.masonryImg} ${hoverStyle}`} image={image} alt="" />
       <span className={styles.imageText}>{hoverText}</span>
     </div>
   )

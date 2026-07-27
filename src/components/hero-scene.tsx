@@ -4,6 +4,7 @@ import { Canvas, useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
 import type { MotionValue } from 'framer-motion';
 import { DESKTOP_HERO_QUERY } from '../styles/breakpoints';
+import { useMatchMedia } from '../hooks/use-match-media';
 
 // ---------------------------------------------------------------------------
 // Axis convention: +X = forward (nose), +Y = up, +Z = right (starboard)
@@ -600,24 +601,9 @@ const REDUCED_MOTION_QUERY = '(prefers-reduced-motion: reduce)';
 
 const HeroScene: React.FC<HeroSceneProps> = ({ scrollProgress }) => {
   const wrapperRef = useRef<HTMLDivElement>(null);
-  const [isDesktop, setIsDesktop] = useState(false);
-  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+  const isDesktop = useMatchMedia(DESKTOP_QUERY);
+  const prefersReducedMotion = useMatchMedia(REDUCED_MOTION_QUERY);
   const [isVisible, setIsVisible] = useState(true);
-
-  useEffect(() => {
-    const desktopMql = window.matchMedia(DESKTOP_QUERY);
-    const reducedMql = window.matchMedia(REDUCED_MOTION_QUERY);
-    const updateDesktop = () => setIsDesktop(desktopMql.matches);
-    const updateReduced = () => setPrefersReducedMotion(reducedMql.matches);
-    updateDesktop();
-    updateReduced();
-    desktopMql.addEventListener('change', updateDesktop);
-    reducedMql.addEventListener('change', updateReduced);
-    return () => {
-      desktopMql.removeEventListener('change', updateDesktop);
-      reducedMql.removeEventListener('change', updateReduced);
-    };
-  }, []);
 
   useEffect(() => {
     if (!isDesktop || prefersReducedMotion) return;
