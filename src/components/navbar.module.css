@@ -64,10 +64,12 @@
   color: var(--color-accent);
 }
 
-/* Beat `.navItem a` color without !important (Gatsby activeClassName on the <a>). */
+/* Beat `.navItem a` color without !important (Gatsby activeClassName on the <a>).
+   Weight bump (vs 600) is the non-color cue; keep bg as quiet as hover. */
 .navItem a.active {
   color: var(--color-accent);
-  background-color: rgba(128, 128, 128, 0.05);
+  font-weight: 700;
+  background-color: rgba(128, 128, 128, 0.1);
 }
 
 @media only screen and (max-width: 767px) {

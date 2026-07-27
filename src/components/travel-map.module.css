@@ -1,8 +1,30 @@
+.wrap,
+.slot {
+  /* Map palette — see travel-map.tsx (reads these via getComputedStyle on .wrap) */
+  --map-unvisited-fill: #2b2b37;
+  --map-visited-fill: #d4fcff;
+  --map-route-stroke: #dcae52;
+  --map-control-bg: #2b2b37;
+  --map-control-fg: #d4fcff;
+  --map-control-border: #444;
+}
+
+@media (prefers-color-scheme: dark) {
+  .wrap,
+  .slot {
+    --map-control-border: var(--color-border, #636e72);
+    --map-control-fg: var(--color-highlight, #81ecec);
+  }
+}
+
 .wrap {
   width: 100%;
   aspect-ratio: 800 / 500;
   background: transparent;
   position: relative;
+  /* Only on the interactive map — applying to .slot blocked page scroll on the placeholder. */
+  touch-action: none;
+  user-select: none;
 }
 
 /* Loading / Suspense placeholders — same aspect as .wrap + ComposableMap viewBox */
@@ -32,9 +54,9 @@
 .zoomBtn {
   width: 44px;
   height: 44px;
-  background: #2b2b37;
-  color: #d4fcff;
-  border: 1px solid #444;
+  background: var(--map-control-bg);
+  color: var(--map-control-fg);
+  border: 1px solid var(--map-control-border);
   border-radius: 4px;
   cursor: pointer;
   font-size: 1.2rem;
@@ -62,9 +84,9 @@
   align-items: center;
   justify-content: center;
   padding: 0;
-  background: #2b2b37;
-  color: #d4fcff;
-  border: 1px solid #444;
+  background: var(--map-control-bg);
+  color: var(--map-control-fg);
+  border: 1px solid var(--map-control-border);
   border-radius: 4px;
   cursor: pointer;
   font-size: 1rem;
@@ -72,7 +94,7 @@
 }
 
 .flightsBtn:hover {
-  border-color: #666;
+  border-color: var(--color-text-secondary, #666);
 }
 
 .flightsBtn:focus-visible {
@@ -81,9 +103,16 @@
 }
 
 .flightsBtnOn {
-  background: rgba(220, 174, 82, 0.35);
-  border-color: #dcae52;
+  /* Mix onto the opaque control bg — mixing with `transparent` lets the light
+     map show through and washes out the cream icon in light mode. */
+  background: color-mix(in srgb, var(--map-route-stroke) 40%, var(--map-control-bg));
+  border-color: var(--map-route-stroke);
   color: #f0e6c8;
+}
+
+.controlsToggle,
+.controlsZoom {
+  z-index: 1;
 }
 
 /* Keep local — importing global.module.css would pull the full file into the lazy map chunk. */
@@ -103,7 +132,7 @@
   pointer-events: none;
 }
 
-/* Warm gold — distinct from visited land (#d4fcff) and site teal accent */
+/* Warm gold — distinct from visited land and site teal accent */
 .routeLayer path {
   opacity: 0.52;
 }

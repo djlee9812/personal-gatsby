@@ -1,10 +1,10 @@
 
 import type { HeadFC } from "gatsby"
-import { motion, useReducedMotion } from "framer-motion"
+import { m, useReducedMotion } from "framer-motion"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import * as globalStyles from "../components/global.module.css"
 import * as styles from "../components/projects.module.css"
-import Layout from "../components/layout"
+import Layout from "../components/animated-layout"
 import Seo from "../components/seo"
 import { projects } from "../data/projects"
 import type { Project } from "../data/projects"
@@ -35,7 +35,7 @@ function ProjectCard({ project }: { project: Project }) {
   const image = projectImages.get(project.title) ?? null
 
   return (
-    <motion.article
+    <m.article
       className={styles.card}
       variants={projectFade}
     >
@@ -99,7 +99,7 @@ function ProjectCard({ project }: { project: Project }) {
           )}
         </div>
       </div>
-    </motion.article>
+    </m.article>
   )
 }
 
@@ -116,7 +116,7 @@ const Projects = () => {
             <p>A few things I've built: simulations, tools, and side projects.</p>
           </div>
           <div className={globalStyles.container}>
-            <motion.div
+            <m.div
               className={styles.cardGrid}
               variants={projectStagger}
               initial={enterInitial}
@@ -126,7 +126,7 @@ const Projects = () => {
               {projects.map((project) => (
                 <ProjectCard key={project.title} project={project} />
               ))}
-            </motion.div>
+            </m.div>
           </div>
         </section>
       </main>

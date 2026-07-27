@@ -2,7 +2,9 @@
 
 /* 1. Hero Section */
 .heroContainer {
+  /* dvh tracks the visible viewport; vh kept as fallback for older browsers. */
   height: 100vh;
+  height: 100dvh;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -86,6 +88,9 @@
   display: block; /* Ensures stacking */
   text-transform: uppercase;
   margin-bottom: 2rem;
+  text-shadow:
+    0 0 32px color-mix(in srgb, var(--color-bg-primary) 88%, transparent),
+    0 1px 2px color-mix(in srgb, var(--color-bg-primary) 55%, transparent);
 }
 
 .heroSubtitle {
@@ -290,11 +295,21 @@
     max-width: calc(100% - 20px); /* Ensure it doesn't overflow with margin */
   }
 
-  .scrollIndicator {
-    bottom: 100px;
-  }
-
   .hobbyGrid {
     grid-template-columns: 1fr;
+  }
+}
+
+/* Bottom pill nav only below md — keep SCROLL TO EXPLORE above its hit box.
+   Use svh so absolute bottom aligns with the fixed nav (100vh often extends
+   under mobile browser chrome and puts this control behind the pill). */
+@media (max-width: 767px) {
+  .heroContainer {
+    height: 100svh;
+    min-height: 100svh;
+  }
+
+  .scrollIndicator {
+    bottom: calc(var(--mobile-nav-clearance) + 1.5rem);
   }
 }

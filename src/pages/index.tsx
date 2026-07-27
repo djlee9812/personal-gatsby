@@ -2,13 +2,13 @@ import * as React from "react"
 import { Link, type HeadFC, useStaticQuery, graphql } from 'gatsby'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import Layout from '../components/layout'
+import Layout from '../components/animated-layout'
 import Seo from '../components/seo'
 import * as styles from '../components/index.module.css'
 import TravelMapWhenVisible from '../components/travel-map-when-visible'
 
 const HeroScene = React.lazy(() => import('../components/hero-scene'))
-import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion'
+import { m, useReducedMotion, useScroll, useTransform } from 'framer-motion'
 import { fadeInUp, staggerContainer } from '../utils/motion-variants'
 import { DESKTOP_HERO_QUERY } from '../styles/breakpoints'
 import { useMatchMedia } from '../hooks/use-match-media'
@@ -26,24 +26,24 @@ const HomeHeroChrome: React.FC<HomeHeroChromeProps> = ({
   reducedMotion,
 }) => (
   <>
-    <motion.div
+    <m.div
       className={styles.heroContent}
       initial={enterInitial}
       animate="visible"
       variants={homeStagger}
     >
-      <motion.h1 className={styles.heroTitle} variants={homeFade}>
+      <m.h1 className={styles.heroTitle} variants={homeFade}>
         DONGJOON<br/>LEE
-      </motion.h1>
+      </m.h1>
 
-      <motion.div className={styles.heroSubtitle} variants={homeFade}>
+      <m.div className={styles.heroSubtitle} variants={homeFade}>
         <span>Software Engineer.</span>
         <span>Aerospace Background.</span>
         <span>Based in Boston.</span>
-      </motion.div>
-    </motion.div>
+      </m.div>
+    </m.div>
 
-    <motion.button
+    <m.button
       className={styles.scrollIndicator}
       initial={reducedMotion ? false : { opacity: 0 }}
       animate={{ opacity: 1 }}
@@ -54,7 +54,7 @@ const HomeHeroChrome: React.FC<HomeHeroChromeProps> = ({
     >
       <span>SCROLL TO EXPLORE</span>
       <FontAwesomeIcon icon={['fas', 'arrow-down']} />
-    </motion.button>
+    </m.button>
   </>
 )
 
@@ -105,7 +105,7 @@ const HomeHeroAnimated: React.FC = () => {
   const scrollProgress = useTransform(scrollY, [0, 300], [0, 1])
 
   return (
-    <motion.header
+    <m.header
       className={styles.heroContainer}
       style={{ opacity: heroOpacity, scale: heroScale, y: heroY }}
     >
@@ -118,17 +118,17 @@ const HomeHeroAnimated: React.FC = () => {
         ) : null}
       </div>
       <HomeHeroChrome enterInitial="hidden" reducedMotion={false} />
-    </motion.header>
+    </m.header>
   )
 }
 
 const HomeHeroStatic: React.FC = () => (
-  <motion.header className={styles.heroContainer}>
+  <m.header className={styles.heroContainer}>
     <div className={styles.hero3dWrapper}>
       <HeroMobileVisual />
     </div>
     <HomeHeroChrome enterInitial={false} reducedMotion />
-  </motion.header>
+  </m.header>
 )
 
 const IndexPage = () => {
@@ -169,7 +169,7 @@ const IndexPage = () => {
       {showAnimatedHero ? <HomeHeroAnimated /> : <HomeHeroStatic />}
 
       {/* 2. About Section */}
-      <motion.section 
+      <m.section 
         id="about"
         className={styles.section}
         initial={enterInitial}
@@ -180,7 +180,7 @@ const IndexPage = () => {
         <div className={styles.sectionTitle}>01 / About Me</div>
         
         <div className={styles.aboutGrid}>
-          <motion.div className={styles.aboutText} variants={homeFade}>
+          <m.div className={styles.aboutText} variants={homeFade}>
             <p>
               Hi, I'm Dongjoon! I was born in <span className={styles.highlight}>Seoul, Korea</span> and moved 
               to <span className={styles.highlight}>Southern California</span> in the fourth grade.
@@ -198,9 +198,9 @@ const IndexPage = () => {
               Personally, I enjoy <span className={styles.highlight}>snowboarding</span>, <span className={styles.highlight}>climbing</span>, playing music,
               and trying new foods. This website is an ongoing catalog of things from my life.
             </p>
-          </motion.div>
+          </m.div>
 
-          <motion.div className={styles.portraitContainer} variants={homeFade}>
+          <m.div className={styles.portraitContainer} variants={homeFade}>
             {columnsImage ? (
               <GatsbyImage 
                 image={columnsImage} 
@@ -210,12 +210,12 @@ const IndexPage = () => {
             ) : (
               <div style={{width: 400, height: 400, background: '#333', borderRadius: '12px'}} />
             )}
-          </motion.div>
+          </m.div>
         </div>
-      </motion.section>
+      </m.section>
 
       {/* 3. Hobbies / Featured Section */}
-      <motion.section 
+      <m.section 
         className={styles.section}
         initial={enterInitial}
         whileInView="visible"
@@ -259,10 +259,10 @@ const IndexPage = () => {
             </div>
           </Link>
         </div>
-      </motion.section>
+      </m.section>
 
       {/* 4. Travel Section */}
-      <motion.section 
+      <m.section 
         id="travel-map"
         className={styles.section}
         initial={enterInitial}
@@ -278,10 +278,10 @@ const IndexPage = () => {
           </p>
         </div>
 
-        <motion.div className={styles.mapContainer} variants={homeFade}>
+        <m.div className={styles.mapContainer} variants={homeFade}>
           <TravelMapWhenVisible />
-        </motion.div>
-      </motion.section>
+        </m.div>
+      </m.section>
 
       </main>
     </Layout>

@@ -1,4 +1,4 @@
-import { useEffect, useId, useMemo, useState } from "react";
+import { useEffect, useId, useLayoutEffect, useMemo, useRef, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { ComposableMap, Geographies, Geography, Line, ZoomableGroup } from "react-simple-maps";
 import visitedCountries from "../data/visited-countries.json";
@@ -9,12 +9,25 @@ import type { FlightsDataset } from "../data/flights.types";
 import { buildDrawableRoutes, type AirportCoordinatesMap } from "../lib/flight-routes";
 import { TRAVEL_MAP_HEIGHT, TRAVEL_MAP_WIDTH } from "./travel-map-constants";
 import { prefetchTravelGeo } from "./travel-map-geo";
+import { useMatchMedia } from "../hooks/use-match-media";
 import * as styles from "./travel-map.module.css";
 
 const FLIGHTS_STORAGE_KEY = "travel-map-show-flights";
-const VISITED_FILL = "#d4fcff";
-const UNVISITED_FILL = "#2B2B37";
-const ROUTE_STROKE = "#dcae52";
+
+/** Fallbacks mirror defaults in travel-map.module.css until CSS vars are read. */
+interface MapColors {
+  visited: string;
+  unvisited: string;
+  routeStroke: string;
+  stroke: string;
+}
+
+const MAP_COLOR_DEFAULTS: MapColors = {
+  visited: "#d4fcff",
+  unvisited: "#2b2b37",
+  routeStroke: "#dcae52",
+  stroke: "#444",
+};
 
 const MAP_COLOR_DESCRIPTION =
   "Light teal regions are places visited. Dark regions have not been visited.";
@@ -44,12 +57,38 @@ const geographyStyle = {
 };
 
 const TravelMap = () => {
+  const wrapRef = useRef<HTMLDivElement>(null);
   const colorDescId = useId();
+  const prefersDark = useMatchMedia("(prefers-color-scheme: dark)");
   const [position, setPosition] = useState<MapPosition>({ coordinates: [0, 20], zoom: 1 });
   const [showFlights, setShowFlights] = useState(false);
   const [worldGeo, setWorldGeo] = useState<object | null>(null);
   const [statesGeo, setStatesGeo] = useState<object | null>(null);
   const [geoError, setGeoError] = useState(false);
+  const [colors, setColors] = useState<MapColors>(MAP_COLOR_DEFAULTS);
+
+  // Re-read when OS theme flips so SVG stroke stays in sync with CSS control tokens.
+  // biome-ignore lint/correctness/useExhaustiveDependencies: prefersDark is the theme-change signal
+  useLayoutEffect(() => {
+    const el = wrapRef.current;
+    if (!el) return;
+    const s = getComputedStyle(el);
+    const next: MapColors = {
+      visited: s.getPropertyValue("--map-visited-fill").trim() || MAP_COLOR_DEFAULTS.visited,
+      unvisited: s.getPropertyValue("--map-unvisited-fill").trim() || MAP_COLOR_DEFAULTS.unvisited,
+      routeStroke: s.getPropertyValue("--map-route-stroke").trim() || MAP_COLOR_DEFAULTS.routeStroke,
+      stroke: s.getPropertyValue("--map-control-border").trim() || MAP_COLOR_DEFAULTS.stroke,
+    };
+    // Skip update when CSS vars match current state (avoids a full Geography re-render).
+    setColors((prev) =>
+      prev.visited === next.visited &&
+      prev.unvisited === next.unvisited &&
+      prev.routeStroke === next.routeStroke &&
+      prev.stroke === next.stroke
+        ? prev
+        : next,
+    );
+  }, [prefersDark]);
 
   const drawableRoutes = useMemo(
     () => (showFlights ? buildDrawableRoutes(typedFlights.flights ?? [], typedAirports) : []),
@@ -110,7 +149,7 @@ const TravelMap = () => {
 
   if (geoError) {
     return (
-      <div className={styles.wrap} role="status">
+      <div ref={wrapRef} className={styles.wrap} role="status">
         <p className={styles.geoError}>Map geography could not be loaded.</p>
       </div>
     );
@@ -124,7 +163,7 @@ const TravelMap = () => {
     MAP_COLOR_DESCRIPTION + (showFlights ? MAP_FLIGHTS_DESCRIPTION : "");
 
   return (
-    <div className={styles.wrap} aria-describedby={colorDescId}>
+    <div ref={wrapRef} className={styles.wrap} aria-describedby={colorDescId}>
       <p id={colorDescId} className={styles.srOnly}>
         {colorDescription}
       </p>
@@ -153,8 +192,8 @@ const TravelMap = () => {
                   <Geography
                     key={geo.rsmKey}
                     geography={geo}
-                    fill={isVisited ? VISITED_FILL : UNVISITED_FILL}
-                    stroke="#444"
+                    fill={isVisited ? colors.visited : colors.unvisited}
+                    stroke={colors.stroke}
                     strokeWidth={0.5}
                     style={geographyStyle}
                   />
@@ -173,8 +212,8 @@ const TravelMap = () => {
                   <Geography
                     key={geo.rsmKey}
                     geography={geo}
-                    fill={isVisited ? VISITED_FILL : UNVISITED_FILL}
-                    stroke="#444"
+                    fill={isVisited ? colors.visited : colors.unvisited}
+                    stroke={colors.stroke}
                     strokeWidth={0.5}
                     style={geographyStyle}
                   />
@@ -189,7 +228,7 @@ const TravelMap = () => {
                 <Line
                   key={route.key}
                   coordinates={route.coordinates}
-                  stroke={ROUTE_STROKE}
+                  stroke={colors.routeStroke}
                   strokeWidth={0.65}
                   strokeLinecap="round"
                   fill="transparent"

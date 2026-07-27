@@ -580,7 +580,7 @@ function Airplane({ scrollProgress }: AirplaneProps) {
   });
 
   return (
-    <group ref={groupRef} position={[0, 0, -1.5]}>
+    <group ref={groupRef} position={[2.5, 1.2, -1.5]}>
       <mesh geometry={mergedGeometry}>
         <meshStandardMaterial color={PLANE_COLOR} flatShading />
       </mesh>
