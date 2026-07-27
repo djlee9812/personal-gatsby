@@ -1,4 +1,5 @@
 import { useEffect, useId, useMemo, useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { ComposableMap, Geographies, Geography, Line, ZoomableGroup } from "react-simple-maps";
 import visitedCountries from "../data/visited-countries.json";
 import visitedStates from "../data/visited-states.json";
@@ -7,10 +8,8 @@ import airportCoordinates from "../data/airport-coordinates.json";
 import type { FlightsDataset } from "../data/flights.types";
 import { buildDrawableRoutes, type AirportCoordinatesMap } from "../lib/flight-routes";
 import { TRAVEL_MAP_HEIGHT, TRAVEL_MAP_WIDTH } from "./travel-map-constants";
+import { prefetchTravelGeo } from "./travel-map-geo";
 import * as styles from "./travel-map.module.css";
-
-const worldUrl = "/geo/ne_50m_admin_0_map_units.json";
-const statesUrl = "/geo/states-10m.json";
 
 const FLIGHTS_STORAGE_KEY = "travel-map-show-flights";
 const VISITED_FILL = "#d4fcff";
@@ -44,14 +43,7 @@ const geographyStyle = {
   pressed: { outline: "none" },
 };
 
-async function loadGeography(url: string): Promise<object> {
-  const res = await fetch(url);
-  if (!res.ok) throw new Error(`Failed to load ${url} (${res.status})`);
-  return res.json();
-}
-
 const TravelMap = () => {
-  const flightsLabelId = useId();
   const colorDescId = useId();
   const [position, setPosition] = useState<MapPosition>({ coordinates: [0, 20], zoom: 1 });
   const [showFlights, setShowFlights] = useState(false);
@@ -76,8 +68,8 @@ const TravelMap = () => {
 
   useEffect(() => {
     let cancelled = false;
-    Promise.all([loadGeography(worldUrl), loadGeography(statesUrl)])
-      .then(([world, states]) => {
+    prefetchTravelGeo()
+      .then(({ world, states }) => {
         if (cancelled) return;
         setWorldGeo(world);
         setStatesGeo(states);
@@ -209,21 +201,16 @@ const TravelMap = () => {
       </ComposableMap>
 
       <div className={styles.controlsToggle}>
-        <div className={styles.toggleControl}>
-          <span id={flightsLabelId} className={styles.toggleTitle}>
-            Flights
-          </span>
-          <button
-            type="button"
-            role="switch"
-            aria-checked={showFlights}
-            aria-labelledby={flightsLabelId}
-            className={`${styles.switchTrack} ${showFlights ? styles.switchTrackOn : ""}`}
-            onClick={toggleFlights}
-          >
-            <span className={styles.switchThumb} aria-hidden />
-          </button>
-        </div>
+        <button
+          type="button"
+          role="switch"
+          aria-checked={showFlights}
+          aria-label="Show flight routes"
+          className={`${styles.flightsBtn} ${showFlights ? styles.flightsBtnOn : ""}`}
+          onClick={toggleFlights}
+        >
+          <FontAwesomeIcon icon={["fas", "plane"]} aria-hidden="true" />
+        </button>
       </div>
 
       <div className={styles.controlsZoom}>

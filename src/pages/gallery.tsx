@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Layout from '../components/layout'
 import Seo from '../components/seo'
 import ImageCell from '../components/image-cell'
+import { getSrc } from 'gatsby-plugin-image'
 import ImageModal from '../components/image-modal'
 
 /**
@@ -50,6 +51,8 @@ const Gallery = ({ data }: PageProps<Queries.GalleryQuery>) => {
   const [galIndex, setGalIndex] = React.useState(0);
   const [imgIndex, setImgIndex] = React.useState(0);
   const [modalShow, setModalShow] = React.useState(false);
+  /** Prevents double history.back() when FocusTrap onDeactivate re-enters closeModal. */
+  const lightboxHistoryOpen = React.useRef(false);
   
   /**
    * renderLimit implements "Soft Infinite Scroll". 
@@ -62,6 +65,21 @@ const Gallery = ({ data }: PageProps<Queries.GalleryQuery>) => {
 
   const numPages = collections.length;
   const currentCollection = numPages > 0 ? collections[galIndex] : null;
+  const [collectionAnnouncement, setCollectionAnnouncement] = React.useState("");
+  const skipInitialCollectionAnnounce = React.useRef(true);
+
+  // Announce collection changes only — skip the initial mount so SPA entry
+  // isn't double-announced with the visible heading/counter.
+  React.useEffect(() => {
+    if (!currentCollection || numPages === 0) return;
+    if (skipInitialCollectionAnnounce.current) {
+      skipInitialCollectionAnnounce.current = false;
+      return;
+    }
+    setCollectionAnnouncement(
+      `${currentCollection.title} collection, ${galIndex + 1} of ${numPages}`,
+    );
+  }, [galIndex, currentCollection, numPages]);
 
   // Re-bind when the active collection changes (loader node remounts).
   // biome-ignore lint/correctness/useExhaustiveDependencies: intentional — loader remounts per collection
@@ -81,6 +99,20 @@ const Gallery = ({ data }: PageProps<Queries.GalleryQuery>) => {
 
     return () => observer.disconnect();
   }, [currentCollection]);
+
+  // Browser back closes the lightbox. Popstate already consumed the history
+  // entry — only clear React state (never history.back() here).
+  React.useEffect(() => {
+    if (!modalShow) return;
+
+    const handlePopState = () => {
+      lightboxHistoryOpen.current = false;
+      setModalShow(false);
+    };
+
+    window.addEventListener("popstate", handlePopState);
+    return () => window.removeEventListener("popstate", handlePopState);
+  }, [modalShow]);
 
   // Handle cases where no valid Cloudinary images/tags are found.
   if (numPages === 0 || !currentCollection) {
@@ -117,9 +149,23 @@ const Gallery = ({ data }: PageProps<Queries.GalleryQuery>) => {
     if (!imgList[index]?.secure_url) return
     setImgIndex(index);
     setModalShow(true);
+    // Push a history entry so the back button closes the modal instead of
+    // navigating away from the gallery page.
+    if (!lightboxHistoryOpen.current) {
+      lightboxHistoryOpen.current = true;
+      window.history.pushState({ galleryLightbox: true }, "");
+    }
   }
 
-  const closeModal = () => setModalShow(false);
+  const closeModal = () => {
+    setModalShow(false);
+    // Only pop the entry we pushed — and only once (FocusTrap onDeactivate
+    // can re-enter closeModal before popstate clears history.state).
+    if (lightboxHistoryOpen.current) {
+      lightboxHistoryOpen.current = false;
+      window.history.back();
+    }
+  };
 
   const stepModalIndex = (direction: 1 | -1) => {
     setImgIndex((prev) => {
@@ -136,6 +182,13 @@ const Gallery = ({ data }: PageProps<Queries.GalleryQuery>) => {
   const nextImg = () => stepModalIndex(1)
   const prevImg = () => stepModalIndex(-1)
 
+  const modalImage = modalShow ? imgList[imgIndex] : null
+  const modalThumb = modalImage?.thumb ?? null
+  const modalAspectRatio =
+    modalThumb?.width && modalThumb?.height
+      ? modalThumb.width / modalThumb.height
+      : 4 / 3
+
   return (
     <Layout>
       <main className={globalStyles.navbarMargin} id="main">
@@ -149,12 +202,19 @@ const Gallery = ({ data }: PageProps<Queries.GalleryQuery>) => {
             </div>
             <div className={`${globalStyles.textCenter} ${globalStyles.pageHeader}`}>
               <h1 key={currentCollection.title}>{currentCollection.title}</h1>
+              <p className={galleryStyles.collectionCounter}>
+                {galIndex + 1} / {numPages}
+              </p>
             </div>
             <div className={galleryStyles.arrowDiv}>
               <button className={globalStyles.hiddenButton} onClick={incrementIndex} aria-label="Next Collection">
                 <FontAwesomeIcon icon={['fas', 'arrow-right']} size="xl"/>
               </button>
             </div>
+          </div>
+          {/* Visually hidden: announces collection changes (not initial load). */}
+          <div aria-live="polite" className={globalStyles.srOnly}>
+            {collectionAnnouncement}
           </div>
         </div>
         
@@ -184,12 +244,14 @@ const Gallery = ({ data }: PageProps<Queries.GalleryQuery>) => {
       </main>
       
       {/* Lightbox Modal */}
-      {modalShow && imgList[imgIndex]?.secure_url ? (
-        <ImageModal 
-          src={imgList[imgIndex].secure_url ?? ""} 
-          alt={imgList[imgIndex].context?.custom?.alt || `Gallery Image ${imgIndex}`} 
-          close={closeModal} 
-          nextImg={nextImg} 
+      {modalShow && modalImage?.secure_url ? (
+        <ImageModal
+          src={modalImage.secure_url ?? ""}
+          alt={modalImage.context?.custom?.alt || `Gallery Image ${imgIndex}`}
+          aspectRatio={modalAspectRatio}
+          placeholderSrc={modalThumb ? getSrc(modalThumb) : undefined}
+          close={closeModal}
+          nextImg={nextImg}
           prevImg={prevImg}
         />
       ) : null}

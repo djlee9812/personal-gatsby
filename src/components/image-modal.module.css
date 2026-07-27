@@ -15,8 +15,6 @@
 
 .modalContent {
   position: relative;
-  max-width: 90vw;
-  max-height: 90vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -24,16 +22,39 @@
   outline: none;
 }
 
+/*
+ * Sized from the thumbnail aspect ratio so controls and caption stay anchored
+ * to the final image frame while the full-res bitmap downloads.
+ */
+.imageStage {
+  position: relative;
+  display: grid;
+  place-items: center;
+  box-sizing: border-box;
+  --aspect-ratio: 1;
+  --max-stage-width: 90vw;
+  --max-stage-height: 85vh;
+  aspect-ratio: var(--aspect-ratio);
+  width: min(var(--max-stage-width), calc(var(--max-stage-height) * var(--aspect-ratio)));
+  height: min(var(--max-stage-height), calc(var(--max-stage-width) / var(--aspect-ratio)));
+  max-width: var(--max-stage-width);
+  max-height: var(--max-stage-height);
+}
+
 .modalTitle {
   position: absolute;
-  bottom: -40px; /* Move title below image */
+  top: 100%;
+  margin: 1rem 0 0 0;
   left: 50%;
   transform: translateX(-50%);
   color: #fff;
   font-family: var(--font-heading);
   font-size: 1.2rem;
-  margin: 0;
-  white-space: nowrap;
+  text-align: center;
+  max-width: min(90vw, 40rem);
+  white-space: normal;
+  padding: 0 1rem;
+  box-sizing: border-box;
   text-shadow: 0 2px 4px rgba(0,0,0,0.5);
 }
 
@@ -60,32 +81,141 @@
 }
 
 /* Higher specificity than `.hiddenButton:focus-visible` (same button also gets that class). */
-.modalContent .closeBtn:focus-visible {
+.imageStage .closeBtn:focus-visible {
   color: var(--color-accent);
   outline: 2px solid var(--color-highlight);
   outline-offset: 4px;
 }
 
+/* Prev/next affordances, overlaid mid-height on the image edges. Sized for touch (~44px). */
+.navBtn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  min-width: 44px;
+  min-height: 44px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.35);
+  color: #fff;
+  font-size: 1.1rem;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  z-index: 10;
+}
+
+.navBtn:hover {
+  background: rgba(0, 0, 0, 0.55);
+  color: var(--color-accent);
+}
+
+.navBtn:focus {
+  outline: none;
+}
+
+/* Higher specificity than `.hiddenButton:focus-visible` (same button also gets that class). */
+.imageStage .navBtn:focus-visible {
+  color: var(--color-accent);
+  outline: 2px solid var(--color-highlight);
+  outline-offset: 4px;
+}
+
+.prevBtn {
+  left: 0.5rem;
+}
+
+.nextBtn {
+  right: 0.5rem;
+}
+
+.placeholderThumb,
 .modalImage {
-  max-height: 85vh;
-  max-width: 90vw;
-  width: auto;
-  height: auto;
+  grid-area: 1 / 1;
+  width: 100%;
+  height: 100%;
   object-fit: contain;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
   border-radius: 4px;
+}
+
+.placeholderThumb {
+  opacity: 0.55;
+  filter: blur(6px);
+}
+
+.modalImage {
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  /* Keep in layout but invisible until the full-res src finishes loading. */
+  visibility: hidden;
+}
+
+.modalImageReady {
+  opacity: 1;
+  visibility: visible;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
 }
 
 /* Mobile Adjustments */
 @media (max-width: 767px) {
+  .imageStage {
+    --max-stage-width: 96vw;
+    --max-stage-height: 80vh;
+  }
+
   .closeBtn {
     top: -40px;
     right: 0;
     font-size: 2.5rem;
+    /* Keep the tap target >=44px even though the glyph itself renders smaller. */
+    min-width: 44px;
+    min-height: 44px;
   }
-  
+
   .modalTitle {
-    bottom: -30px;
+    margin-top: 0.75rem;
     font-size: 1rem;
+  }
+
+  .navBtn {
+    width: 44px;
+    height: 44px;
+  }
+
+  .prevBtn {
+    left: 0.25rem;
+  }
+
+  .nextBtn {
+    right: 0.25rem;
+  }
+}
+
+/* Short viewports (e.g. phones in landscape): leave room for caption + close. */
+@media (max-height: 500px) {
+  .modal {
+    overflow-y: auto;
+    align-items: flex-start;
+    padding: 2.75rem 0 3.5rem;
+    box-sizing: border-box;
+  }
+
+  .modalContent {
+    margin: auto;
+  }
+
+  .imageStage {
+    --max-stage-height: 55vh;
+  }
+
+  .closeBtn {
+    top: -2.25rem;
+  }
+
+  .modalTitle {
+    margin-top: 0.5rem;
+    font-size: 0.95rem;
   }
 }

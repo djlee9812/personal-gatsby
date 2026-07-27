@@ -1,6 +1,6 @@
 import * as React from "react"
 import * as styles from "./travel-map.module.css"
-import { TRAVEL_MAP_ASPECT_RATIO } from "./travel-map-constants"
+import { prefetchTravelGeo } from "./travel-map-geo"
 
 const TravelMap = React.lazy(() => import("./travel-map"))
 
@@ -17,6 +17,8 @@ const TravelMapWhenVisible = () => {
     if (shouldLoad) return
     const node = sentinelRef.current
     if (!node || typeof IntersectionObserver === "undefined") {
+      // Fire-and-forget: TravelMap attaches its own .catch when mounted.
+      void prefetchTravelGeo().catch(() => {})
       setShouldLoad(true)
       return
     }
@@ -24,6 +26,7 @@ const TravelMapWhenVisible = () => {
     const observer = new IntersectionObserver(
       (entries) => {
         if (entries.some((entry) => entry.isIntersecting)) {
+          void prefetchTravelGeo().catch(() => {})
           setShouldLoad(true)
           observer.disconnect()
         }
@@ -35,23 +38,16 @@ const TravelMapWhenVisible = () => {
     return () => observer.disconnect()
   }, [shouldLoad])
 
-  // Inline aspect-ratio mirrors CSS so Suspense fallback works before CSS module loads.
-  const slotStyle: React.CSSProperties = {
-    width: "100%",
-    aspectRatio: TRAVEL_MAP_ASPECT_RATIO,
-    background: "transparent",
-  }
-
   return (
     <div ref={sentinelRef}>
       {shouldLoad ? (
         <React.Suspense
-          fallback={<div style={slotStyle} className={styles.slot} aria-hidden="true" />}
+          fallback={<div className={styles.slot} aria-hidden="true" />}
         >
           <TravelMap />
         </React.Suspense>
       ) : (
-        <div style={slotStyle} className={styles.slot} aria-hidden="true" />
+        <div className={styles.slot} aria-hidden="true" />
       )}
     </div>
   )

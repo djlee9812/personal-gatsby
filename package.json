@@ -20,7 +20,8 @@
     "test:unit": "node --experimental-strip-types --test src/utils/*.test.ts src/lib/*.test.ts",
     "test:e2e": "playwright test",
     "test:links": "linkinator ./public --config ./linkinator.config.json",
-    "flights:build": "node scripts/flighty-export-to-json.mjs && node scripts/generate-airport-coordinates.mjs"
+    "flights:build": "node scripts/flighty-export-to-json.mjs && node scripts/generate-airport-coordinates.mjs",
+    "geo:strip": "node scripts/strip-geo-properties.mjs"
   },
   "dependencies": {
     "@fontsource/inconsolata": "^4.5.9",

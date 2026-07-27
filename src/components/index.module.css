@@ -20,6 +20,56 @@
   pointer-events: none;
 }
 
+/* Mobile/tablet substitute for the desktop-only Three.js scene. CSS (not JS)
+   controls visibility so the same markup renders correctly from both the
+   animated and reduced-motion static hero. */
+.heroMobileVisual {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.18;
+  color: var(--color-text-secondary);
+}
+
+.heroMobileVisualSvg {
+  width: min(70vw, 380px);
+  height: auto;
+}
+
+.heroMobileVisualArc {
+  color: var(--color-border);
+}
+
+.heroMobileVisualPlane {
+  color: var(--color-accent);
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: heroPlaneFloat 6s ease-in-out infinite;
+}
+
+@keyframes heroPlaneFloat {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .heroMobileVisualPlane {
+    animation: none;
+  }
+}
+
+@media (min-width: 901px) {
+  .heroMobileVisual {
+    display: none;
+  }
+}
+
 .heroContent {
   position: relative;
   z-index: 1;

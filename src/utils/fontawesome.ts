@@ -6,6 +6,7 @@ import {
   faArrowDown,
   faChevronLeft,
   faChevronRight,
+  faPlane,
 } from '@fortawesome/free-solid-svg-icons';
 import { faApple, faGithub, faInstagram, faLinkedin, faGoodreads } from '@fortawesome/free-brands-svg-icons';
 
@@ -15,6 +16,7 @@ library.add(
   faArrowDown,
   faChevronLeft,
   faChevronRight,
+  faPlane,
   faApple,
   faGithub,
   faInstagram,

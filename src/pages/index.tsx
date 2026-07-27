@@ -58,6 +58,42 @@ const HomeHeroChrome: React.FC<HomeHeroChromeProps> = ({
   </>
 )
 
+// Lightweight aerospace-flavored decorative visual shown in place of the
+// Three.js scene below the desktop breakpoint. CSS (not JS) decides
+// visibility (`@media (min-width: 901px)` hides it) so it renders identically
+// from HomeHeroStatic and HomeHeroAnimated without needing isDesktop there.
+const HeroMobileVisual: React.FC = () => (
+  <div className={styles.heroMobileVisual} aria-hidden="true">
+    <svg
+      className={styles.heroMobileVisualSvg}
+      viewBox="0 0 400 400"
+      preserveAspectRatio="xMidYMid meet"
+      focusable="false"
+    >
+      <path
+        className={styles.heroMobileVisualArc}
+        d="M 40 260 Q 200 180 360 260"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1"
+      />
+      <path
+        className={styles.heroMobileVisualArc}
+        d="M 70 300 Q 200 240 330 300"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1"
+      />
+      <g className={styles.heroMobileVisualPlane}>
+        <path
+          d="M200 120 L206 150 L246 174 L246 182 L206 172 L206 196 L222 208 L222 214 L200 208 L178 214 L178 208 L194 196 L194 172 L154 182 L154 174 L194 150 Z"
+          fill="currentColor"
+        />
+      </g>
+    </svg>
+  </div>
+)
+
 const HomeHeroAnimated: React.FC = () => {
   // Gate the lazy Three.js child only — keep chrome mounted across breakpoint
   // crossings so scroll motion / entrance state are not remounted.
@@ -74,6 +110,7 @@ const HomeHeroAnimated: React.FC = () => {
       style={{ opacity: heroOpacity, scale: heroScale, y: heroY }}
     >
       <div className={styles.hero3dWrapper}>
+        <HeroMobileVisual />
         {isDesktop ? (
           <React.Suspense fallback={null}>
             <HeroScene scrollProgress={scrollProgress} />
@@ -87,7 +124,9 @@ const HomeHeroAnimated: React.FC = () => {
 
 const HomeHeroStatic: React.FC = () => (
   <motion.header className={styles.heroContainer}>
-    <div className={styles.hero3dWrapper} />
+    <div className={styles.hero3dWrapper}>
+      <HeroMobileVisual />
+    </div>
     <HomeHeroChrome enterInitial={false} reducedMotion />
   </motion.header>
 )
