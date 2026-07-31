@@ -41,19 +41,10 @@
   display: block;
 }
 
-/* Portrait / phone screenshots: full image visible, side bars, slightly inset (“zoomed out”). */
-.cardImageWrapContain {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
+/* Full image visible: scale until the first edges meet the frame (no inset). */
 .cardImageWrapContain img {
-  width: auto;
-  height: auto;
-  /* ~10% narrower gutters than 72% / 88% (bars ≈ 90% of previous thickness). */
-  max-width: 75%;
-  max-height: 95%;
+  width: 100%;
+  height: 100%;
   object-fit: contain;
   object-position: center;
 }

@@ -15,7 +15,7 @@ export interface Project {
   imagePath?: string
   /**
    * `cover` (default): fill the 16:10 card crop.
-   * `contain`: fit the whole image inside the frame (pillar/letterboxing); use for tall phone screenshots.
+   * `contain`: fit the whole image flush to the frame (letter/pillarbox only as needed).
    */
   imageFit?: "cover" | "contain"
   /** Optional: link to run in Binder, Colab, or similar. */
@@ -31,6 +31,16 @@ export const projects: Project[] = [
     appStoreUrl: "https://apps.apple.com/us/app/poker-income-tracker/id6762243351",
     imagePath:
       "https://res.cloudinary.com/dongjoongallery/image/upload/v1778273338/homeGraph_iurgpy.png",
+    imageFit: "contain",
+  },
+  {
+    title: "Isochrone Map",
+    description:
+      "Plot drive-time isochrones from a point on the map to see how far you can reach within a given time, across different days and times of day.",
+    techStack: ["React", "Vite", "Mapbox"],
+    githubUrl: "https://github.com/djlee9812/isochrone",
+    imagePath:
+      "https://res.cloudinary.com/dongjoongallery/image/upload/v1785537048/isochrone_ivnkzp.png",
     imageFit: "contain",
   },
   {
