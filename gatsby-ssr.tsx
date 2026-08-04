@@ -4,17 +4,6 @@ import React from "react"
 import type { GatsbySSR } from "gatsby"
 import { Partytown } from "@qwik.dev/partytown/react"
 import "./src/utils/fontawesome"
-import { QueryErrorBoundary } from "./src/components/query-error-boundary"
-import { locationResetKey } from "./src/utils/location-reset-key"
-
-export const wrapPageElement: GatsbySSR["wrapPageElement"] = ({
-  element,
-  props,
-}) => (
-  <QueryErrorBoundary resetKey={locationResetKey(props.location)}>
-    {element}
-  </QueryErrorBoundary>
-)
 
 export const onRenderBody: GatsbySSR["onRenderBody"] = ({
   setHtmlAttributes,

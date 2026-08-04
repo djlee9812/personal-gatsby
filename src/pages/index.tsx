@@ -6,6 +6,7 @@ import Layout from '../components/animated-layout'
 import Seo from '../components/seo'
 import * as styles from '../components/index.module.css'
 import TravelMapWhenVisible from '../components/travel-map-when-visible'
+import josefinSans700 from '@fontsource/josefin-sans/files/josefin-sans-latin-700-normal.woff2'
 
 const HeroScene = React.lazy(() => import('../components/hero-scene'))
 import { m, useReducedMotion, useScroll, useTransform } from 'framer-motion'
@@ -98,11 +99,45 @@ const HomeHeroAnimated: React.FC = () => {
   // Gate the lazy Three.js child only — keep chrome mounted across breakpoint
   // crossings so scroll motion / entrance state are not remounted.
   const isDesktop = useMatchMedia(DESKTOP_HERO_QUERY)
+  const [idleReady, setIdleReady] = React.useState(false)
   const { scrollY } = useScroll()
   const heroOpacity = useTransform(scrollY, [0, 300], [1, 0])
   const heroScale = useTransform(scrollY, [0, 300], [1, 0.95])
   const heroY = useTransform(scrollY, [0, 300], [0, 50])
   const scrollProgress = useTransform(scrollY, [0, 300], [0, 1])
+
+  React.useEffect(() => {
+    if (!isDesktop) {
+      setIdleReady(false)
+      return
+    }
+
+    let cancelled = false
+    let idleId: number | undefined
+    let timeoutId: ReturnType<typeof setTimeout> | undefined
+    // Short timeout: yield once after paint without waiting up to 2s on a busy main thread.
+    const IDLE_TIMEOUT_MS = 150
+
+    const onIdle = () => {
+      if (!cancelled) setIdleReady(true)
+    }
+
+    if (typeof requestIdleCallback !== 'undefined') {
+      idleId = requestIdleCallback(onIdle, { timeout: IDLE_TIMEOUT_MS })
+    } else {
+      timeoutId = setTimeout(onIdle, IDLE_TIMEOUT_MS)
+    }
+
+    return () => {
+      cancelled = true
+      if (idleId !== undefined && typeof cancelIdleCallback !== 'undefined') {
+        cancelIdleCallback(idleId)
+      }
+      if (timeoutId !== undefined) {
+        clearTimeout(timeoutId)
+      }
+    }
+  }, [isDesktop])
 
   return (
     <m.header
@@ -111,7 +146,7 @@ const HomeHeroAnimated: React.FC = () => {
     >
       <div className={styles.hero3dWrapper}>
         <HeroMobileVisual />
-        {isDesktop ? (
+        {isDesktop && idleReady ? (
           <React.Suspense fallback={null}>
             <HeroScene scrollProgress={scrollProgress} />
           </React.Suspense>
@@ -131,7 +166,7 @@ const HomeHeroStatic: React.FC = () => (
   </m.header>
 )
 
-const IndexPage = () => {
+const IndexPageContent = () => {
   const prefersReducedMotion = useReducedMotion();
   const [hydrated, setHydrated] = React.useState(false);
   React.useEffect(() => {
@@ -144,6 +179,7 @@ const IndexPage = () => {
   const showAnimatedHero = hydrated && prefersReducedMotion === false;
   const enterInitial = prefersReducedMotion === true ? false : "hidden";
 
+  // Keep useStaticQuery inside Layout so QueryErrorBoundary can catch failures.
   const data = useStaticQuery<Queries.IndexPageCloudinaryQuery>(graphql`
     query IndexPageCloudinary {
       columnsImg: cloudinaryMedia(secure_url: {regex: "/Columns/"}) {
@@ -163,7 +199,6 @@ const IndexPage = () => {
   const climbingImage = getImage(data?.climbingImg?.gatsbyImageData ?? null);
 
   return (
-    <Layout>
       <main id="main">
       {/* 1. Hero Section */}
       {showAnimatedHero ? <HomeHeroAnimated /> : <HomeHeroStatic />}
@@ -177,7 +212,7 @@ const IndexPage = () => {
         viewport={{ once: true, margin: "-100px" }}
         variants={homeStagger}
       >
-        <div className={styles.sectionTitle}>01 / About Me</div>
+        <h2 className={styles.sectionTitle}>01 / About Me</h2>
         
         <div className={styles.aboutGrid}>
           <m.div className={styles.aboutText} variants={homeFade}>
@@ -222,7 +257,7 @@ const IndexPage = () => {
         viewport={{ once: true, margin: "-100px" }}
         variants={homeStagger}
       >
-        <div className={styles.sectionTitle}>02 / Hobbies</div>
+        <h2 className={styles.sectionTitle}>02 / Hobbies</h2>
         
         <div className={styles.hobbyGrid}>
           {/* Card 1: Snowboarding */}
@@ -270,7 +305,7 @@ const IndexPage = () => {
         viewport={{ once: true, margin: "-100px" }}
         variants={homeStagger}
       >
-        <div className={styles.sectionTitle}>03 / Travel</div>
+        <h2 className={styles.sectionTitle}>03 / Travel</h2>
         
         <div className={styles.aboutText} style={{marginBottom: '30px'}}>
           <p>
@@ -284,12 +319,25 @@ const IndexPage = () => {
       </m.section>
 
       </main>
-    </Layout>
   )
 }
 
+const IndexPage = () => (
+  <Layout>
+    <IndexPageContent />
+  </Layout>
+)
+
 export const Head: HeadFC = ({ location }) => (
-  <Seo pathname={location.pathname} />
+  <Seo pathname={location.pathname}>
+    <link
+      rel="preload"
+      href={josefinSans700}
+      as="font"
+      type="font/woff2"
+      crossOrigin="anonymous"
+    />
+  </Seo>
 )
 
 export default IndexPage

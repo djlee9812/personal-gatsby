@@ -66,9 +66,10 @@ test.describe("smoke", () => {
     await page.goto("/gallery");
 
     const imageCell = page.getByRole("button").filter({ has: page.locator("img") }).first();
-    if ((await imageCell.count()) === 0) {
-      test.skip(true, "No gallery images (empty Cloudinary)");
-    }
+    expect(
+      await imageCell.count(),
+      "Cloudinary gallery empty — CI secrets / tags required",
+    ).toBeGreaterThan(0);
 
     await imageCell.click();
     const dialog = page.getByRole("dialog");

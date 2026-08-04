@@ -90,6 +90,12 @@ body {
   padding-top: 80px;
 }
 
+@media only screen and (max-width: 767px) {
+  .navbarMargin {
+    padding-top: 1.5rem;
+  }
+}
+
 /* Shared page header (Blog, Gallery, Projects): title + optional subtext */
 .pageHeader {
   padding-bottom: 2rem;

@@ -14,3 +14,36 @@
 #   CLOUDINARY_API_SECRET
 # Optional analytics (GA4 via Partytown):
 #   GATSBY_GA_ID
+
+# Long-lived caching for fingerprinted assets only.
+# Do not add immutable Cache-Control to HTML, /page-data/*, or /index.html —
+# those must stay revalidatable so content updates reach visitors.
+#
+# Why `/*.js` and `/*.css` (not only `/static/*`):
+# Gatsby emits content-hashed bundles at the site root (e.g. `/app-<hash>.js`,
+# `/commons-<hash>.js`, `/styles.<hash>.css`). Fonts land under `/static/`.
+# `immutable` is safe for those hashed names because a content change gets a
+# new URL. Footgun: anything copied from `static/` to the site root as a
+# stable name (e.g. `static/widget.js` → `/widget.js`) would also match and
+# stick for a year. Keep `static/` free of unversioned `.js`/`.css` at its
+# top level (geo JSON under `/geo/*` uses a shorter max-age below).
+
+[[headers]]
+  for = "/static/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/*.js"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/*.css"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/geo/*"
+  [headers.values]
+    Cache-Control = "public, max-age=86400"

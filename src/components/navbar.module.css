@@ -81,7 +81,40 @@
   }
   
   .navItem a {
+    position: relative;
+    z-index: 0;
+    min-height: 44px;
+    min-width: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     font-size: 1rem;
     padding: 10px 15px;
+    /* Hit area stays tall; paint lives on ::before so the chip isn’t full bar height. */
+    background-color: transparent;
+  }
+
+  .navItem a::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    left: 4px;
+    right: 4px;
+    top: 50%;
+    height: 2rem;
+    transform: translateY(-50%);
+    border-radius: 25px;
+    background-color: transparent;
+    transition: background-color 0.3s ease;
+  }
+
+  .navItem a:hover,
+  .navItem a.active {
+    background-color: transparent;
+  }
+
+  .navItem a:hover::before,
+  .navItem a.active::before {
+    background-color: rgba(128, 128, 128, 0.1);
   }
 }

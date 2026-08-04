@@ -1,7 +1,12 @@
 import type React from 'react';
 import { useRef, useState, useEffect, useMemo } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
-import * as THREE from 'three';
+import {
+  BufferAttribute,
+  BufferGeometry,
+  Float32BufferAttribute,
+  type Group,
+} from 'three';
 import type { MotionValue } from 'framer-motion';
 import { DESKTOP_HERO_QUERY } from '../styles/breakpoints';
 import { useMatchMedia } from '../hooks/use-match-media';
@@ -95,7 +100,7 @@ const PLANE_COLOR = '#c8cfd0';
 // Geometry builders
 // ---------------------------------------------------------------------------
 
-function createFuselageGeometry(): THREE.BufferGeometry {
+function createFuselageGeometry(): BufferGeometry {
   const points: number[] = [];
   const indices: number[] = [];
 
@@ -174,14 +179,14 @@ function createFuselageGeometry(): THREE.BufferGeometry {
     }
   }
 
-  const geo = new THREE.BufferGeometry();
-  geo.setAttribute('position', new THREE.Float32BufferAttribute(points, 3));
-  geo.setIndex(new THREE.BufferAttribute(new Uint16Array(indices), 1));
+  const geo = new BufferGeometry();
+  geo.setAttribute('position', new Float32BufferAttribute(points, 3));
+  geo.setIndex(new BufferAttribute(new Uint16Array(indices), 1));
   geo.computeVertexNormals();
   return geo;
 }
 
-function createWingGeometry(side: 1 | -1): THREE.BufferGeometry {
+function createWingGeometry(side: 1 | -1): BufferGeometry {
   const s = side;
   const rootLE_x = WING_X_OFFSET;
   const rootTE_x = rootLE_x - WING_ROOT_CHORD;
@@ -290,14 +295,14 @@ function createWingGeometry(side: 1 | -1): THREE.BufferGeometry {
           wrap(2, 0), wrap(2, 4), wrap(2, 3),
         ];
 
-  const geo = new THREE.BufferGeometry();
-  geo.setAttribute('position', new THREE.BufferAttribute(verts, 3));
-  geo.setIndex(new THREE.BufferAttribute(new Uint16Array(idx), 1));
+  const geo = new BufferGeometry();
+  geo.setAttribute('position', new BufferAttribute(verts, 3));
+  geo.setIndex(new BufferAttribute(new Uint16Array(idx), 1));
   geo.computeVertexNormals();
   return geo;
 }
 
-function createHTailGeometry(side: 1 | -1): THREE.BufferGeometry {
+function createHTailGeometry(side: 1 | -1): BufferGeometry {
   const rootLE_x = HTAIL_X_OFFSET;
   const rootTE_x = rootLE_x - HTAIL_ROOT_CHORD;
   const tipLE_x = rootLE_x - HTAIL_SWEEP;
@@ -338,14 +343,14 @@ function createHTailGeometry(side: 1 | -1): THREE.BufferGeometry {
         5,7,6, 5,8,7, 5,9,8,
       ];
 
-  const geo = new THREE.BufferGeometry();
-  geo.setAttribute('position', new THREE.BufferAttribute(verts, 3));
-  geo.setIndex(new THREE.BufferAttribute(new Uint16Array(idx), 1));
+  const geo = new BufferGeometry();
+  geo.setAttribute('position', new BufferAttribute(verts, 3));
+  geo.setIndex(new BufferAttribute(new Uint16Array(idx), 1));
   geo.computeVertexNormals();
   return geo;
 }
 
-function createVTailGeometry(): THREE.BufferGeometry {
+function createVTailGeometry(): BufferGeometry {
   const rootLE_x = VTAIL_X_OFFSET;
   const rootTE_x = rootLE_x - VTAIL_ROOT_CHORD;
   // TE sweep (side view): tip TE aft of root TE
@@ -383,14 +388,14 @@ function createVTailGeometry(): THREE.BufferGeometry {
     5,6,7, 5,7,8, 5,8,9,
   ];
 
-  const geo = new THREE.BufferGeometry();
-  geo.setAttribute('position', new THREE.BufferAttribute(verts, 3));
-  geo.setIndex(new THREE.BufferAttribute(new Uint16Array(idx), 1));
+  const geo = new BufferGeometry();
+  geo.setAttribute('position', new BufferAttribute(verts, 3));
+  geo.setIndex(new BufferAttribute(new Uint16Array(idx), 1));
   geo.computeVertexNormals();
   return geo;
 }
 
-function createEngineGeometry(side: 1 | -1): THREE.BufferGeometry {
+function createEngineGeometry(side: 1 | -1): BufferGeometry {
   const cx = ENGINE_X_OFFSET;
   const cy = ENGINE_Y_OFFSET;
   const cz = ENGINE_SPAN_POS * side;
@@ -447,14 +452,14 @@ function createEngineGeometry(side: 1 | -1): THREE.BufferGeometry {
     indices.push(backCenter, ring(lastSec, i + 1), ring(lastSec, i));
   }
 
-  const geo = new THREE.BufferGeometry();
-  geo.setAttribute('position', new THREE.Float32BufferAttribute(points, 3));
-  geo.setIndex(new THREE.BufferAttribute(new Uint16Array(indices), 1));
+  const geo = new BufferGeometry();
+  geo.setAttribute('position', new Float32BufferAttribute(points, 3));
+  geo.setIndex(new BufferAttribute(new Uint16Array(indices), 1));
   geo.computeVertexNormals();
   return geo;
 }
 
-function createPylonGeometry(side: 1 | -1): THREE.BufferGeometry {
+function createPylonGeometry(side: 1 | -1): BufferGeometry {
   const engineCenterX = ENGINE_X_OFFSET - ENGINE_LENGTH / 2 + ENGINE_LENGTH * 0.45;
   const cx = engineCenterX;
   const cz = ENGINE_SPAN_POS * side;
@@ -484,9 +489,9 @@ function createPylonGeometry(side: 1 | -1): THREE.BufferGeometry {
     4,5,7, 7,5,6,  // bottom
   ];
 
-  const geo = new THREE.BufferGeometry();
-  geo.setAttribute('position', new THREE.BufferAttribute(verts, 3));
-  geo.setIndex(new THREE.BufferAttribute(new Uint16Array(idx), 1));
+  const geo = new BufferGeometry();
+  geo.setAttribute('position', new BufferAttribute(verts, 3));
+  geo.setIndex(new BufferAttribute(new Uint16Array(idx), 1));
   geo.computeVertexNormals();
   return geo;
 }
@@ -499,7 +504,7 @@ interface AirplaneProps {
   scrollProgress: MotionValue<number>;
 }
 
-function mergeGeometries(geometries: THREE.BufferGeometry[]): THREE.BufferGeometry {
+function mergeGeometries(geometries: BufferGeometry[]): BufferGeometry {
   const positions: number[] = [];
   const indices: number[] = [];
   let vertexOffset = 0;
@@ -515,9 +520,9 @@ function mergeGeometries(geometries: THREE.BufferGeometry[]): THREE.BufferGeomet
     }
     vertexOffset += pos.count;
   }
-  const merged = new THREE.BufferGeometry();
-  merged.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3));
-  merged.setIndex(new THREE.BufferAttribute(new Uint16Array(indices), 1));
+  const merged = new BufferGeometry();
+  merged.setAttribute('position', new Float32BufferAttribute(positions, 3));
+  merged.setIndex(new BufferAttribute(new Uint16Array(indices), 1));
   merged.computeVertexNormals();
   return merged;
 }
@@ -530,7 +535,7 @@ const IDLE_BOB_AMP = 0.35;
 const IDLE_SPEED = 0.38;
 
 function Airplane({ scrollProgress }: AirplaneProps) {
-  const groupRef = useRef<THREE.Group>(null!);
+  const groupRef = useRef<Group>(null!);
   const scrollRef = useRef(0);
 
   const mergedGeometry = useMemo(() => {

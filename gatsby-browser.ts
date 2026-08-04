@@ -1,8 +1,6 @@
 // gatsby-browser.ts
-import React from "react"
 import "./src/utils/fontawesome"
 import type { GatsbyBrowser } from "gatsby"
-import { QueryErrorBoundary } from "./src/components/query-error-boundary"
 import {
   clearQueryErrorOverlay,
   isStaticQueryErrorMessage,
@@ -59,16 +57,6 @@ export const onClientEntry: GatsbyBrowser["onClientEntry"] = () => {
     handle as (e: PromiseRejectionEvent) => void
   )
 }
-
-/** Page-level boundary so resetKey includes search/hash from Gatsby location. */
-export const wrapPageElement: GatsbyBrowser["wrapPageElement"] = ({
-  element,
-  props,
-}) =>
-  React.createElement(QueryErrorBoundary, {
-    resetKey: locationResetKey(props.location),
-    children: element,
-  })
 
 export const onRouteUpdate: GatsbyBrowser["onRouteUpdate"] = ({ location }) => {
   clearQueryErrorOverlay()

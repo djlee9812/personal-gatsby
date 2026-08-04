@@ -1,6 +1,9 @@
 import type * as React from 'react'
+import { useLocation } from '@gatsbyjs/reach-router'
 import Navbar from './navbar'
 import Footer from './footer'
+import { QueryErrorBoundary } from './query-error-boundary'
+import { locationResetKey } from '../utils/location-reset-key'
 import * as styles from './layout.module.css'
 /* Side-effect: :root tokens + body styles must load on every route (incl. homepage). */
 import './global.module.css'
@@ -16,12 +19,16 @@ interface LayoutProps {
 }
 
 const Layout = ({ children }: LayoutProps) => {
+  const location = useLocation()
+
   return (
     <div className={styles.page}>
       <a href="#main" className={styles.skipLink}>Skip to content</a>
       <Navbar />
       <div className={styles.contentDiv}>
-        {children}
+        <QueryErrorBoundary resetKey={locationResetKey(location)}>
+          {children}
+        </QueryErrorBoundary>
       </div>
       <Footer />
     </div>
