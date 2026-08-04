@@ -51,8 +51,8 @@ const Gallery = ({ data }: PageProps<Queries.GalleryQuery>) => {
   const [galIndex, setGalIndex] = React.useState(0);
   const [imgIndex, setImgIndex] = React.useState(0);
   const [modalShow, setModalShow] = React.useState(false);
-  /** Prevents double history.back() when FocusTrap onDeactivate re-enters closeModal. */
   const lightboxHistoryOpen = React.useRef(false);
+  const returnFocusRef = React.useRef<HTMLElement | null>(null);
   
   /**
    * renderLimit implements "Soft Infinite Scroll". 
@@ -114,6 +114,15 @@ const Gallery = ({ data }: PageProps<Queries.GalleryQuery>) => {
     return () => window.removeEventListener("popstate", handlePopState);
   }, [modalShow]);
 
+  // Leaving /gallery while open leaves the synthetic history entry (calling
+  // history.back() here races Gatsby Link and can undo the destination route).
+  React.useEffect(() => {
+    return () => {
+      lightboxHistoryOpen.current = false;
+      returnFocusRef.current = null;
+    };
+  }, []);
+
   // Handle cases where no valid Cloudinary images/tags are found.
   if (numPages === 0 || !currentCollection) {
     return (
@@ -145,8 +154,9 @@ const Gallery = ({ data }: PageProps<Queries.GalleryQuery>) => {
     setRenderLimit(15); 
   }
 
-  const openModal = (index: number) => {
+  const openModal = (index: number, trigger?: HTMLElement | null) => {
     if (!imgList[index]?.secure_url) return
+    returnFocusRef.current = trigger ?? null
     setImgIndex(index);
     setModalShow(true);
     // Push a history entry so the back button closes the modal instead of
@@ -159,8 +169,6 @@ const Gallery = ({ data }: PageProps<Queries.GalleryQuery>) => {
 
   const closeModal = () => {
     setModalShow(false);
-    // Only pop the entry we pushed — and only once (FocusTrap onDeactivate
-    // can re-enter closeModal before popstate clears history.state).
     if (lightboxHistoryOpen.current) {
       lightboxHistoryOpen.current = false;
       window.history.back();
@@ -231,7 +239,7 @@ const Gallery = ({ data }: PageProps<Queries.GalleryQuery>) => {
                 key={id} 
                 image={node.thumb} 
                 alt={alt} 
-                onClick={() => openModal(index)}
+                onClick={(trigger) => openModal(index, trigger)}
               />
             )
           })}
@@ -253,6 +261,7 @@ const Gallery = ({ data }: PageProps<Queries.GalleryQuery>) => {
           close={closeModal}
           nextImg={nextImg}
           prevImg={prevImg}
+          returnFocusRef={returnFocusRef}
         />
       ) : null}
     </Layout>

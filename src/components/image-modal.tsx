@@ -13,6 +13,7 @@ interface ImageModalProps {
   close: () => void
   nextImg: () => void
   prevImg: () => void
+  returnFocusRef?: React.RefObject<HTMLElement | null>
 }
 
 const ImageModal = ({
@@ -23,6 +24,7 @@ const ImageModal = ({
   close,
   nextImg,
   prevImg,
+  returnFocusRef,
 }: ImageModalProps) => {
   const modalRef = React.useRef<HTMLDivElement>(null)
   const closeRef = React.useRef<HTMLButtonElement>(null)
@@ -96,7 +98,8 @@ const ImageModal = ({
       focusTrapOptions={{
         escapeDeactivates: false,
         allowOutsideClick: true,
-        onDeactivate: close,
+        clickOutsideDeactivates: false,
+        setReturnFocus: () => returnFocusRef?.current ?? false,
       }}
     >
       <div

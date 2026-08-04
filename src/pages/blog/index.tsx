@@ -61,7 +61,10 @@ const Blog = ({ data }: PageProps<Queries.BlogIndexQuery>) => {
 export const query = graphql`
   query BlogIndex {
     allFile(
-      sort: {childMdx: {frontmatter: {date: DESC}}}
+      sort: [
+        { childMdx: { frontmatter: { date: DESC } } }
+        { childMdx: { frontmatter: { slug: ASC } } }
+      ]
       filter: {sourceInstanceName: {eq: "blogs"}}
     ) {
       nodes {

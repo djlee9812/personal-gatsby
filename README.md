@@ -42,23 +42,28 @@ The website can be accessed [here](https://www.dongjoonlee.com/)
     npm install
     ```
 
-2.  **Start developing:**
+2.  **Set Cloudinary credentials** (required for `develop` and `build`):
+    - `CLOUDINARY_CLOUD_NAME`
+    - `CLOUDINARY_API_KEY`
+    - `CLOUDINARY_API_SECRET`
+
+3.  **Start developing:**
     ```shell
     npm run develop
     ```
     The site will be running at `http://localhost:8000`.
 
-3.  **Build for production:**
+4.  **Build for production:**
     ```shell
     npm run build
     ```
 
-4.  **Unit tests:**
+5.  **Unit tests:**
     ```shell
     npm test
     ```
 
-5.  **Rebuild flight map data** (optional; after updating Flighty exports):
+6.  **Rebuild flight map data** (optional; after updating Flighty exports):
     ```shell
     npm run flights:build
     ```
@@ -67,11 +72,12 @@ The website can be accessed [here](https://www.dongjoonlee.com/)
 
 GitHub Actions (`.github/workflows/ci.yml`) runs on pushes and pull requests, including unit tests:
 
-1. `npm test` (unit tests under `src/utils/*.test.ts` and `src/lib/*.test.ts`)
-2. `npm run build` (also generates `src/gatsby-types.d.ts` via `graphqlTypegen.generateOnBuild`)
-3. `npm run typecheck`
-4. `npm run test:links` (internal links in `public/`)
-5. `npm run test:e2e` (Playwright smokes)
+1. `npm run lint` (Biome)
+2. `npm test` (unit tests under `src/utils/*.test.ts` and `src/lib/*.test.ts`)
+3. `npm run build` (also generates `src/gatsby-types.d.ts` via `graphqlTypegen.generateOnBuild`)
+4. `npm run typecheck`
+5. `npm run test:links` (internal links in `public/`)
+6. `npm run test:e2e` (Playwright smokes)
 
 Add these repository secrets so the Cloudinary-backed build works in CI
 (and the same names under **Dependabot secrets** so Dependabot PRs can build):

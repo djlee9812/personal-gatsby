@@ -5,7 +5,7 @@ import * as styles from './image-cell.module.css'
 interface ImageCellProps {
   image: IGatsbyImageData
   alt: string
-  onClick: () => void
+  onClick: (trigger: HTMLElement) => void
 }
 
 const ImageCell = ({ image, alt, onClick }: ImageCellProps) => {
@@ -20,11 +20,17 @@ const ImageCell = ({ image, alt, onClick }: ImageCellProps) => {
     setHoverStyle(null);
     setHoverText("");
   }
+
+  const handleActivate = (
+    e: React.MouseEvent<HTMLElement> | React.KeyboardEvent<HTMLElement>,
+  ) => {
+    onClick(e.currentTarget)
+  }
   
-  const handleKeyDown = (e: React.KeyboardEvent) => {
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLElement>) => {
     if (e.key === 'Enter' || e.key === ' ') {
       if (e.key === ' ') e.preventDefault();
-      onClick();
+      handleActivate(e);
     }
   };
 
@@ -35,7 +41,7 @@ const ImageCell = ({ image, alt, onClick }: ImageCellProps) => {
       onMouseLeave={imageLeave} 
       onFocus={imageEnter} 
       onBlur={imageLeave}
-      onClick={onClick}
+      onClick={handleActivate}
       onKeyDown={handleKeyDown}
       role="button"
       tabIndex={0}

@@ -15,7 +15,22 @@ import {
 // Shared with gatsby-config via CommonJS (Gatsby loads config as CJS).
 const { maxResults: CLOUDINARY_GALLERY_MAX_RESULTS } = require("./cloudinary-gallery-config");
 
-export const onPreBootstrap: GatsbyNode["onPreBootstrap"] = async () => {
+const REQUIRED_CLOUDINARY_ENV = [
+  "CLOUDINARY_CLOUD_NAME",
+  "CLOUDINARY_API_KEY",
+  "CLOUDINARY_API_SECRET",
+] as const;
+
+export const onPreBootstrap: GatsbyNode["onPreBootstrap"] = async ({ reporter }) => {
+  const missing = REQUIRED_CLOUDINARY_ENV.filter(
+    (name) => !process.env[name]?.trim(),
+  );
+  if (missing.length > 0) {
+    reporter.panic(
+      `Missing required Cloudinary environment variable(s): ${missing.join(", ")}. Set all of: ${REQUIRED_CLOUDINARY_ENV.join(", ")}.`
+    );
+  }
+
   await copyLibFiles(path.join(process.cwd(), "static", "~partytown"), {
     debugDir: false,
   });

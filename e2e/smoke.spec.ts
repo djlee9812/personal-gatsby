@@ -76,5 +76,29 @@ test.describe("smoke", () => {
 
     await page.keyboard.press("Escape");
     await expect(dialog).toBeHidden();
+    await expect(imageCell).toBeFocused();
+
+    await imageCell.click();
+    await expect(dialog).toBeVisible();
+    await page.goBack();
+    await expect(dialog).toBeHidden();
+    await expect(page).toHaveURL(/\/gallery\/?$/);
+
+    // Client-navigate away with lightbox open (modal covers nav, so Link
+    // clicks are not reachable). Ensures unmount no longer history.back()s
+    // and undoes the destination route.
+    await imageCell.click();
+    await expect(dialog).toBeVisible();
+    await page.evaluate(() => {
+      const navigate = (
+        window as unknown as { ___navigate?: (to: string) => void }
+      ).___navigate;
+      if (typeof navigate !== "function") {
+        throw new Error("Gatsby ___navigate is not available");
+      }
+      navigate("/blog");
+    });
+    await expect(page).toHaveURL(/\/blog\/?$/);
+    await expect(dialog).toBeHidden();
   });
 });

@@ -4,6 +4,7 @@
 .heroContainer {
   /* dvh tracks the visible viewport; vh kept as fallback for older browsers. */
   height: 100vh;
+  /* biome-ignore lint/suspicious/noDuplicateProperties: progressive enhancement vh → dvh */
   height: 100dvh;
   display: flex;
   flex-direction: column;
