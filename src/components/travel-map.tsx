@@ -9,25 +9,11 @@ import type { FlightsDataset } from "../data/flights.types";
 import { buildDrawableRoutes, type AirportCoordinatesMap } from "../lib/flight-routes";
 import { TRAVEL_MAP_HEIGHT, TRAVEL_MAP_WIDTH } from "./travel-map-constants";
 import { prefetchTravelGeo } from "./travel-map-geo";
-import { useMatchMedia } from "../hooks/use-match-media";
+import { MAP_COLOR_DEFAULTS, readMapColors, type MapColors } from "../utils/map-colors";
 import * as styles from "./travel-map.module.css";
 
 const FLIGHTS_STORAGE_KEY = "travel-map-show-flights";
-
-/** Fallbacks mirror defaults in travel-map.module.css until CSS vars are read. */
-interface MapColors {
-  visited: string;
-  unvisited: string;
-  routeStroke: string;
-  stroke: string;
-}
-
-const MAP_COLOR_DEFAULTS: MapColors = {
-  visited: "#d4fcff",
-  unvisited: "#2b2b37",
-  routeStroke: "#dcae52",
-  stroke: "#444",
-};
+const COLOR_SCHEME_QUERY = "(prefers-color-scheme: dark)";
 
 const MAP_COLOR_DESCRIPTION =
   "Light teal regions are places visited. Dark regions have not been visited.";
@@ -59,7 +45,6 @@ const geographyStyle = {
 const TravelMap = () => {
   const wrapRef = useRef<HTMLDivElement>(null);
   const colorDescId = useId();
-  const prefersDark = useMatchMedia("(prefers-color-scheme: dark)");
   const [position, setPosition] = useState<MapPosition>({ coordinates: [0, 20], zoom: 1 });
   const [showFlights, setShowFlights] = useState(false);
   const [worldGeo, setWorldGeo] = useState<object | null>(null);
@@ -67,28 +52,30 @@ const TravelMap = () => {
   const [geoError, setGeoError] = useState(false);
   const [colors, setColors] = useState<MapColors>(MAP_COLOR_DEFAULTS);
 
-  // Re-read when OS theme flips so SVG stroke stays in sync with CSS control tokens.
-  // biome-ignore lint/correctness/useExhaustiveDependencies: prefersDark is the theme-change signal
+  // Sync SVG colors from CSS vars when .wrap mounts/geo loads, and on OS theme
+  // changes — without putting prefersDark in render (avoids a stale Geography pass).
+  // biome-ignore lint/correctness/useExhaustiveDependencies: geo/error gate wrapRef mount
   useLayoutEffect(() => {
-    const el = wrapRef.current;
-    if (!el) return;
-    const s = getComputedStyle(el);
-    const next: MapColors = {
-      visited: s.getPropertyValue("--map-visited-fill").trim() || MAP_COLOR_DEFAULTS.visited,
-      unvisited: s.getPropertyValue("--map-unvisited-fill").trim() || MAP_COLOR_DEFAULTS.unvisited,
-      routeStroke: s.getPropertyValue("--map-route-stroke").trim() || MAP_COLOR_DEFAULTS.routeStroke,
-      stroke: s.getPropertyValue("--map-control-border").trim() || MAP_COLOR_DEFAULTS.stroke,
+    const syncFromCss = () => {
+      const el = wrapRef.current;
+      if (!el) return;
+      const next = readMapColors(el);
+      setColors((prev) =>
+        prev.visited === next.visited &&
+        prev.unvisited === next.unvisited &&
+        prev.routeStroke === next.routeStroke &&
+        prev.stroke === next.stroke
+          ? prev
+          : next,
+      );
     };
-    // Skip update when CSS vars match current state (avoids a full Geography re-render).
-    setColors((prev) =>
-      prev.visited === next.visited &&
-      prev.unvisited === next.unvisited &&
-      prev.routeStroke === next.routeStroke &&
-      prev.stroke === next.stroke
-        ? prev
-        : next,
-    );
-  }, [prefersDark]);
+
+    syncFromCss();
+
+    const mq = window.matchMedia(COLOR_SCHEME_QUERY);
+    mq.addEventListener("change", syncFromCss);
+    return () => mq.removeEventListener("change", syncFromCss);
+  }, [worldGeo, statesGeo, geoError]);
 
   const drawableRoutes = useMemo(
     () => (showFlights ? buildDrawableRoutes(typedFlights.flights ?? [], typedAirports) : []),

@@ -5,6 +5,7 @@
   --color-bg-secondary: #ffffff;
   --color-text-primary: #2d3436;
   --color-text-secondary: #636e72;
+  --color-text-muted: #a0a0a8;
   /* Accent ≥4.5:1 on #f8f9fa (was #00b894 ≈2.4:1) */
   --color-accent: #007a63;
   --color-highlight: #006b56;
@@ -21,6 +22,19 @@
   /* Fonts */
   --font-heading: 'Josefin Sans', sans-serif;
   --font-body: 'Inconsolata', monospace;
+
+  /*
+   * Shared chrome tokens — consume these for radii / motion; do not invent
+   * parallel hex for decorative corners or control transitions.
+   * Navbar glass silhouette keeps its own 50px / 25px radii (not --radius-pill).
+   */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-pill: 999px;
+  --motion-fast: 150ms;
+  --motion-normal: 300ms;
 
   /*
    * Layout max widths (safe in property values).
@@ -45,6 +59,7 @@
     --color-bg-secondary: #2d3436;
     --color-text-primary: #dfe6e9;
     --color-text-secondary: #b2bec3;
+    --color-text-muted: #8b949e;
     --color-accent: #55efc4; /* Lighter Teal */
     --color-highlight: #81ecec;
     --color-border: #636e72;
@@ -75,7 +90,16 @@ body {
   padding: 0;
   background-color: var(--color-bg-primary);
   color: var(--color-text-primary);
-  transition: background-color 0.3s ease, color 0.3s ease;
+  transition:
+    background-color var(--motion-normal) ease,
+    color var(--motion-normal) ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --motion-fast: 0ms;
+    --motion-normal: 0ms;
+  }
 }
 
 .container {

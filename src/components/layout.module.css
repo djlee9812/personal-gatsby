@@ -29,9 +29,9 @@
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'Josefin Sans', sans-serif;
+  font-family: var(--font-heading);
 }
 
 p, span, a {
-  font-family: 'Inconsolata', monospace;
+  font-family: var(--font-body);
 }

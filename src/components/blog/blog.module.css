@@ -138,10 +138,14 @@
   background: var(--color-card-bg);
   backdrop-filter: blur(10px);
   border: 1px solid var(--color-card-border);
-  border-radius: 12px;
+  border-radius: var(--radius-lg);
   box-shadow: var(--color-card-shadow);
   padding: 1.5rem;
-  transition: all 0.3s ease;
+  transition:
+    transform var(--motion-normal) ease,
+    border-color var(--motion-normal) ease,
+    box-shadow var(--motion-normal) ease,
+    background var(--motion-normal) ease;
   display: flex;
   flex-direction: column;
   height: 100%;
@@ -286,7 +290,7 @@
   height: auto;
   display: block;
   margin: 1.5rem auto;
-  border-radius: 8px;
+  border-radius: var(--radius-md);
 }
 
 .postContent figure {
@@ -389,7 +393,7 @@
   font-size: 0.9em;
   background: color-mix(in srgb, var(--color-text-primary) 7%, transparent);
   border: 1px solid var(--color-border);
-  border-radius: 4px;
+  border-radius: var(--radius-sm);
   padding: 0.12em 0.35em;
 }
 
@@ -399,7 +403,7 @@
   overflow-x: auto;
   background: var(--color-card-bg);
   border: 1px solid var(--color-card-border);
-  border-radius: 8px;
+  border-radius: var(--radius-md);
   box-shadow: var(--color-card-shadow);
 }
 

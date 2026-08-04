@@ -201,7 +201,7 @@ const Gallery = ({ data }: PageProps<Queries.GalleryQuery>) => {
     <Layout>
       <main className={globalStyles.navbarMargin} id="main">
         {/* Navigation Header for Collections */}
-        <div className={galleryStyles.pageHeaderWrap}>
+        <div className={globalStyles.pageHeaderTop}>
           <div className={galleryStyles.titleDiv}>
             <div className={galleryStyles.arrowDiv}>
               <button className={globalStyles.hiddenButton} onClick={decrementIndex} aria-label="Previous Collection">

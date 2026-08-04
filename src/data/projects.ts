@@ -40,7 +40,8 @@ export const projects: Project[] = [
     techStack: ["React", "Vite", "Mapbox"],
     githubUrl: "https://github.com/djlee9812/isochrone",
     imagePath:
-      "https://res.cloudinary.com/dongjoongallery/image/upload/v1785537048/isochrone_ivnkzp.png",
+      "https://res.cloudinary.com/dongjoongallery/image/upload/v1785819341/isochrone_o5mpq4.png",
+    // ~16:10 (1469×921) — matches card frame, so contain fills without letterbox.
     imageFit: "contain",
   },
   {

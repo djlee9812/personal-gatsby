@@ -243,7 +243,7 @@ const IndexPageContent = () => {
                 className={styles.portraitImg}
               />
             ) : (
-              <div style={{width: 400, height: 400, background: '#333', borderRadius: '12px'}} />
+              <div style={{width: 400, height: 400, background: 'var(--color-border)', borderRadius: 'var(--radius-lg)'}} />
             )}
           </m.div>
         </div>
@@ -269,7 +269,7 @@ const IndexPageContent = () => {
                 style={{ height: '100%' }}
               />
             ) : (
-              <div style={{width: '100%', height: '100%', background: '#333'}} />
+              <div style={{width: '100%', height: '100%', background: 'var(--color-border)'}} />
             )}
             <div className={styles.cardOverlay}>
               <h3 className={styles.cardTitle}>Snowboarding</h3>
@@ -286,7 +286,7 @@ const IndexPageContent = () => {
                 style={{ height: '100%' }}
               />
             ) : (
-              <div style={{width: '100%', height: '100%', background: '#333'}} />
+              <div style={{width: '100%', height: '100%', background: 'var(--color-border)'}} />
             )}
              <div className={styles.cardOverlay}>
               <h3 className={styles.cardTitle}>Climbing</h3>

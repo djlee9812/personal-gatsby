@@ -55,11 +55,31 @@ test.describe("smoke", () => {
     const travelSection = page.locator("#travel-map");
     await expect(travelSection).toBeVisible();
     await expect(travelSection.getByText(/Travel/i)).toBeVisible();
+
+    await travelSection.scrollIntoViewIfNeeded();
+    const mapReady = { timeout: 15_000 };
+    await expect(travelSection.getByRole("button", { name: "Zoom in" })).toBeVisible(mapReady);
+    await expect(travelSection.getByRole("button", { name: "Zoom out" })).toBeVisible(mapReady);
+    await expect(
+      travelSection.getByRole("switch", { name: "Show flight routes" }),
+    ).toBeVisible(mapReady);
+    await expect(
+      travelSection.getByText(/geography could not be loaded/i),
+    ).toHaveCount(0);
   });
 
-  test("gallery page has heading", async ({ page }) => {
+  test("listing pages and home have visible h1 headings", async ({ page }) => {
+    await page.goto("/");
+    await expect(page.getByRole("heading", { level: 1, name: /DONGJOON/i })).toBeVisible();
+
     await page.goto("/gallery");
     await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
+
+    await page.goto("/blog");
+    await expect(page.getByRole("heading", { level: 1, name: "Blog" })).toBeVisible();
+
+    await page.goto("/projects");
+    await expect(page.getByRole("heading", { level: 1, name: "Projects" })).toBeVisible();
   });
 
   test("gallery modal", async ({ page }) => {

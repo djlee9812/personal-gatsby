@@ -1,12 +1,14 @@
 .wrap,
 .slot {
-  /* Map palette — see travel-map.tsx (reads these via getComputedStyle on .wrap) */
+  /* Map palette — see map-colors.ts (readMapColors reads these on .wrap) */
   --map-unvisited-fill: #2b2b37;
   --map-visited-fill: #d4fcff;
   --map-route-stroke: #dcae52;
-  --map-control-bg: #2b2b37;
-  --map-control-fg: #d4fcff;
+  --map-control-bg: var(--map-unvisited-fill);
+  --map-control-fg: var(--map-visited-fill);
   --map-control-border: #444;
+  /* Distinct from --map-control-fg so on-state reads on gold-tinted background */
+  --map-flights-on-fg: #f0e6c8;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -57,7 +59,7 @@
   background: var(--map-control-bg);
   color: var(--map-control-fg);
   border: 1px solid var(--map-control-border);
-  border-radius: 4px;
+  border-radius: var(--radius-sm);
   cursor: pointer;
   font-size: 1.2rem;
   display: flex;
@@ -67,7 +69,7 @@
 }
 
 .zoomBtn:focus-visible {
-  outline: 2px solid var(--color-accent, #00b894);
+  outline: 2px solid var(--color-accent);
   outline-offset: 2px;
 }
 
@@ -87,10 +89,10 @@
   background: var(--map-control-bg);
   color: var(--map-control-fg);
   border: 1px solid var(--map-control-border);
-  border-radius: 4px;
+  border-radius: var(--radius-sm);
   cursor: pointer;
   font-size: 1rem;
-  transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+  transition: background var(--motion-fast), border-color var(--motion-fast), color var(--motion-fast);
 }
 
 .flightsBtn:hover {
@@ -98,7 +100,7 @@
 }
 
 .flightsBtn:focus-visible {
-  outline: 2px solid var(--color-accent, #00b894);
+  outline: 2px solid var(--color-accent);
   outline-offset: 2px;
 }
 
@@ -107,7 +109,7 @@
      map show through and washes out the cream icon in light mode. */
   background: color-mix(in srgb, var(--map-route-stroke) 40%, var(--map-control-bg));
   border-color: var(--map-route-stroke);
-  color: #f0e6c8;
+  color: var(--map-flights-on-fg);
 }
 
 .controlsToggle,
@@ -146,6 +148,6 @@
   align-items: center;
   justify-content: center;
   text-align: center;
-  color: var(--color-text-muted, #a0a0a8);
+  color: var(--color-text-muted);
   font-size: 0.9375rem;
 }
