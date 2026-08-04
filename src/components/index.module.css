@@ -32,12 +32,12 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  opacity: 0.18;
+  opacity: 0.36;
   color: var(--color-text-secondary);
 }
 
 .heroMobileVisualSvg {
-  width: min(70vw, 380px);
+  width: min(82vw, 420px);
   height: auto;
 }
 
@@ -90,7 +90,8 @@
   text-transform: uppercase;
   margin-bottom: 2rem;
   text-shadow:
-    0 0 32px color-mix(in srgb, var(--color-bg-primary) 88%, transparent),
+    0 0 40px color-mix(in srgb, var(--color-bg-primary) 92%, transparent),
+    0 0 12px color-mix(in srgb, var(--color-bg-primary) 70%, transparent),
     0 1px 2px color-mix(in srgb, var(--color-bg-primary) 55%, transparent);
 }
 
@@ -278,8 +279,8 @@
   }
 
   .heroTitle {
-    font-size: 15vw;
-    line-height: 1.2;
+    font-size: clamp(2.75rem, 11vw, 3.75rem);
+    line-height: 0.95;
   }
 
   .heroSubtitle {
