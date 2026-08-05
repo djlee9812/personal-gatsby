@@ -1,6 +1,15 @@
 import type { Variants } from "framer-motion"
 
-/** Shared fade-up used by home, projects, and blog listings. */
+/**
+ * Homepage motion budget (editorial / calm):
+ * - Hero: plane establishes scene; title static; subtitle delayed fade
+ * - About: asymmetric briefing (title → text → portrait)
+ * - Hobbies: overlay labels only (no card translate vs CSS hover)
+ * - Travel: copy fade only; map shell static
+ * Do not reuse one fadeInUp+stagger for every homepage section.
+ */
+
+/** Shared fade-up used by projects and blog listings (not homepage sections). */
 export function fadeInUp(options?: {
   y?: number
   duration?: number
@@ -24,6 +33,55 @@ export function staggerContainer(staggerChildren = 0.1): Variants {
     visible: {
       opacity: 1,
       transition: { staggerChildren },
+    },
+  }
+}
+
+/** About: orchestrate title → text → portrait. */
+export const aboutBriefingContainer: Variants = {
+  hidden: {},
+  visible: {
+    transition: { staggerChildren: 0.18, delayChildren: 0.04 },
+  },
+}
+
+export const aboutTextReveal: Variants = {
+  hidden: { opacity: 0, y: 12 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.45, ease: "easeOut" },
+  },
+}
+
+export const aboutPortraitLand: Variants = {
+  hidden: { opacity: 0, x: 28 },
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: { duration: 0.5, ease: "easeOut" },
+  },
+}
+
+/** Soft opacity for lower-section titles / Travel copy / About title. */
+export const softInView: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { duration: 0.4, ease: "easeOut" },
+  },
+}
+
+export const aboutTitleFade = softInView
+
+/** Hobbies: motion on caption overlays only. */
+export function hobbyOverlayFade(delay = 0): Variants {
+  return {
+    hidden: { opacity: 0, y: 14 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { delay, duration: 0.4, ease: "easeOut" },
     },
   }
 }

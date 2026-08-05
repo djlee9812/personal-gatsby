@@ -10,12 +10,28 @@ import josefinSans700 from '@fontsource/josefin-sans/files/josefin-sans-latin-70
 
 const HeroScene = React.lazy(() => import('../components/hero-scene'))
 import { m, useReducedMotion, useScroll, useTransform } from 'framer-motion'
-import { fadeInUp, staggerContainer } from '../utils/motion-variants'
+import {
+  aboutBriefingContainer,
+  aboutPortraitLand,
+  aboutTextReveal,
+  aboutTitleFade,
+  hobbyOverlayFade,
+  softInView,
+} from '../utils/motion-variants'
+import { HERO_INTRO_DURATION_S } from '../utils/hero-timing'
 import { DESKTOP_HERO_QUERY } from '../styles/breakpoints'
 import { useMatchMedia } from '../hooks/use-match-media'
 
-const homeFade = fadeInUp({ y: 30, duration: 0.6 })
-const homeStagger = staggerContainer(0.2)
+const HOME_IN_VIEW_VIEWPORT = { once: true, margin: "-100px" } as const
+/** Softer margin so short overlay nodes still intersect on tight viewports. */
+const OVERLAY_IN_VIEW_VIEWPORT = { once: true, margin: "-40px" } as const
+
+const hobbyOverlay = hobbyOverlayFade()
+const hobbyOverlayDelayed = hobbyOverlayFade(0.12)
+
+const heroIntroStyle = {
+  ["--hero-intro-s" as string]: `${HERO_INTRO_DURATION_S}s`,
+}
 
 type HomeHeroChromeProps = {
   enterInitial: false | "hidden"
@@ -27,42 +43,49 @@ const HomeHeroChrome: React.FC<HomeHeroChromeProps> = ({
   reducedMotion,
 }) => (
   <>
-    <m.div
-      className={styles.heroContent}
-      initial={enterInitial}
-      animate="visible"
-      variants={homeStagger}
-    >
-      <m.h1 className={styles.heroTitle} variants={homeFade}>
+    <div className={styles.heroContent}>
+      {/* Attitude Hold: title is always present — plane leads the scene */}
+      <h1 className={styles.heroTitle}>
         DONGJOON<br/>LEE
-      </m.h1>
+      </h1>
 
-      <m.div className={styles.heroSubtitle} variants={homeFade}>
+      <m.div
+        className={styles.heroSubtitle}
+        initial={enterInitial === false ? false : { opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={
+          reducedMotion
+            ? { duration: 0 }
+            : { delay: 0.65, duration: 0.5, ease: "easeOut" }
+        }
+      >
         <span>Software Engineer.</span>
         <span>Aerospace Background.</span>
         <span>Based in Boston.</span>
       </m.div>
-    </m.div>
+    </div>
 
     <m.button
       className={styles.scrollIndicator}
       initial={reducedMotion ? false : { opacity: 0 }}
       animate={{ opacity: 1 }}
-      transition={reducedMotion ? { duration: 0 } : { delay: 1, duration: 1 }}
+      transition={reducedMotion ? { duration: 0 } : { delay: 1.9, duration: 0.7 }}
       onClick={() => document.getElementById('about')?.scrollIntoView()}
       style={{ background: 'none', border: 'none', cursor: 'pointer' }}
       aria-label="Scroll to About Section"
     >
       <span>SCROLL TO EXPLORE</span>
-      <FontAwesomeIcon icon={['fas', 'arrow-down']} />
+      <FontAwesomeIcon
+        icon={['fas', 'arrow-down']}
+        className={styles.scrollIndicatorIcon}
+      />
     </m.button>
   </>
 )
 
 // Lightweight aerospace-flavored decorative visual shown in place of the
 // Three.js scene below the desktop breakpoint. CSS (not JS) decides
-// visibility (`@media (min-width: 901px)` hides it) so it renders identically
-// from HomeHeroStatic and HomeHeroAnimated without needing isDesktop there.
+// visibility (`@media (min-width: 901px)` hides it).
 const HeroMobileVisual: React.FC = () => (
   <div className={styles.heroMobileVisual} aria-hidden="true">
     <svg
@@ -95,19 +118,20 @@ const HeroMobileVisual: React.FC = () => (
   </div>
 )
 
-const HomeHeroAnimated: React.FC = () => {
-  // Gate the lazy Three.js child only — keep chrome mounted across breakpoint
-  // crossings so scroll motion / entrance state are not remounted.
+type HomeHeroProps = {
+  allowMotion: boolean
+}
+
+/** Single header so HeroMobileVisual is not remounted when motion unlocks after hydrate. */
+const HomeHero: React.FC<HomeHeroProps> = ({ allowMotion }) => {
   const isDesktop = useMatchMedia(DESKTOP_HERO_QUERY)
   const [idleReady, setIdleReady] = React.useState(false)
   const { scrollY } = useScroll()
-  const heroOpacity = useTransform(scrollY, [0, 300], [1, 0])
-  const heroScale = useTransform(scrollY, [0, 300], [1, 0.95])
-  const heroY = useTransform(scrollY, [0, 300], [0, 50])
+  // Plane attitude only — header chrome stays fully opaque (Attitude Hold).
   const scrollProgress = useTransform(scrollY, [0, 300], [0, 1])
 
   React.useEffect(() => {
-    if (!isDesktop) {
+    if (!allowMotion || !isDesktop) {
       setIdleReady(false)
       return
     }
@@ -137,47 +161,48 @@ const HomeHeroAnimated: React.FC = () => {
         clearTimeout(timeoutId)
       }
     }
-  }, [isDesktop])
+  }, [allowMotion, isDesktop])
 
   return (
-    <m.header
-      className={styles.heroContainer}
-      style={{ opacity: heroOpacity, scale: heroScale, y: heroY }}
-    >
+    <header className={styles.heroContainer} style={heroIntroStyle}>
       <div className={styles.hero3dWrapper}>
         <HeroMobileVisual />
-        {isDesktop && idleReady ? (
+        {allowMotion && isDesktop && idleReady ? (
           <React.Suspense fallback={null}>
             <HeroScene scrollProgress={scrollProgress} />
           </React.Suspense>
         ) : null}
       </div>
-      <HomeHeroChrome enterInitial="hidden" reducedMotion={false} />
-    </m.header>
+      {allowMotion ? (
+        <HomeHeroChrome enterInitial="hidden" reducedMotion={false} />
+      ) : (
+        <HomeHeroChrome enterInitial={false} reducedMotion />
+      )}
+    </header>
   )
 }
-
-const HomeHeroStatic: React.FC = () => (
-  <m.header className={styles.heroContainer}>
-    <div className={styles.hero3dWrapper}>
-      <HeroMobileVisual />
-    </div>
-    <HomeHeroChrome enterInitial={false} reducedMotion />
-  </m.header>
-)
 
 const IndexPageContent = () => {
   const prefersReducedMotion = useReducedMotion();
   const [hydrated, setHydrated] = React.useState(false);
+  const aboutTitleRef = React.useRef<HTMLHeadingElement>(null);
   React.useEffect(() => {
     setHydrated(true);
   }, []);
 
-  // SSR + first client paint both use Static (avoids hydration mismatch).
-  // Animated chrome mounts whenever motion is allowed; Three.js still only
-  // loads when HomeHeroAnimated renders <HeroScene/> behind isDesktop.
-  const showAnimatedHero = hydrated && prefersReducedMotion === false;
+  // SSR + first client paint both keep allowMotion false (avoids hydration mismatch).
+  const allowMotion = hydrated && prefersReducedMotion === false;
   const enterInitial = prefersReducedMotion === true ? false : "hidden";
+  const inViewProps = {
+    initial: enterInitial as false | "hidden",
+    whileInView: "visible" as const,
+    viewport: HOME_IN_VIEW_VIEWPORT,
+  };
+  const overlayInViewProps = {
+    initial: enterInitial as false | "hidden",
+    whileInView: "visible" as const,
+    viewport: OVERLAY_IN_VIEW_VIEWPORT,
+  };
 
   // Keep useStaticQuery inside Layout so QueryErrorBoundary can catch failures.
   const data = useStaticQuery<Queries.IndexPageCloudinaryQuery>(graphql`
@@ -201,32 +226,39 @@ const IndexPageContent = () => {
   return (
       <main id="main">
       {/* 1. Hero Section */}
-      {showAnimatedHero ? <HomeHeroAnimated /> : <HomeHeroStatic />}
+      <HomeHero allowMotion={allowMotion} />
 
-      {/* 2. About Section */}
-      <m.section 
+      {/* 2. About — Asymmetric Briefing */}
+      <m.section
         id="about"
         className={styles.section}
-        initial={enterInitial}
-        whileInView="visible"
-        viewport={{ once: true, margin: "-100px" }}
-        variants={homeStagger}
+        {...inViewProps}
+        variants={aboutBriefingContainer}
+        onViewportEnter={() => {
+          aboutTitleRef.current?.classList.add(styles.sectionTitleBriefing)
+        }}
       >
-        <h2 className={styles.sectionTitle}>01 / About Me</h2>
-        
+        <m.h2
+          ref={aboutTitleRef}
+          className={styles.sectionTitle}
+          variants={aboutTitleFade}
+        >
+          01 / About Me
+        </m.h2>
+
         <div className={styles.aboutGrid}>
-          <m.div className={styles.aboutText} variants={homeFade}>
+          <m.div className={styles.aboutText} variants={aboutTextReveal}>
             <p>
-              Hi, I'm Dongjoon! I was born in <span className={styles.highlight}>Seoul, Korea</span> and moved 
+              Hi, I'm Dongjoon! I was born in <span className={styles.highlight}>Seoul, Korea</span> and moved
               to <span className={styles.highlight}>Southern California</span> in the fourth grade.
             </p>
             <p>
-              I graduated with a Master's degree from <span className={styles.highlight}>MIT AeroAstro</span> in 2023, 
-              where I researched <span className={styles.highlight}>aircraft design optimization</span>. 
+              I graduated with a Master's degree from <span className={styles.highlight}>MIT AeroAstro</span> in 2023,
+              where I researched <span className={styles.highlight}>aircraft design optimization</span>.
               You can find <a href="https://dspace.mit.edu/handle/1721.1/151601" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--color-accent)' }}>my MIT thesis</a>.
             </p>
             <p>
-              Currently, I work as a Software Developer at <span className={styles.highlight}>MathWorks</span> on 
+              Currently, I work as a Software Developer at <span className={styles.highlight}>MathWorks</span> on
               the Aerospace Toolbox and Aerospace Blockset products.
             </p>
             <p>
@@ -235,11 +267,11 @@ const IndexPageContent = () => {
             </p>
           </m.div>
 
-          <m.div className={styles.portraitContainer} variants={homeFade}>
+          <m.div className={styles.portraitContainer} variants={aboutPortraitLand}>
             {columnsImage ? (
-              <GatsbyImage 
-                image={columnsImage} 
-                alt="Dongjoon Portrait" 
+              <GatsbyImage
+                image={columnsImage}
+                alt="Dongjoon Portrait"
                 className={styles.portraitImg}
               />
             ) : (
@@ -249,74 +281,84 @@ const IndexPageContent = () => {
         </div>
       </m.section>
 
-      {/* 3. Hobbies / Featured Section */}
-      <m.section 
-        className={styles.section}
-        initial={enterInitial}
-        whileInView="visible"
-        viewport={{ once: true, margin: "-100px" }}
-        variants={homeStagger}
-      >
-        <h2 className={styles.sectionTitle}>02 / Hobbies</h2>
-        
+      {/* 3. Hobbies — overlay telemetry only */}
+      <section className={styles.section}>
+        <m.h2
+          className={styles.sectionTitle}
+          {...inViewProps}
+          variants={softInView}
+        >
+          02 / Hobbies
+        </m.h2>
+
         <div className={styles.hobbyGrid}>
-          {/* Card 1: Snowboarding */}
           <Link to="/gallery" className={styles.hobbyCard}>
             {snowboardingImage ? (
-              <GatsbyImage 
-                image={snowboardingImage} 
-                alt="Snowboarding" 
+              <GatsbyImage
+                image={snowboardingImage}
+                alt="Snowboarding"
                 style={{ height: '100%' }}
               />
             ) : (
               <div style={{width: '100%', height: '100%', background: 'var(--color-border)'}} />
             )}
-            <div className={styles.cardOverlay}>
+            <m.div
+              className={styles.cardOverlay}
+              {...overlayInViewProps}
+              variants={hobbyOverlay}
+            >
               <h3 className={styles.cardTitle}>Snowboarding</h3>
               <p className={styles.cardText}>Chasing powder & progression.</p>
-            </div>
+            </m.div>
           </Link>
 
-          {/* Card 2: Climbing */}
           <Link to="/gallery" className={styles.hobbyCard}>
             {climbingImage ? (
-              <GatsbyImage 
-                image={climbingImage} 
-                alt="Climbing" 
+              <GatsbyImage
+                image={climbingImage}
+                alt="Climbing"
                 style={{ height: '100%' }}
               />
             ) : (
               <div style={{width: '100%', height: '100%', background: 'var(--color-border)'}} />
             )}
-             <div className={styles.cardOverlay}>
+            <m.div
+              className={styles.cardOverlay}
+              {...overlayInViewProps}
+              variants={hobbyOverlayDelayed}
+            >
               <h3 className={styles.cardTitle}>Climbing</h3>
               <p className={styles.cardText}>Bouldering & Lead.</p>
-            </div>
+            </m.div>
           </Link>
         </div>
-      </m.section>
+      </section>
 
-      {/* 4. Travel Section */}
-      <m.section 
-        id="travel-map"
-        className={styles.section}
-        initial={enterInitial}
-        whileInView="visible"
-        viewport={{ once: true, margin: "-100px" }}
-        variants={homeStagger}
-      >
-        <h2 className={styles.sectionTitle}>03 / Travel</h2>
-        
-        <div className={styles.aboutText} style={{marginBottom: '30px'}}>
+      {/* 4. Travel — copy only; map shell static */}
+      <section id="travel-map" className={styles.section}>
+        <m.h2
+          className={styles.sectionTitle}
+          {...inViewProps}
+          variants={softInView}
+        >
+          03 / Travel
+        </m.h2>
+
+        <m.div
+          className={styles.aboutText}
+          style={{ marginBottom: '30px' }}
+          {...inViewProps}
+          variants={softInView}
+        >
           <p>
             I enjoy visiting new places. Check out the <Link to="/gallery" style={{ color: 'var(--color-accent)' }}>Gallery</Link> for photos from my trips.
           </p>
-        </div>
-
-        <m.div className={styles.mapContainer} variants={homeFade}>
-          <TravelMapWhenVisible />
         </m.div>
-      </m.section>
+
+        <div className={styles.mapContainer}>
+          <TravelMapWhenVisible />
+        </div>
+      </section>
 
       </main>
   )

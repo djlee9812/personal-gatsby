@@ -10,6 +10,7 @@ import {
 import type { MotionValue } from 'framer-motion';
 import { DESKTOP_HERO_QUERY } from '../styles/breakpoints';
 import { useMatchMedia } from '../hooks/use-match-media';
+import { HERO_INTRO_DURATION_S } from '../utils/hero-timing';
 
 // ---------------------------------------------------------------------------
 // Axis convention: +X = forward (nose), +Y = up, +Z = right (starboard)
@@ -534,9 +535,13 @@ const IDLE_ROLL_AMP = 0.04;
 const IDLE_BOB_AMP = 0.35;
 const IDLE_SPEED = 0.38;
 
+/** Survives Canvas remount (IO hide/show) so the mount fly-in plays once per page load. */
+let planeIntroCompleted = false;
+
 function Airplane({ scrollProgress }: AirplaneProps) {
   const groupRef = useRef<Group>(null!);
   const scrollRef = useRef(0);
+  const introStartRef = useRef<number | null>(null);
 
   const mergedGeometry = useMemo(() => {
     const geos = [
@@ -573,15 +578,38 @@ function Airplane({ scrollProgress }: AirplaneProps) {
   useFrame((state) => {
     const g = groupRef.current;
     if (!g) return;
+
+    let intro = 1;
+    if (!planeIntroCompleted) {
+      if (introStartRef.current === null) {
+        introStartRef.current = state.clock.elapsedTime;
+      }
+      const introT = Math.min(
+        1,
+        (state.clock.elapsedTime - introStartRef.current) / HERO_INTRO_DURATION_S,
+      );
+      // Quartic ease-out — longer soft settle into cruise attitude
+      intro = 1 - (1 - introT) ** 4;
+      if (introT >= 1) {
+        planeIntroCompleted = true;
+      }
+    }
+
     const v = scrollRef.current;
     const t = state.clock.elapsedTime * IDLE_SPEED;
     const baseScale = 0.62;
     g.scale.setScalar(baseScale * (1 - v * 0.05));
-    // pitch and roll mapped to aircraft axes not graphics axes
+
+    const introYaw = (1 - intro) * 0.55;
+    const introLift = (1 - intro) * -1.1;
+    const introDepth = (1 - intro) * -1.6;
+
     g.rotation.x = 0.24 * v + IDLE_ROLL_AMP * Math.sin(t);
-    g.rotation.y = -0.45 * v + IDLE_YAW_AMP * Math.sin(t * 0.7 + 1);
-    g.rotation.z = .18 + IDLE_PITCH_AMP * Math.sin(t * 0.5 + 2);
-    g.position.y = IDLE_BOB_AMP * Math.sin(t * 0.6 + 0.5);
+    g.rotation.y = -0.45 * v + IDLE_YAW_AMP * Math.sin(t * 0.7 + 1) + introYaw;
+    g.rotation.z = 0.18 + IDLE_PITCH_AMP * Math.sin(t * 0.5 + 2);
+    g.position.x = 2.5;
+    g.position.y = 1.2 + IDLE_BOB_AMP * Math.sin(t * 0.6 + 0.5) + introLift;
+    g.position.z = -1.5 + introDepth;
   });
 
   return (
