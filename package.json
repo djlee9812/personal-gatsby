@@ -48,7 +48,7 @@
     "gatsby-transformer-cloudinary": "^4.7.0",
     "gatsby-transformer-sharp": "^5.0.0",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0",
+    "react-dom": "^19.2.8",
     "react-simple-maps": "^3.0.0",
     "rehype-unwrap-images": "^1.0.0",
     "three": "^0.183.2"
@@ -58,7 +58,7 @@
     "@playwright/test": "^1.62.0",
     "@types/node": "^26.1.2",
     "@types/react": "^18.3.12",
-    "@types/react-dom": "^18.3.1",
+    "@types/react-dom": "^19.2.4",
     "@types/react-simple-maps": "^3.0.6",
     "@types/three": "^0.185.1",
     "linkinator": "^8.0.2",
