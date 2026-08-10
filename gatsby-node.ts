@@ -11,6 +11,7 @@ import {
   findDuplicateSlugs,
   normalizeBlogSlug,
 } from "./src/utils/blog-slug";
+import { resolveGalleryCategory } from "./src/utils/gallery-category";
 
 // Shared with gatsby-config via CommonJS (Gatsby loads config as CJS).
 const { maxResults: CLOUDINARY_GALLERY_MAX_RESULTS } = require("./cloudinary-gallery-config");
@@ -67,7 +68,28 @@ export const createSchemaCustomization: GatsbyNode["createSchemaCustomization"] 
       tags: [String]
       layout: String
     }
+    type CloudinaryMedia implements Node {
+      galleryCategory: String
+    }
   `);
+};
+
+/**
+ * Filterable primary tag for gallery collections (null = untagged / misc).
+ */
+export const createResolvers: GatsbyNode["createResolvers"] = ({
+  createResolvers: createResolversFn,
+}) => {
+  createResolversFn({
+    CloudinaryMedia: {
+      galleryCategory: {
+        type: "String",
+        resolve(source: { tags?: ReadonlyArray<string | null | undefined> | null }) {
+          return resolveGalleryCategory(source.tags);
+        },
+      },
+    },
+  });
 };
 
 type BlogFileNode = Queries.WebsiteUpdateCreatePagesQuery["allFile"]["nodes"][number];

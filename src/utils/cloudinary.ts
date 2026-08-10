@@ -68,3 +68,24 @@ export function optimizeCloudinaryImage(
     sizes: options.sizes,
   };
 }
+
+/** Gallery masonry: ~1-col mobile, ~3-col desktop. */
+export const GALLERY_THUMB_OPTIONS: CloudinaryImageOptions = {
+  width: 600,
+  widths: [300, 600],
+  sizes: "(max-width: 767px) 100vw, 33vw",
+};
+
+/**
+ * Tiny blurred Cloudinary URL for LQIP-style placeholders (no inline base64).
+ * Non-Cloudinary URLs are returned unchanged.
+ */
+export function cloudinaryBlurPlaceholder(
+  src: string,
+  width = 40,
+): string {
+  if (!src || !isCloudinaryUploadUrl(src)) {
+    return src;
+  }
+  return buildCloudinaryUrl(src, `f_auto,q_auto,w_${width},e_blur:1000`);
+}

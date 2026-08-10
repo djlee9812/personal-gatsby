@@ -6,8 +6,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Layout from '../components/layout'
 import Seo from '../components/seo'
 import ImageCell from '../components/image-cell'
-import { getSrc } from 'gatsby-plugin-image'
 import ImageModal from '../components/image-modal'
+import {
+  cloudinaryBlurPlaceholder,
+  GALLERY_THUMB_OPTIONS,
+  optimizeCloudinaryImage,
+} from '../utils/cloudinary'
 
 /**
  * Type alias for a single Cloudinary media node from the generated GraphQL types.
@@ -22,26 +26,35 @@ interface GalleryCollection {
   images: CloudinaryNode[]
 }
 
+/** Eager-load the first row-ish of masonry thumbs (3-col desktop). */
+const EAGER_THUMB_COUNT = 3
+
+function nodeAspectRatio(node: CloudinaryNode): number {
+  if (node.width && node.height && node.width > 0 && node.height > 0) {
+    return node.width / node.height
+  }
+  return 4 / 3
+}
+
 const Gallery = ({ data }: PageProps<Queries.GalleryQuery>) => {
   
-  // Group images by their primary tag (tags[0]). 
-  // This allows the gallery to be "zero-maintenance": simply adding a new tag 
-  // in Cloudinary will automatically create a new collection slide here.
+  // Group by galleryCategory (resolved from tags[0] at build time).
+  // Zero-maintenance: a new Cloudinary tag automatically becomes a collection.
+  // Untagged / misc are already excluded via the GraphQL filter.
   const collections: GalleryCollection[] = React.useMemo(() => {
     const groups: { [key: string]: CloudinaryNode[] } = {};
     
     if (!data?.allCloudinaryMedia?.nodes) return [];
 
     data.allCloudinaryMedia.nodes.forEach(node => {
-      // images without tags are grouped under 'misc' and later filtered out.
-      const category = (node.tags && node.tags.length > 0) ? node.tags[0]! : "misc";
+      const category = node.galleryCategory;
+      if (!category) return;
       
       if (!groups[category]) groups[category] = [];
       groups[category].push(node as CloudinaryNode);
     });
 
     return Object.keys(groups)
-      .filter(key => key !== 'misc') 
       .map(key => ({
         title: key.charAt(0).toUpperCase() + key.slice(1), 
         images: groups[key]
@@ -191,11 +204,8 @@ const Gallery = ({ data }: PageProps<Queries.GalleryQuery>) => {
   const prevImg = () => stepModalIndex(-1)
 
   const modalImage = modalShow ? imgList[imgIndex] : null
-  const modalThumb = modalImage?.thumb ?? null
-  const modalAspectRatio =
-    modalThumb?.width && modalThumb?.height
-      ? modalThumb.width / modalThumb.height
-      : 4 / 3
+  const modalSrc = modalImage?.secure_url ?? ""
+  const modalAspectRatio = modalImage ? nodeAspectRatio(modalImage) : 4 / 3
 
   return (
     <Layout>
@@ -229,16 +239,27 @@ const Gallery = ({ data }: PageProps<Queries.GalleryQuery>) => {
         {/* Masonry Grid */}
         <section className={galleryStyles.masonry}>
           {visibleImages.map((node, index) => {
-            if (!node.thumb || !node.secure_url) return null
+            if (!node.secure_url) return null
 
             const id = node.id;
-            const alt = node.context?.custom?.alt || `Gallery Image ${index}`; 
+            const alt = node.context?.custom?.alt || `Gallery Image ${index}`;
+            const optimized = optimizeCloudinaryImage(
+              node.secure_url,
+              GALLERY_THUMB_OPTIONS,
+            )
+            const placeholderSrc = cloudinaryBlurPlaceholder(node.secure_url)
             
             return (
               <ImageCell 
                 key={id} 
-                image={node.thumb} 
+                src={optimized.src}
+                srcSet={optimized.srcSet}
+                sizes={optimized.sizes}
+                width={node.width}
+                height={node.height}
                 alt={alt} 
+                placeholderSrc={placeholderSrc}
+                loading={index < EAGER_THUMB_COUNT ? "eager" : "lazy"}
                 onClick={(trigger) => openModal(index, trigger)}
               />
             )
@@ -252,12 +273,12 @@ const Gallery = ({ data }: PageProps<Queries.GalleryQuery>) => {
       </main>
       
       {/* Lightbox Modal */}
-      {modalShow && modalImage?.secure_url ? (
+      {modalShow && modalSrc ? (
         <ImageModal
-          src={modalImage.secure_url ?? ""}
-          alt={modalImage.context?.custom?.alt || `Gallery Image ${imgIndex}`}
+          src={modalSrc}
+          alt={modalImage?.context?.custom?.alt || `Gallery Image ${imgIndex}`}
           aspectRatio={modalAspectRatio}
-          placeholderSrc={modalThumb ? getSrc(modalThumb) : undefined}
+          placeholderSrc={cloudinaryBlurPlaceholder(modalSrc)}
           close={closeModal}
           nextImg={nextImg}
           prevImg={prevImg}
@@ -270,21 +291,21 @@ const Gallery = ({ data }: PageProps<Queries.GalleryQuery>) => {
 
 export const query = graphql`
   query Gallery {
-    allCloudinaryMedia(sort: {created_at: DESC}) {
+    allCloudinaryMedia(
+      sort: { created_at: DESC }
+      filter: { galleryCategory: { ne: null } }
+    ) {
       nodes {
         id
-        tags
+        galleryCategory
         secure_url
+        width
+        height
         context {
           custom {
             alt
           }
         }
-        thumb: gatsbyImageData(
-          width: 600
-          placeholder: BLURRED
-          layout: CONSTRAINED
-        )
       }
     }
   }

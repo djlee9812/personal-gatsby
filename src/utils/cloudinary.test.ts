@@ -2,6 +2,8 @@ import assert from "node:assert/strict"
 import { describe, it } from "node:test"
 import {
   buildCloudinaryUrl,
+  cloudinaryBlurPlaceholder,
+  GALLERY_THUMB_OPTIONS,
   optimizeCloudinaryImage,
 } from "./cloudinary.ts"
 
@@ -107,6 +109,51 @@ describe("optimizeCloudinaryImage", () => {
       ].join(", "),
     )
     assert.equal(result.sizes, "(max-width: 600px) 100vw, 480px")
+    assert.doesNotMatch(result.srcSet ?? "", /w_1200|w_1600/)
+  })
+})
+
+describe("cloudinaryBlurPlaceholder", () => {
+  it("returns non-Cloudinary URLs unchanged", () => {
+    const external = "https://example.com/photo.jpg"
+    assert.equal(cloudinaryBlurPlaceholder(external), external)
+  })
+
+  it("returns empty src unchanged", () => {
+    assert.equal(cloudinaryBlurPlaceholder(""), "")
+  })
+
+  it("builds a small blurred Cloudinary URL", () => {
+    assert.equal(
+      cloudinaryBlurPlaceholder(BASE),
+      "https://res.cloudinary.com/demo/image/upload/f_auto,q_auto,w_40,e_blur:1000/v1234567890/sample.jpg",
+    )
+  })
+
+  it("honors custom blur width", () => {
+    assert.equal(
+      cloudinaryBlurPlaceholder(BASE, 24),
+      "https://res.cloudinary.com/demo/image/upload/f_auto,q_auto,w_24,e_blur:1000/v1234567890/sample.jpg",
+    )
+  })
+})
+
+describe("GALLERY_THUMB_OPTIONS", () => {
+  it("produces masonry-sized srcSet without large breakpoints", () => {
+    const result = optimizeCloudinaryImage(BASE, GALLERY_THUMB_OPTIONS)
+
+    assert.equal(
+      result.src,
+      "https://res.cloudinary.com/demo/image/upload/f_auto,q_auto,w_600/v1234567890/sample.jpg",
+    )
+    assert.equal(
+      result.srcSet,
+      [
+        "https://res.cloudinary.com/demo/image/upload/f_auto,q_auto,w_300/v1234567890/sample.jpg 300w",
+        "https://res.cloudinary.com/demo/image/upload/f_auto,q_auto,w_600/v1234567890/sample.jpg 600w",
+      ].join(", "),
+    )
+    assert.equal(result.sizes, "(max-width: 767px) 100vw, 33vw")
     assert.doesNotMatch(result.srcSet ?? "", /w_1200|w_1600/)
   })
 })
