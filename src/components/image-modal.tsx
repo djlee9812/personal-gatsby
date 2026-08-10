@@ -53,14 +53,42 @@ const ImageModal = ({
     }
   }, [optimized.src])
 
-  React.useEffect(() => {
+  // Layout phase so lock/unlock paint together with the modal (avoids a
+  // post-paint scroll flash). FocusTrap still returns focus in its own
+  // willUnmount first; we only need restore to finish before browser paint.
+  React.useLayoutEffect(() => {
     if (!hasMedia) return
-    const previousOverflow = document.body.style.overflow
-    document.body.style.overflow = "hidden"
+
+    // overflow:hidden alone does not stop background scroll on iOS Safari.
+    // Pin the body and restore scrollY on close so the page does not jump.
+    const { body } = document
+    const root = document.documentElement
+    const scrollY = window.scrollY
+    const previous = {
+      overflow: body.style.overflow,
+      position: body.style.position,
+      top: body.style.top,
+      width: body.style.width,
+      scrollBehavior: root.style.scrollBehavior,
+    }
+
+    body.style.overflow = "hidden"
+    body.style.position = "fixed"
+    body.style.top = `-${scrollY}px`
+    body.style.width = "100%"
     closeRef.current?.focus()
 
     return () => {
-      document.body.style.overflow = previousOverflow
+      body.style.overflow = previous.overflow
+      body.style.position = previous.position
+      body.style.top = previous.top
+      body.style.width = previous.width
+      // html { scroll-behavior: smooth } makes scrollTo(..., behavior:"auto")
+      // animate; temporarily force auto so restore is instant. Prefer this over
+      // behavior:"instant" so older engines that lack that enum stay correct.
+      root.style.scrollBehavior = "auto"
+      window.scrollTo(0, scrollY)
+      root.style.scrollBehavior = previous.scrollBehavior
     }
   }, [hasMedia])
 

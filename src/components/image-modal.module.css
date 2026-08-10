@@ -197,6 +197,8 @@
 @media (max-height: 500px) {
   .modal {
     overflow-y: auto;
+    /* Keep overscroll from chaining past the modal while body is scroll-locked. */
+    overscroll-behavior: contain;
     align-items: flex-start;
     padding: 2.75rem 0 3.5rem;
     box-sizing: border-box;
