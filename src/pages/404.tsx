@@ -30,7 +30,7 @@ const NotFoundPage = () => {
 }
 
 export const Head: HeadFC = ({ location }) => (
-  <Seo title="404: Not Found" pathname={location.pathname} />
+  <Seo title="404: Not Found" pathname={location.pathname} noIndex />
 )
 
 export default NotFoundPage
