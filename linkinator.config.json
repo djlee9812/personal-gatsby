@@ -1,5 +1,15 @@
 {
   "recurse": true,
   "verbosity": "error",
-  "skip": ["https://", "mailto:", "tel:", "^data:"]
+  "skip": [
+    "mailto:",
+    "tel:",
+    "^data:",
+    "linkedin\\.com",
+    "instagram\\.com",
+    "facebook\\.com",
+    "twitter\\.com",
+    "x\\.com",
+    "dspace\\.mit\\.edu"
+  ]
 }
