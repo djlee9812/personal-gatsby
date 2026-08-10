@@ -1,8 +1,14 @@
 /* Global Variables & Theming */
 :root {
-  /* Light Mode (Default) */
-  --color-bg-primary: #f8f9fa; /* Off-white */
+  /* Off-white — body / primary plane */
+  --color-bg-primary: #f8f9fa;
+  /*
+   * Panels, cards, skip-link. Also default homepage altitude band in light mode
+   * (Quiet Alternating Planes). Dark uses a softer --color-bg-band so bands
+   * don’t jump as hard as full secondary.
+   */
   --color-bg-secondary: #ffffff;
+  --color-bg-band: var(--color-bg-secondary);
   --color-text-primary: #2d3436;
   --color-text-secondary: #636e72;
   --color-text-muted: #a0a0a8;
@@ -57,6 +63,14 @@
     /* Dark Mode */
     --color-bg-primary: #1e1e1e;
     --color-bg-secondary: #2d3436;
+    /* Soft altitude lift (~35% toward secondary); solid first for non-color-mix engines */
+    --color-bg-band: #232626;
+    /* biome-ignore lint/suspicious/noDuplicateCustomProperties: progressive enhancement solid → color-mix */
+    --color-bg-band: color-mix(
+      in srgb,
+      var(--color-bg-secondary) 35%,
+      var(--color-bg-primary)
+    );
     --color-text-primary: #dfe6e9;
     --color-text-secondary: #b2bec3;
     --color-text-muted: #8b949e;

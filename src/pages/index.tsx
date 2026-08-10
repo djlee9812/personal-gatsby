@@ -228,135 +228,143 @@ const IndexPageContent = () => {
       {/* 1. Hero Section */}
       <HomeHero allowMotion={allowMotion} />
 
-      {/* 2. About — Asymmetric Briefing */}
-      <m.section
-        id="about"
-        className={styles.section}
-        {...inViewProps}
-        variants={aboutBriefingContainer}
-        onViewportEnter={() => {
-          aboutTitleRef.current?.classList.add(styles.sectionTitleBriefing)
-        }}
-      >
-        <m.h2
-          ref={aboutTitleRef}
-          className={styles.sectionTitle}
-          variants={aboutTitleFade}
-        >
-          01 / About Me
-        </m.h2>
-
-        <div className={styles.aboutGrid}>
-          <m.div className={styles.aboutText} variants={aboutTextReveal}>
-            <p>
-              Hi, I'm Dongjoon! I was born in <span className={styles.highlight}>Seoul, Korea</span> and moved
-              to <span className={styles.highlight}>Southern California</span> in the fourth grade.
-            </p>
-            <p>
-              I graduated with a Master's degree from <span className={styles.highlight}>MIT AeroAstro</span> in 2023,
-              where I researched <span className={styles.highlight}>aircraft design optimization</span>.
-              You can find <a href="https://dspace.mit.edu/handle/1721.1/151601" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--color-accent)' }}>my MIT thesis</a>.
-            </p>
-            <p>
-              Currently, I work as a Software Developer at <span className={styles.highlight}>MathWorks</span> on
-              the Aerospace Toolbox and Aerospace Blockset products.
-            </p>
-            <p>
-              Personally, I enjoy <span className={styles.highlight}>snowboarding</span>, <span className={styles.highlight}>climbing</span>, playing music,
-              and trying new foods. This website is an ongoing catalog of things from my life.
-            </p>
-          </m.div>
-
-          <m.div className={styles.portraitContainer} variants={aboutPortraitLand}>
-            {columnsImage ? (
-              <GatsbyImage
-                image={columnsImage}
-                alt="Dongjoon Portrait"
-                className={styles.portraitImg}
-              />
-            ) : (
-              <div style={{width: 400, height: 400, background: 'var(--color-border)', borderRadius: 'var(--radius-lg)'}} />
-            )}
-          </m.div>
-        </div>
-      </m.section>
-
-      {/* 3. Hobbies — overlay telemetry only */}
-      <section className={styles.section}>
-        <m.h2
-          className={styles.sectionTitle}
+      {/* 2. About — Asymmetric Briefing (alt altitude band) */}
+      <section id="about" className={styles.bandAlt} aria-labelledby="about-heading">
+        <m.div
+          className={styles.section}
           {...inViewProps}
-          variants={softInView}
+          variants={aboutBriefingContainer}
+          onViewportEnter={() => {
+            aboutTitleRef.current?.classList.add(styles.sectionTitleBriefing)
+          }}
         >
-          02 / Hobbies
-        </m.h2>
+          <m.h2
+            id="about-heading"
+            ref={aboutTitleRef}
+            className={styles.sectionTitle}
+            variants={aboutTitleFade}
+          >
+            01 / About Me
+          </m.h2>
 
-        <div className={styles.hobbyGrid}>
-          <Link to="/gallery" className={styles.hobbyCard}>
-            {snowboardingImage ? (
-              <GatsbyImage
-                image={snowboardingImage}
-                alt="Snowboarding"
-                style={{ height: '100%' }}
-              />
-            ) : (
-              <div style={{width: '100%', height: '100%', background: 'var(--color-border)'}} />
-            )}
-            <m.div
-              className={styles.cardOverlay}
-              {...overlayInViewProps}
-              variants={hobbyOverlay}
-            >
-              <h3 className={styles.cardTitle}>Snowboarding</h3>
-              <p className={styles.cardText}>Chasing powder & progression.</p>
+          <div className={styles.aboutGrid}>
+            <m.div className={styles.aboutText} variants={aboutTextReveal}>
+              <p>
+                Hi, I'm Dongjoon! I was born in <span className={styles.highlight}>Seoul, Korea</span> and moved
+                to <span className={styles.highlight}>Southern California</span> in the fourth grade.
+              </p>
+              <p>
+                I graduated with a Master's degree from <span className={styles.highlight}>MIT AeroAstro</span> in 2023,
+                where I researched <span className={styles.highlight}>aircraft design optimization</span>.
+                You can find <a href="https://dspace.mit.edu/handle/1721.1/151601" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--color-accent)' }}>my MIT thesis</a>.
+              </p>
+              <p>
+                Currently, I work as a Software Developer at <span className={styles.highlight}>MathWorks</span> on
+                the Aerospace Toolbox and Aerospace Blockset products.
+              </p>
+              <p>
+                Personally, I enjoy <span className={styles.highlight}>snowboarding</span>, <span className={styles.highlight}>climbing</span>, playing music,
+                and trying new foods. This website is an ongoing catalog of things from my life.
+              </p>
             </m.div>
-          </Link>
 
-          <Link to="/gallery" className={styles.hobbyCard}>
-            {climbingImage ? (
-              <GatsbyImage
-                image={climbingImage}
-                alt="Climbing"
-                style={{ height: '100%' }}
-              />
-            ) : (
-              <div style={{width: '100%', height: '100%', background: 'var(--color-border)'}} />
-            )}
-            <m.div
-              className={styles.cardOverlay}
-              {...overlayInViewProps}
-              variants={hobbyOverlayDelayed}
-            >
-              <h3 className={styles.cardTitle}>Climbing</h3>
-              <p className={styles.cardText}>Bouldering & Lead.</p>
+            <m.div className={styles.portraitContainer} variants={aboutPortraitLand}>
+              {columnsImage ? (
+                <GatsbyImage
+                  image={columnsImage}
+                  alt="Dongjoon Portrait"
+                  className={styles.portraitImg}
+                />
+              ) : (
+                <div style={{width: 400, height: 400, background: 'var(--color-border)', borderRadius: 'var(--radius-lg)'}} />
+              )}
             </m.div>
-          </Link>
+          </div>
+        </m.div>
+      </section>
+
+      {/* 3. Hobbies — overlay telemetry only (primary plane) */}
+      <section className={styles.band} aria-labelledby="hobbies-heading">
+        <div className={styles.section}>
+          <m.h2
+            id="hobbies-heading"
+            className={styles.sectionTitle}
+            {...inViewProps}
+            variants={softInView}
+          >
+            02 / Hobbies
+          </m.h2>
+
+          <div className={styles.hobbyGrid}>
+            <Link to="/gallery" className={styles.hobbyCard}>
+              {snowboardingImage ? (
+                <GatsbyImage
+                  image={snowboardingImage}
+                  alt="Snowboarding"
+                  style={{ height: '100%' }}
+                />
+              ) : (
+                <div style={{width: '100%', height: '100%', background: 'var(--color-border)'}} />
+              )}
+              <m.div
+                className={styles.cardOverlay}
+                {...overlayInViewProps}
+                variants={hobbyOverlay}
+              >
+                <h3 className={styles.cardTitle}>Snowboarding</h3>
+                <p className={styles.cardText}>Chasing powder & progression.</p>
+              </m.div>
+            </Link>
+
+            <Link to="/gallery" className={styles.hobbyCard}>
+              {climbingImage ? (
+                <GatsbyImage
+                  image={climbingImage}
+                  alt="Climbing"
+                  style={{ height: '100%' }}
+                />
+              ) : (
+                <div style={{width: '100%', height: '100%', background: 'var(--color-border)'}} />
+              )}
+              <m.div
+                className={styles.cardOverlay}
+                {...overlayInViewProps}
+                variants={hobbyOverlayDelayed}
+              >
+                <h3 className={styles.cardTitle}>Climbing</h3>
+                <p className={styles.cardText}>Bouldering & Lead.</p>
+              </m.div>
+            </Link>
+          </div>
         </div>
       </section>
 
-      {/* 4. Travel — copy only; map shell static */}
-      <section id="travel-map" className={styles.section}>
-        <m.h2
-          className={styles.sectionTitle}
-          {...inViewProps}
-          variants={softInView}
-        >
-          03 / Travel
-        </m.h2>
+      {/* 4. Travel — copy only; map shell static (alt altitude band) */}
+      <section id="travel-map" className={styles.bandAlt} aria-labelledby="travel-heading">
+        <div className={styles.section}>
+          <m.h2
+            id="travel-heading"
+            className={styles.sectionTitle}
+            {...inViewProps}
+            variants={softInView}
+          >
+            03 / Travel
+          </m.h2>
 
-        <m.div
-          className={styles.aboutText}
-          style={{ marginBottom: '30px' }}
-          {...inViewProps}
-          variants={softInView}
-        >
-          <p>
-            I enjoy visiting new places. Check out the <Link to="/gallery" style={{ color: 'var(--color-accent)' }}>Gallery</Link> for photos from my trips.
-          </p>
-        </m.div>
+          <m.div
+            className={styles.aboutText}
+            style={{ marginBottom: '30px' }}
+            {...inViewProps}
+            variants={softInView}
+          >
+            <p>
+              I enjoy visiting new places. Check out the <Link to="/gallery" style={{ color: 'var(--color-accent)' }}>Gallery</Link> for photos from my trips.
+            </p>
+          </m.div>
 
-        <div className={styles.mapContainer}>
-          <TravelMapWhenVisible />
+          <div className={styles.mapContainer}>
+            <TravelMapWhenVisible />
+          </div>
         </div>
       </section>
 
