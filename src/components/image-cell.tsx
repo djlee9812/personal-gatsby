@@ -26,8 +26,6 @@ const ImageCell = ({
   placeholderSrc,
   loading = "lazy",
 }: ImageCellProps) => {
-  const [hoverStyle, setHoverStyle] = React.useState<string | null>(null)
-  const [hoverText, setHoverText] = React.useState("")
   const [loadedSrc, setLoadedSrc] = React.useState("")
   const imgRef = React.useRef<HTMLImageElement>(null)
 
@@ -45,15 +43,6 @@ const ImageCell = ({
       setLoadedSrc(src)
     }
   }, [src])
-
-  const imageEnter = () => {
-    setHoverStyle(styles.opaqueImage);
-    setHoverText(alt);
-  }
-  const imageLeave = () => {
-    setHoverStyle(null);
-    setHoverText("");
-  }
 
   const handleActivate = (
     e: React.MouseEvent<HTMLElement> | React.KeyboardEvent<HTMLElement>,
@@ -75,10 +64,6 @@ const ImageCell = ({
   return (
     <div 
       className={styles.cell} 
-      onMouseOver={imageEnter} 
-      onMouseLeave={imageLeave} 
-      onFocus={imageEnter} 
-      onBlur={imageLeave}
       onClick={handleActivate}
       onKeyDown={handleKeyDown}
       role="button"
@@ -98,7 +83,7 @@ const ImageCell = ({
         {/* Decorative: accessible name comes from the button aria-label. */}
         <img
           ref={imgRef}
-          className={`${styles.masonryImg}${imageLoaded ? ` ${styles.masonryImgReady}` : ""}${hoverStyle ? ` ${hoverStyle}` : ""}`}
+          className={`${styles.masonryImg}${imageLoaded ? ` ${styles.masonryImgReady}` : ""}`}
           src={src}
           srcSet={srcSet}
           sizes={sizes}
@@ -112,7 +97,7 @@ const ImageCell = ({
           // clear aria-busy); an empty broken thumb is worse than leaving LQIP.
         />
       </div>
-      <span className={styles.imageText}>{hoverText}</span>
+      <span className={styles.imageText} aria-hidden="true">{alt}</span>
     </div>
   )
 }

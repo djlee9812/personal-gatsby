@@ -6,6 +6,8 @@
   margin-bottom: 1rem;
   display: inline-block;
   width: 100%;
+  --cell-img-filter-active: brightness(70%);
+  --cell-caption-opacity-active: 1;
 }
 
 .cell:focus-visible {
@@ -42,6 +44,7 @@
 .masonryImgReady {
   opacity: 1;
   visibility: visible;
+  filter: var(--cell-img-filter, none);
 }
 
 .placeholderThumb {
@@ -64,8 +67,19 @@
   font-weight: 400;
   z-index: 1;
   pointer-events: none;
+  opacity: var(--cell-caption-opacity, 0);
 }
 
-.opaqueImage {
-  filter: brightness(70%);
+/* Keyboard / programmatic focus — matches old onFocus/onBlur */
+.cell:focus-within {
+  --cell-img-filter: var(--cell-img-filter-active);
+  --cell-caption-opacity: var(--cell-caption-opacity-active);
+}
+
+/* Fine pointer only — avoids sticky :hover after tap on touch */
+@media (hover: hover) {
+  .cell:hover {
+    --cell-img-filter: var(--cell-img-filter-active);
+    --cell-caption-opacity: var(--cell-caption-opacity-active);
+  }
 }
