@@ -207,13 +207,13 @@ const IndexPageContent = () => {
   // Keep useStaticQuery inside Layout so QueryErrorBoundary can catch failures.
   const data = useStaticQuery<Queries.IndexPageCloudinaryQuery>(graphql`
     query IndexPageCloudinary {
-      columnsImg: cloudinaryMedia(secure_url: {regex: "/Columns/"}) {
+      columnsImg: cloudinaryMedia(public_id: {eq: "src/images/Columns"}) {
         gatsbyImageData(width: 400, placeholder: BLURRED, layout: CONSTRAINED)
       }
-      snowboardingImg: cloudinaryMedia(secure_url: {regex: "/snowboarding/"}) {
+      snowboardingImg: cloudinaryMedia(public_id: {eq: "src/images/snowboarding"}) {
         gatsbyImageData(width: 600, placeholder: BLURRED, layout: CONSTRAINED)
       }
-      climbingImg: cloudinaryMedia(secure_url: {regex: "/climb1/"}) {
+      climbingImg: cloudinaryMedia(public_id: {eq: "src/images/hobby/climb1"}) {
         gatsbyImageData(width: 600, placeholder: BLURRED, layout: CONSTRAINED)
       }
     }
