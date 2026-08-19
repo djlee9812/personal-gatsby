@@ -41,11 +41,47 @@ export const onPreBootstrap: GatsbyNode["onPreBootstrap"] = async ({ reporter })
  * Warn when the sourced gallery hit the plugin page size (likely truncated).
  * Uses in-memory node count instead of a second Cloudinary Admin API round-trip.
  */
+type CloudinaryMediaNode = {
+  tags?: ReadonlyArray<string | null | undefined> | null;
+};
+
+export const onCreateNode: GatsbyNode["onCreateNode"] = ({ node, actions }) => {
+  if (node.internal.type !== "CloudinaryMedia") return;
+
+  const { createNodeField } = actions;
+  const category = resolveGalleryCategory(
+    (node as CloudinaryMediaNode).tags,
+  );
+  // Persist for GraphQL filtering at build time (resolver-only fields are unreliable).
+  createNodeField({
+    node,
+    name: "galleryCategory",
+    value: category ?? "",
+  });
+};
+
 export const onPostBootstrap: GatsbyNode["onPostBootstrap"] = ({
   getNodesByType,
   reporter,
 }) => {
-  const count = getNodesByType("CloudinaryMedia").length;
+  const nodes = getNodesByType("CloudinaryMedia");
+  const count = nodes.length;
+  const taggedCount = nodes.filter((node) =>
+    Boolean(resolveGalleryCategory((node as CloudinaryMediaNode).tags)),
+  ).length;
+
+  if (count === 0) {
+    reporter.panic(
+      "Cloudinary gallery sourced 0 images. Check CLOUDINARY_* env vars on the build host (Netlify Site settings → Environment variables) and Cloudinary Admin API access.",
+    );
+  }
+
+  if (taggedCount === 0) {
+    reporter.panic(
+      `Cloudinary sourced ${count} image(s) but none have a gallery tag. Add a primary tag (e.g. Travel, Hobby) to images in Cloudinary — folders alone are not tags.`,
+    );
+  }
+
   if (count >= CLOUDINARY_GALLERY_MAX_RESULTS) {
     reporter.warn(
       `Cloudinary gallery may be truncated: sourced ${count} image(s) (maxResults=${CLOUDINARY_GALLERY_MAX_RESULTS}). Raise maxResults or paginate in cloudinary-gallery-config.js.`
@@ -68,28 +104,7 @@ export const createSchemaCustomization: GatsbyNode["createSchemaCustomization"] 
       tags: [String]
       layout: String
     }
-    type CloudinaryMedia implements Node {
-      galleryCategory: String
-    }
   `);
-};
-
-/**
- * Filterable primary tag for gallery collections (null = untagged / misc).
- */
-export const createResolvers: GatsbyNode["createResolvers"] = ({
-  createResolvers: createResolversFn,
-}) => {
-  createResolversFn({
-    CloudinaryMedia: {
-      galleryCategory: {
-        type: "String",
-        resolve(source: { tags?: ReadonlyArray<string | null | undefined> | null }) {
-          return resolveGalleryCategory(source.tags);
-        },
-      },
-    },
-  });
 };
 
 type BlogFileNode = Queries.WebsiteUpdateCreatePagesQuery["allFile"]["nodes"][number];

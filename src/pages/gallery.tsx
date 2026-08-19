@@ -38,16 +38,15 @@ function nodeAspectRatio(node: CloudinaryNode): number {
 
 const Gallery = ({ data }: PageProps<Queries.GalleryQuery>) => {
   
-  // Group by galleryCategory (resolved from tags[0] at build time).
+  // Group by persisted galleryCategory (tags[0] at build time via onCreateNode).
   // Zero-maintenance: a new Cloudinary tag automatically becomes a collection.
-  // Untagged / misc are already excluded via the GraphQL filter.
   const collections: GalleryCollection[] = React.useMemo(() => {
     const groups: { [key: string]: CloudinaryNode[] } = {};
     
     if (!data?.allCloudinaryMedia?.nodes) return [];
 
     data.allCloudinaryMedia.nodes.forEach(node => {
-      const category = node.galleryCategory;
+      const category = node.fields?.galleryCategory;
       if (!category) return;
       
       if (!groups[category]) groups[category] = [];
@@ -143,7 +142,7 @@ const Gallery = ({ data }: PageProps<Queries.GalleryQuery>) => {
         <main className={globalStyles.navbarMargin} id="main">
           <div className={`${globalStyles.pageHeader} ${globalStyles.pageHeaderTop} ${globalStyles.textCenter}`}>
             <h1>Gallery</h1>
-            <p>No tagged images found. Add tags (e.g. travel, hobby) to your images in Cloudinary.</p>
+            <p>No tagged gallery images in the latest build. Add primary tags (e.g. Travel, Hobby) in Cloudinary, then trigger a site rebuild.</p>
           </div>
           <div className={globalStyles.container}>
             <p>No images to display.</p>
@@ -293,11 +292,13 @@ export const query = graphql`
   query Gallery {
     allCloudinaryMedia(
       sort: { created_at: DESC }
-      filter: { galleryCategory: { ne: null } }
+      filter: { fields: { galleryCategory: { ne: "" } } }
     ) {
       nodes {
         id
-        galleryCategory
+        fields {
+          galleryCategory
+        }
         secure_url
         width
         height

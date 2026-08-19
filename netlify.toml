@@ -8,10 +8,12 @@
 [build.environment]
   NODE_VERSION = "22"
 
-# Required for gallery GraphQL at build time:
+# Required for gallery (sourced at build time, not runtime):
 #   CLOUDINARY_CLOUD_NAME
 #   CLOUDINARY_API_KEY
 #   CLOUDINARY_API_SECRET
+# Set these in Netlify: Site configuration → Environment variables (all scopes).
+# After changing tags in Cloudinary, trigger Deploys → Trigger deploy → Clear cache and deploy.
 # Optional analytics (GA4 via Partytown):
 #   GATSBY_GA_ID
 
