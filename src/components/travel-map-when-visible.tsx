@@ -1,8 +1,18 @@
 import * as React from "react"
+import { IslandErrorBoundary } from "./island-error-boundary"
+import { TRAVEL_MAP_GEO_ERROR } from "./travel-map-constants"
 import * as styles from "./travel-map.module.css"
 import { prefetchTravelGeo } from "./travel-map-geo"
 
-const TravelMap = React.lazy(() => import("./travel-map"))
+const TravelMap = React.lazy(
+  () => import(/* webpackChunkName: "travel-map" */ "./travel-map"),
+)
+
+const mapChunkFallback = (
+  <div className={styles.slot} role="status">
+    <p className={styles.geoError}>{TRAVEL_MAP_GEO_ERROR}</p>
+  </div>
+)
 
 const ROOT_MARGIN = "200px"
 
@@ -41,11 +51,13 @@ const TravelMapWhenVisible = () => {
   return (
     <div ref={sentinelRef}>
       {shouldLoad ? (
-        <React.Suspense
-          fallback={<div className={styles.slot} aria-hidden="true" />}
-        >
-          <TravelMap />
-        </React.Suspense>
+        <IslandErrorBoundary fallback={mapChunkFallback}>
+          <React.Suspense
+            fallback={<div className={styles.slot} aria-hidden="true" />}
+          >
+            <TravelMap />
+          </React.Suspense>
+        </IslandErrorBoundary>
       ) : (
         <div className={styles.slot} aria-hidden="true" />
       )}

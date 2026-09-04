@@ -72,9 +72,18 @@
   }
 }
 
+/* Marker rendered by IslandErrorBoundary when the Three island fails. */
+.heroSceneFailed {
+  display: none;
+}
+
 @media (min-width: 901px) {
   .heroMobileVisual {
     display: none;
+  }
+
+  .hero3dWrapper:has(.heroSceneFailed) .heroMobileVisual {
+    display: flex;
   }
 }
 

@@ -4,3 +4,6 @@
  */
 export const TRAVEL_MAP_WIDTH = 800
 export const TRAVEL_MAP_HEIGHT = 500
+
+/** Shared copy for geo fetch failure and lazy-chunk island fallback. */
+export const TRAVEL_MAP_GEO_ERROR = "Map geography could not be loaded."

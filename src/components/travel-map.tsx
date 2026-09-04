@@ -7,7 +7,11 @@ import flightsDataset from "../data/flights.json";
 import airportCoordinates from "../data/airport-coordinates.json";
 import type { FlightsDataset } from "../data/flights.types";
 import { buildDrawableRoutes, type AirportCoordinatesMap } from "../lib/flight-routes";
-import { TRAVEL_MAP_HEIGHT, TRAVEL_MAP_WIDTH } from "./travel-map-constants";
+import {
+  TRAVEL_MAP_GEO_ERROR,
+  TRAVEL_MAP_HEIGHT,
+  TRAVEL_MAP_WIDTH,
+} from "./travel-map-constants";
 import { prefetchTravelGeo } from "./travel-map-geo";
 import { MAP_COLOR_DEFAULTS, readMapColors, type MapColors } from "../utils/map-colors";
 import * as styles from "./travel-map.module.css";
@@ -137,7 +141,7 @@ const TravelMap = () => {
   if (geoError) {
     return (
       <div ref={wrapRef} className={styles.wrap} role="status">
-        <p className={styles.geoError}>Map geography could not be loaded.</p>
+        <p className={styles.geoError}>{TRAVEL_MAP_GEO_ERROR}</p>
       </div>
     );
   }

@@ -3,12 +3,15 @@ import { Link, type HeadFC, useStaticQuery, graphql } from 'gatsby'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Layout from '../components/animated-layout'
+import { IslandErrorBoundary } from '../components/island-error-boundary'
 import Seo from '../components/seo'
 import * as styles from '../components/index.module.css'
 import TravelMapWhenVisible from '../components/travel-map-when-visible'
 import josefinSans700 from '@fontsource/josefin-sans/files/josefin-sans-latin-700-normal.woff2'
 
-const HeroScene = React.lazy(() => import('../components/hero-scene'))
+const HeroScene = React.lazy(
+  () => import(/* webpackChunkName: "hero-scene" */ '../components/hero-scene'),
+)
 import { m, useReducedMotion, useScroll, useTransform } from 'framer-motion'
 import {
   aboutBriefingContainer,
@@ -149,9 +152,15 @@ const HomeHero: React.FC<HomeHeroProps> = ({ allowMotion }) => {
       <div className={styles.hero3dWrapper}>
         <HeroMobileVisual />
         {allowMotion && isDesktop && idleReady ? (
-          <React.Suspense fallback={null}>
-            <HeroScene scrollProgress={scrollProgress} />
-          </React.Suspense>
+          <IslandErrorBoundary
+            fallback={
+              <div className={styles.heroSceneFailed} aria-hidden="true" />
+            }
+          >
+            <React.Suspense fallback={null}>
+              <HeroScene scrollProgress={scrollProgress} />
+            </React.Suspense>
+          </IslandErrorBoundary>
         ) : null}
       </div>
       <HomeHeroChrome />

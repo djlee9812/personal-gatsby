@@ -53,7 +53,7 @@ const buttonStyle: React.CSSProperties = {
 function FallbackContent({ kind }: { kind: QueryFallbackKind }) {
   const { title, body } = FALLBACK_COPY[kind]
   return (
-    <div style={shellStyle}>
+    <main id="main" style={shellStyle}>
       <h2 style={titleStyle}>{title}</h2>
       <p style={bodyStyle}>{body}</p>
       <button
@@ -63,7 +63,7 @@ function FallbackContent({ kind }: { kind: QueryFallbackKind }) {
       >
         {REFRESH_LABEL}
       </button>
-    </div>
+    </main>
   )
 }
 
