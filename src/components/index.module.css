@@ -23,9 +23,9 @@
   pointer-events: none;
 }
 
-/* Mobile/tablet substitute for the desktop-only Three.js scene. CSS (not JS)
-   controls visibility so the same markup renders correctly from both the
-   animated and reduced-motion static hero. */
+/* Substitute for the Three.js scene: always shown below the desktop
+   breakpoint. CSS (not JS) controls visibility so the same markup works
+   for the animated hero, reduced-motion desktop, and WebGL failure. */
 .heroMobileVisual {
   position: absolute;
   inset: 0;
@@ -83,6 +83,14 @@
   }
 
   .hero3dWrapper:has(.heroSceneFailed) .heroMobileVisual {
+    display: flex;
+  }
+}
+
+/* Desktop + reduced-motion: SVG is the scene. Motion users stay hidden so
+   the SVG does not flash against the 3D plane. */
+@media (min-width: 901px) and (prefers-reduced-motion: reduce) {
+  .heroMobileVisual {
     display: flex;
   }
 }

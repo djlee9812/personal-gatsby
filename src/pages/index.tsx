@@ -70,8 +70,8 @@ const HomeHeroChrome: React.FC = () => (
 )
 
 // Lightweight aerospace-flavored decorative visual shown in place of the
-// Three.js scene below the desktop breakpoint. CSS (not JS) decides
-// visibility (`@media (min-width: 901px)` hides it).
+// Three.js scene below the desktop breakpoint, and on desktop when
+// prefers-reduced-motion is reduce. CSS (not JS) decides visibility.
 const HeroMobileVisual: React.FC = () => (
   <div className={styles.heroMobileVisual} aria-hidden="true">
     <svg
