@@ -231,20 +231,20 @@ const IndexPageContent = () => {
           <div className={styles.aboutGrid}>
             <m.div className={styles.aboutText} variants={aboutTextReveal}>
               <p>
-                Hi, I'm Dongjoon! I was born in <span className={styles.highlight}>Seoul, Korea</span> and moved
-                to <span className={styles.highlight}>Southern California</span> in the fourth grade.
+                Hi, I'm Dongjoon! I was born in Seoul, Korea and moved
+                to Southern California in the fourth grade.
               </p>
               <p>
-                I graduated with a Master's degree from <span className={styles.highlight}>MIT AeroAstro</span> in 2023,
-                where I researched <span className={styles.highlight}>aircraft design optimization</span>.
-                You can find <a href="https://dspace.mit.edu/handle/1721.1/151601" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--color-accent)' }}>my MIT thesis</a>.
+                I graduated with a Master's degree from MIT AeroAstro in 2023,
+                where I researched aircraft design optimization.
+                You can find <a href="https://dspace.mit.edu/handle/1721.1/151601" target="_blank" rel="noopener noreferrer">my MIT thesis</a>.
               </p>
               <p>
-                Currently, I work as a Software Developer at <span className={styles.highlight}>MathWorks</span> on
+                Currently, I work as a Software Developer at MathWorks on
                 the Aerospace Toolbox and Aerospace Blockset products.
               </p>
               <p>
-                Personally, I enjoy <span className={styles.highlight}>snowboarding</span>, <span className={styles.highlight}>climbing</span>, playing music,
+                Personally, I enjoy snowboarding, climbing, playing music,
                 and trying new foods. This website is an ongoing catalog of things from my life.
               </p>
             </m.div>
@@ -339,7 +339,7 @@ const IndexPageContent = () => {
             variants={softInView}
           >
             <p>
-              I enjoy visiting new places. Check out the <Link to={`/gallery?${GALLERY_COLLECTION_PARAM}=travel`} style={{ color: 'var(--color-accent)' }}>Gallery</Link> for photos from my trips.
+              I enjoy visiting new places. Check out the <Link to={`/gallery?${GALLERY_COLLECTION_PARAM}=travel`}>Gallery</Link> for photos from my trips.
             </p>
           </m.div>
 

@@ -248,9 +248,21 @@
   margin-bottom: 1.5rem;
 }
 
-.highlight {
+.aboutText a,
+.aboutText a:visited {
   color: var(--color-accent);
-  font-weight: bold;
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+}
+
+.aboutText a:hover {
+  color: var(--color-highlight);
+  text-decoration-thickness: 2px;
+}
+
+.aboutText a:focus-visible {
+  outline: 2px solid var(--color-highlight);
+  outline-offset: 2px;
 }
 
 .portraitContainer {
