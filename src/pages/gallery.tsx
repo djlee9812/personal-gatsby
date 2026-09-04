@@ -29,6 +29,22 @@ interface GalleryCollection {
 /** Eager-load the first row-ish of masonry thumbs (3-col desktop). */
 const EAGER_THUMB_COUNT = 3
 
+/** Soft-infinite-scroll batch size for thumbs. */
+const PAGE_SIZE = 15
+
+/**
+ * html { scroll-behavior: smooth } makes scrollTo(..., behavior:"auto")
+ * animate; temporarily force auto so collection switches jump instantly.
+ * Prefer this over behavior:"instant" so older engines that lack that enum stay correct.
+ */
+function scrollToTopInstant() {
+  const root = document.documentElement
+  const previous = root.style.scrollBehavior
+  root.style.scrollBehavior = "auto"
+  window.scrollTo(0, 0)
+  root.style.scrollBehavior = previous
+}
+
 function nodeAspectRatio(node: CloudinaryNode): number {
   if (node.width && node.height && node.width > 0 && node.height > 0) {
     return node.width / node.height
@@ -72,7 +88,7 @@ const Gallery = ({ data }: PageProps<Queries.GalleryQuery>) => {
    * we only render a small batch. The IntersectionObserver at the bottom 
    * increments this limit as the user scrolls.
    */
-  const [renderLimit, setRenderLimit] = React.useState(15);
+  const [renderLimit, setRenderLimit] = React.useState(PAGE_SIZE);
   const loaderRef = React.useRef<HTMLDivElement>(null);
 
   const numPages = collections.length;
@@ -99,7 +115,7 @@ const Gallery = ({ data }: PageProps<Queries.GalleryQuery>) => {
     const observer = new IntersectionObserver(
       (entries) => {
         if (entries[0].isIntersecting) {
-          setRenderLimit((prev) => prev + 15);
+          setRenderLimit((prev) => prev + PAGE_SIZE);
         }
       },
       { rootMargin: "200px" } 
@@ -155,15 +171,11 @@ const Gallery = ({ data }: PageProps<Queries.GalleryQuery>) => {
   const imgList = currentCollection.images;
   const visibleImages = imgList.slice(0, renderLimit);
 
-  const decrementIndex = () => {
-    setGalIndex(prev => (prev === 0 ? numPages - 1 : prev - 1));
-    setImgIndex(0); 
-    setRenderLimit(15); 
-  }
-  const incrementIndex = () => {
-    setGalIndex(prev => (prev === numPages - 1 ? 0 : prev + 1));
-    setImgIndex(0);
-    setRenderLimit(15); 
+  const goToCollection = (direction: 1 | -1) => {
+    setGalIndex((prev) => (prev + direction + numPages) % numPages)
+    setImgIndex(0)
+    setRenderLimit(PAGE_SIZE)
+    scrollToTopInstant()
   }
 
   const openModal = (index: number, trigger?: HTMLElement | null) => {
@@ -213,7 +225,7 @@ const Gallery = ({ data }: PageProps<Queries.GalleryQuery>) => {
         <div className={globalStyles.pageHeaderTop}>
           <div className={galleryStyles.titleDiv}>
             <div className={galleryStyles.arrowDiv}>
-              <button className={globalStyles.hiddenButton} onClick={decrementIndex} aria-label="Previous Collection">
+              <button className={globalStyles.hiddenButton} onClick={() => goToCollection(-1)} aria-label="Previous Collection">
                 <FontAwesomeIcon icon={['fas', 'arrow-left']} size="xl"/>
               </button>
             </div>
@@ -224,7 +236,7 @@ const Gallery = ({ data }: PageProps<Queries.GalleryQuery>) => {
               </p>
             </div>
             <div className={galleryStyles.arrowDiv}>
-              <button className={globalStyles.hiddenButton} onClick={incrementIndex} aria-label="Next Collection">
+              <button className={globalStyles.hiddenButton} onClick={() => goToCollection(1)} aria-label="Next Collection">
                 <FontAwesomeIcon icon={['fas', 'arrow-right']} size="xl"/>
               </button>
             </div>

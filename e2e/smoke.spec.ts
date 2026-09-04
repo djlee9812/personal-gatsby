@@ -82,6 +82,39 @@ test.describe("smoke", () => {
     await expect(page.getByRole("heading", { level: 1, name: "Projects" })).toBeVisible();
   });
 
+  test("gallery collection switch resets scroll to top", async ({ page }) => {
+    await page.goto("/gallery");
+
+    const imageCell = page.getByRole("button").filter({ has: page.locator("img") }).first();
+    expect(
+      await imageCell.count(),
+      "Cloudinary gallery empty — CI secrets / tags required",
+    ).toBeGreaterThan(0);
+
+    const next = page.getByRole("button", { name: "Next Collection" });
+    await expect(next).toBeVisible();
+    await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
+
+    // Pad so a short first collection still leaves the heading; html {
+    // scroll-behavior: smooth } would otherwise animate this jump.
+    const scrolled = await page.evaluate(() => {
+      document.documentElement.style.scrollBehavior = "auto";
+      document.body.style.minHeight = `${window.innerHeight + 2000}px`;
+      window.scrollTo(0, document.documentElement.scrollHeight);
+      return window.scrollY;
+    });
+    expect(scrolled).toBeGreaterThan(100);
+
+    // dispatchEvent avoids Playwright scrolling the off-screen control into
+    // view, which would mask a missing scroll reset.
+    await next.dispatchEvent("click");
+
+    await expect
+      .poll(async () => page.evaluate(() => window.scrollY))
+      .toBeLessThan(50);
+    await expect(page.getByRole("heading", { level: 1 })).toBeInViewport();
+  });
+
   test("gallery modal", async ({ page }) => {
     await page.goto("/gallery");
 
