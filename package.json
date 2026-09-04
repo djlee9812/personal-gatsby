@@ -17,7 +17,7 @@
     "lint": "biome lint .",
     "lint:fix": "biome check --write .",
     "test": "npm run test:unit",
-    "test:unit": "node --experimental-strip-types --test src/utils/*.test.ts src/lib/*.test.ts",
+    "test:unit": "node --experimental-strip-types --test src/utils/*.test.ts src/lib/*.test.ts src/hooks/*.test.ts",
     "test:e2e": "playwright test",
     "test:links": "linkinator ./public --config ./linkinator.config.json",
     "flights:build": "node scripts/flighty-export-to-json.mjs && node scripts/generate-airport-coordinates.mjs",
