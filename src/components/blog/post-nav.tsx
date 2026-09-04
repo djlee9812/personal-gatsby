@@ -14,8 +14,34 @@ export type PostNavProps = {
   "aria-label"?: string
 }
 
-function neighborAriaLabel(direction: "Older" | "Newer", title: string): string {
-  return title ? `${direction} post: ${title}` : `${direction} post`
+function NeighborLink({
+  direction,
+  neighbor,
+}: {
+  direction: "Older" | "Newer"
+  neighbor: PostNeighbor
+}) {
+  const isOlder = direction === "Older"
+
+  return (
+    <Link
+      to={`/blog/${neighbor.slug}`}
+      className={`${styles.backLink} ${styles.postNavLink} ${
+        isOlder ? styles.postNavOlder : styles.postNavNewer
+      }`}
+      {...(neighbor.title ? {} : { "aria-label": `${direction} post` })}
+    >
+      <span className={styles.postNavChevron} aria-hidden="true">
+        <FontAwesomeIcon
+          icon={["fas", isOlder ? "chevron-left" : "chevron-right"]}
+        />
+      </span>
+      <span className={styles.postNavDir}>{direction}</span>
+      {neighbor.title ? (
+        <span className={styles.postNavTitle}>{neighbor.title}</span>
+      ) : null}
+    </Link>
+  )
 }
 
 const PostNav = ({
@@ -33,26 +59,12 @@ const PostNav = ({
   return (
     <nav className={navClassName} aria-label={ariaLabel}>
       {older ? (
-        <Link
-          to={`/blog/${older.slug}`}
-          className={`${styles.backLink} ${styles.postNavLink} ${styles.postNavOlder}`}
-          aria-label={neighborAriaLabel("Older", older.title)}
-        >
-          <FontAwesomeIcon icon={["fas", "chevron-left"]} aria-hidden="true" />
-          Older
-        </Link>
+        <NeighborLink direction="Older" neighbor={older} />
       ) : (
         <span className={styles.postNavSpacer} aria-hidden="true" />
       )}
       {newer ? (
-        <Link
-          to={`/blog/${newer.slug}`}
-          className={`${styles.backLink} ${styles.postNavLink} ${styles.postNavNewer}`}
-          aria-label={neighborAriaLabel("Newer", newer.title)}
-        >
-          Newer
-          <FontAwesomeIcon icon={["fas", "chevron-right"]} aria-hidden="true" />
-        </Link>
+        <NeighborLink direction="Newer" neighbor={newer} />
       ) : (
         <span className={styles.postNavSpacer} aria-hidden="true" />
       )}

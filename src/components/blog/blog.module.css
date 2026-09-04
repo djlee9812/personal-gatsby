@@ -79,7 +79,7 @@
 .postNav {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
   gap: 1rem;
   width: 100%;
   max-width: min(var(--blog-prose-max), 100%);
@@ -101,30 +101,98 @@
   margin-bottom: 0;
 }
 
-/* Top nav is desktop-only — mobile uses bottom after finishing. */
-@media (max-width: 767px) {
-  .postNavTop {
-    display: none;
-  }
+.postNavLink {
+  display: grid;
+  align-items: center;
+  /* row / col — title lines up with the label, not the chevron */
+  gap: 0.5rem 0.5rem;
+  flex: 0 1 auto;
+  min-width: 0;
+  max-width: min(18rem, calc(50% - 0.5rem));
 }
 
-.postNavLink {
-  flex-shrink: 0;
-  gap: 0.5rem;
+.postNavChevron {
+  display: inline-flex;
+  align-items: center;
+  grid-row: 1;
+}
+
+.postNavDir {
+  grid-row: 1;
 }
 
 .postNavOlder {
-  justify-content: flex-start;
+  grid-template-columns: auto minmax(0, 1fr);
+}
+
+.postNavOlder .postNavChevron {
+  grid-column: 1;
+}
+
+.postNavOlder .postNavDir,
+.postNavOlder .postNavTitle {
+  grid-column: 2;
 }
 
 .postNavNewer {
-  justify-content: flex-end;
+  grid-template-columns: minmax(0, 1fr) auto;
+  text-align: right;
   margin-left: auto;
+}
+
+.postNavNewer .postNavDir {
+  grid-column: 1;
+  justify-self: end;
+}
+
+.postNavNewer .postNavChevron {
+  grid-column: 2;
+}
+
+.postNavNewer .postNavTitle {
+  grid-column: 1;
+}
+
+.postNavTitle {
+  grid-row: 2;
+  min-width: 0;
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .postNavSpacer {
   flex: 1;
   min-width: 0;
+}
+
+/* Top nav is desktop-only — mobile uses bottom after finishing.
+ * Stack Older/Newer so titles get the full rail instead of a 50% ellipsis. */
+@media (max-width: 767px) {
+  .postNavTop {
+    display: none;
+  }
+
+  .postNav {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.75rem;
+  }
+
+  .postNavLink {
+    max-width: none;
+    width: 100%;
+  }
+
+  .postNavNewer {
+    margin-left: 0;
+  }
+
+  .postNavSpacer {
+    display: none;
+  }
 }
 
 .blogGrid {
