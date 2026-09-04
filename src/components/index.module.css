@@ -297,7 +297,7 @@
   height: 400px;
   background: var(--color-bg-secondary);
   box-shadow: 0 4px 20px rgba(0,0,0,0.05);
-  transition: transform 0.3s ease;
+  transition: transform var(--motion-normal) ease;
   text-decoration: none;
   display: block;
 }

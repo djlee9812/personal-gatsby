@@ -14,7 +14,7 @@
   height: auto;
   /* Prefer intrinsic ratio from width/height attrs (or inline aspectRatio).
    * No shared 3/2 crop — photos keep natural proportions. */
-  border-radius: 8px;
+  border-radius: var(--radius-md);
 }
 
 /*

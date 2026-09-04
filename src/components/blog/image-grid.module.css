@@ -39,7 +39,7 @@
   max-height: min(50vh, 28rem);
   object-fit: contain;
   object-position: center;
-  border-radius: 8px;
+  border-radius: var(--radius-md);
   display: block;
 }
 

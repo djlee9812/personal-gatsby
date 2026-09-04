@@ -71,7 +71,7 @@
   /* Override shared .img defaults so photos keep natural aspect */
   aspect-ratio: auto;
   object-fit: contain;
-  border-radius: 8px;
+  border-radius: var(--radius-md);
   display: block;
 }
 

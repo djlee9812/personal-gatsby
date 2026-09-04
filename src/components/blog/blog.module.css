@@ -58,7 +58,7 @@
   color: var(--color-text-secondary);
   font-family: var(--font-body);
   font-size: 0.9rem;
-  transition: color 0.3s ease;
+  transition: color var(--motion-normal) ease;
   padding: 0.5rem 0; /* Increase touch target vertical size */
 }
 
