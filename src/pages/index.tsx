@@ -7,6 +7,7 @@ import { IslandErrorBoundary } from '../components/island-error-boundary'
 import Seo from '../components/seo'
 import * as styles from '../components/index.module.css'
 import TravelMapWhenVisible from '../components/travel-map-when-visible'
+import { GALLERY_COLLECTION_PARAM } from '../utils/gallery-collection-param'
 import josefinSans700 from '@fontsource/josefin-sans/files/josefin-sans-latin-700-normal.woff2'
 
 const HeroScene = React.lazy(
@@ -276,7 +277,7 @@ const IndexPageContent = () => {
           </m.h2>
 
           <div className={styles.hobbyGrid}>
-            <Link to="/gallery" className={styles.hobbyCard}>
+            <Link to={`/gallery?${GALLERY_COLLECTION_PARAM}=hobby`} className={styles.hobbyCard}>
               {snowboardingImage ? (
                 <GatsbyImage
                   image={snowboardingImage}
@@ -296,7 +297,7 @@ const IndexPageContent = () => {
               </m.div>
             </Link>
 
-            <Link to="/gallery" className={styles.hobbyCard}>
+            <Link to={`/gallery?${GALLERY_COLLECTION_PARAM}=hobby`} className={styles.hobbyCard}>
               {climbingImage ? (
                 <GatsbyImage
                   image={climbingImage}
@@ -338,7 +339,7 @@ const IndexPageContent = () => {
             variants={softInView}
           >
             <p>
-              I enjoy visiting new places. Check out the <Link to="/gallery" style={{ color: 'var(--color-accent)' }}>Gallery</Link> for photos from my trips.
+              I enjoy visiting new places. Check out the <Link to={`/gallery?${GALLERY_COLLECTION_PARAM}=travel`} style={{ color: 'var(--color-accent)' }}>Gallery</Link> for photos from my trips.
             </p>
           </m.div>
 

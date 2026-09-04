@@ -113,6 +113,59 @@ test.describe("smoke", () => {
       .poll(async () => page.evaluate(() => window.scrollY))
       .toBeLessThan(50);
     await expect(page.getByRole("heading", { level: 1 })).toBeInViewport();
+    await expect(page).toHaveURL(/[?&]c=/);
+  });
+
+  test("hobby cards and travel copy deep-link gallery collections", async ({
+    page,
+  }) => {
+    await page.goto("/");
+
+    const hobbyHref = /\/gallery\/?\?c=hobby$/;
+    await expect(
+      page.getByRole("link", { name: /snowboarding/i }),
+    ).toHaveAttribute("href", hobbyHref);
+    await expect(page.getByRole("link", { name: /climbing/i })).toHaveAttribute(
+      "href",
+      hobbyHref,
+    );
+
+    await expect(
+      page.getByRole("navigation").getByRole("link", { name: "Gallery", exact: true }),
+    ).toHaveAttribute("href", /\/gallery\/?$/);
+
+    await expect(
+      page.locator("#travel-map").getByRole("link", { name: "Gallery" }),
+    ).toHaveAttribute("href", /\/gallery\/?\?c=travel$/);
+  });
+
+  test("gallery honors ?c= collection param", async ({ page }) => {
+    await page.goto("/gallery?c=travel");
+
+    const imageCell = page.getByRole("button").filter({ has: page.locator("img") }).first();
+    expect(
+      await imageCell.count(),
+      "Cloudinary gallery empty — CI secrets / tags required",
+    ).toBeGreaterThan(0);
+
+    await expect(page.getByRole("heading", { level: 1, name: /^Travel$/i })).toBeVisible();
+  });
+
+  test("unknown gallery ?c= keeps the query and shows the first collection", async ({
+    page,
+  }) => {
+    await page.goto("/gallery");
+    const imageCell = page.getByRole("button").filter({ has: page.locator("img") }).first();
+    expect(
+      await imageCell.count(),
+      "Cloudinary gallery empty — CI secrets / tags required",
+    ).toBeGreaterThan(0);
+
+    const firstTitle = await page.getByRole("heading", { level: 1 }).innerText();
+
+    await page.goto("/gallery?c=not-a-collection");
+    await expect(page).toHaveURL(/[?&]c=not-a-collection/);
+    await expect(page.getByRole("heading", { level: 1 })).toHaveText(firstTitle);
   });
 
   test("gallery modal", async ({ page }) => {

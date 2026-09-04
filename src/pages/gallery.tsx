@@ -1,5 +1,5 @@
 import * as React from "react"
-import { graphql, type PageProps, type HeadFC } from 'gatsby'
+import { graphql, navigate, type PageProps, type HeadFC } from 'gatsby'
 import * as globalStyles from '../components/global.module.css'
 import * as galleryStyles from '../components/gallery.module.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -12,6 +12,11 @@ import {
   GALLERY_THUMB_OPTIONS,
   optimizeCloudinaryImage,
 } from '../utils/cloudinary'
+import {
+  collectionIndexFromSearch,
+  collectionSlug,
+  GALLERY_COLLECTION_PARAM,
+} from '../utils/gallery-collection-param'
 
 /**
  * Type alias for a single Cloudinary media node from the generated GraphQL types.
@@ -52,7 +57,7 @@ function nodeAspectRatio(node: CloudinaryNode): number {
   return 4 / 3
 }
 
-const Gallery = ({ data }: PageProps<Queries.GalleryQuery>) => {
+const Gallery = ({ data, location }: PageProps<Queries.GalleryQuery>) => {
   
   // Group by persisted galleryCategory (tags[0] at build time via onCreateNode).
   // Zero-maintenance: a new Cloudinary tag automatically becomes a collection.
@@ -76,7 +81,7 @@ const Gallery = ({ data }: PageProps<Queries.GalleryQuery>) => {
       })).sort((a, b) => a.title.localeCompare(b.title));
   }, [data]);
 
-  const [galIndex, setGalIndex] = React.useState(0);
+  const galIndex = collectionIndexFromSearch(location.search, collections);
   const [imgIndex, setImgIndex] = React.useState(0);
   const [modalShow, setModalShow] = React.useState(false);
   const lightboxHistoryOpen = React.useRef(false);
@@ -95,6 +100,7 @@ const Gallery = ({ data }: PageProps<Queries.GalleryQuery>) => {
   const currentCollection = numPages > 0 ? collections[galIndex] : null;
   const [collectionAnnouncement, setCollectionAnnouncement] = React.useState("");
   const skipInitialCollectionAnnounce = React.useRef(true);
+  const skipCollectionLayoutReset = React.useRef(true);
 
   // Announce collection changes only — skip the initial mount so SPA entry
   // isn't double-announced with the visible heading/counter.
@@ -151,6 +157,22 @@ const Gallery = ({ data }: PageProps<Queries.GalleryQuery>) => {
     };
   }, []);
 
+  // Reset grid/lightbox when `?c=` changes (prev/next or inbound Links).
+  // Skip the initial mount so a shared `?c=travel` link does not jump-scroll.
+  // biome-ignore lint/correctness/useExhaustiveDependencies: keyed on search; body only resets layout
+  React.useEffect(() => {
+    if (skipCollectionLayoutReset.current) {
+      skipCollectionLayoutReset.current = false;
+      return;
+    }
+    setImgIndex(0);
+    setRenderLimit(PAGE_SIZE);
+    setModalShow(false);
+    lightboxHistoryOpen.current = false;
+    returnFocusRef.current = null;
+    scrollToTopInstant();
+  }, [location.search]);
+
   // Handle cases where no valid Cloudinary images/tags are found.
   if (numPages === 0 || !currentCollection) {
     return (
@@ -172,10 +194,15 @@ const Gallery = ({ data }: PageProps<Queries.GalleryQuery>) => {
   const visibleImages = imgList.slice(0, renderLimit);
 
   const goToCollection = (direction: 1 | -1) => {
-    setGalIndex((prev) => (prev + direction + numPages) % numPages)
-    setImgIndex(0)
-    setRenderLimit(PAGE_SIZE)
+    const next = (galIndex + direction + numPages) % numPages
+    const nextCollection = collections[next]
+    if (!nextCollection) return
+    const slug = collectionSlug(nextCollection.title)
     scrollToTopInstant()
+    void navigate(
+      `${location.pathname}?${GALLERY_COLLECTION_PARAM}=${encodeURIComponent(slug)}`,
+      { replace: true },
+    )
   }
 
   const openModal = (index: number, trigger?: HTMLElement | null) => {

@@ -68,3 +68,22 @@ export const onRouteUpdate: GatsbyBrowser["onRouteUpdate"] = ({ location }) => {
     })
   }
 }
+
+// Gallery collection switches are same-pathname `?c=` navigations. Gatsby's
+// default scroll restoration would undo gallery.tsx's reset and blank the
+// viewport; the page handles scroll itself.
+export const shouldUpdateScroll: GatsbyBrowser["shouldUpdateScroll"] = ({
+  prevRouterProps,
+  routerProps,
+}) => {
+  const prevPath = prevRouterProps?.location.pathname
+  const nextPath = routerProps.location.pathname
+  if (
+    prevPath &&
+    prevPath === nextPath &&
+    nextPath.replace(/\/+$/, "") === "/gallery"
+  ) {
+    return false
+  }
+  return true
+}
