@@ -17,7 +17,7 @@
     "lint": "biome lint .",
     "lint:fix": "biome check --write .",
     "test": "npm run test:unit",
-    "test:unit": "node --experimental-strip-types --test src/utils/*.test.ts src/lib/*.test.ts",
+    "test:unit": "node --experimental-strip-types --test src/utils/*.test.ts src/lib/*.test.ts src/hooks/*.test.ts",
     "test:e2e": "playwright test",
     "test:links": "linkinator ./public --config ./linkinator.config.json",
     "flights:build": "node scripts/flighty-export-to-json.mjs && node scripts/generate-airport-coordinates.mjs",
@@ -54,13 +54,13 @@
     "three": "^0.185.1"
   },
   "devDependencies": {
-    "@biomejs/biome": "^2.5.6",
     "@playwright/test": "^1.62.1",
+    "@biomejs/biome": "^2.5.8",
     "@types/node": "^26.1.2",
     "@types/react": "^18.3.12",
     "@types/react-dom": "^18.3.1",
     "@types/react-simple-maps": "^3.0.6",
-    "@types/three": "^0.185.1",
+    "@types/three": "^0.185.4",
     "linkinator": "^8.0.3",
     "typescript": "^5.9.3"
   },

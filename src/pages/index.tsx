@@ -9,7 +9,7 @@ import TravelMapWhenVisible from '../components/travel-map-when-visible'
 import josefinSans700 from '@fontsource/josefin-sans/files/josefin-sans-latin-700-normal.woff2'
 
 const HeroScene = React.lazy(() => import('../components/hero-scene'))
-import { m, useReducedMotion, useScroll, useTransform } from 'framer-motion'
+import { m, useScroll, useTransform } from 'framer-motion'
 import {
   aboutBriefingContainer,
   aboutPortraitLand,
@@ -21,6 +21,7 @@ import {
 import { HERO_INTRO_DURATION_S } from '../utils/hero-timing'
 import { DESKTOP_HERO_QUERY } from '../styles/breakpoints'
 import { useMatchMedia } from '../hooks/use-match-media'
+import { useAllowMotion } from '../hooks/use-allow-motion'
 
 const HOME_IN_VIEW_VIEWPORT = { once: true, margin: "-100px" } as const
 /** Softer margin so short overlay nodes still intersect on tight viewports. */
@@ -33,15 +34,7 @@ const heroIntroStyle = {
   ["--hero-intro-s" as string]: `${HERO_INTRO_DURATION_S}s`,
 }
 
-type HomeHeroChromeProps = {
-  enterInitial: false | "hidden"
-  reducedMotion: boolean
-}
-
-const HomeHeroChrome: React.FC<HomeHeroChromeProps> = ({
-  enterInitial,
-  reducedMotion,
-}) => (
+const HomeHeroChrome: React.FC = () => (
   <>
     <div className={styles.heroContent}>
       {/* Attitude Hold: title is always present — plane leads the scene */}
@@ -49,27 +42,16 @@ const HomeHeroChrome: React.FC<HomeHeroChromeProps> = ({
         DONGJOON<br/>LEE
       </h1>
 
-      <m.div
-        className={styles.heroSubtitle}
-        initial={enterInitial === false ? false : { opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={
-          reducedMotion
-            ? { duration: 0 }
-            : { delay: 0.65, duration: 0.5, ease: "easeOut" }
-        }
-      >
+      <div className={styles.heroSubtitle}>
         <span>Software Engineer.</span>
         <span>Aerospace Background.</span>
         <span>Based in Boston.</span>
-      </m.div>
+      </div>
     </div>
 
-    <m.button
+    <button
+      type="button"
       className={styles.scrollIndicator}
-      initial={reducedMotion ? false : { opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={reducedMotion ? { duration: 0 } : { delay: 1.9, duration: 0.7 }}
       onClick={() => document.getElementById('about')?.scrollIntoView()}
       style={{ background: 'none', border: 'none', cursor: 'pointer' }}
       aria-label="Scroll to About Section"
@@ -79,7 +61,7 @@ const HomeHeroChrome: React.FC<HomeHeroChromeProps> = ({
         icon={['fas', 'arrow-down']}
         className={styles.scrollIndicatorIcon}
       />
-    </m.button>
+    </button>
   </>
 )
 
@@ -122,7 +104,7 @@ type HomeHeroProps = {
   allowMotion: boolean
 }
 
-/** Single header so HeroMobileVisual is not remounted when motion unlocks after hydrate. */
+/** Single header so HeroMobileVisual and chrome are not remounted when motion unlocks after hydrate. */
 const HomeHero: React.FC<HomeHeroProps> = ({ allowMotion }) => {
   const isDesktop = useMatchMedia(DESKTOP_HERO_QUERY)
   const [idleReady, setIdleReady] = React.useState(false)
@@ -173,33 +155,22 @@ const HomeHero: React.FC<HomeHeroProps> = ({ allowMotion }) => {
           </React.Suspense>
         ) : null}
       </div>
-      {allowMotion ? (
-        <HomeHeroChrome enterInitial="hidden" reducedMotion={false} />
-      ) : (
-        <HomeHeroChrome enterInitial={false} reducedMotion />
-      )}
+      <HomeHeroChrome />
     </header>
   )
 }
 
 const IndexPageContent = () => {
-  const prefersReducedMotion = useReducedMotion();
-  const [hydrated, setHydrated] = React.useState(false);
   const aboutTitleRef = React.useRef<HTMLHeadingElement>(null);
-  React.useEffect(() => {
-    setHydrated(true);
-  }, []);
-
-  // SSR + first client paint both keep allowMotion false (avoids hydration mismatch).
-  const allowMotion = hydrated && prefersReducedMotion === false;
-  const enterInitial = prefersReducedMotion === true ? false : "hidden";
+  // Gate enter animations on hydrate so SSR/no-JS HTML is not opacity:0.
+  const { allowMotion, enterInitial } = useAllowMotion();
   const inViewProps = {
-    initial: enterInitial as false | "hidden",
+    initial: enterInitial,
     whileInView: "visible" as const,
     viewport: HOME_IN_VIEW_VIEWPORT,
   };
   const overlayInViewProps = {
-    initial: enterInitial as false | "hidden",
+    initial: enterInitial,
     whileInView: "visible" as const,
     viewport: OVERLAY_IN_VIEW_VIEWPORT,
   };

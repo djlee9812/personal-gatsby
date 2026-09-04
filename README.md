@@ -86,6 +86,8 @@ Add these repository secrets so the Cloudinary-backed build works in CI
 - `CLOUDINARY_API_KEY`
 - `CLOUDINARY_API_SECRET`
 
+For **Netlify**, set the same three variables under Site configuration → Environment variables (all deploy contexts). The gallery is baked in at build time — after retagging images in Cloudinary, run **Deploys → Trigger deploy → Clear cache and deploy** so production picks up changes.
+
 Locally:
 
 ```shell
