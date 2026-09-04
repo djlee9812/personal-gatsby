@@ -1,6 +1,6 @@
 
 import type { HeadFC } from "gatsby"
-import { m, useReducedMotion } from "framer-motion"
+import { m } from "framer-motion"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import * as globalStyles from "../components/global.module.css"
 import * as styles from "../components/projects.module.css"
@@ -11,6 +11,7 @@ import type { Project } from "../data/projects"
 import { optimizeCloudinaryImage } from "../utils/cloudinary"
 import { fadeInUp, staggerContainer } from "../utils/motion-variants"
 import { SIZES_BELOW_PAGE } from "../styles/breakpoints"
+import { useAllowMotion } from "../hooks/use-allow-motion"
 
 const projectFade = fadeInUp({ y: 24, duration: 0.4 })
 const projectStagger = staggerContainer(0.1)
@@ -104,8 +105,7 @@ function ProjectCard({ project }: { project: Project }) {
 }
 
 const Projects = () => {
-  const prefersReducedMotion = useReducedMotion();
-  const enterInitial = prefersReducedMotion ? false : "hidden";
+  const { enterInitial } = useAllowMotion()
 
   return (
     <Layout>

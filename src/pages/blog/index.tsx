@@ -5,31 +5,31 @@ import * as styles from '../../components/blog/blog.module.css'
 import Layout from '../../components/animated-layout'
 import Seo from '../../components/seo'
 import BlogLink  from '../../components/blog-link'
-import { m, useReducedMotion } from 'framer-motion'
+import { m } from 'framer-motion'
 import { normalizeBlogSlug } from '../../utils/blog-slug'
 import { blogListContainer, blogListItem } from '../../utils/motion-variants'
+import { useAllowMotion } from '../../hooks/use-allow-motion'
 import '../../components/blog/blog-fragments'
 
 const Blog = ({ data }: PageProps<Queries.BlogIndexQuery>) => {
   const nodes = data.allFile.nodes;
-  const prefersReducedMotion = useReducedMotion();
-  const enterInitial = prefersReducedMotion ? false : "hidden";
+  const { allowMotion, enterInitial } = useAllowMotion();
   
   return (
     <Layout>
       <main className={globalStyles.navbarMargin} id="main">
         <div className={`${globalStyles.pageHeader} ${globalStyles.pageHeaderTop} ${globalStyles.textCenter}`}>
           <m.h1
-            initial={prefersReducedMotion ? false : { opacity: 0, y: -20 }}
+            initial={allowMotion ? { opacity: 0, y: -20 } : false}
             animate={{ opacity: 1, y: 0 }}
-            transition={prefersReducedMotion ? { duration: 0 } : { duration: 0.5 }}
+            transition={allowMotion ? { duration: 0.5 } : { duration: 0 }}
           >
             Blog
           </m.h1>
           <m.p
-            initial={prefersReducedMotion ? false : { opacity: 0 }}
+            initial={allowMotion ? { opacity: 0 } : false}
             animate={{ opacity: 1 }}
-            transition={prefersReducedMotion ? { duration: 0 } : { duration: 0.5, delay: 0.2 }}
+            transition={allowMotion ? { duration: 0.5, delay: 0.2 } : { duration: 0 }}
           >
             Thoughts, technical logs, and life updates.
           </m.p>
