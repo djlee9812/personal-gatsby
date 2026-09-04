@@ -12,7 +12,7 @@ import josefinSans700 from '@fontsource/josefin-sans/files/josefin-sans-latin-70
 const HeroScene = React.lazy(
   () => import(/* webpackChunkName: "hero-scene" */ '../components/hero-scene'),
 )
-import { m, useReducedMotion, useScroll, useTransform } from 'framer-motion'
+import { m, useScroll, useTransform } from 'framer-motion'
 import {
   aboutBriefingContainer,
   aboutPortraitLand,
@@ -24,6 +24,7 @@ import {
 import { HERO_INTRO_DURATION_S } from '../utils/hero-timing'
 import { DESKTOP_HERO_QUERY } from '../styles/breakpoints'
 import { useMatchMedia } from '../hooks/use-match-media'
+import { useAllowMotion } from '../hooks/use-allow-motion'
 
 const HOME_IN_VIEW_VIEWPORT = { once: true, margin: "-100px" } as const
 /** Softer margin so short overlay nodes still intersect on tight viewports. */
@@ -169,23 +170,16 @@ const HomeHero: React.FC<HomeHeroProps> = ({ allowMotion }) => {
 }
 
 const IndexPageContent = () => {
-  const prefersReducedMotion = useReducedMotion();
-  const [hydrated, setHydrated] = React.useState(false);
   const aboutTitleRef = React.useRef<HTMLHeadingElement>(null);
-  React.useEffect(() => {
-    setHydrated(true);
-  }, []);
-
-  // SSR + first client paint both keep allowMotion false (avoids hydration mismatch).
-  const allowMotion = hydrated && prefersReducedMotion === false;
-  const enterInitial = prefersReducedMotion === true ? false : "hidden";
+  // Gate enter animations on hydrate so SSR/no-JS HTML is not opacity:0.
+  const { allowMotion, enterInitial } = useAllowMotion();
   const inViewProps = {
-    initial: enterInitial as false | "hidden",
+    initial: enterInitial,
     whileInView: "visible" as const,
     viewport: HOME_IN_VIEW_VIEWPORT,
   };
   const overlayInViewProps = {
-    initial: enterInitial as false | "hidden",
+    initial: enterInitial,
     whileInView: "visible" as const,
     viewport: OVERLAY_IN_VIEW_VIEWPORT,
   };
