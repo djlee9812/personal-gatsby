@@ -46,7 +46,7 @@ const Blog = ({ data }: PageProps<Queries.BlogIndexQuery>) => {
               const mdx = node.childMdx
               if (!mdx || !normalizeBlogSlug(mdx.frontmatter?.slug)) return null
               return (
-                <m.div key={mdx.id} variants={blogListItem}>
+                <m.div key={mdx.id} className={styles.blogGridItem} variants={blogListItem}>
                   <BlogLink node={mdx} />
                 </m.div>
               )

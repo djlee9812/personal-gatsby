@@ -134,12 +134,20 @@
   padding: 2rem 0;
 }
 
+/* Motion wrapper is the grid item. Flex-stretch the card so row height
+ * comes from content, not height:100% + content-box padding. */
+.blogGridItem {
+  display: flex;
+  min-width: 0;
+}
+
 .blogCard {
   background: var(--color-card-bg);
   backdrop-filter: blur(10px);
   border: 1px solid var(--color-card-border);
   border-radius: var(--radius-lg);
   box-shadow: var(--color-card-shadow);
+  box-sizing: border-box;
   padding: 1.5rem;
   transition:
     transform var(--motion-normal) ease,
@@ -148,7 +156,9 @@
     background var(--motion-normal) ease;
   display: flex;
   flex-direction: column;
-  height: 100%;
+  flex: 1;
+  width: 100%;
+  min-width: 0;
   text-decoration: none;
   color: var(--color-text-primary);
 }
@@ -192,18 +202,33 @@
   font-size: 0.95rem;
   line-height: 1.6;
   color: var(--color-text-primary);
-  margin-bottom: 1.5rem;
-  flex-grow: 1;
+  margin: 1rem 0 1.25rem;
 }
 
 .readMore {
   font-family: var(--font-body);
   font-size: 0.85rem;
-  color: var(--color-highlight);
-  font-weight: bold;
+  color: var(--color-text-secondary);
+  font-weight: 600;
   display: flex;
   align-items: center;
   gap: 0.5rem;
+  margin-top: auto;
+  transition: color var(--motion-normal) ease;
+}
+
+.readMoreIcon {
+  transition: transform var(--motion-normal) ease;
+}
+
+.blogCard:hover .readMore,
+.blogCard:focus-visible .readMore {
+  color: var(--color-highlight);
+}
+
+.blogCard:hover .readMoreIcon,
+.blogCard:focus-visible .readMoreIcon {
+  transform: translateX(4px);
 }
 
 /* Post header + article share --blog-prose-max. Notes: centered in chrome.
@@ -579,6 +604,16 @@
   }
 
   .blogCard:hover {
+    transform: none;
+  }
+
+  .readMore,
+  .readMoreIcon {
+    transition: none;
+  }
+
+  .blogCard:hover .readMoreIcon,
+  .blogCard:focus-visible .readMoreIcon {
     transform: none;
   }
 }
